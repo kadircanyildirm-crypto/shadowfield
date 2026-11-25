@@ -115,7 +115,19 @@ Be honest: use category "unknown" and low confidence when the evidence does not 
 Return one entry per candidate field, keeping its offset."""
 
 
-def name_fields(fields: list[dict], orbit: dict, frame_info: dict, sat_hint: str | None = None) -> FrameGuess:
+VOTES = int(os.environ.get("SHADOWFIELD_VOTES", "3"))
+
+
+def name_fields(fields: list[dict], orbit: dict, frame_info: dict, sat_hint: str | None = None,
+                votes: int | None = None) -> FrameGuess:
+    """Ask Claude `votes` times (independent samples) and keep each field's majority category.
+
+    One sample can flip between "battery" and "solar" from run to run; a majority of three
+    is far steadier. The samples share one cached prompt, so extra votes cost mostly output
+    tokens. Each field's confidence becomes mean confidence x agreement, and its rationale
+    says how many samples agreed.
+    """
+    votes = VOTES if votes is None else votes
     payload = {
         "satellite": sat_hint or "withheld (blind test)",
         "orbit": orbit,
@@ -123,8 +135,38 @@ def name_fields(fields: list[dict], orbit: dict, frame_info: dict, sat_hint: str
         "candidate_fields": fields,
     }
     user = json.dumps(payload, indent=1, default=float)
+    samples = [_ask(user, i) for i in range(votes)]
+    return _vote(samples)
+
+
+def _vote(samples: list[FrameGuess]) -> FrameGuess:
+    if len(samples) == 1:
+        return samples[0]
+    from collections import Counter
+    by_off: dict[int, list[FieldGuess]] = {}
+    for smp in samples:
+        for g in smp.fields:
+            by_off.setdefault(g.offset, []).append(g)
+    out = []
+    for off, gs in sorted(by_off.items()):
+        counts = Counter(g.category for g in gs)
+        top = max(counts.values())
+        tied = [c for c, k in counts.items() if k == top]
+        # a tie goes to the more confident category; "unknown" never wins a tie
+        win = max(tied, key=lambda c: (c != "unknown", sum(g.confidence for g in gs if g.category == c)))
+        agree = [g for g in gs if g.category == win]
+        rep = max(agree, key=lambda g: g.confidence)
+        conf = sum(g.confidence for g in agree) / len(agree) * len(agree) / len(samples)
+        out.append(rep.model_copy(update={"confidence": round(conf, 3),
+                                          "rationale": f"{rep.rationale} [{len(agree)}/{len(samples)} samples agree]"}))
+    return samples[0].model_copy(update={"fields": out})
+
+
+def _ask(user: str, sample: int) -> FrameGuess:
     # identical evidence -> identical question: answer from disk instead of paying again
-    key = hashlib.sha256(f"{MODEL}|{EFFORT}|{SYSTEM}|{user}".encode()).hexdigest()[:24]
+    key = hashlib.sha256(f"{MODEL}|{EFFORT}|{SYSTEM}|{user}|{sample}".encode()).hexdigest()[:24]
+    if sample == 0:  # keep answers cached by earlier single-sample runs valid
+        key = hashlib.sha256(f"{MODEL}|{EFFORT}|{SYSTEM}|{user}".encode()).hexdigest()[:24]
     cached = CACHE_DIR / f"{key}.json"
     if cached.exists():
         return FrameGuess.model_validate_json(cached.read_text(encoding="utf-8"))
@@ -135,6 +177,7 @@ def name_fields(fields: list[dict], orbit: dict, frame_info: dict, sat_hint: str
         max_tokens=8000,
         betas=["server-side-fallback-2026-07-01"],
         fallbacks="default",
+        cache_control={"type": "ephemeral"},  # later votes read the same prompt from cache
         system=SYSTEM,
         output_config={
             "effort": EFFORT,
@@ -144,8 +187,11 @@ def name_fields(fields: list[dict], orbit: dict, frame_info: dict, sat_hint: str
     )
     u = resp.usage
     pin, pout = PRICE_PER_MTOK.get(resp.model, PRICE_PER_MTOK.get(MODEL, (0, 0)))
-    print(f"[llm] {resp.model}: {u.input_tokens} in / {u.output_tokens} out tokens, "
-          f"about ${(u.input_tokens * pin + u.output_tokens * pout) / 1e6:.4f}", flush=True)
+    cr = getattr(u, "cache_read_input_tokens", 0) or 0
+    cw = getattr(u, "cache_creation_input_tokens", 0) or 0
+    cost = (u.input_tokens * pin + cw * pin * 1.25 + cr * pin * 0.05 + u.output_tokens * pout) / 1e6
+    print(f"[llm] {resp.model} vote {sample}: {u.input_tokens} in + {cw} cache-write + {cr} cache-read / "
+          f"{u.output_tokens} out tokens, about ${cost:.4f}", flush=True)
     if resp.stop_reason == "refusal":
         raise RuntimeError(f"model declined: {resp.stop_details}")
     if resp.stop_reason == "max_tokens":

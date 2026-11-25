@@ -91,6 +91,13 @@ def _ranks(M: np.ndarray) -> np.ndarray:
     return R / sd
 
 
+def _restd(R: np.ndarray) -> np.ndarray:
+    R = R - R.mean(0)
+    sd = R.std(0)
+    sd[sd == 0] = np.inf
+    return R / sd
+
+
 def _demean(R: np.ndarray, groups: np.ndarray) -> np.ndarray:
     out = R.copy()
     for g in np.unique(groups):
@@ -205,7 +212,18 @@ def analyze(B: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, alpha: float | 
     week = np.floor((unix - unix.min()) / (7 * 86400)).astype(int)
     if week.max() >= 2:
         RX, RF = _demean(RX, week), _demean(RF, week)
-    C = RX.T @ RF / n  # (n_cand, n_feat) Spearman
+    # Sunlight correlations only from weeks in which the sunlight history actually varies:
+    # weeks of permanent sunshine carry no information about it, and would only dilute it.
+    # (Counters, clocks, GNSS and orbit phase still use every frame.)
+    wk_var = pd.Series(phys[f"ema_{TAUS[2]}"].to_numpy()).groupby(week).transform("std").fillna(0).to_numpy()
+    E = wk_var > 0.02
+    if E.sum() >= 30 and not E.all():
+        RXe, RFe = _restd(RX[E]), _restd(RF[E])
+        C = RXe.T @ RFe / E.sum()
+        n_pass_sun = int(df["obs_id"].iloc[np.flatnonzero(E)].nunique())
+    else:
+        C = RX.T @ RF / n  # (n_cand, n_feat) Spearman
+        n_pass_sun = n_pass
     names = list(feats)
     ci = {k: i for i, k in enumerate(names)}
 
@@ -257,7 +275,8 @@ def analyze(B: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, alpha: float | 
                              "rolling": True, "wraps_in_pass": int(wrap_p[j])}))
         kind, s, info = max(options, key=lambda t: t[1])
         phys_best[(o, w, endian, signed)] = max(v for k_, v, _ in options if k_ in ("sun", "lagged", "orbit"))
-        p = _p_from_rho(np.array([s]), n_pass)[0] if kind in ("sun", "lagged", "orbit") else 0.0
+        n_eff = n_pass_sun if kind in ("sun", "lagged") else n_pass
+        p = _p_from_rho(np.array([s]), max(n_eff, 3))[0] if kind in ("sun", "lagged", "orbit") else 0.0
         if p > alpha:
             continue
         det.update(info)
@@ -539,10 +558,27 @@ def _width_ok(f: Field, ctx: dict) -> bool:
         r_lo = ctx["rough"].get((lo_off, 1, "be", False), 0.0)
         r_hi = max(ctx["rough"].get((top_off, 1, "be", sg), 9.0) for sg in (False, True)) if h == 1 else \
             min(ctx["rough"].get((top_off, h, f.endian, sg), 9.0) for sg in (False, True))
-        if r_lo >= r_hi + 0.2:
+        if r_lo >= r_hi + 0.2 and _lsb_follows(ctx["B"], lo_off, top_off, h, f.endian, ctx["same"]):
             f.detail["joined"] = "lsb"
             return True
     return False
+
+
+def _lsb_follows(B, lo_off, hi_off, hi_w, endian, same) -> bool:
+    """Is the low byte the continuation of the high part rather than an unrelated noisy byte?
+
+    Inside a pass, while the high part stays put, a real low byte moves by small steps
+    (the signal's own noise); a random neighbour jumps like any two draws from its values.
+    """
+    lo = B[:, lo_off].astype(float)
+    hi = _decode(B, hi_off, hi_w, endian, False)
+    m = same & (np.diff(hi) == 0)
+    if m.sum() < 20:
+        return False
+    step = np.median(np.abs(np.diff(lo))[m])
+    rng = np.random.default_rng(0)
+    shuffled = np.median(np.abs(lo - rng.permutation(lo)))
+    return step <= 0.6 * shuffled
 
 
 def _carries_into(B: np.ndarray, narrow: Field, wide: Field) -> bool:

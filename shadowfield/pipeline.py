@@ -30,6 +30,19 @@ class TypeResult:
     order: np.ndarray = field(default=None, repr=False)
 
 
+def _season_note(ph) -> str | None:
+    """Say how many weeks had no eclipse information (they are left out of the sunlight analysis)."""
+    u = ph["unix"].to_numpy()
+    week = np.floor((u - u.min()) / (7 * 86400)).astype(int)
+    var = pd.Series(ph[f"ema_{physics.TAUS[2]}"].to_numpy()).groupby(week).std().fillna(0)
+    flat = int((var <= 0.02).sum())
+    if flat == 0 or flat == len(var):
+        return None
+    return (f"{flat} of {len(var)} weeks had no eclipse in the hours before any frame; they are left out "
+            "of the sunlight correlations (but still used for counters, clocks, GNSS and orbit phase), and "
+            "correlations are taken within weeks, so seasonal drift cannot pose as physics.")
+
+
 def _one_season(ft, ph, gap_days: float = 14.0):
     """Keep one contiguous stretch of data when the frames come from separate seasons.
 
@@ -80,9 +93,7 @@ def run(norad: int, data_dir: Path, decoder: str | None = None, use_llm: bool = 
     results = []
     for ft in types:
         ph = physics.compute(ft.df, data_dir / "ephemeris")
-        ft, ph, seg_note = _one_season(ft, ph)
-        if seg_note:
-            print(f"[{norad}] {ft.key}: {seg_note}")
+        seg_note = _season_note(ph)
         n_pass = int(ft.df["obs_id"].nunique())
         if n_pass < MIN_PASSES:
             # frames from one or two passes (often a stored-telemetry dump) cannot be tied to physics
