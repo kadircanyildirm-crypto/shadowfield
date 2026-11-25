@@ -107,10 +107,16 @@ def _p_from_rho(rho: np.ndarray, n_eff: int) -> np.ndarray:
     return 2 * stats.t.sf(t, n_eff - 2)
 
 
-def analyze(B: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, alpha: float = 1e-6,
+# 1e-4 per reading, counted in passes: on the development satellites this found more
+# fields than 1e-6 at the same precision (1e-8 lost fields)
+ALPHA = float(__import__("os").environ.get("SHADOWFIELD_ALPHA", "1e-4"))
+
+
+def analyze(B: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, alpha: float | None = None,
             quick: bool = False) -> list[Field]:
     """All fields in one frame type. quick=True (1-2 byte integers only, no GNSS search) is for
     comparing candidate decodings of the same bytes, where only the relative evidence matters."""
+    alpha = ALPHA if alpha is None else alpha
     n, L = B.shape
     order = np.argsort(df["ts"].to_numpy())
     B, df, phys = B[order], df.iloc[order].reset_index(drop=True), phys.iloc[order].reset_index(drop=True)
@@ -628,6 +634,15 @@ def _greedy(fields: list[Field], rough: dict) -> list[Field]:
         fields = [f for f in fields if f.width == 1 or f.endian == dom
                   or f.kind in ("position", "magnet", "clock")
                   or not any(set(g.span) & set(f.span) for g in proven)]
+        # With a clear frame byte order, a minority-order reading that overlaps an almost
+        # equally good same-width reading in the frame's order is a misaligned read.
+        if votes[dom] >= 2 and votes[dom] >= 2 * votes["le" if dom == "be" else "be"]:
+            dom_reads = [g for g in fields if g.width > 1 and g.endian == dom]
+            fields = [f for f in fields if not (
+                f.width > 1 and f.endian != dom and not f.detail.get("joined")
+                and f.kind in ("sun", "lagged", "orbit")
+                and any(g.width == f.width and set(g.span) & set(f.span) and g.score >= f.score - 0.05
+                        for g in dom_reads))]
     joined = [f for f in fields if f.detail.get("joined")]
     # carries also appear when the split point cuts through a real neighbouring field,
     # so a carry-joined reading only absorbs parts it explains about as well
