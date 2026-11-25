@@ -119,12 +119,12 @@ def motion(X: np.ndarray, cand: list, df: pd.DataFrame, unix: np.ndarray) -> Mot
     step = np.diff(X, axis=0)
     span = X.max(0) - X.min(0)
     # Several stations hear the same pass with clocks a few seconds apart, so frames that
-    # close together may be out of order: monotonicity is judged only on pairs > 5 s apart.
+    # close together may be out of order: monotonicity is judged only on pairs >= 3 s apart.
     # Drops of more than half the range are resets (allowed if rare).
     dts = np.diff(unix)
     # ...and only between frames less than a week apart: across a gap of months a satellite
     # may have rebooted and restarted its counters, which says nothing about a counter
-    apart = (dts > 5) & (dts < 7 * 86400)
+    apart = (dts >= 3) & (dts < 7 * 86400)
     st = step[apart]
     up = (st > 0).sum(0)
     resets_all = ((st < 0) & (np.abs(st) > 0.5 * span)).sum(0)

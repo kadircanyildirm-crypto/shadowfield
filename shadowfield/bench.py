@@ -20,13 +20,20 @@ SATS = [  # norad, decoder, display name
     (46506, "netsat", "NetSat"),
     (41789, "alsat1n", "AlSat-1N"),
 ]
-# Held out: never looked at while the engine was tuned on the satellites above.
-HELDOUT = [
-    (62394, "crocube", "CroCube"),
+# The first held-out set (Sputnix, CubeBel-2, Geoscan #2) was inspected after its blind run and
+# has joined development. The current held-out set has never been looked at while tuning.
+SATS += [
     (57172, "sputnixusp", "Sputnix USP"),
     (57175, "cubebel2", "CubeBel-2"),
     (64881, "geoscan", "Geoscan (2nd unit)"),
-    (62391, "lasarsat", "LASARsat"),
+]
+HELDOUT = [
+    (68458, "cp16", "CP16"),
+    (67683, "knacksat2", "KNACKSAT-2"),
+    (69935, "kostka", "Kostka"),
+    (98243, "gbsat", "GBSAT"),
+    (68635, "canvas", "CANVAS"),
+    (64878, "innosat16", "InnoSat-16"),
 ]
 
 

@@ -43,6 +43,9 @@ def _pick_encodings(fields: list[Field], rough: dict, B: np.ndarray | None = Non
                       and _boundary(B, f)]
             if proven:
                 near = proven
+        counting = [f for f in near if f.kind in ("counter", "clock") and not f.signed]
+        if counting:  # counters and clocks are unsigned by nature
+            near = counting
         out.append(min(near, key=lambda f: (round(rough.get(_k(f), 1.0), 2), f.signed)))
     return out
 

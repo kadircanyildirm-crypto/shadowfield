@@ -9,7 +9,7 @@ from pathlib import Path
 from shadowfield import pipeline
 from shadowfield.bench import SATS
 
-DEV = {43880, 61785, 60237, 43784, 46506, 41789}  # tuned on these; held-out satellites are never listed here
+DEV = {43880, 61785, 60237, 43784, 46506, 41789, 57172, 57175, 64881}  # incl. the first held-out set (now development)
 want = {int(a) for a in sys.argv[1:]} or DEV
 out = []
 for norad, dec, name in SATS:

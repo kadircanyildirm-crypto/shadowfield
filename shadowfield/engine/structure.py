@@ -87,6 +87,8 @@ def _width_ok(f: Field, ctx: dict) -> bool:
     if f.kind == "counter":
         return ctx["up"][_k(f)] >= 1.5 * max(ctx["up"].get(t, 0) for t in tops)
     top_best = max(ctx["phys_best"].get(t, 0.0) for t in tops)
+    if _two_fields(f, ctx["phys_best"], ctx["B"], ctx["rough"]):
+        return False
     if f.score >= top_best + 0.02:
         return True
     # The least significant byte of a measured number carries its noise and wraps, so it
@@ -140,3 +142,57 @@ def _carries_into(B: np.ndarray, narrow: Field, wide: Field) -> bool:
         return bool(e[0] != 0 and not wraps_own)
     wraps = np.diff(vn) < 0
     return (de & wraps).sum() / de.sum() >= 0.8
+
+
+def _span_best(phys_best: dict, a: int, b: int) -> float:
+    """Best physics score of any reading covering exactly bytes [a, b)."""
+    w = b - a
+    ens = ("be",) if w == 1 else ("be", "le")
+    return max((phys_best.get((a, w, e, sg), 0.0) for e in ens for sg in (False, True, "f")), default=0.0)
+
+
+def _resets_below(hi: np.ndarray, lo: np.ndarray) -> bool:
+    """Where two neighbouring high values are both seen, is the low part lower above the step?
+
+    That is the carry signature of one number (the low part starts again). Two separate
+    sensors that follow the same physics rise together instead.
+    """
+    vals = np.unique(hi)
+    votes = []
+    for a, b in zip(vals[:-1], vals[1:]):
+        la, lb = lo[hi == a], lo[hi == b]
+        if b == a + 1 and len(la) >= 5 and len(lb) >= 5:
+            votes.append(la.mean() > lb.mean())
+    return bool(votes) and sum(votes) > len(votes) / 2
+
+
+def _span_rough(rough: dict, a: int, b: int) -> float:
+    w = b - a
+    ens = ("be",) if w == 1 else ("be", "le")
+    return min((rough.get((a, w, e, sg), 9.0) for e in ens for sg in (False, True, "f")), default=9.0)
+
+
+def _two_fields(f: Field, phys_best: dict, B: np.ndarray | None = None, rough: dict | None = None) -> bool:
+    """Is this wide reading really two neighbouring sensors read as one number?
+
+    If some byte boundary inside it splits it into two readings that are *each* clearly
+    physical, and one of them explains the physics about as well as the combination, the
+    combination adds nothing but a second sensor. (A real number's low byte, read alone,
+    wraps and correlates weakly; a small-range number's high byte alone is near-constant.)
+    """
+    for k in range(f.offset + 1, f.offset + f.width):
+        left, right = _span_best(phys_best, f.offset, k), _span_best(phys_best, k, f.offset + f.width)
+        if min(left, right) >= 0.5 and max(left, right) >= f.score - 0.05:
+            # two sensors are each smooth inside a pass; the low byte of one number is noisy
+            if rough is not None and max(_span_rough(rough, f.offset, k),
+                                         _span_rough(rough, k, f.offset + f.width)) >= 0.4:
+                continue
+            if B is not None:
+                a, b = (f.offset, k), (k, f.offset + f.width)
+                (hs, he), (ls, le_) = (a, b) if f.endian == "be" else (b, a)  # high part first in big-endian
+                hi = _decode(B, hs, he - hs, f.endian, False)
+                lo = _decode(B, ls, le_ - ls, f.endian, False)
+                if _resets_below(hi, lo):
+                    continue  # one number after all
+            return True
+    return False
