@@ -179,7 +179,9 @@ def analyze(B: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, alpha: float | 
     # close together may be out of order: monotonicity is judged only on pairs > 5 s apart.
     # Drops of more than half the range are resets (allowed if rare).
     dts = np.diff(unix)
-    apart = dts > 5
+    # ...and only between frames less than a week apart: across a gap of months a satellite
+    # may have rebooted and restarted its counters, which says nothing about a counter
+    apart = (dts > 5) & (dts < 7 * 86400)
     st = step[apart]
     up = (st > 0).sum(0)
     resets_all = ((st < 0) & (np.abs(st) > 0.5 * span)).sum(0)
