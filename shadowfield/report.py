@@ -32,8 +32,9 @@ table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card)}
 
 
 def _values(ft, f) -> np.ndarray:
-    if f.kind == "magnet":
-        ax = [_decode(ft.bytes_, f.offset + i * f.width, f.width, f.endian, f.signed).astype(float) for i in range(3)]
+    if f.detail.get("axes", 1) > 1:  # vector: plot its length
+        ax = [_decode(ft.bytes_, f.offset + i * f.width, f.width, f.endian, f.signed).astype(float)
+              for i in range(f.detail["axes"])]
         return np.sqrt(sum(a ** 2 for a in ax))
     return _decode(ft.bytes_, f.offset, f.width, f.endian, f.signed).astype(float)
 

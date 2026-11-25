@@ -65,7 +65,8 @@ def render(res, norad: int, header_bytes: int = 0) -> str:
         unit = g.get("unit", "")
         doc = f"{g.get('category', f.kind)}" + (f", {unit}" if unit and unit != "unknown" else "") + \
               (f", {g['scale']}" if g.get("scale") else "") + f"; evidence: {ev}{note}"
-        idents = [base] if axes == 1 else [_ident(f"{base}_{a}", used) for a in "xyz"]
+        labels = {1: [""], 3: ["x", "y", "z"], 4: ["q0", "q1", "q2", "q3"]}.get(axes, [str(i) for i in range(axes)])
+        idents = [base] if axes == 1 else [_ident(f"{base}_{a}", used) for a in labels]
         for ident in idents:
             seq.append(f"  - id: {ident}\n    type: {t}\n    doc: {_q(doc)}")
         expr = _scale_expr(g.get("scale", ""), idents[0]) if axes == 1 else None

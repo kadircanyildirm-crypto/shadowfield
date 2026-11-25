@@ -135,32 +135,47 @@ def run(norad: int, data_dir: Path, decoder: str | None = None, use_llm: bool = 
         if decoder:
             t = truth.locate_true_fields(ft, list(ft.df["raw"]), decoder)
             if t:
-                res.evaluation = truth.evaluate(found, t)
+                res.evaluation = truth.evaluate(found, t, ft.bytes_)
                 if res.names:
                     res.evaluation.update(_llm_accuracy(res.names, res.evaluation["table"]))
         results.append(res)
     return results
 
 
-LLM_TO_TRUTH = {"navigation": "nav", "thermal": "thermal", "power_solar": "power", "power_battery": "power", "power_bus": "power",
+LLM_TO_TRUTH = {"navigation": "nav", "attitude": "nav", "thermal": "thermal", "power_solar": "power", "power_battery": "power", "power_bus": "power",
                 "counter": "counter", "clock": "clock", "magnetometer": "magnet"}
 
 
 def _llm_accuracy(names: dict, table: pd.DataFrame) -> dict:
+    """Claude's categories against the decoder, for every physical field the engine found.
+
+    category_accuracy   coarse (thermal / power / counter+clock / navigation / magnet); an
+                        'unknown' answer counts as wrong
+    answered            share of those fields Claude did not mark 'unknown'
+    selective_accuracy  coarse accuracy on the answered fields only
+    fine_accuracy       battery vs solar vs bus, on answered power fields whose decoder name says which
+    """
     by_off = {f["offset"]: f for f in names["fields"]}
-    hits, total = 0, 0
+    hits = total = answered = sel_hits = fine_total = fine_hits = 0
     for _, t in table[(table["category"] != "other") & table["found"]].iterrows():
-        g = None
-        for off, f in by_off.items():
-            if off <= t["offset"] < off + 4 or t["offset"] <= off < t["offset"] + t["width"]:
-                g = f
-                break
+        g = by_off.get(t["found_offset"])
         if g is None:
             continue
         total += 1
         mapped = LLM_TO_TRUTH.get(g["category"])
-        hits += mapped == t["category"] or {mapped, t["category"]} <= {"counter", "clock"}
-    return {"llm_category_accuracy": hits / total if total else float("nan"), "llm_judged": total}
+        ok = mapped == t["category"] or {mapped, t["category"]} <= {"counter", "clock"}
+        hits += ok
+        if g["category"] != "unknown":
+            answered += 1
+            sel_hits += ok
+            if t.get("fine") and g["category"].startswith("power"):
+                fine_total += 1
+                fine_hits += g["category"] == t["fine"]
+    nan = float("nan")
+    return {"llm_category_accuracy": hits / total if total else nan, "llm_judged": total,
+            "llm_answered": answered / total if total else nan,
+            "llm_selective_accuracy": sel_hits / answered if answered else nan,
+            "llm_fine_accuracy": fine_hits / fine_total if fine_total else nan, "llm_fine_judged": fine_total}
 
 
 def save(results: list[TypeResult], out_dir: Path, norad: int) -> Path:

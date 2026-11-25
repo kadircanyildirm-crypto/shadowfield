@@ -41,7 +41,7 @@ class Field:
 
     @property
     def span(self) -> range:
-        return range(self.offset, self.offset + self.width * self.detail.get("axes", 1))
+        return range(self.offset, self.offset + self.width * self.detail.get("axes", 1))  # vectors: all axes
 
     @property
     def ctype(self) -> str:
@@ -140,7 +140,13 @@ def analyze(B: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, alpha: float = 
             sane = (x == 0) | ((ax > 1e-6) & (ax < 1e10))
             nz = x != 0
             # random bytes read as floats give wild exponents; real values stay in range
-            if sane.mean() >= 0.98 and nz.sum() >= 30 and np.unique(x[: min(n, 2000)]).size >= 4:
+            # a real float has all four bytes moving and a busy lowest mantissa byte; an
+            # integer read as a float (a temperature plus constant neighbours) does not
+            bytes_move = all(np.unique(B[nz, o + i]).size > 1 for i in range(4)) if nz.any() else False
+            lsb = o if endian == "le" else o + 3
+            busy = np.unique(B[nz, lsb]).size >= min(32, max(8, nz.sum() // 8)) if nz.any() else False
+            if (sane.mean() >= 0.98 and nz.sum() >= 30 and np.unique(x[: min(n, 2000)]).size >= 4
+                    and bytes_move and busy):
                 cand.append((o, 4, endian, "f"))
                 X.append(x)
     if not X:
@@ -175,6 +181,9 @@ def analyze(B: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, alpha: float = 
     wrap_p = ((sp < 0) & (np.abs(sp) > 0.5 * span)).sum(0)
     frac_up_pass = up_p / np.maximum(up_p + down_p - wrap_p, 1)
     dt_same = dts[m]
+    # in-pass "counts up (with wraps)" of every single byte, for alignment checks
+    rolling = {c[0]: float(frac_up_pass[j]) if up_p[j] >= 10 else 0.0
+               for j, c in enumerate(cand) if c[1] == 1 and not c[3]}
 
     # ---- physics correlations on ranks ---------------------------------------
     feats = {"sunlit": phys["sunlit"].to_numpy()}
@@ -225,10 +234,14 @@ def analyze(B: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, alpha: float = 
             info = {"frac_up": round(float(frac_up[j]), 4), "per_second": slope,
                     "resets": int(((step[:, j] < 0) & (np.abs(step[:, j]) > 0.5 * (x.max() - x.min()))).sum())}
             clock = _clock(unix, x)
+            # misaligned read: the true lowest byte is one up, and it, not ours, counts in-pass
+            lsb_c, nxt_c = ((o + w - 1, o + w - 2) if endian == "be" else (o, o + 1)) if w > 1 else (o, None)
+            misaligned = (nxt_c is not None and rolling.get(nxt_c, 0) >= 0.9 > rolling.get(lsb_c, 0) + 0.3)
+            pen = 0.02 if misaligned else 0.0
             if clock:
-                options.append(("clock", 0.999, {**info, **clock}))
+                options.append(("clock", 0.999 - pen, {**info, **clock}))
             else:
-                options.append(("counter", float(frac_up[j]), info))
+                options.append(("counter", float(frac_up[j]) - pen, info))
         elif (frac_up_pass[j] > 0.97 and up_p[j] > 20 and 1 <= wrap_p[j] <= 0.2 * up_p[j]
               and np.unique(x).size >= 16):
             inc = sp[:, j] > 0
@@ -248,12 +261,15 @@ def analyze(B: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, alpha: float = 
     fields += _magnetometers(cand, X, phys["b_igrf"].to_numpy(), n_pass, alpha)
     if not quick:
         fields += _positions(cand, X, phys, df["obs_id"].to_numpy())
+        fields += _quaternions(cand, X)
     ctx = {"B": B, "same": same, "phys_best": phys_best,
            "up": {c: int(up[j]) for j, c in enumerate(cand)},
            "rough": {c: float(rough[j]) for j, c in enumerate(cand)}}
     fields = _pick_encodings(fields, ctx["rough"], B)
+    every = fields
     fields = [f for f in fields if _width_ok(f, ctx)]
-    return _greedy(fields, ctx["rough"])
+    chosen = _greedy(fields, ctx["rough"])
+    return _canonical_widths(chosen, every, B)
 
 
 def _slope(t: np.ndarray, x: np.ndarray, m: int = 600) -> float:
@@ -302,29 +318,26 @@ def _positions(cand, X, phys, obs=None) -> list[Field]:
         vals, counts = np.unique(x[valid], return_counts=True)
         if valid.sum() < 30 or vals.size < 20:
             continue
+        # all coordinates at once: robust scale, then which frames agree with the orbit
+        big = valid[:, None] & (np.abs(F) > 0.3 * fmax[None, :])
+        enough = big.sum(0) >= 20
+        if not enough.any():
+            continue
+        with np.errstate(all="ignore"):
+            scale = np.nanmedian(np.where(big, x[:, None] / F, np.nan), axis=0)
+            match = valid[:, None] & (np.abs(x[:, None] / scale[None, :] - F) < 0.01 * fmax[None, :])
+        ok_k = enough & np.isfinite(scale) & (scale != 0) & (match.sum(0) >= 20)
         best = None
-        for k, col in enumerate(cols):
-            f = F[:, k]
-            big = valid & (np.abs(f) > 0.3 * fmax[k])
-            if big.sum() < 20:
-                continue
-            scale = float(np.median(x[big] / f[big]))
-            if not np.isfinite(scale) or scale == 0:
-                continue
-            match = valid & (np.abs(x / scale - f) < 0.01 * fmax[k])
-            if match.sum() < 20:
-                continue
-            n_pass = np.unique(obs[match]).size
-            frac = match.sum() / valid.sum()
-            # stations cluster geographically, so a nearly constant byte can sit inside a
-            # cluster of coordinates: the matches must sweep most of the coordinate's range,
-            # with the field moving along (not just many frames near one value)
-            fm = f[match]
+        for k in np.flatnonzero(ok_k):
+            mk = match[:, k]
+            fm = F[mk, k]
             sweep = (fm.max() - fm.min()) / (2 * fmax[k])
-            if sweep < 0.5 or np.unique(x[match]).size < 15 or abs(np.corrcoef(x[match], fm)[0, 1]) < 0.99:
+            if sweep < 0.5 or np.unique(x[mk]).size < 15 or abs(np.corrcoef(x[mk], fm)[0, 1]) < 0.99:
                 continue
+            n_pass = np.unique(obs[mk]).size
+            frac = mk.sum() / valid.sum()
             if n_pass >= 5 and frac >= 0.25 and (best is None or frac > best[0]):
-                best = (frac, k, scale, int(match.sum()), int(n_pass))
+                best = (frac, int(k), float(scale[k]), int(mk.sum()), int(n_pass))
         if best:
             frac, k, scale, n_match, n_pass = best
             unit = "deg" if cols[k] == "lat" else ("km" if cols[k].startswith(("pos", "alt")) else "km/s")
@@ -333,6 +346,30 @@ def _positions(cand, X, phys, obs=None) -> list[Field]:
                               "matching_frames": n_match, "matching_passes": n_pass,
                               "raw_per_" + unit.replace("/", "_per_"): round(scale, 4),
                               "min": float(x.min()), "max": float(x.max())}, x))
+    return out
+
+
+def _quaternions(cand, X, tol: float = 0.02) -> list[Field]:
+    """Four consecutive floats whose squares sum to one: an attitude quaternion.
+
+    Attitude has no driver the orbit can predict, but a unit quaternion is a structural
+    fingerprint no other telemetry has.
+    """
+    key = {c: j for j, c in enumerate(cand) if c[3] == "f"}
+    out = []
+    for (o, w, endian, sg), j in key.items():
+        js = [key.get((o + 4 * i, 4, endian, "f")) for i in range(4)]
+        if None in js:
+            continue
+        Q = X[:, js]
+        nz = np.abs(Q).sum(1) > 0
+        if nz.sum() < 30:
+            continue
+        norm = np.sqrt((Q[nz] ** 2).sum(1))
+        frac = float((np.abs(norm - 1) < tol).mean())
+        if frac >= 0.9 and all(np.unique(Q[nz, i]).size >= 10 for i in range(4)):
+            out.append(Field(o, 4, endian, "f", "attitude", 0.95 + 0.05 * frac,
+                             {"axes": 4, "unit_norm_fraction": round(frac, 3)}, np.sqrt((Q ** 2).sum(1))))
     return out
 
 
@@ -459,7 +496,7 @@ def _width_ok(f: Field, ctx: dict) -> bool:
     resolution (better physics score / more counter increments). Without such
     evidence the wide reading would just swallow the neighbouring bytes.
     """
-    if f.width == 1 or f.signed == "f" or f.kind in ("clock", "magnet", "position"):
+    if f.width == 1 or f.signed == "f" or f.kind in ("clock", "magnet", "position", "attitude"):
         return True
     n, frac = _carry(ctx["B"], f, ctx["same"])
     # structural proof that these bytes form one number
@@ -484,7 +521,83 @@ def _width_ok(f: Field, ctx: dict) -> bool:
             tops += [(o2, hw, e, sg) for sg in (False, True)]
     if f.kind == "counter":
         return ctx["up"][_k(f)] >= 1.5 * max(ctx["up"].get(t, 0) for t in tops)
-    return f.score >= max(ctx["phys_best"].get(t, 0.0) for t in tops) + 0.02
+    top_best = max(ctx["phys_best"].get(t, 0.0) for t in tops)
+    if f.score >= top_best + 0.02:
+        return True
+    # The least significant byte of a measured number carries its noise and wraps, so it
+    # is much rougher inside a pass than the most significant byte. Two separate smooth
+    # sensors side by side are not. With that, a reading that loses nothing against its
+    # top part is one number even when the sunlight correlation is saturated (a solar
+    # current is near-binary, so extra resolution cannot raise it).
+    if lo_w == 1 and f.score >= top_best - 0.005:
+        r_lo = ctx["rough"].get((lo_off, 1, "be", False), 0.0)
+        r_hi = max(ctx["rough"].get((top_off, 1, "be", sg), 9.0) for sg in (False, True)) if h == 1 else \
+            min(ctx["rough"].get((top_off, h, f.endian, sg), 9.0) for sg in (False, True))
+        if r_lo >= r_hi + 0.2:
+            f.detail["joined"] = "lsb"
+            return True
+    return False
+
+
+def _carries_into(B: np.ndarray, narrow: Field, wide: Field) -> bool:
+    """Are the extra top bytes of `wide` part of the same counter?
+
+    Yes if they change only when `narrow` wraps (or resets), or never change but are not zero.
+
+    That is what the upper bytes of one counter do. A neighbouring field that happens
+    to move would change at unrelated moments. B must be in time order.
+    """
+    extra = [i for i in wide.span if i not in narrow.span]
+    e = B[:, extra].astype(np.int64) @ (256 ** np.arange(len(extra)))
+    de = np.diff(e) != 0
+    vn = _decode(B, narrow.offset, narrow.width, narrow.endian, narrow.signed)
+    if de.sum() == 0:
+        # Constant top byte: zero adds nothing (narrow is exact); non-zero is part of the
+        # absolute value (a unix time whose top byte is 0x69 all month), unless the narrow
+        # counter itself wraps at its own maximum, which a counter with more bytes cannot.
+        top = 256 ** narrow.width
+        wraps_own = ((np.diff(vn) < 0) & (vn[:-1] > 0.9 * top)).any()
+        return bool(e[0] != 0 and not wraps_own)
+    wraps = np.diff(vn) < 0
+    return (de & wraps).sum() / de.sum() >= 0.8
+
+
+def _canonical_widths(chosen: list[Field], pool: list[Field], B: np.ndarray) -> list[Field]:
+    """Settle the width of each chosen field the way a decoder author would.
+
+    - Narrower when it reads exactly the same values (a constant or sign-extension top
+      byte adds nothing; decoders list the narrow type).
+    - For counters and clocks, wider when the extra top byte is free and really moves:
+      an uptime's top byte changes once a month, too rarely to win on evidence, but it
+      is part of the number.
+    """
+    def same_lsb(a, b):
+        if a.endian != b.endian and min(a.width, b.width) > 1:
+            return False
+        la = a.offset + a.width - 1 if a.endian == "be" else a.offset
+        lb = b.offset + b.width - 1 if b.endian == "be" else b.offset
+        return la == lb
+
+    out = []
+    for f in chosen:
+        if f.kind in ("magnet", "attitude") or f.signed == "f":
+            out.append(f)
+            continue
+        claimed = set().union(*(set(g.span) for g in chosen if g is not f)) if len(chosen) > 1 else set()
+        vf = _decode(B, f.offset, f.width, f.endian, f.signed)
+        best = f
+        for g in pool:
+            if g is f or not same_lsb(f, g) or g.signed == "f" or set(g.span) & claimed:
+                continue
+            vg = _decode(B, g.offset, g.width, g.endian, g.signed)
+            if g.width < best.width and np.array_equal(vg, vf) and g.kind == f.kind:
+                best = g
+            elif (f.kind in ("counter", "clock") and g.kind in ("counter", "clock") and g.width > best.width
+                  and g.width <= 4 and g.score >= f.score - 0.01 and not np.array_equal(vg, vf)
+                  and _carries_into(B, f, g)):
+                best = g
+        out.append(best)
+    return sorted(out, key=lambda f: f.offset)
 
 
 def _greedy(fields: list[Field], rough: dict) -> list[Field]:
@@ -525,7 +638,7 @@ def _greedy(fields: list[Field], rough: dict) -> list[Field]:
     def key(f: Field):
         std_clock = f.kind == "clock" and f.detail.get("epoch_guess") != "custom"
         width = f.width * f.detail.get("axes", 1)
-        if f.kind in ("magnet", "position"):
+        if f.kind in ("magnet", "position", "attitude"):
             # vector sensors and GNSS fixes: the full-width reading (finer than the orbit
             # can check) rather than a truncated one
             return (round(f.score, 2), std_clock, 0, width, -rough.get(_k(f), 1.0), not f.signed)
