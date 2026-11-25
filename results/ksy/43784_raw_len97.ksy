@@ -8,44 +8,52 @@ doc: |
 seq:
   - id: unknown_0
     size: 29
-  - id: uptime_or_tick_counter
+  - id: uptime_counter
     type: u4be
-    doc: "counter, ticks, raw * 1; evidence: counter (score 1.00)"
+    doc: "counter, ticks, raw; evidence: counter (score 1.00)"
   - id: unknown_33
     size: 1
   - id: gnss_pos_ecef_x
     type: s4be
-    doc: "navigation, m, raw / 100000 * 1000 (raw_per_km ~1e5, i.e. 10 cm units); evidence: position (score 1.00)"
+    doc: "navigation, km, raw / 99995.39; evidence: position (score 1.00)"
   - id: gnss_pos_ecef_y
     type: s4be
-    doc: "navigation, m, raw / 100 (cm to m); evidence: position (score 1.00)"
+    doc: "navigation, km, raw / 99994.52; evidence: position (score 1.00)"
   - id: gnss_pos_eci_z
     type: s4be
-    doc: "navigation, m, raw / 100 (cm to m); evidence: position (score 1.00)"
+    doc: "navigation, km, raw / 100021.58; evidence: position (score 1.00)"
   - id: unknown_46
     size: 1
   - id: gnss_vel_ecef_x
     type: b24be
-    doc: "navigation, m/s, raw / 100; evidence: position (score 1.00) (signed 24-bit on the satellite; read here as unsigned)"
+    doc: "navigation, km/s, raw / 99979.17; evidence: position (score 1.00) (signed 24-bit on the satellite; read here as unsigned)"
   - id: unknown_50
     size: 1
   - id: gnss_vel_ecef_y
     type: s4be
-    doc: "navigation, m/s, raw / 100 (tentative); evidence: position (score 1.00)"
+    doc: "navigation, km/s, raw / 25602101.57; evidence: position (score 1.00)"
   - id: gnss_vel_eci_z
     type: b24be
-    doc: "navigation, m/s, raw / 100; evidence: position (score 1.00) (signed 24-bit on the satellite; read here as unsigned)"
+    doc: "navigation, km/s, raw / 99994.24; evidence: position (score 1.00) (signed 24-bit on the satellite; read here as unsigned)"
   - id: unknown_58
     size: 1
   - id: battery_voltage
     type: u2be
-    doc: "power_battery, mV, raw (or raw*0.001 V); evidence: sun (score 0.86)"
+    doc: "power_battery, mV, raw * 1; evidence: sun (score 0.86)"
   - id: unknown_61
     size: 36
 instances:
-  uptime_or_tick_counter_ticks:
-    value: uptime_or_tick_counter * 1
-  gnss_vel_ecef_x_m_s:
-    value: gnss_vel_ecef_x / 100
-  gnss_vel_eci_z_m_s:
-    value: gnss_vel_eci_z / 100
+  gnss_pos_ecef_x_km:
+    value: gnss_pos_ecef_x / 99995.39
+  gnss_pos_ecef_y_km:
+    value: gnss_pos_ecef_y / 99994.52
+  gnss_pos_eci_z_km:
+    value: gnss_pos_eci_z / 100021.58
+  gnss_vel_ecef_x_km_s:
+    value: gnss_vel_ecef_x / 99979.17
+  gnss_vel_ecef_y_km_s:
+    value: gnss_vel_ecef_y / 25602101.57
+  gnss_vel_eci_z_km_s:
+    value: gnss_vel_eci_z / 99994.24
+  battery_voltage_mv:
+    value: battery_voltage * 1

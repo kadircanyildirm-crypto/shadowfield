@@ -10,11 +10,11 @@ seq:
     size: 5
   - id: frame_sequence_counter
     type: u1
-    doc: "counter, counts, raw; evidence: counter (score 1.00)"
+    doc: "counter, count, raw; evidence: counter (score 1.00)"
   - id: unknown_6
     size: 8
-  - id: uptime_or_packet_counter
+  - id: uptime_or_message_counter
     type: b24le
-    doc: "counter, counts, raw; evidence: counter (score 0.99)"
+    doc: "counter, count, raw; evidence: counter (score 0.99)"
   - id: unknown_17
     size: 15

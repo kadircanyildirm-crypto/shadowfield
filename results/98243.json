@@ -1,0 +1,1216 @@
+[
+ {
+  "frame_type": "GBSAT0:len68",
+  "frames": 897,
+  "passes": 94,
+  "orbit": {
+   "mean_altitude_km": 583,
+   "max_abs_latitude_deg": 76.1,
+   "beta_angle_range_deg": [
+    -2.6,
+    -0.9
+   ],
+   "fraction_of_frames_in_sunlight": 0.59,
+   "fraction_of_frames_with_an_eclipse_in_the_previous_80_min": 1.0,
+   "days_covered": 25.0
+  },
+  "fields": [
+   {
+    "offset": 0,
+    "type": "u1",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.061,
+    "min": 0.0,
+    "max": 255.0,
+    "p5": 29.400000000000013,
+    "p95": 246.0,
+    "n_frames": 897,
+    "n_passes": 94,
+    "frac_up_in_pass": 1.0,
+    "per_second": 0.1,
+    "rolling": true,
+    "wraps_in_pass": 7,
+    "p": 0.0,
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": 144.0,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 148.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": 193.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 110.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 139.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 158.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.071,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.212,
+    "sun_minus_shadow_in_std": -0.43,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.083,
+     "10": -0.082,
+     "20": -0.061,
+     "40": -0.049,
+     "80": -0.051
+    },
+    "rank_corr_abs_beta": 0.141,
+    "relative_spread_p5_p95": 1.434,
+    "shadow_over_sun_median_ratio": 1.217,
+    "distinct_values": 246,
+    "median_step_within_pass": 1.0,
+    "mean": 149.793,
+    "resets_in_window": 19,
+    "last_reset_days_before_end": 3.7,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 4,
+    "type": "u3le",
+    "kind": "clock",
+    "score": 0.999,
+    "rough": 0.0,
+    "min": 1837702.0,
+    "max": 3984807.0,
+    "p5": 1876819.0,
+    "p95": 3683392.0,
+    "n_frames": 897,
+    "n_passes": 94,
+    "frac_up": 1.0,
+    "per_second": 0.9935841175579982,
+    "resets": 0,
+    "clock_scale": 1.0,
+    "epoch_offset_s": 1791446192.0,
+    "epoch_guess": "custom",
+    "p": 0.0,
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": 3091465.0,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 3077238.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": 2482795.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 3384510.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 3061356.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 2553865.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.386,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.271,
+    "sun_minus_shadow_in_std": 0.23,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.047,
+     "10": -0.048,
+     "20": -0.037,
+     "40": -0.047,
+     "80": -0.066
+    },
+    "rank_corr_abs_beta": -1.0,
+    "relative_spread_p5_p95": 0.591,
+    "shadow_over_sun_median_ratio": 0.952,
+    "distinct_values": 897,
+    "median_step_within_pass": 10.0,
+    "mean": 2861196.095,
+    "resets_in_window": 0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 50,
+    "type": "u1",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.049,
+    "min": 0.0,
+    "max": 254.0,
+    "p5": 12.0,
+    "p95": 243.0,
+    "n_frames": 897,
+    "n_passes": 94,
+    "frac_up_in_pass": 1.0,
+    "per_second": 0.1,
+    "rolling": true,
+    "wraps_in_pass": 5,
+    "p": 0.0,
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": 148.5,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 159.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": 172.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 117.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 140.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 143.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.045,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.018,
+    "sun_minus_shadow_in_std": -0.41,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.075,
+     "10": -0.075,
+     "20": -0.049,
+     "40": -0.035,
+     "80": -0.017
+    },
+    "rank_corr_abs_beta": 0.121,
+    "relative_spread_p5_p95": 1.571,
+    "shadow_over_sun_median_ratio": 1.222,
+    "distinct_values": 247,
+    "median_step_within_pass": 1.0,
+    "mean": 142.73,
+    "resets_in_window": 22,
+    "last_reset_days_before_end": 3.7,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 53,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.679,
+    "rough": 0.549,
+    "min": 0.0,
+    "max": 40.0,
+    "p5": 0.0,
+    "p95": 14.199999999999932,
+    "n_frames": 897,
+    "n_passes": 94,
+    "rho_sun": 0.679,
+    "sun_mean": 6.066162570888469,
+    "shadow_mean": 0.0,
+    "p": 5.667236735092178e-14,
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": 0.0,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 0.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": 0.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 2.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 7.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 4.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.066,
+    "trend_in_shadow_vs_minutes_since_sunset": null,
+    "sun_minus_shadow_in_std": 0.8,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.611,
+     "10": 0.61,
+     "20": 0.558,
+     "40": 0.524,
+     "80": 0.433
+    },
+    "rank_corr_abs_beta": -0.018,
+    "shadow_over_sun_median_ratio": 0.0,
+    "distinct_values": 36,
+    "median_step_within_pass": 0.0,
+    "mean": 3.577,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -0.083,
+    "window_days": 25.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 54,
+    "type": "u3le",
+    "kind": "sun",
+    "score": 0.883,
+    "rough": 0.457,
+    "min": 0.0,
+    "max": 1114647.0,
+    "p5": 0.0,
+    "p95": 536494.3999999998,
+    "n_frames": 897,
+    "n_passes": 94,
+    "rho_sun": 0.883,
+    "sun_mean": 241580.5293005671,
+    "shadow_mean": 0.0,
+    "p": 4.915742248046132e-32,
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": 0.0,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 0.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": 0.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 79366.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 196645.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 268293.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.345,
+    "trend_in_shadow_vs_minutes_since_sunset": null,
+    "sun_minus_shadow_in_std": 1.05,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.824,
+     "10": 0.822,
+     "20": 0.755,
+     "40": 0.712,
+     "80": 0.592
+    },
+    "rank_corr_abs_beta": 0.01,
+    "relative_spread_p5_p95": 37.402,
+    "shadow_over_sun_median_ratio": 0.0,
+    "distinct_values": 452,
+    "median_step_within_pass": 5610.5,
+    "mean": 142470.569,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -111293.257,
+    "window_days": 25.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 57,
+    "type": "u2le",
+    "kind": "sun",
+    "score": 0.796,
+    "rough": 0.138,
+    "min": 0.0,
+    "max": 16965.0,
+    "p5": 15745.0,
+    "p95": 16930.0,
+    "n_frames": 897,
+    "n_passes": 94,
+    "rho_sun": 0.796,
+    "sun_mean": 16416.35538752363,
+    "shadow_mean": 15856.10597826087,
+    "p": 8.687091234490404e-22,
+    "joined": "carry",
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": 15945.5,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 15818.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": 15761.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 16141.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 16652.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 16653.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.31,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.584,
+    "sun_minus_shadow_in_std": 0.77,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.794,
+     "10": 0.792,
+     "20": 0.749,
+     "40": 0.714,
+     "80": 0.631
+    },
+    "rank_corr_abs_beta": 0.037,
+    "relative_spread_p5_p95": 0.074,
+    "shadow_over_sun_median_ratio": 0.968,
+    "distinct_values": 411,
+    "median_step_within_pass": 5.0,
+    "mean": 16186.509,
+    "drift_per_30_days_of_daily_low": -116.919,
+    "drift_per_30_days_of_daily_high": 17.827,
+    "window_days": 25.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 59,
+    "type": "s2le",
+    "kind": "sun",
+    "score": 0.857,
+    "rough": 0.199,
+    "min": -178.0,
+    "max": 451.0,
+    "p5": -170.0,
+    "p95": 270.0,
+    "n_frames": 897,
+    "n_passes": 94,
+    "rho_sun": 0.857,
+    "sun_mean": 89.6805293005671,
+    "shadow_mean": -161.4836956521739,
+    "p": 3.0700427582735706e-28,
+    "joined": "sign",
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": -169.0,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": -169.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": -169.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 53.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 7.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 6.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.324,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.179,
+    "sun_minus_shadow_in_std": 1.21,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.676,
+     "10": 0.674,
+     "20": 0.633,
+     "40": 0.583,
+     "80": 0.439
+    },
+    "rank_corr_abs_beta": -0.092,
+    "relative_spread_p5_p95": 88.0,
+    "shadow_over_sun_median_ratio": -13.0,
+    "distinct_values": 195,
+    "median_step_within_pass": 1.0,
+    "mean": -13.361,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 78.857,
+    "window_days": 25.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 61,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.919,
+    "rough": 0.038,
+    "min": 2.0,
+    "max": 16.0,
+    "p5": 3.0,
+    "p95": 13.0,
+    "n_frames": 897,
+    "n_passes": 94,
+    "rho_sun": -0.919,
+    "sun_mean": 4.775047258979206,
+    "shadow_mean": 10.64945652173913,
+    "p": 5.977694676656285e-39,
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": 12.0,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 11.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": 9.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 5.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 5.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 5.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.276,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.781,
+    "sun_minus_shadow_in_std": -1.85,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.733,
+     "10": -0.729,
+     "20": -0.639,
+     "40": -0.583,
+     "80": -0.448
+    },
+    "rank_corr_abs_beta": -0.277,
+    "relative_spread_p5_p95": 1.667,
+    "shadow_over_sun_median_ratio": 2.2,
+    "distinct_values": 15,
+    "median_step_within_pass": 0.0,
+    "mean": 7.185,
+    "drift_per_30_days_of_daily_low": 2.727,
+    "drift_per_30_days_of_daily_high": 3.0,
+    "window_days": 25.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     63
+    ]
+   },
+   {
+    "offset": 62,
+    "type": "u1",
+    "kind": "orbit",
+    "score": 0.818,
+    "rough": 0.072,
+    "min": 14.0,
+    "max": 20.0,
+    "p5": 15.0,
+    "p95": 19.0,
+    "n_frames": 897,
+    "n_passes": 94,
+    "r2_orbit": 0.825,
+    "p": 8.875856312874939e-24,
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": 18.0,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 18.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": 17.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 15.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 16.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 17.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.723,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.901,
+    "sun_minus_shadow_in_std": -0.79,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.124,
+     "10": -0.119,
+     "20": -0.036,
+     "40": 0.034,
+     "80": 0.201
+    },
+    "rank_corr_abs_beta": -0.165,
+    "relative_spread_p5_p95": 0.25,
+    "shadow_over_sun_median_ratio": 1.062,
+    "distinct_values": 7,
+    "median_step_within_pass": 0.0,
+    "mean": 16.616,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 25.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 63,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.833,
+    "rough": 0.094,
+    "min": 3.0,
+    "max": 17.0,
+    "p5": 5.0,
+    "p95": 11.0,
+    "n_frames": 897,
+    "n_passes": 94,
+    "rho_sun": -0.833,
+    "sun_mean": 5.835538752362949,
+    "shadow_mean": 9.165760869565217,
+    "p": 2.5055733399361847e-25,
+    "response_profile": {
+     "shadow 3-24 min after sunset": {
+      "median": 11.0,
+      "n": 114
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 9.0,
+      "n": 101
+     },
+     "shadow 27-35 min after sunset": {
+      "median": 8.0,
+      "n": 153
+     },
+     "sun 6-14 min after sunrise": {
+      "median": 6.0,
+      "n": 167
+     },
+     "sun 14-17 min after sunrise": {
+      "median": 6.0,
+      "n": 143
+     },
+     "sun 17-35 min after sunrise": {
+      "median": 6.0,
+      "n": 219
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.069,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.787,
+    "sun_minus_shadow_in_std": -1.33,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.538,
+     "10": -0.534,
+     "20": -0.446,
+     "40": -0.384,
+     "80": -0.241
+    },
+    "rank_corr_abs_beta": -0.337,
+    "relative_spread_p5_p95": 1.0,
+    "shadow_over_sun_median_ratio": 1.5,
+    "distinct_values": 15,
+    "median_step_within_pass": 0.0,
+    "mean": 7.202,
+    "drift_per_30_days_of_daily_low": 1.782,
+    "drift_per_30_days_of_daily_high": 1.975,
+    "window_days": 25.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     61
+    ]
+   }
+  ],
+  "names": {
+   "summary": "A 68-byte beacon (GBSAT0 header) with two free-running 1-byte sequence counters, a 3-byte uptime clock, and a block of power and thermal fields near the end of the frame. Solar input and battery-related fields respond to eclipse, with two small quantities that are higher in shadow.",
+   "fields": [
+    {
+     "offset": 0,
+     "name": "frame_counter_a",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.633,
+     "rationale": "Increases by 1 per step at about 0.1 per second and wraps at 255, so it is a rolling sequence counter. The power_bus hint comes from weak sun correlation and should be ignored. [3/3 samples agree]"
+    },
+    {
+     "offset": 4,
+     "name": "uptime_seconds",
+     "category": "clock",
+     "unit": "s",
+     "scale": "raw * 1.0",
+     "confidence": 0.7,
+     "rationale": "u3le rising at 0.994 per second with no resets, so it counts seconds. Custom epoch or uptime since boot. [3/3 samples agree]"
+    },
+    {
+     "offset": 50,
+     "name": "frame_sequence_b",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.583,
+     "rationale": "Second rolling u1 counter at 0.1/s with wraps, similar to offset 0. [3/3 samples agree]"
+    },
+    {
+     "offset": 53,
+     "name": "solar_current_small",
+     "category": "power_solar",
+     "unit": "mA",
+     "scale": "raw",
+     "confidence": 0.35,
+     "rationale": "Zero in all shadow frames, small positive in sun, rough and following sunlight (rho 0.68). Might be a low-range solar or charge current. [3/3 samples agree]"
+    },
+    {
+     "offset": 54,
+     "name": "solar_array_power_or_current",
+     "category": "power_solar",
+     "unit": "uA",
+     "scale": "raw",
+     "confidence": 0.45,
+     "rationale": "u3le value exactly zero in shadow and large in sun (rho 0.88), rough with huge relative spread. Behaves like a solar input; the unit is a guess. [3/3 samples agree]"
+    },
+    {
+     "offset": 57,
+     "name": "battery_voltage",
+     "category": "power_battery",
+     "unit": "mV",
+     "scale": "raw * 0.5",
+     "confidence": 0.4,
+     "rationale": "Narrow spread of 7%, rises in sun and falls in shadow (trends +0.31 and -0.58) with a lag of about 5-10 min. A raw value near 16000 is consistent with a 2-cell pack at about 8 V if scaled by 0.5, though the scale is uncertain. [3/3 samples agree]"
+    },
+    {
+     "offset": 59,
+     "name": "battery_current",
+     "category": "power_battery",
+     "unit": "mA",
+     "scale": "raw",
+     "confidence": 0.517,
+     "rationale": "Signed value that is about -169 in shadow and positive in sun, so it is charging in sun and discharging in shadow. This is consistent with a signed battery current. [3/3 samples agree]"
+    },
+    {
+     "offset": 61,
+     "name": "panel_temperature_a",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.2,
+     "rationale": "u1 that is higher in shadow and falls through shadow. It moves with offset 63 and its time constant is short. The sign is odd for a panel, so it may be a heated or internal component, or an ADC count. [2/3 samples agree]"
+    },
+    {
+     "offset": 62,
+     "name": "internal_temperature",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.317,
+     "rationale": "u1 in 14-20 with very few distinct values. It is slightly higher in shadow, rises through sun (+0.72) and falls through shadow (-0.90). It has a long time constant, which fits an internal or battery temperature. [3/3 samples agree]"
+    },
+    {
+     "offset": 63,
+     "name": "panel_temperature_b",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.2,
+     "rationale": "u1 that moves with offset 61 and is higher in shadow, falling through shadow (-0.79). It is a likely sibling temperature channel and is named consistently with it. [2/3 samples agree]"
+    }
+   ],
+   "health": "No clock resets were seen (uptime is continuous over 25 days), so there is no sign of reboots; the 1-byte counters wrap by design. Battery voltage daily low drifts slightly downward, but 25 days include season effects, so the evidence for ageing is weak. Battery current shows discharge in shadow and charge in sun, which is normal."
+  },
+  "evaluation": {
+   "true_fields": 23,
+   "physical_true_fields": 14,
+   "recall_physical": 0.7142857142857143,
+   "exact_physical": 0.5,
+   "value_exact_physical": 0.5,
+   "located_exact_fraction": 0.43478260869565216,
+   "kind_accuracy": 0.8,
+   "precision": 0.9,
+   "llm_category_accuracy": 1.0,
+   "llm_judged": 10,
+   "llm_answered": 1.0,
+   "llm_selective_accuracy": 1.0,
+   "llm_fine_accuracy": 1.0,
+   "llm_fine_judged": 6,
+   "truth": [
+    {
+     "name": "timestamp",
+     "offset": 4,
+     "width": 3,
+     "endian": "le",
+     "signed": false,
+     "category": "clock",
+     "located": "affine",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 4.0,
+     "kind": "clock",
+     "kind_ok": true
+    },
+    {
+     "name": "error_code",
+     "offset": 23,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "other",
+     "located": "exact",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "last_command_received",
+     "offset": 25,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "other",
+     "located": "exact",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "last_command_executed",
+     "offset": 26,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "other",
+     "located": "exact",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "status_log_size",
+     "offset": 29,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "other",
+     "located": "exact",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "subsystem_status_flag",
+     "offset": 33,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "other",
+     "located": "exact",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "adcs_gyro_x_dps",
+     "offset": 34,
+     "width": 1,
+     "endian": "be",
+     "signed": true,
+     "category": "other",
+     "located": "affine",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "adcs_gyro_y_dps",
+     "offset": 36,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "other",
+     "located": "affine",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "adcs_gyro_z_dps",
+     "offset": 38,
+     "width": 2,
+     "endian": "le",
+     "signed": true,
+     "category": "other",
+     "located": "affine",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "adcs_mag_x_nt",
+     "offset": 40,
+     "width": 2,
+     "endian": "le",
+     "signed": true,
+     "category": "magnet",
+     "located": "affine",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "adcs_mag_y_nt",
+     "offset": 42,
+     "width": 2,
+     "endian": "le",
+     "signed": true,
+     "category": "magnet",
+     "located": "affine",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "adcs_mag_z_nt",
+     "offset": 44,
+     "width": 2,
+     "endian": "le",
+     "signed": true,
+     "category": "magnet",
+     "located": "affine",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "last_cs_tx_stat",
+     "offset": 50,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "other",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 50.0,
+     "kind": "counter",
+     "kind_ok": false
+    },
+    {
+     "name": "eps_solar_panel_0_w",
+     "offset": 53,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "power",
+     "located": "affine",
+     "fine": "power_solar",
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 53.0,
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "eps_solar_panel_1_w",
+     "offset": 54,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "power",
+     "located": "affine",
+     "fine": "power_solar",
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 54.0,
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "eps_solar_panel_2_w",
+     "offset": 55,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "power",
+     "located": "affine",
+     "fine": "power_solar",
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 54.0,
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "eps_solar_panel_3_w",
+     "offset": 56,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "power",
+     "located": "affine",
+     "fine": "power_solar",
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 54.0,
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "eps_batt_voltage_v",
+     "offset": 57,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "located": "affine",
+     "fine": "power_battery",
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 57.0,
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "eps_batt_current_a",
+     "offset": 59,
+     "width": 2,
+     "endian": "le",
+     "signed": true,
+     "category": "power",
+     "located": "affine",
+     "fine": "power_battery",
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 59.0,
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "tcs_cs_temp",
+     "offset": 61,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 61.0,
+     "kind": "sun",
+     "kind_ok": false
+    },
+    {
+     "name": "tcs_eps_batt_temp",
+     "offset": 62,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 62.0,
+     "kind": "orbit",
+     "kind_ok": true
+    },
+    {
+     "name": "tcs_cdh_temp",
+     "offset": 63,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 63.0,
+     "kind": "sun",
+     "kind_ok": false
+    },
+    {
+     "name": "tcs_adcs_temp",
+     "offset": 67,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    }
+   ]
+  }
+ }
+]

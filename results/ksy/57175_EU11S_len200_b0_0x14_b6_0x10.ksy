@@ -11,86 +11,93 @@ seq:
     doc: AX.25 address and control header
   - id: unknown_0
     size: 2
-  - id: sequence_counter_a
+  - id: frame_sequence_counter
     type: u2le
-    doc: "counter, count, raw; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_4
     size: 1
-  - id: temperature_a
+  - id: battery_voltage_raw
     type: u1
-    doc: "thermal, degC, raw; evidence: lagged (score 0.83)"
+    doc: "power_battery, V, raw * 0.0828; evidence: lagged (score 0.83)"
   - id: unknown_6
     size: 7
-  - id: charge_current_or_power_raw
+  - id: temperature_c_scaled_int
     type: u2le
-    doc: "power_battery, raw, raw; evidence: lagged (score 0.82)"
+    doc: "thermal, degC, raw * 0.001; evidence: lagged (score 0.82)"
   - id: unknown_15
     size: 6
-  - id: frame_counter_be
+  - id: tick_counter_a
     type: u4be
-    doc: "counter, count, raw; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_25
     size: 18
-  - id: sequence_counter_b
+  - id: frame_sequence_counter_copy
     type: u2le
     doc: "counter, count, raw; evidence: counter (score 1.00)"
   - id: unknown_45
     size: 1
   - id: unix_time
     type: u4le
-    doc: "clock, s, raw (unix seconds); evidence: counter (score 1.00)"
+    doc: "clock, s, raw (unix epoch seconds); evidence: counter (score 1.00)"
   - id: unknown_50
-    size: 11
-  - id: state_value_a
-    type: u1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.81)"
+    size: 8
+  - id: temperature_a
+    type: f4le
+    doc: "thermal, degC, raw; evidence: lagged (score 0.94)"
   - id: unknown_62
-    size: 2
-  - id: housekeeping_temp_candidate
-    type: u1
-    doc: "thermal, raw, raw; evidence: lagged (score 0.69)"
-  - id: slow_orbit_value
-    type: u1
-    doc: "unknown, raw, raw; evidence: orbit (score 0.78)"
-  - id: unknown_66
-    size: 2
-  - id: uptime_or_tick_counter
+    size: 1
+  - id: battery_voltage
+    type: f4le
+    doc: "power_battery, V, raw; evidence: lagged (score 0.83)"
+  - id: unknown_67
+    size: 1
+  - id: uptime_or_event_counter_a
     type: b24le
-    doc: "counter, count, raw; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_71
     size: 1
-  - id: uptime_or_tick_counter_2
+  - id: uptime_or_event_counter_b
     type: u4le
-    doc: "counter, count, raw; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_76
     size: 1
-  - id: charge_current_signed
+  - id: temperature_b
     type: f4le
-    doc: "power_battery, raw, raw; evidence: lagged (score 0.91)"
+    doc: "thermal, degC, raw; evidence: lagged (score 0.91)"
   - id: unknown_81
     size: 4
-  - id: state_value_b
+  - id: status_byte_85
     type: u1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.69)"
+    doc: "unknown, raw; evidence: lagged (score 0.69)"
   - id: unknown_86
     size: 6
-  - id: accumulated_value_a
+  - id: unknown_u2_a
     type: u2le
-    doc: "unknown, raw, raw; evidence: lagged (score 0.80)"
+    doc: "unknown, raw; evidence: lagged (score 0.80)"
   - id: unknown_94
     size: 6
-  - id: accumulated_value_b
+  - id: unknown_u2_b
     type: u2le
-    doc: "unknown, raw, raw; evidence: lagged (score 0.76)"
+    doc: "unknown, raw; evidence: lagged (score 0.76)"
   - id: unknown_102
-    size: 17
-  - id: accumulated_value_c
+    size: 12
+  - id: unknown_f4_c
+    type: f4le
+    doc: "unknown, raw; evidence: lagged (score 0.70)"
+  - id: unknown_118
+    size: 1
+  - id: unknown_u2_d
     type: u2le
-    doc: "unknown, raw, raw; evidence: lagged (score 0.71)"
+    doc: "unknown, raw; evidence: lagged (score 0.71)"
   - id: unknown_121
     size: 36
-  - id: frame_counter_c
+  - id: tick_counter_b
     type: u4be
-    doc: "counter, count, raw; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_161
     size: 39
+instances:
+  battery_voltage_raw_v:
+    value: battery_voltage_raw * 0.0828
+  temperature_c_scaled_int_degc:
+    value: temperature_c_scaled_int * 0.001

@@ -94,6 +94,14 @@
     "drift_per_30_days_of_daily_low": 5.0,
     "drift_per_30_days_of_daily_high": 4.375,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -157,6 +165,14 @@
     "drift_per_30_days_of_daily_low": -2.4,
     "drift_per_30_days_of_daily_high": 15.125,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": true,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -220,6 +236,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": true,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -234,7 +258,7 @@
     "p95": 1795596433.0,
     "n_frames": 474,
     "n_passes": 80,
-    "frac_up": 0.9913,
+    "frac_up": 0.9891,
     "per_second": 1.0,
     "resets": 0,
     "clock_scale": 1.0,
@@ -284,6 +308,14 @@
     "median_step_within_pass": 30.0,
     "mean": 1795164022.743,
     "resets_in_window": 0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": true,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      98
     ]
@@ -292,7 +324,7 @@
     "offset": 36,
     "type": "u3le",
     "kind": "counter",
-    "score": 0.982,
+    "score": 0.98,
     "rough": 0.005,
     "min": 32.0,
     "max": 348461.0,
@@ -300,7 +332,7 @@
     "p95": 311909.4999999998,
     "n_frames": 474,
     "n_passes": 80,
-    "frac_up": 0.9825,
+    "frac_up": 0.9803,
     "per_second": -0.004647961874567456,
     "resets": 2,
     "p": 0.0,
@@ -349,6 +381,14 @@
     "mean": 118282.506,
     "resets_in_window": 2,
     "last_reset_days_before_end": 1.9,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -411,6 +451,14 @@
     "drift_per_30_days_of_daily_low": -291.0,
     "drift_per_30_days_of_daily_high": -60.0,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": true,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -475,6 +523,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -338.571,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -539,6 +595,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -2122.05,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": true,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_solar",
     "moves_with_offsets": [
      61
     ]
@@ -605,6 +669,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -1717.714,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": true,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_solar",
     "moves_with_offsets": [
      59
     ]
@@ -670,6 +742,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 27.667,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": true,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_solar",
     "moves_with_offsets": []
    },
    {
@@ -733,6 +813,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 1379.4,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -797,6 +885,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 1593.3,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -861,6 +957,14 @@
     "drift_per_30_days_of_daily_low": -16.5,
     "drift_per_30_days_of_daily_high": 762.071,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -925,6 +1029,14 @@
     "drift_per_30_days_of_daily_low": 155.5,
     "drift_per_30_days_of_daily_high": -765.0,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      81,
      83,
@@ -993,6 +1105,14 @@
     "drift_per_30_days_of_daily_low": 314.143,
     "drift_per_30_days_of_daily_high": -773.887,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      79,
      83,
@@ -1061,6 +1181,14 @@
     "drift_per_30_days_of_daily_low": 277.7,
     "drift_per_30_days_of_daily_high": -871.725,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      79,
      81,
@@ -1129,6 +1257,14 @@
     "drift_per_30_days_of_daily_low": 162.0,
     "drift_per_30_days_of_daily_high": -748.05,
     "window_days": 11.4,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      79,
      81,
@@ -1147,7 +1283,7 @@
     "p95": 567051.0,
     "n_frames": 474,
     "n_passes": 80,
-    "frac_up": 0.9913,
+    "frac_up": 0.9891,
     "per_second": 0.9997498028742877,
     "resets": 1,
     "clock_scale": 1.0,
@@ -1198,6 +1334,14 @@
     "mean": 305288.949,
     "resets_in_window": 1,
     "last_reset_days_before_end": 6.9,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -1259,31 +1403,39 @@
     "median_step_within_pass": 0.0,
     "mean": 4193693493.681,
     "resets_in_window": 0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": true,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      32
     ]
    }
   ],
   "names": {
-   "summary": "A 103-byte housekeeping beacon with a Unix timestamp at offset 32, uptime and sequence counters, a set of sun-driven currents, and four matching signed channels that are warmer or higher in shadow. Every frame is in the 16-33 min window after sunset or 9-21 min after sunrise, so the eclipse is partly seen.",
+   "summary": "A 103-byte housekeeping beacon with a unix timestamp at offset 32, a boot-relative uptime clock at 93 and several counters. It has a block of solar-array style channels (offsets 57-67) that drop to near zero in shadow, a battery-related group, and four bus channels at 79-85 that move together and are higher in shadow. Every frame has an eclipse in the previous 80 minutes, so the lagged correlations are meaningful.",
    "fields": [
     {
      "offset": 24,
-     "name": "internal_temperature",
+     "name": "battery_temperature",
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.317,
-     "rationale": "Signed byte in -13..37 that is warmer in shadow than in sun, with a narrow range and a weak trend. That fits an internal or heated component, but the correlation is only moderate. [3/3 samples agree]"
+     "confidence": 0.417,
+     "rationale": "Signed byte of -13..37, warmer in shadow with a narrow range and rising with sunlight history. This matches a heated internal or battery temperature, though the correlation is weak. [3/3 samples agree]"
     },
     {
      "offset": 27,
      "name": "battery_voltage",
      "category": "power_battery",
-     "unit": "V",
-     "scale": "raw * 0.001",
-     "confidence": 0.5,
-     "rationale": "u2 in 8535-8833 with a spread of only 3%, higher in sun, so likely a 2-cell pack (about 8.5 V). It shows a step after sunrise rather than a smooth rise, so confidence is moderate. [3/3 samples agree]"
+     "unit": "mV",
+     "scale": "raw",
+     "confidence": 0.583,
+     "rationale": "u2 of 8535-8833 is a narrow band (spread 0.03) at the two-cell Li-ion range 6000-8400 mV, slightly above it. It is higher in sun (rho 0.55) and the hint is battery. [3/3 samples agree]"
     },
     {
      "offset": 29,
@@ -1291,89 +1443,89 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.367,
-     "rationale": "Byte in 18-22, rising in sun (trend 0.64) and falling in shadow, with a lag correlation of 0.87. That fits a slowly varying internal temperature, with only 5 distinct values. [3/3 samples agree]"
+     "confidence": 0.267,
+     "rationale": "u1 in 18..22, rising in sun (trend 0.64) and falling in shadow (-0.28), with rho 0.87. This is a slow internal thermal response; it could also be a state of charge on a coarse scale, but the range is too narrow for that. [2/3 samples agree]"
     },
     {
      "offset": 32,
-     "name": "unix_time",
+     "name": "unix_timestamp",
      "category": "clock",
      "unit": "s",
      "scale": "raw",
      "confidence": 0.95,
-     "rationale": "u4 increasing 1 s/s with epoch_guess unix and no resets. [3/3 samples agree]"
+     "rationale": "u4 that increments at 1 s/s with no resets and an epoch guess of unix (values around 1.795e9). [3/3 samples agree]"
     },
     {
      "offset": 36,
-     "name": "sequence_counter",
+     "name": "packet_sequence_counter",
      "category": "counter",
      "unit": "count",
      "scale": "raw",
-     "confidence": 0.467,
-     "rationale": "u3 that mostly increases by about 30 per frame step and has 2 resets, the last 1.9 days before the end. This is a boot or packet counter, but the 3-byte span may be joined with the neighbouring byte. [3/3 samples agree]"
+     "confidence": 0.5,
+     "rationale": "u3 that mostly increases with 2 resets (the last about 1.9 days before the end), so it may wrap or the unit may reboot. The median step within a pass of 30 matches the frame cadence. [3/3 samples agree]"
     },
     {
      "offset": 46,
-     "name": "bus_voltage_or_sensor",
-     "category": "power_bus",
-     "unit": "mV",
+     "name": "unknown_slow_analog",
+     "category": "unknown",
+     "unit": "",
      "scale": "raw",
-     "confidence": 0.25,
-     "rationale": "u2 in 7612-8028, smooth, weakly orbit and sun related (r2 0.26, rho 0.48). It may be a bus voltage but evidence is weak; the large negative drift is noted. [3/3 samples agree]"
+     "confidence": 0.133,
+     "rationale": "u2 in 7612..8028 with a weak orbit r2 of 0.26 and a mild sun correlation. The daily low drifts downward, but the evidence is too thin to name it. [2/3 samples agree]"
     },
     {
      "offset": 57,
      "name": "solar_panel_current_1",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "Near zero in shadow (about 9) and a high plateau in sun, with a shadow/sun ratio of 0.007 and rough. This is a solar input current, with the scale unknown. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.55,
+     "rationale": "Near zero in shadow, plateau around 1300-5000 in sun, strongly sun-correlated (rho 0.88). [3/3 samples agree]"
     },
     {
      "offset": 59,
      "name": "solar_panel_current_2",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.517,
-     "rationale": "Near zero in shadow and about 4400 in sun, moving with offset 61. It looks like a solar input channel. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.65,
+     "rationale": "Near zero in shadow, about 4400-5300 in sun, power_class_hint is solar, and it moves with offset 61. [3/3 samples agree]"
     },
     {
      "offset": 61,
      "name": "solar_panel_current_3",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.517,
-     "rationale": "Near zero in shadow and about 4300 in sun, moving with offset 59, so it is a sibling solar channel. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.65,
+     "rationale": "Near zero in shadow and about 4300 in sun, and it moves with offset 59. [3/3 samples agree]"
     },
     {
      "offset": 63,
      "name": "solar_panel_current_4",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.467,
-     "rationale": "Zero in shadow and about 1000 in sun with high sun correlation (0.87). It is a solar input channel. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.6,
+     "rationale": "Near zero in shadow, about 1000-1200 in sun, rho 0.87, hint is solar. [3/3 samples agree]"
     },
     {
      "offset": 65,
      "name": "solar_panel_current_5",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.383,
-     "rationale": "Near zero in shadow, and in sun it falls with time since sunrise (400 to 47). It may be a panel that is only briefly illuminated. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.4,
+     "rationale": "Zero in shadow and up to 1233 in sun, but it decays with time since sunrise and depends on beta. [3/3 samples agree]"
     },
     {
      "offset": 67,
      "name": "solar_panel_current_6",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.383,
-     "rationale": "Near zero in shadow, and in sun it declines from 431 to 233 after sunrise. This is a solar channel with a changing sun angle. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.433,
+     "rationale": "Zero in shadow, up to 1286 in sun, rho 0.90, decaying after sunrise. [3/3 samples agree]"
     },
     {
      "offset": 69,
@@ -1382,64 +1534,64 @@
      "unit": "mA",
      "scale": "raw",
      "confidence": 0.483,
-     "rationale": "Signed, positive in sun (about +100) and negative in shadow (about -120), so it is a charge/discharge current. [3/3 samples agree]"
+     "rationale": "Signed s2 that is positive in sun (about +100) and negative in shadow (about -40 to -170), consistent with charging and discharging. [3/3 samples agree]"
     },
     {
      "offset": 79,
-     "name": "panel_temperature_1",
-     "category": "thermal",
-     "unit": "0.1 degC",
-     "scale": "raw * 0.1",
-     "confidence": 0.333,
-     "rationale": "s2 that is higher in shadow (ratio 1.9-2.0) and negatively sun-correlated. Four channels move together, so they are a group of temperatures. The scale and sign are uncertain. [3/3 samples agree]"
+     "name": "load_current_1",
+     "category": "power_bus",
+     "unit": "mA",
+     "scale": "raw * 1",
+     "confidence": 0.4,
+     "rationale": "Signed, smooth and higher in shadow (825 vs 422), and moves with offsets 81, 83 and 85. The hint is bus/load, possibly heater or payload channels. [3/3 samples agree]"
     },
     {
      "offset": 81,
-     "name": "panel_temperature_2",
-     "category": "thermal",
-     "unit": "0.1 degC",
-     "scale": "raw * 0.1",
-     "confidence": 0.333,
-     "rationale": "Moves with 79, 83 and 85 with the same shadow-warm shape, so it belongs to the same group. [3/3 samples agree]"
+     "name": "load_current_2",
+     "category": "power_bus",
+     "unit": "mA",
+     "scale": "raw * 1",
+     "confidence": 0.4,
+     "rationale": "Same behaviour as offset 79 and moves with the group. [3/3 samples agree]"
     },
     {
      "offset": 83,
-     "name": "panel_temperature_3",
-     "category": "thermal",
-     "unit": "0.1 degC",
-     "scale": "raw * 0.1",
-     "confidence": 0.333,
-     "rationale": "Same group and response as 79, 81 and 85. [3/3 samples agree]"
+     "name": "load_current_3",
+     "category": "power_bus",
+     "unit": "mA",
+     "scale": "raw * 1",
+     "confidence": 0.4,
+     "rationale": "Same behaviour as offset 79 and moves with the group. [3/3 samples agree]"
     },
     {
      "offset": 85,
-     "name": "panel_temperature_4",
-     "category": "thermal",
-     "unit": "0.1 degC",
-     "scale": "raw * 0.1",
-     "confidence": 0.333,
-     "rationale": "Same group and response as 79, 81 and 83. [3/3 samples agree]"
+     "name": "load_current_4",
+     "category": "power_bus",
+     "unit": "mA",
+     "scale": "raw * 1",
+     "confidence": 0.4,
+     "rationale": "Same behaviour as offset 79 and moves with the group. [3/3 samples agree]"
     },
     {
      "offset": 93,
-     "name": "uptime",
+     "name": "uptime_seconds",
      "category": "clock",
      "unit": "s",
      "scale": "raw",
-     "confidence": 0.7,
-     "rationale": "u3 increasing at about 1 s/s with 1 reset 6.9 days before the end. This is uptime and indicates a reboot. [3/3 samples agree]"
+     "confidence": 0.8,
+     "rationale": "u3 that increments at about 1 s/s with 1 reset about 6.9 days before the end. It is an uptime counter that restarted, or a wrapping value. [3/3 samples agree]"
     },
     {
      "offset": 98,
-     "name": "unix_time_offset_counter",
+     "name": "clock_like_counter",
      "category": "counter",
      "unit": "s",
      "scale": "raw",
-     "confidence": 0.333,
-     "rationale": "u4 that only increases and correlates with the clock at offset 32 (rank corr with beta 0.998). Its rate is low (0.0039 per second) and it moves in jumps, so it may be a stepped timestamp-like counter. [3/3 samples agree]"
+     "confidence": 0.267,
+     "rationale": "u4 that only increases, at 0.0039 per second, and is flat across sun and shadow. It moves with the timestamp but advances in rare large jumps; the values are near 2^32, so it may be a different time base. [2/3 samples agree]"
     }
    ],
-   "health": "The uptime counter reset once, 6.9 days before the end, and the sequence counter reset twice, the last 1.9 days before the end. These indicate at least one reboot in the 11-day window. Battery voltage and temperatures look stable with no clear drift, but the window is short, so I am not sure."
+   "health": "The uptime clock at offset 93 reset once about 6.9 days before the end and the sequence counter at 36 reset twice, so there was at least one reboot in the 11.4-day window. Battery voltage tracks sunlight within a narrow band, with no clear ageing trend in 11 days. Temperatures are modest, so the battery and thermal state look nominal, but the evidence is limited."
   },
   "evaluation": {
    "true_fields": 24,
@@ -1448,12 +1600,12 @@
    "exact_physical": 0.7,
    "value_exact_physical": 0.7,
    "located_exact_fraction": 1.0,
-   "kind_accuracy": 0.375,
+   "kind_accuracy": 0.5,
    "precision": 1.0,
-   "llm_category_accuracy": 1.0,
+   "llm_category_accuracy": 0.375,
    "llm_judged": 8,
    "llm_answered": 1.0,
-   "llm_selective_accuracy": 1.0,
+   "llm_selective_accuracy": 0.375,
    "llm_fine_accuracy": NaN,
    "llm_fine_judged": 0,
    "truth": [
@@ -1463,7 +1615,7 @@
      "width": 1,
      "endian": "be",
      "signed": true,
-     "category": "thermal",
+     "category": "power",
      "located": "exact",
      "fine": null,
      "found": true,
@@ -1471,7 +1623,7 @@
      "value_exact": true,
      "found_offset": 24.0,
      "kind": "sun",
-     "kind_ok": false
+     "kind_ok": true
     },
     {
      "name": "t_uhf",

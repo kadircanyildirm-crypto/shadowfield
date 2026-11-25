@@ -27,7 +27,7 @@
     "p95": 5504685.7,
     "n_frames": 1724,
     "n_passes": 241,
-    "frac_up_in_pass": 0.9905,
+    "frac_up_in_pass": 0.9909,
     "per_second": 0.11666666666666667,
     "rolling": true,
     "wraps_in_pass": 6,
@@ -59,41 +59,82 @@
    },
    {
     "offset": 37,
-    "type": "u3le",
+    "type": "u1",
     "kind": "counter",
-    "score": 0.994,
-    "rough": 0.021,
-    "min": 2126952.0,
-    "max": 14601989.0,
-    "p5": 2126952.0,
-    "p95": 14584238.85,
+    "score": 0.981,
+    "rough": 0.03,
+    "min": 0.0,
+    "max": 255.0,
+    "p5": 37.0,
+    "p95": 212.0,
     "n_frames": 1724,
     "n_passes": 241,
-    "frac_up": 0.9941,
-    "per_second": -0.0,
-    "resets": 10,
+    "frac_up_in_pass": 0.9813,
+    "per_second": 0.016666666666666666,
+    "rolling": true,
+    "wraps_in_pass": 1,
     "p": 0.0,
     "response_profile": {
      "sun 17-200 min after sunrise": {
-      "median": 2126952.0,
+      "median": 104.0,
       "n": 1724
      }
     },
-    "trend_in_sun_vs_minutes_since_sunrise": -0.416,
+    "trend_in_sun_vs_minutes_since_sunrise": -0.077,
     "trend_in_shadow_vs_minutes_since_sunset": null,
     "rank_corr_by_lag_tau_min": {
-     "5": -0.539,
-     "10": -0.651,
-     "20": -0.331,
-     "40": -0.029,
-     "80": -0.413
+     "5": -0.056,
+     "10": -0.068,
+     "20": -0.066,
+     "40": -0.061,
+     "80": -0.081
     },
-    "rank_corr_abs_beta": -0.096,
-    "relative_spread_p5_p95": 5.857,
-    "distinct_values": 518,
+    "rank_corr_abs_beta": -0.049,
+    "relative_spread_p5_p95": 1.683,
+    "distinct_values": 235,
     "median_step_within_pass": 0.0,
-    "mean": 6026088.377,
-    "resets_in_window": 10,
+    "mean": 110.168,
+    "resets_in_window": 44,
+    "last_reset_days_before_end": 0.0,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 38,
+    "type": "u3le",
+    "kind": "counter",
+    "score": 0.995,
+    "rough": 0.026,
+    "min": 106306.0,
+    "max": 16703183.0,
+    "p5": 4792436.0,
+    "p95": 16703113.0,
+    "n_frames": 1724,
+    "n_passes": 241,
+    "frac_up": 0.9952,
+    "per_second": -0.0,
+    "resets": 13,
+    "p": 0.0,
+    "response_profile": {
+     "sun 17-200 min after sunrise": {
+      "median": 4792436.0,
+      "n": 1724
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.395,
+    "trend_in_shadow_vs_minutes_since_sunset": null,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.518,
+     "10": -0.629,
+     "20": -0.311,
+     "40": -0.017,
+     "80": -0.393
+    },
+    "rank_corr_abs_beta": -0.086,
+    "relative_spread_p5_p95": 2.485,
+    "distinct_values": 215,
+    "median_step_within_pass": 0.0,
+    "mean": 8509462.615,
+    "resets_in_window": 13,
     "last_reset_days_before_end": 60.0,
     "moves_with_offsets": [
      45,
@@ -143,7 +184,7 @@
     "resets_in_window": 10,
     "last_reset_days_before_end": 59.5,
     "moves_with_offsets": [
-     37,
+     38,
      51,
      52,
      68
@@ -189,7 +230,7 @@
     "drift_per_30_days_of_daily_high": 1.263,
     "window_days": 150.5,
     "moves_with_offsets": [
-     37,
+     38,
      45,
      52,
      68
@@ -235,7 +276,7 @@
     "drift_per_30_days_of_daily_high": 1.631,
     "window_days": 150.5,
     "moves_with_offsets": [
-     37,
+     38,
      45,
      51,
      68
@@ -282,7 +323,7 @@
     "drift_per_30_days_of_daily_high": 21294158.308,
     "window_days": 150.5,
     "moves_with_offsets": [
-     37,
+     38,
      45,
      51,
      52
@@ -290,77 +331,86 @@
    }
   ],
   "names": {
-   "summary": "A 89-byte beacon frame with several multi-byte counters and fields that look like they come from the same reboot-driven process. Every candidate field jumps at the same ~10 reset events, so they seem to be uptime or counter values that restart at reboot, not sensors tracking sunlight. The sun and lag correlations are most likely side effects of the reboot timing.",
+   "summary": "An 89-byte beacon frame with several multi-byte counters, odd byte-aligned fields that look like parts of larger values, and a few fields correlated with time since an out-of-view eclipse. Many candidate fields are probably misaligned slices of the same counters and flags, so the layout is uncertain.",
    "fields": [
     {
      "offset": 22,
-     "name": "uptime_or_frame_counter",
-     "category": "counter",
-     "unit": "counts",
-     "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "A 3-byte counter that only rises (about 0.117 per second) and wraps or resets 10 times in the window. The last reset was 59.5 days before the end, which matches offsets 37, 45, 51 and 52. [3/3 samples agree]"
-    },
-    {
-     "offset": 37,
-     "name": "reset_linked_counter_a",
-     "category": "counter",
-     "unit": "counts",
-     "scale": "raw",
-     "confidence": 0.3,
-     "rationale": "Marked as a counter with 10 resets at the same time as the others. The rate is about 0 and the value is constant within a pass, so it may be a boot-persistent value or a mis-aligned multi-byte field. [3/3 samples agree]"
-    },
-    {
-     "offset": 45,
-     "name": "seconds_since_boot",
+     "name": "uptime_counter",
      "category": "counter",
      "unit": "s",
      "scale": "raw * 1",
-     "confidence": 0.283,
-     "rationale": "It rises at about 1.03 per second and resets at the same events as the other counters (last 59.5 days before the end). That fits an uptime counter in seconds, which wraps at reboot. [2/3 samples agree]"
+     "confidence": 0.4,
+     "rationale": "A 3-byte counter rising about 0.117/s with 10 resets in the window, the last one 59.5 days before the end. It wraps within passes, so it is likely a low-rate tick or sequence counter that reboots. [3/3 samples agree]"
     },
     {
-     "offset": 51,
-     "name": "boot_related_byte",
-     "category": "unknown",
+     "offset": 37,
+     "name": "rolling_byte_counter",
+     "category": "counter",
      "unit": "counts",
-     "scale": "raw",
-     "confidence": 0.15,
-     "rationale": "A single byte with a 20 min lag correlation, but every frame is in sunlight and it moves with the counters. This is probably a counter sub-byte or boot count, not a physical sensor. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.3,
+     "rationale": "A 1-byte value that mostly rises and wraps at 255, with 44 resets. It is probably a sequence number or one byte of a larger counter. [3/3 samples agree]"
     },
     {
-     "offset": 52,
-     "name": "boot_related_u16",
-     "category": "unknown",
-     "unit": "counts",
-     "scale": "raw",
-     "confidence": 0.15,
-     "rationale": "A big-endian 16-bit field with 40 distinct values that moves with the counters and falls in step with the other reset-linked fields. It is probably part of a counter or timestamp, not a physical quantity. [3/3 samples agree]"
-    },
-    {
-     "offset": 68,
+     "offset": 38,
      "name": "misaligned_counter_field",
      "category": "unknown",
      "unit": "counts",
-     "scale": "raw",
+     "scale": "raw * 1",
+     "confidence": 0.15,
+     "rationale": "It has a near-zero rate and a median step of 0 but repeats the reset times of offset 22 (60 days before the end). It moves with offsets 45, 51, 52 and 68, so it is likely a misaligned slice of a larger field. [3/3 samples agree]"
+    },
+    {
+     "offset": 45,
+     "name": "event_counter",
+     "category": "counter",
+     "unit": "counts",
+     "scale": "raw * 1",
+     "confidence": 0.3,
+     "rationale": "A 3-byte counter at about 1.03/s with resets coinciding with offset 22 (59.5 days before the end). It is probably a boot-related counter, and its sun correlation is likely an artefact of when the satellite is heard. [3/3 samples agree]"
+    },
+    {
+     "offset": 51,
+     "name": "unknown_byte_51",
+     "category": "unknown",
+     "unit": "counts",
+     "scale": "raw * 1",
+     "confidence": 0.133,
+     "rationale": "A 1-byte value with only 36 distinct values, moving with the counters. Its lag correlation looks like a time-since-reboot artefact rather than thermal or power physics. [3/3 samples agree]"
+    },
+    {
+     "offset": 52,
+     "name": "unknown_u16_52",
+     "category": "unknown",
+     "unit": "counts",
+     "scale": "raw * 1",
+     "confidence": 0.117,
+     "rationale": "A 16-bit big-endian field with 40 distinct values, tracking the counters and the reboot period. The evidence does not support a physical sensor. [3/3 samples agree]"
+    },
+    {
+     "offset": 68,
+     "name": "unknown_u32_68",
+     "category": "unknown",
+     "unit": "counts",
+     "scale": "raw * 1",
      "confidence": 0.1,
-     "rationale": "A 32-bit value with a byte-shifted pattern (16777216 is 0x01000000), so the field is likely misaligned or composed of smaller fields. It tracks the reset events with high correlation. [3/3 samples agree]"
+     "rationale": "Values step in multiples of 2^24, suggesting a misaligned field whose top byte is the only part changing. It follows the same pattern as the other reboot-linked fields. [3/3 samples agree]"
     }
    ],
-   "health": "The counters show 10 resets in 150 days, with the last about 60 days before the end. This suggests repeated reboots earlier in the window and a quieter period since, though a wrap by design cannot be excluded. There is no usable battery or thermal evidence in these fields."
+   "health": "The counters at offsets 22 and 45 reset 10 times in 150 days, the last about 59.5 days before the end, which suggests repeated reboots or counter wraps. The reset count is uncertain because the counters are rolling and may wrap by design. There is not enough evidence on battery or thermal health."
   },
   "evaluation": {
    "true_fields": 15,
    "physical_true_fields": 14,
    "recall_physical": 0.42857142857142855,
-   "exact_physical": 0.14285714285714285,
-   "value_exact_physical": 0.14285714285714285,
+   "exact_physical": 0.21428571428571427,
+   "value_exact_physical": 0.21428571428571427,
    "located_exact_fraction": 0.9333333333333333,
    "kind_accuracy": 1.0,
-   "precision": 1.0,
-   "llm_category_accuracy": 0.3333333333333333,
+   "precision": 0.8571428571428571,
+   "llm_category_accuracy": 0.16666666666666666,
    "llm_judged": 6,
-   "llm_answered": 0.3333333333333333,
+   "llm_answered": 0.16666666666666666,
    "llm_selective_accuracy": 1.0,
    "llm_fine_accuracy": NaN,
    "llm_fine_judged": 0,
@@ -391,9 +441,9 @@
      "located": "affine",
      "fine": NaN,
      "found": true,
-     "how": "overlap",
-     "value_exact": false,
-     "found_offset": 37.0,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 38.0,
      "kind": "counter",
      "kind_ok": true
     },
@@ -670,15 +720,15 @@
     "moves_with_offsets": []
    },
    {
-    "offset": 60,
-    "type": "u3be",
+    "offset": 62,
+    "type": "u1",
     "kind": "counter",
     "score": 0.976,
     "rough": 0.149,
-    "min": 2690304.0,
-    "max": 2690559.0,
-    "p5": 2690316.85,
-    "p95": 2690545.0,
+    "min": 0.0,
+    "max": 255.0,
+    "p5": 12.850000000000001,
+    "p95": 241.0,
     "n_frames": 938,
     "n_passes": 237,
     "frac_up_in_pass": 0.976,
@@ -688,11 +738,11 @@
     "p": 0.0,
     "response_profile": {
      "sun 13-48 min after sunrise": {
-      "median": 2690434.0,
+      "median": 130.0,
       "n": 305
      },
      "sun 48-200 min after sunrise": {
-      "median": 2690435.0,
+      "median": 131.0,
       "n": 633
      }
     },
@@ -706,38 +756,38 @@
      "80": 0.043
     },
     "rank_corr_abs_beta": 0.04,
-    "relative_spread_p5_p95": 0.0,
+    "relative_spread_p5_p95": 1.742,
     "distinct_values": 251,
     "median_step_within_pass": 4.0,
-    "mean": 2690432.467,
+    "mean": 128.467,
     "resets_in_window": 40,
     "last_reset_days_before_end": 0.1,
     "moves_with_offsets": []
    }
   ],
   "names": {
-   "summary": "A 68-byte beacon frame in which the automated engine found only two monotonic counters. Neither tracks sunlight, so they look like housekeeping sequence or uptime counters rather than physical sensors. The remaining bytes are not characterised here.",
+   "summary": "A 68-byte beacon frame where only two monotonic counters were identified. Neither responds to sunlight, so this looks like housekeeping/sequence data, and the rest of the frame is unresolved.",
    "fields": [
     {
      "offset": 22,
-     "name": "uptime_or_tick_counter",
+     "name": "uptime_or_frame_counter",
      "category": "counter",
      "unit": "counts",
-     "scale": "raw * 1",
-     "confidence": 0.583,
-     "rationale": "A u4le that rises in 99% of in-pass steps at about 0.108 per second, with no sun or beta dependence. It showed 3 resets in 150 days, the last 12.5 days before the end of the window, so it looks like a reboot-reset uptime or tick counter. The rate is about 1 count per 9 s, so it could be a frame or packet sequence counter. [3/3 samples agree]"
+     "scale": "raw",
+     "confidence": 0.6,
+     "rationale": "u4le that increases in 99% of in-pass steps at about 0.108 counts/s, with a median step of 4 between frames. It shows no sun or beta dependence. It has 3 resets in the window, the last 12.5 days before the end, and one wrap within a pass. The rate suggests a counter incremented per beacon or per few seconds rather than a wall clock. [3/3 samples agree]"
     },
     {
-     "offset": 60,
-     "name": "frame_sequence_counter",
+     "offset": 62,
+     "name": "frame_sequence_number",
      "category": "counter",
      "unit": "counts",
-     "scale": "raw * 1",
-     "confidence": 0.333,
-     "rationale": "A u3be whose values span only 256 (2690304-2690559), so the low byte is what changes, at about 0.111 per second. The 40 resets and 14 wraps in a pass are consistent with a low-byte wrap rather than reboots, so this is a rolling sequence number. The upper two bytes are constant. [3/3 samples agree]"
+     "scale": "raw",
+     "confidence": 0.55,
+     "rationale": "u1 that increases by a median of 4 per frame step and wraps across 0-255 (14 wraps within passes, 40 resets in the window). That is the expected behaviour of a 1-byte sequence counter that wraps by design. Its rate of 0.111/s is close to the other counter's, so it may count the same events. [3/3 samples agree]"
     }
    ],
-   "health": "Not enough evidence for battery or thermal health, because no voltage or temperature fields were identified. The 4-byte counter at offset 22 reset 3 times in 150 days, the last about 12.5 days before the end, which could mean occasional reboots. The 40 resets on the offset 60 counter are most likely byte wrapping and say nothing about health."
+   "health": "Not enough evidence. The 1-byte counter wraps by design. The u4 counter reset 3 times in 150 days, the last about 12.5 days before the end, which could indicate occasional reboots, but a counter rollover or a different mechanism can't be ruled out. No battery or thermal fields were found."
   },
   "evaluation": {
    "true_fields": 1,

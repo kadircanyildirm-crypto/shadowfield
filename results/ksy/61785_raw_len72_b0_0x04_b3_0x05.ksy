@@ -8,30 +8,30 @@ doc: |
 seq:
   - id: unknown_0
     size: 8
-  - id: uptime_counter
+  - id: frame_counter
     type: b24le
-    doc: "counter, s, raw * 1; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_11
     size: 5
-  - id: unknown_byte_16
+  - id: orbit_phase_byte
     type: u1
-    doc: "unknown, raw; evidence: orbit (score 0.60)"
-  - id: unknown_sun_flag
+    doc: "unknown, counts, raw; evidence: orbit (score 0.60)"
+  - id: eclipse_flag_byte
     type: s1
     doc: "unknown, counts, raw; evidence: sun (score 0.95)"
-  - id: pos_eci_y
+  - id: position_eci_y
     type: f4le
-    doc: "navigation, m, raw * 1; evidence: position (score 0.97)"
-  - id: position_eci_axis_candidate
+    doc: "navigation, m, raw / 1009.685 km (about raw*0.001 km if metres); evidence: position (score 0.97)"
+  - id: position_eci_z_or_x
     type: f4le
     doc: "navigation, m, raw; evidence: orbit (score 0.65)"
-  - id: vel_eci_component
+  - id: velocity_or_position_component
     type: f4le
-    doc: "navigation, m/s, raw * 1; evidence: orbit (score 0.66)"
-  - id: vel_eci_y
+    doc: "navigation, raw; evidence: orbit (score 0.66)"
+  - id: velocity_eci_y
     type: f4le
-    doc: "navigation, m/s, raw * 1; evidence: position (score 0.97)"
-  - id: velocity_eci_axis_candidate
+    doc: "navigation, m/s, raw / 1003.9 km/s (about raw*0.001 km/s); evidence: position (score 0.97)"
+  - id: velocity_component_x_or_z
     type: f4le
     doc: "navigation, m/s, raw; evidence: sun (score 0.86)"
   - id: attitude_quaternion_q0
@@ -48,12 +48,3 @@ seq:
     doc: "attitude, unitless, raw; evidence: attitude (score 1.00)"
   - id: unknown_54
     size: 18
-instances:
-  uptime_counter_s:
-    value: uptime_counter * 1
-  pos_eci_y_m:
-    value: pos_eci_y * 1
-  vel_eci_component_m_s:
-    value: vel_eci_component * 1
-  vel_eci_y_m_s:
-    value: vel_eci_y * 1

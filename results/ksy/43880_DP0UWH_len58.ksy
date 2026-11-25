@@ -26,31 +26,31 @@ seq:
     doc: "counter, count, raw; evidence: counter (score 1.00)"
   - id: unknown_30
     size: 3
-  - id: unknown_small_value_a
+  - id: temp_a
     type: u1
-    doc: "unknown, count, raw; evidence: orbit (score 0.56)"
-  - id: solar_panel_current_1
+    doc: "thermal, degC, raw; evidence: orbit (score 0.56)"
+  - id: battery_a_state_of_charge
     type: u1
-    doc: "power_solar, mA, raw; evidence: sun (score 0.85)"
-  - id: unknown_small_value_b
+    doc: "power_battery, %, raw; evidence: sun (score 0.85)"
+  - id: temp_b
     type: u1
-    doc: "unknown, count, raw; evidence: sun (score 0.53)"
-  - id: solar_panel_current_2
+    doc: "thermal, degC, raw; evidence: sun (score 0.53)"
+  - id: battery_b_state_of_charge
     type: u1
-    doc: "power_solar, mA, raw; evidence: sun (score 0.83)"
-  - id: battery_current_a
+    doc: "power_battery, %, raw; evidence: sun (score 0.83)"
+  - id: battery_a_current
     type: s2le
     doc: "power_battery, mA, raw; evidence: sun (score 0.71)"
-  - id: battery_voltage_a
+  - id: battery_a_voltage
     type: u2le
     doc: "power_battery, mV, raw; evidence: sun (score 0.83)"
-  - id: battery_current_b
+  - id: battery_b_current
     type: s2le
     doc: "power_battery, mA, raw; evidence: sun (score 0.79)"
-  - id: battery_voltage_b
+  - id: battery_b_voltage
     type: u2le
     doc: "power_battery, mV, raw; evidence: sun (score 0.82)"
-  - id: solar_array_current
+  - id: solar_or_bus_current
     type: u2le
     doc: "power_solar, mA, raw; evidence: sun (score 0.76)"
   - id: unknown_47

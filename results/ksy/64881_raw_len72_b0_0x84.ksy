@@ -13,15 +13,15 @@ seq:
     doc: "clock, s, raw; evidence: clock (score 1.00)"
   - id: unknown_21
     size: 4
-  - id: solar_array_current
+  - id: solar_panel_current
     type: u2le
     doc: "power_solar, mA, raw; evidence: sun (score 0.92)"
   - id: unknown_27
     size: 6
-  - id: housekeeping_value_a
+  - id: bus_load_a
     type: u1
     doc: "unknown, counts, raw; evidence: orbit (score 0.50)"
-  - id: housekeeping_value_b
+  - id: bus_load_b
     type: u1
     doc: "unknown, counts, raw; evidence: orbit (score 0.50)"
   - id: unknown_35
@@ -40,13 +40,13 @@ seq:
     doc: "thermal, degC, raw; evidence: sun (score 0.74)"
   - id: unknown_47
     size: 18
-  - id: rolling_sequence_counter
+  - id: sequence_counter
     type: s1
     doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_66
     size: 2
-  - id: unknown_housekeeping_byte
+  - id: battery_temp
     type: u1
-    doc: "unknown, counts, raw; evidence: orbit (score 0.46)"
+    doc: "thermal, degC, raw; evidence: orbit (score 0.46)"
   - id: unknown_69
     size: 3

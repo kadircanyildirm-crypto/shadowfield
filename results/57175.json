@@ -115,7 +115,9 @@
     "distinct_values": 13,
     "median_step_within_pass": 0.0,
     "mean": 51.043,
-    "moves_with_offsets": []
+    "moves_with_offsets": [
+     63
+    ]
    },
    {
     "offset": 13,
@@ -164,7 +166,7 @@
     "median_step_within_pass": 0.0,
     "mean": 1487.634,
     "moves_with_offsets": [
-     61,
+     58,
      77,
      85
     ]
@@ -328,148 +330,105 @@
     ]
    },
    {
-    "offset": 61,
-    "type": "u1",
+    "offset": 58,
+    "type": "f4le",
     "kind": "lagged",
-    "score": 0.815,
-    "rough": 0.081,
-    "min": 0.0,
-    "max": 192.0,
-    "p5": 63.0,
-    "p95": 192.0,
+    "score": 0.939,
+    "rough": 0.088,
+    "min": -7.0,
+    "max": 21.0,
+    "p5": -5.0,
+    "p95": 3.0,
     "n_frames": 161,
     "n_passes": 27,
-    "rho_lag": -0.815,
+    "rho_lag": 0.939,
     "tau_min": 80,
-    "rho_sun": -0.128,
-    "p": 2.289253031037918e-07,
+    "rho_sun": 0.099,
+    "p": 4.621332728180468e-13,
     "response_profile": {
      "shadow 5-24 min after sunset": {
-      "median": 64.0,
+      "median": 2.0,
       "n": 38
      },
      "shadow 24-27 min after sunset": {
-      "median": 192.0,
+      "median": -2.0,
       "n": 58
      },
      "shadow 27-32 min after sunset": {
-      "median": 192.0,
+      "median": -4.0,
       "n": 62
      }
     },
     "trend_in_sun_vs_minutes_since_sunrise": null,
-    "trend_in_shadow_vs_minutes_since_sunset": 0.824,
-    "sun_minus_shadow_in_std": -0.02,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.956,
+    "sun_minus_shadow_in_std": 0.22,
     "rank_corr_by_lag_tau_min": {
-     "5": -0.814,
-     "10": -0.814,
-     "20": -0.814,
-     "40": -0.814,
-     "80": -0.815
+     "5": 0.935,
+     "10": 0.935,
+     "20": 0.937,
+     "40": 0.938,
+     "80": 0.939
     },
-    "rank_corr_abs_beta": 0.072,
-    "relative_spread_p5_p95": 0.672,
-    "shadow_over_sun_median_ratio": 1.005,
-    "distinct_values": 6,
+    "rank_corr_abs_beta": -0.067,
+    "relative_spread_p5_p95": 4.0,
+    "shadow_over_sun_median_ratio": 2.0,
+    "distinct_values": 15,
     "median_step_within_pass": 0.0,
-    "mean": 154.807,
+    "mean": -1.05,
     "moves_with_offsets": [
-     13
+     13,
+     77
     ]
    },
    {
-    "offset": 64,
-    "type": "u1",
+    "offset": 63,
+    "type": "f4le",
     "kind": "lagged",
-    "score": 0.688,
-    "rough": 0.229,
-    "min": 2.0,
-    "max": 253.0,
-    "p5": 139.0,
-    "p95": 172.0,
+    "score": 0.832,
+    "rough": 0.034,
+    "min": 4.139999866485596,
+    "max": 4.343999862670898,
+    "p5": 4.142000198364258,
+    "p95": 4.150000095367432,
     "n_frames": 161,
     "n_passes": 27,
-    "rho_lag": 0.688,
-    "tau_min": 80,
-    "rho_sun": -0.079,
-    "p": 7.187225418490559e-05,
+    "rho_lag": 0.832,
+    "tau_min": 40,
+    "rho_sun": 0.241,
+    "p": 7.375816161117442e-08,
     "response_profile": {
      "shadow 5-24 min after sunset": {
-      "median": 172.0,
+      "median": 4.146,
       "n": 38
      },
      "shadow 24-27 min after sunset": {
-      "median": 163.0,
+      "median": 4.145,
       "n": 58
      },
      "shadow 27-32 min after sunset": {
-      "median": 147.0,
+      "median": 4.143,
       "n": 62
      }
     },
     "trend_in_sun_vs_minutes_since_sunrise": null,
-    "trend_in_shadow_vs_minutes_since_sunset": -0.751,
-    "sun_minus_shadow_in_std": -4.55,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.827,
+    "sun_minus_shadow_in_std": 5.74,
     "rank_corr_by_lag_tau_min": {
-     "5": 0.684,
-     "10": 0.685,
-     "20": 0.687,
-     "40": 0.688,
-     "80": 0.688
+     "5": 0.831,
+     "10": 0.831,
+     "20": 0.831,
+     "40": 0.832,
+     "80": 0.83
     },
-    "rank_corr_abs_beta": 0.143,
-    "relative_spread_p5_p95": 0.202,
-    "shadow_over_sun_median_ratio": 6.792,
+    "rank_corr_abs_beta": 0.068,
+    "relative_spread_p5_p95": 0.002,
+    "shadow_over_sun_median_ratio": 0.975,
     "distinct_values": 13,
     "median_step_within_pass": 0.0,
-    "mean": 156.267,
-    "moves_with_offsets": []
-   },
-   {
-    "offset": 65,
-    "type": "u1",
-    "kind": "orbit",
-    "score": 0.784,
-    "rough": 0.012,
-    "min": 132.0,
-    "max": 139.0,
-    "p5": 132.0,
-    "p95": 132.0,
-    "n_frames": 161,
-    "n_passes": 27,
-    "r2_orbit": 0.759,
-    "p": 1.3108560210704183e-06,
-    "response_profile": {
-     "shadow 5-24 min after sunset": {
-      "median": 132.0,
-      "n": 38
-     },
-     "shadow 24-27 min after sunset": {
-      "median": 132.0,
-      "n": 58
-     },
-     "shadow 27-32 min after sunset": {
-      "median": 132.0,
-      "n": 62
-     }
-    },
-    "trend_in_sun_vs_minutes_since_sunrise": null,
-    "trend_in_shadow_vs_minutes_since_sunset": -0.19,
-    "sun_minus_shadow_in_std": 6.08,
-    "rank_corr_by_lag_tau_min": {
-     "5": 0.298,
-     "10": 0.297,
-     "20": 0.29,
-     "40": 0.289,
-     "80": 0.28
-    },
-    "rank_corr_abs_beta": -0.182,
-    "relative_spread_p5_p95": 0.0,
-    "shadow_over_sun_median_ratio": 0.971,
-    "distinct_values": 5,
-    "median_step_within_pass": 0.0,
-    "mean": 132.093,
-    "moves_with_offsets": []
+    "mean": 4.147,
+    "moves_with_offsets": [
+     5
+    ]
    },
    {
     "offset": 68,
@@ -588,7 +547,7 @@
     "rho_lag": 0.91,
     "tau_min": 80,
     "rho_sun": 0.142,
-    "p": 4.4871155244712257e-11,
+    "p": 4.487115524471181e-11,
     "response_profile": {
      "shadow 5-24 min after sunset": {
       "median": 3.411,
@@ -620,7 +579,8 @@
     "median_step_within_pass": 0.15503883361816406,
     "mean": 0.437,
     "moves_with_offsets": [
-     13
+     13,
+     58
     ]
    },
    {
@@ -722,6 +682,7 @@
     "mean": 8436.062,
     "moves_with_offsets": [
      100,
+     114,
      119
     ]
    },
@@ -772,6 +733,56 @@
     "distinct_values": 18,
     "median_step_within_pass": 10.0,
     "mean": 38852.193,
+    "moves_with_offsets": [
+     92
+    ]
+   },
+   {
+    "offset": 114,
+    "type": "f4le",
+    "kind": "lagged",
+    "score": 0.704,
+    "rough": 0.384,
+    "min": 0.0,
+    "max": 2.118000030517578,
+    "p5": 0.0,
+    "p95": 2.115999937057495,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": -0.704,
+    "tau_min": 40,
+    "rho_sun": -0.136,
+    "p": 4.1038459397357025e-05,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 2.111,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 2.113,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 2.115,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.713,
+    "sun_minus_shadow_in_std": -0.0,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.702,
+     "10": -0.702,
+     "20": -0.703,
+     "40": -0.704,
+     "80": -0.704
+    },
+    "rank_corr_abs_beta": 0.111,
+    "relative_spread_p5_p95": 1.001,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 14,
+    "median_step_within_pass": 0.0009999275207519531,
+    "mean": 1.982,
     "moves_with_offsets": [
      92
     ]
@@ -882,177 +893,177 @@
    }
   ],
   "names": {
-   "summary": "A 200-byte beacon frame with several rolling counters, an epoch-based clock, uptime-like counters and a number of fields that drift smoothly after an unseen eclipse. Nearly all frames are in shadow (only 1.9% in sunlight), so the sun contrasts are weak and the lagged fields mostly show recovery or decay after the earlier eclipse.",
+   "summary": "A 200-byte beacon of mixed-format fields (little-endian floats, integers and big-endian counters). It appears to carry housekeeping data: a battery voltage, some temperature-like values, several uptime and sequence counters, a Unix-style clock, and a block of fields that sit at zero or full scale (likely an unpopulated sensor block). The window is only 3.7 days and nearly every frame is in shadow.",
    "fields": [
     {
      "offset": 2,
-     "name": "sequence_counter_a",
+     "name": "frame_sequence_counter",
      "category": "counter",
-     "unit": "count",
+     "unit": "counts",
      "scale": "raw",
      "confidence": 0.433,
-     "rationale": "Rolling u2 counter that wraps within passes, rising about 3.9 per second. Same values as offset 43, so likely a duplicated frame or sequence counter. [3/3 samples agree]"
+     "rationale": "u2le counter that wraps 3 times in a pass at 3.9 counts/s. Duplicated at offset 43, so it is likely a repeated sequence or tick counter. [3/3 samples agree]"
     },
     {
      "offset": 5,
-     "name": "temperature_a",
-     "category": "thermal",
-     "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.2,
-     "rationale": "Smooth u1 around 50 with a falling trend in shadow (-0.83) and tau of 40 min. It behaves like a slowly cooling internal temperature, but the unit is a guess. [2/3 samples agree]"
+     "name": "battery_voltage_raw",
+     "category": "power_battery",
+     "unit": "V",
+     "scale": "raw * 0.0828",
+     "confidence": 0.317,
+     "rationale": "u1 that moves exactly with the f4 at offset 63 (4.14-4.34, Li-ion cell voltage). It falls in shadow (trend -0.83) and the spread is narrow, so it is likely a byte-scaled copy of the battery voltage. The scale is a loose guess. [3/3 samples agree]"
     },
     {
      "offset": 13,
-     "name": "charge_current_or_power_raw",
-     "category": "power_battery",
-     "unit": "raw",
-     "scale": "raw",
-     "confidence": 0.083,
-     "rationale": "Value is zero for most shadow frames and positive only early after sunset, so it decays after the earlier eclipse. It moves with offset 77, which is the same quantity in float form. [1/3 samples agree]"
+     "name": "temperature_c_scaled_int",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw * 0.001",
+     "confidence": 0.217,
+     "rationale": "u2 lagged at tau 80 min, correlated with the float temperatures at 58 and 77 (77 maxes at 22.17 while 13 maxes at 22170). Treat it as a millidegree integer copy, though this is not certain. Zeros in much of the data suggest wrapping or invalid readings. [2/3 samples agree]"
     },
     {
      "offset": 21,
-     "name": "frame_counter_be",
+     "name": "tick_counter_a",
      "category": "counter",
-     "unit": "count",
+     "unit": "counts",
      "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "u4be counter that rises 0.05 per second and rolls within passes, and it moves with the offset 2, 43 and 157 counters. This looks like a packet or beacon sequence number. [3/3 samples agree]"
+     "confidence": 0.367,
+     "rationale": "u4be counter at 0.05/s that wraps within a pass and moves with offsets 2, 43 and 157. It looks like a rolling housekeeping counter. [3/3 samples agree]"
     },
     {
      "offset": 43,
-     "name": "sequence_counter_b",
+     "name": "frame_sequence_counter_copy",
      "category": "counter",
      "unit": "count",
      "scale": "raw",
      "confidence": 0.4,
-     "rationale": "Identical to the offset 2 counter, with the same values and rate. It is a duplicate of that field. [3/3 samples agree]"
+     "rationale": "Its values are identical to offset 2 (same range, rate and wraps), so it is a duplicate copy. [3/3 samples agree]"
     },
     {
      "offset": 46,
      "name": "unix_time",
      "category": "clock",
      "unit": "s",
-     "scale": "raw (unix seconds)",
-     "confidence": 0.833,
-     "rationale": "u4le value around 1.7876e9 rising monotonically with no resets and in step with the offsets 68 and 72. This is consistent with a Unix timestamp from 2026. [3/3 samples agree]"
+     "scale": "raw (unix epoch seconds)",
+     "confidence": 0.75,
+     "rationale": "u4le monotonic with no resets, values near 1.787e9 consistent with a Unix timestamp. The frame-to-frame rate of 0.68/s reflects gaps between receptions, not the clock rate. [3/3 samples agree]"
     },
     {
-     "offset": 61,
-     "name": "state_value_a",
-     "category": "unknown",
-     "unit": "raw",
-     "scale": "raw",
-     "confidence": 0.15,
-     "rationale": "Takes only 6 distinct values and steps from 64 to 192 over the pass, mirroring offset 13. It is probably a status or mode byte. [3/3 samples agree]"
-    },
-    {
-     "offset": 64,
-     "name": "housekeeping_temp_candidate",
+     "offset": 58,
+     "name": "temperature_a",
      "category": "thermal",
-     "unit": "raw",
+     "unit": "degC",
      "scale": "raw",
-     "confidence": 0.2,
-     "rationale": "Declines in shadow (trend -0.75) over a range of about 139-172, with outliers at 2 and 253. This is plausible as a temperature, but the scaling is unknown. [3/3 samples agree]"
+     "confidence": 0.467,
+     "rationale": "f4 over -7 to 21 that falls after sunset (trend -0.96) with a long time constant (80 min) and tracks field 77. It is a slow internal temperature. [3/3 samples agree]"
     },
     {
-     "offset": 65,
-     "name": "slow_orbit_value",
-     "category": "unknown",
-     "unit": "raw",
+     "offset": 63,
+     "name": "battery_voltage",
+     "category": "power_battery",
+     "unit": "V",
      "scale": "raw",
-     "confidence": 0.117,
-     "rationale": "Almost constant at 132, with only a few values up to 139. The orbit r2 is modest and it is likely a quantised sensor reading. [3/3 samples agree]"
+     "confidence": 0.533,
+     "rationale": "f4 at 4.14-4.34 V, a single Li-ion cell, with a narrow spread (0.002), a falling trend in shadow and a shadow/sun ratio of 0.975. It is identical in shape to offset 5. [3/3 samples agree]"
     },
     {
      "offset": 68,
-     "name": "uptime_or_tick_counter",
+     "name": "uptime_or_event_counter_a",
      "category": "counter",
-     "unit": "count",
+     "unit": "counts",
      "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "u3 counter that rises monotonically at about 0.00265 per second with no resets. It moves with offset 72, which has the same rate. [3/3 samples agree]"
+     "confidence": 0.35,
+     "rationale": "u3le monotonic counter at 0.0026/s with no resets. It tracks offsets 46 and 72, so it is probably a slow operation counter. [3/3 samples agree]"
     },
     {
      "offset": 72,
-     "name": "uptime_or_tick_counter_2",
+     "name": "uptime_or_event_counter_b",
      "category": "counter",
-     "unit": "count",
+     "unit": "counts",
      "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "u4 counter that rises at 0.00265 per second with no resets, tracking offset 68. It is likely an event or tick counter. [3/3 samples agree]"
+     "confidence": 0.35,
+     "rationale": "u4le monotonic counter at 0.00265/s, the same rate as offset 68 (offset 72 is about 3.4x larger), with no resets. [3/3 samples agree]"
     },
     {
      "offset": 77,
-     "name": "charge_current_signed",
-     "category": "power_battery",
-     "unit": "raw",
+     "name": "temperature_b",
+     "category": "thermal",
+     "unit": "degC",
      "scale": "raw",
-     "confidence": 0.167,
-     "rationale": "Float that is signed and falls after sunset (trend -0.92), moving with offset 13. This is consistent with a battery current that is recovering from an earlier eclipse. [2/3 samples agree]"
+     "confidence": 0.45,
+     "rationale": "f4 over -6.4 to 22.2 that falls in shadow with a time constant of 80 min and tracks offsets 58 and 13. It is an internal or panel temperature. [3/3 samples agree]"
     },
     {
      "offset": 85,
-     "name": "state_value_b",
+     "name": "status_byte_85",
      "category": "unknown",
-     "unit": "raw",
+     "unit": "",
      "scale": "raw",
-     "confidence": 0.117,
-     "rationale": "Mostly sits at 62-67 with only 7 distinct values, and occasional zeros. It could be a status or sensor byte, and it moves with offset 13. [3/3 samples agree]"
+     "confidence": 0.15,
+     "rationale": "u1 confined to 62-67 with an occasional 0. It correlates negatively with sun history but its meaning is unclear. It could be a sensor ADC that is zero on dropout. [3/3 samples agree]"
     },
     {
      "offset": 92,
-     "name": "accumulated_value_a",
+     "name": "unknown_u2_a",
      "category": "unknown",
-     "unit": "raw",
+     "unit": "",
      "scale": "raw",
-     "confidence": 0.117,
-     "rationale": "u2 value that rises in shadow (trend +0.82) with wrapping noted. It moves with offsets 100 and 119 and could be an energy or time accumulator. [3/3 samples agree]"
+     "confidence": 0.133,
+     "rationale": "u2 is either 0 or about 9000, with a rising trend in shadow, and moves with 100, 114 and 119; this looks like a group of values that go to zero after an invalid or reset condition. [3/3 samples agree]"
     },
     {
      "offset": 100,
-     "name": "accumulated_value_b",
+     "name": "unknown_u2_b",
      "category": "unknown",
-     "unit": "raw",
+     "unit": "",
      "scale": "raw",
-     "confidence": 0.117,
-     "rationale": "Sits near 41400 in shadow and moves with offset 92. Probably an accumulator that wraps. [3/3 samples agree]"
+     "confidence": 0.133,
+     "rationale": "u2 near 41400 or 0, moving with offset 92, so likely part of the same group with a similar invalid-or-zero mode. [3/3 samples agree]"
+    },
+    {
+     "offset": 114,
+     "name": "unknown_f4_c",
+     "category": "unknown",
+     "unit": "",
+     "scale": "raw",
+     "confidence": 0.133,
+     "rationale": "Float about 2.11 or 0, moving with offset 92; its role is uncertain. [3/3 samples agree]"
     },
     {
      "offset": 119,
-     "name": "accumulated_value_c",
+     "name": "unknown_u2_d",
      "category": "unknown",
-     "unit": "raw",
+     "unit": "",
      "scale": "raw",
-     "confidence": 0.117,
-     "rationale": "Sits near 47000 in shadow and moves with offset 92. Likely another accumulator that wraps. [3/3 samples agree]"
+     "confidence": 0.133,
+     "rationale": "u2 near 47000 or 0, moving with offset 92; likely part of the same group as 100 and 114. [3/3 samples agree]"
     },
     {
      "offset": 157,
-     "name": "frame_counter_c",
+     "name": "tick_counter_b",
      "category": "counter",
-     "unit": "count",
+     "unit": "counts",
      "scale": "raw",
-     "confidence": 0.383,
-     "rationale": "u4be counter rising 0.05 per second with the same pattern as offset 21. It is probably a related sequence counter. [3/3 samples agree]"
+     "confidence": 0.317,
+     "rationale": "u4be rolling counter at 0.05/s that moves with offsets 21 and 2. It is probably a related housekeeping counter. [3/3 samples agree]"
     }
    ],
-   "health": "Not enough evidence for a reliable assessment. The timestamp and the uptime counters show no resets over 3.7 days, which suggests no reboots. The battery and thermal fields cannot be identified with confidence, and nearly all frames are in shadow."
+   "health": "Not enough evidence for firm conclusions. Nearly all frames are in shadow after an unseen eclipse, and the 3.7-day window is short. The clock and uptime counters show 0 resets, so no reboots are visible. The battery voltage sits at about 4.14-4.15 V and falls slightly in shadow, consistent with a nearly full cell, and the temperatures cool after sunset as expected."
   },
   "evaluation": {
    "true_fields": 18,
    "physical_true_fields": 17,
-   "recall_physical": 0.8235294117647058,
-   "exact_physical": 0.17647058823529413,
-   "value_exact_physical": 0.17647058823529413,
+   "recall_physical": 0.8823529411764706,
+   "exact_physical": 0.35294117647058826,
+   "value_exact_physical": 0.35294117647058826,
    "located_exact_fraction": 1.0,
-   "kind_accuracy": 0.9285714285714286,
+   "kind_accuracy": 0.9333333333333333,
    "precision": 0.9411764705882353,
-   "llm_category_accuracy": 0.2857142857142857,
-   "llm_judged": 14,
-   "llm_answered": 0.5714285714285714,
-   "llm_selective_accuracy": 0.5,
+   "llm_category_accuracy": 0.6,
+   "llm_judged": 15,
+   "llm_answered": 0.6666666666666666,
+   "llm_selective_accuracy": 0.9,
    "llm_fine_accuracy": 0.0,
    "llm_fine_judged": 2,
    "truth": [
@@ -1162,9 +1173,9 @@
      "located": "exact",
      "fine": NaN,
      "found": true,
-     "how": "overlap",
-     "value_exact": false,
-     "found_offset": 61.0,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 58.0,
      "kind": "lagged",
      "kind_ok": true
     },
@@ -1190,9 +1201,9 @@
      "width": 4,
      "endian": "le",
      "signed": "f",
-     "category": "clock",
+     "category": "power",
      "located": "exact",
-     "fine": NaN,
+     "fine": "power_battery",
      "found": false,
      "how": "",
      "value_exact": false,
@@ -1210,10 +1221,10 @@
      "located": "exact",
      "fine": NaN,
      "found": true,
-     "how": "overlap",
-     "value_exact": false,
-     "found_offset": 65.0,
-     "kind": "orbit",
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 63.0,
+     "kind": "lagged",
      "kind_ok": true
     },
     {
@@ -1321,12 +1332,12 @@
      "category": "power",
      "located": "exact",
      "fine": "power_bus",
-     "found": false,
-     "how": "",
-     "value_exact": false,
-     "found_offset": NaN,
-     "kind": "",
-     "kind_ok": false
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 114.0,
+     "kind": "lagged",
+     "kind_ok": true
     },
     {
      "name": "tlm_trx_modem_pwr_rev",

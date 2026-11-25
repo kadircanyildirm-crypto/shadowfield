@@ -8,94 +8,94 @@ doc: |
 seq:
   - id: unknown_0
     size: 27
-  - id: unix_time_s
+  - id: uptime_or_obc_time_counter
     type: u4be
-    doc: "clock, s, raw; evidence: counter (score 1.00)"
-  - id: rolling_packet_counter
+    doc: "counter, s, raw * 1; evidence: counter (score 1.00)"
+  - id: packet_sequence_counter
     type: u2be
-    doc: "counter, counts, raw; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw * 1; evidence: counter (score 1.00)"
   - id: unknown_33
     size: 1
   - id: gnss_pos_ecef_x
     type: s4be
-    doc: "navigation, m, raw * 0.01; evidence: position (score 1.00)"
+    doc: "navigation, cm, raw / 1e5 km => raw * 0.00001 km (raw*0.01 m); evidence: position (score 1.00)"
   - id: gnss_pos_ecef_y
     type: s4be
-    doc: "navigation, m, raw * 0.01; evidence: position (score 1.00)"
+    doc: "navigation, cm, raw * 0.00001 km; evidence: position (score 1.00)"
   - id: gnss_pos_eci_z
     type: s4be
-    doc: "navigation, m, raw * 0.01; evidence: position (score 1.00)"
+    doc: "navigation, cm, raw * 0.00001 km; evidence: position (score 1.00)"
   - id: unknown_46
     size: 1
   - id: gnss_vel_ecef_x
     type: b24be
-    doc: "navigation, m/s, raw * 0.01; evidence: position (score 1.00) (signed 24-bit on the satellite; read here as unsigned)"
+    doc: "navigation, mm/s, raw * 0.00001 km/s; evidence: position (score 1.00) (signed 24-bit on the satellite; read here as unsigned)"
   - id: unknown_50
     size: 1
   - id: gnss_vel_ecef_y
     type: s4be
-    doc: "navigation, m/s, raw * 0.01 (probable); evidence: position (score 1.00)"
-  - id: gnss_vel_eci_z
+    doc: "navigation, km/s, raw / 25606409; evidence: position (score 1.00)"
+  - id: gnss_vel_z
     type: b24be
     doc: "navigation, m/s, raw * 0.01; evidence: position (score 1.00) (signed 24-bit on the satellite; read here as unsigned)"
   - id: unknown_58
     size: 1
   - id: battery_voltage
     type: u2be
-    doc: "power_battery, mV, raw; evidence: sun (score 0.86)"
+    doc: "power_battery, mV, raw * 1; evidence: sun (score 0.86)"
   - id: unknown_61
     size: 15
-  - id: solar_array_current_a
+  - id: solar_current_a
     type: u1
-    doc: "power_solar, raw, raw; evidence: sun (score 0.93)"
-  - id: solar_or_load_current_u1
+    doc: "power_solar, counts, raw * 1; evidence: sun (score 0.93)"
+  - id: solar_or_load_byte
     type: u1
-    doc: "power_solar, raw, raw; evidence: sun (score 0.54)"
-  - id: solar_array_current_total
-    type: u2be
-    doc: "power_solar, mA, raw; evidence: sun (score 0.89)"
+    doc: "unknown, counts, raw * 1; evidence: sun (score 0.54)"
   - id: solar_panel_current_1
     type: u2be
-    doc: "power_solar, mA, raw; evidence: sun (score 0.92)"
-  - id: solar_panel_current_2
+    doc: "power_solar, mA, raw; evidence: sun (score 0.89)"
+  - id: solar_panel_1_current
     type: u2be
-    doc: "power_solar, mA, raw; evidence: sun (score 0.94)"
-  - id: solar_panel_current_3
+    doc: "power_solar, mA, raw * 1; evidence: sun (score 0.92)"
+  - id: solar_panel_2_current
     type: u2be
-    doc: "power_solar, mA, raw; evidence: sun (score 0.95)"
-  - id: solar_panel_current_4
+    doc: "power_solar, mA, raw * 1; evidence: sun (score 0.94)"
+  - id: solar_panel_3_current
     type: u2be
-    doc: "power_solar, mA, raw; evidence: sun (score 0.93)"
+    doc: "power_solar, mA, raw * 1; evidence: sun (score 0.95)"
+  - id: solar_panel_4_current
+    type: u2be
+    doc: "power_solar, mA, raw * 1; evidence: sun (score 0.93)"
   - id: attitude_quaternion_q0
     type: f4be
-    doc: "attitude, unitless, 4 x float32 BE, unit norm; evidence: attitude (score 1.00)"
+    doc: "attitude, unit quaternion, raw (float32 x4); evidence: attitude (score 1.00)"
   - id: attitude_quaternion_q1
     type: f4be
-    doc: "attitude, unitless, 4 x float32 BE, unit norm; evidence: attitude (score 1.00)"
+    doc: "attitude, unit quaternion, raw (float32 x4); evidence: attitude (score 1.00)"
   - id: attitude_quaternion_q2
     type: f4be
-    doc: "attitude, unitless, 4 x float32 BE, unit norm; evidence: attitude (score 1.00)"
+    doc: "attitude, unit quaternion, raw (float32 x4); evidence: attitude (score 1.00)"
   - id: attitude_quaternion_q3
     type: f4be
-    doc: "attitude, unitless, 4 x float32 BE, unit norm; evidence: attitude (score 1.00)"
+    doc: "attitude, unit quaternion, raw (float32 x4); evidence: attitude (score 1.00)"
   - id: unknown_104
     size: 35
-  - id: power_or_charge_u2le
+  - id: battery_current_or_charge_counter
     type: u2le
-    doc: "power_bus, counts, raw; evidence: lagged (score 0.44)"
-  - id: aux_sensor_a
+    doc: "power_battery, counts, raw * 1; evidence: lagged (score 0.44)"
+  - id: temp_internal_a
     type: u1
-    doc: "unknown, counts, raw; evidence: sun (score 0.41)"
+    doc: "thermal, counts, raw * 1; evidence: sun (score 0.41)"
   - id: unknown_142
     size: 11
-  - id: aux_sensor_b
+  - id: temp_internal_b
     type: u1
-    doc: "unknown, counts, raw; evidence: sun (score 0.37)"
+    doc: "thermal, counts, raw * 1; evidence: sun (score 0.37)"
   - id: unknown_154
     size: 4
-  - id: uptime_seconds
+  - id: uptime_or_tick_counter
     type: u4be
-    doc: "counter, s, raw; evidence: counter (score 1.00)"
+    doc: "counter, s, raw * 1; evidence: counter (score 1.00)"
   - id: panel_temp_1
     type: s1
     doc: "thermal, degC, raw; evidence: lagged (score 0.98)"
@@ -105,46 +105,84 @@ seq:
   - id: panel_temp_3
     type: s1
     doc: "thermal, degC, raw; evidence: lagged (score 0.98)"
-  - id: internal_temp_1
+  - id: temp_panel_4
     type: s1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.86)"
+    doc: "thermal, degC, raw * 1; evidence: orbit (score 0.86)"
   - id: panel_temp_4
     type: s1
     doc: "thermal, degC, raw; evidence: lagged (score 0.98)"
-  - id: internal_temp_a
+  - id: temp_internal_1
     type: u1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: internal_temp_b
+    doc: "thermal, degC, raw * 1; evidence: orbit (score 0.87)"
+  - id: temp_internal_2
     type: u1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: internal_temp_c
+    doc: "thermal, degC, raw * 1; evidence: orbit (score 0.87)"
+  - id: temp_internal_3
     type: u1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: internal_temp_d
+    doc: "thermal, degC, raw * 1; evidence: orbit (score 0.87)"
+  - id: temp_internal_4
     type: u1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: internal_temp_e
+    doc: "thermal, degC, raw * 1; evidence: orbit (score 0.87)"
+  - id: temp_internal_5
     type: u1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.86)"
-  - id: internal_temp_f
+    doc: "thermal, degC, raw * 1; evidence: orbit (score 0.86)"
+  - id: temp_internal_6
     type: u1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: internal_temp_g
+    doc: "thermal, degC, raw * 1; evidence: orbit (score 0.87)"
+  - id: temp_internal_7
     type: u1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: internal_temp_h
+    doc: "thermal, degC, raw * 1; evidence: orbit (score 0.87)"
+  - id: temp_internal_8
     type: u1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
+    doc: "thermal, degC, raw * 1; evidence: orbit (score 0.87)"
   - id: unknown_175
     size: 39
 instances:
-  gnss_pos_ecef_x_m:
-    value: gnss_pos_ecef_x * 0.01
-  gnss_pos_ecef_y_m:
-    value: gnss_pos_ecef_y * 0.01
-  gnss_pos_eci_z_m:
-    value: gnss_pos_eci_z * 0.01
-  gnss_vel_ecef_x_m_s:
-    value: gnss_vel_ecef_x * 0.01
-  gnss_vel_eci_z_m_s:
-    value: gnss_vel_eci_z * 0.01
+  uptime_or_obc_time_counter_s:
+    value: uptime_or_obc_time_counter * 1
+  packet_sequence_counter_counts:
+    value: packet_sequence_counter * 1
+  gnss_vel_ecef_y_km_s:
+    value: gnss_vel_ecef_y / 25606409
+  gnss_vel_z_m_s:
+    value: gnss_vel_z * 0.01
+  battery_voltage_mv:
+    value: battery_voltage * 1
+  solar_current_a_counts:
+    value: solar_current_a * 1
+  solar_or_load_byte_counts:
+    value: solar_or_load_byte * 1
+  solar_panel_1_current_ma:
+    value: solar_panel_1_current * 1
+  solar_panel_2_current_ma:
+    value: solar_panel_2_current * 1
+  solar_panel_3_current_ma:
+    value: solar_panel_3_current * 1
+  solar_panel_4_current_ma:
+    value: solar_panel_4_current * 1
+  battery_current_or_charge_counter_counts:
+    value: battery_current_or_charge_counter * 1
+  temp_internal_a_counts:
+    value: temp_internal_a * 1
+  temp_internal_b_counts:
+    value: temp_internal_b * 1
+  uptime_or_tick_counter_s:
+    value: uptime_or_tick_counter * 1
+  temp_panel_4_degc:
+    value: temp_panel_4 * 1
+  temp_internal_1_degc:
+    value: temp_internal_1 * 1
+  temp_internal_2_degc:
+    value: temp_internal_2 * 1
+  temp_internal_3_degc:
+    value: temp_internal_3 * 1
+  temp_internal_4_degc:
+    value: temp_internal_4 * 1
+  temp_internal_5_degc:
+    value: temp_internal_5 * 1
+  temp_internal_6_degc:
+    value: temp_internal_6 * 1
+  temp_internal_7_degc:
+    value: temp_internal_7 * 1
+  temp_internal_8_degc:
+    value: temp_internal_8 * 1

@@ -108,28 +108,28 @@
    }
   ],
   "names": {
-   "summary": "A short 19-byte beacon frame with a rolling 1-byte counter at offset 5 and a slowly varying 2-byte value at offset 17 that rises with time since sunrise. Only two fields could be identified, and the rest of the frame is unexplained.",
+   "summary": "A short 19-byte beacon frame with two fields located: a rolling 1-byte counter at offset 5 and a smooth, slowly varying 2-byte value at offset 17. The frame is probably a housekeeping or status beacon. Most bytes were not identified.",
    "fields": [
     {
      "offset": 5,
-     "name": "frame_sequence_counter",
+     "name": "sequence_counter",
      "category": "counter",
      "unit": "count",
      "scale": "raw",
-     "confidence": 0.7,
-     "rationale": "A u1 counter that rises within 99.6% of passes and wraps 4 times per pass. It increments at about 0.011 per second, with a median step of 3 between frames. The 63 resets in the window are mostly wraps of a 1-byte counter, so they do not indicate reboots. The weak sun correlation is probably a sampling artifact. [3/3 samples agree]"
+     "confidence": 0.6,
+     "rationale": "A u1 that increases within passes (99.6% of steps up) and wraps at 255, with a median step of 3 between frames. This fits a frame or beacon sequence number that wraps by design. The 63 'resets' are mostly these wraps, so they are not evidence of reboots. [3/3 samples agree]"
     },
     {
      "offset": 17,
-     "name": "battery_voltage_or_temperature_raw",
+     "name": "battery_voltage_mv",
      "category": "power_battery",
      "unit": "mV",
      "scale": "raw * 1",
-     "confidence": 0.2,
-     "rationale": "A smooth, narrow-range u2 (p5-p95 of 761-808, spread 0.06) that rises strongly after sunrise (trend 0.84) with a long time constant (80 min or more). That fits a battery voltage or an internal temperature. The values are too low for a Li-ion cell in mV, so the unit and scale are uncertain, and the max of 48072 looks like a glitch or bad frame. It could also be a temperature in 0.1 degC or a similar scale. [2/3 samples agree]"
+     "confidence": 0.367,
+     "rationale": "The p5-p95 range is 761-808 and the spread is a narrow 6%. It rises with time since sunrise (trend 0.84, lag correlation up to 0.90 at tau 80 min), as expected for charge integration. The absolute level is low for a Li-ion cell in mV, so the scale could be 0.1 V or a 4x multiplier. It could instead be an internal temperature in 0.1 units, and the occasional outliers (0 and 48072) point to dropouts or wrap glitches. [3/3 samples agree]"
     }
    ],
-   "health": "Not enough evidence for a firm verdict. The only reset-like signal is the 1-byte counter, which wraps by design, so reboots cannot be judged from it. The slow upward drift of offset 17 (about +2 raw units per 30 days) could be seasonal or a real trend, and its meaning is unclear."
+   "health": "Not enough evidence for a firm assessment. The counter's wraps are by design and say nothing about reboots. If offset 17 is a battery voltage, its daily low and high rise by about 2 raw units per 30 days, which shows no ageing, but the window spans seasonal beta-angle changes, so I am not sure of that."
   },
   "evaluation": {
    "true_fields": 4,
@@ -314,28 +314,28 @@
    }
   ],
   "names": {
-   "summary": "A 20-byte beacon frame with two 1-byte rolling counters at offsets 5 and 18. Both advance at about 0.067 per second (roughly one count every 15 s) and wrap at 255. They look like sequence or frame counters. The other bytes were not identified as candidate fields.",
+   "summary": "A 20-byte beacon frame where the two analysed bytes at offsets 5 and 18 are free-running 8-bit counters, each increasing about 0.067 per second (roughly one count every 15 s). The frame is likely a housekeeping or status beacon carrying sequence or uptime counters. Neither field responds to sunlight.",
    "fields": [
     {
      "offset": 5,
-     "name": "beacon_sequence_counter_a",
+     "name": "frame_sequence_counter",
      "category": "counter",
-     "unit": "counts",
-     "scale": "raw * 1",
-     "confidence": 0.683,
-     "rationale": "A u1 that only rises within a pass (frac_up_in_pass 1.0) at 0.0667 per second, with 251 distinct values and a wrap at 255. It has no sun, lag or beta dependence, so it is a free-running sequence or frame counter, not a physical sensor. [3/3 samples agree]"
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.667,
+     "rationale": "It only increases within a pass at 0.0667 per second (one count every 15 s) and wraps at 255. Its median step within a pass is 3, which matches the beacon interval. The 41 resets are consistent with the 8-bit wrap by design. [3/3 samples agree]"
     },
     {
      "offset": 18,
-     "name": "beacon_sequence_counter_b",
+     "name": "frame_sequence_counter_2",
      "category": "counter",
-     "unit": "counts",
-     "scale": "raw * 1",
-     "confidence": 0.64,
-     "rationale": "A u1 that only rises within a pass at 0.0669 per second, the same rate as offset 5, and wraps at 255. It is uncorrelated with sunlight, so it is probably a second sequence counter (e.g. packet or uptime ticks). [3/3 samples agree]"
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.633,
+     "rationale": "It has the same behaviour and rate as the field at offset 5 (0.0669 per second, wraps at 255, median step 3). It could be a second counter, such as a telemetry or packet counter, or a duplicate of the first. It has no sun or beta dependence. [3/3 samples agree]"
     }
    ],
-   "health": "Not enough evidence. The counters are 1-byte values that wrap by design, so the 41-44 detected resets are mostly wraps and not reboots. Nothing in these fields gives battery or thermal information."
+   "health": "Not enough evidence. Both counters are 1-byte values that wrap by design, so the 41-44 resets in the window are mostly rollovers and do not indicate reboots. No battery or thermal fields were identified, so spacecraft health cannot be assessed."
   },
   "evaluation": {
    "true_fields": 1,
@@ -472,28 +472,28 @@
    }
   ],
   "names": {
-   "summary": "A 32-byte beacon frame in which the two located fields are monotonic counters, with no sun, thermal or power fields identified. Likely a housekeeping or status frame carrying a rolling sequence or frame counter and a longer uptime or packet counter.",
+   "summary": "A 32-byte beacon frame in which only two monotonic counters could be identified. The u1 at offset 5 looks like a rolling frame or packet sequence number. The u3le at offset 14 looks like a longer uptime or message counter that resets occasionally. No sensor fields were located.",
    "fields": [
     {
      "offset": 5,
      "name": "frame_sequence_counter",
      "category": "counter",
-     "unit": "counts",
+     "unit": "count",
      "scale": "raw",
      "confidence": 0.6,
-     "rationale": "u1 that only increases within a pass at about 0.067 per second (roughly one count per 15 s) and wraps 0-255 by design (3 wraps within a pass). It shows no sun dependence. The 34 resets are consistent with 8-bit wraps, so they are not reliable reboot evidence. [3/3 samples agree]"
+     "rationale": "A single byte that always increases within a pass and wraps 3 times per pass, 1-255 range, median step of 3 between received frames. This is a rolling sequence number, so its 34 resets are wraps by design, not reboots. The 0.067/s rate would be about one count per 15 s. [3/3 samples agree]"
     },
     {
      "offset": 14,
-     "name": "uptime_or_packet_counter",
+     "name": "uptime_or_message_counter",
      "category": "counter",
-     "unit": "counts",
+     "unit": "count",
      "scale": "raw",
-     "confidence": 0.467,
-     "rationale": "u3le that rises 99% of frames with median step 1 within a pass, and 12 resets over 532 days, the latest 0.5 days before end. This suggests a reboot-resettable counter such as a packet or uptime count, but the unit is unknown. The negative overall per_second reflects the resets. [3/3 samples agree]"
+     "confidence": 0.417,
+     "rationale": "A 3-byte little-endian counter that increases in 99% of frames with median step 1 within a pass, and has 12 resets over 532 days, the last 0.5 days before the end. That fits an uptime or telemetry-record counter that restarts on reboot. The units could be seconds or frames, and the mean rate is not reliable because of the resets and sparse sampling. [3/3 samples agree]"
     }
    ],
-   "health": "Not enough evidence for battery or thermal health, since no such fields were found. The u3le counter resets 12 times in 532 days, with the last about 0.5 days before the end, which may indicate occasional reboots, but the nature of the counter is uncertain. The 1-byte counter wraps by design, so its resets say nothing about reboots."
+   "health": "Not enough evidence for battery or thermal state, since no power or temperature fields were found. The counter at offset 14 reset 12 times in 532 days, with the last reset about 0.5 days before the end of the window. If it is an uptime counter, that suggests occasional reboots, but this is uncertain because it could also be a counter that wraps or is reset by design."
   },
   "evaluation": {
    "true_fields": 5,

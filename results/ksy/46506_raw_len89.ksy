@@ -8,34 +8,49 @@ doc: |
 seq:
   - id: unknown_0
     size: 22
-  - id: uptime_or_frame_counter
-    type: b24le
-    doc: "counter, counts, raw; evidence: counter (score 0.99)"
-  - id: unknown_25
-    size: 12
-  - id: reset_linked_counter_a
-    type: b24le
-    doc: "counter, counts, raw; evidence: counter (score 0.99)"
-  - id: unknown_40
-    size: 5
-  - id: seconds_since_boot
+  - id: uptime_counter
     type: b24le
     doc: "counter, s, raw * 1; evidence: counter (score 0.99)"
+  - id: unknown_25
+    size: 12
+  - id: rolling_byte_counter
+    type: u1
+    doc: "counter, counts, raw * 1; evidence: counter (score 0.98)"
+  - id: misaligned_counter_field
+    type: b24le
+    doc: "unknown, counts, raw * 1; evidence: counter (score 1.00)"
+  - id: unknown_41
+    size: 4
+  - id: event_counter
+    type: b24le
+    doc: "counter, counts, raw * 1; evidence: counter (score 0.99)"
   - id: unknown_48
     size: 3
-  - id: boot_related_byte
+  - id: unknown_byte_51
     type: u1
-    doc: "unknown, counts, raw; evidence: lagged (score 0.76)"
-  - id: boot_related_u16
+    doc: "unknown, counts, raw * 1; evidence: lagged (score 0.76)"
+  - id: unknown_u16_52
     type: u2be
-    doc: "unknown, counts, raw; evidence: lagged (score 0.68)"
+    doc: "unknown, counts, raw * 1; evidence: lagged (score 0.68)"
   - id: unknown_54
     size: 14
-  - id: misaligned_counter_field
+  - id: unknown_u32_68
     type: u4le
-    doc: "unknown, counts, raw; evidence: lagged (score 0.74)"
+    doc: "unknown, counts, raw * 1; evidence: lagged (score 0.74)"
   - id: unknown_72
     size: 17
 instances:
-  seconds_since_boot_s:
-    value: seconds_since_boot * 1
+  uptime_counter_s:
+    value: uptime_counter * 1
+  rolling_byte_counter_counts:
+    value: rolling_byte_counter * 1
+  misaligned_counter_field_counts:
+    value: misaligned_counter_field * 1
+  event_counter_counts:
+    value: event_counter * 1
+  unknown_byte_51_counts:
+    value: unknown_byte_51 * 1
+  unknown_u16_52_counts:
+    value: unknown_u16_52 * 1
+  unknown_u32_68_counts:
+    value: unknown_u32_68 * 1

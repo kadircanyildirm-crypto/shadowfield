@@ -8,42 +8,42 @@ doc: |
 seq:
   - id: unknown_0
     size: 2
-  - id: unknown_byte_2
+  - id: status_byte_a
     type: u1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.50)"
-  - id: unknown_byte_3
+    doc: "unknown, raw; evidence: lagged (score 0.50)"
+  - id: status_byte_b
     type: u1
-    doc: "unknown, raw, raw; evidence: orbit (score 0.47)"
-  - id: unknown_signed_byte_4
+    doc: "unknown, raw; evidence: orbit (score 0.47)"
+  - id: status_byte_c
     type: s1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.47)"
+    doc: "unknown, raw; evidence: lagged (score 0.47)"
   - id: unknown_5
     size: 10
-  - id: unknown_u24_15
+  - id: bus_or_load_candidate
     type: b24le
-    doc: "unknown, raw, raw; evidence: lagged (score 0.75)"
+    doc: "unknown, raw; evidence: lagged (score 0.75)"
   - id: unknown_18
     size: 3
-  - id: unknown_signed_byte_21
+  - id: shadow_linked_signed_byte
     type: s1
-    doc: "unknown, raw, raw; evidence: sun (score 0.73)"
+    doc: "unknown, raw; evidence: sun (score 0.73)"
   - id: gnss_position_eci_z
     type: f4le
-    doc: "navigation, m, raw / 992.18 km, so about raw * 1.0 m; approx. metres; evidence: position (score 0.97)"
+    doc: "navigation, m, raw / 992.18 (m, approx); evidence: position (score 0.97)"
   - id: unknown_26
     size: 1
-  - id: unknown_s24_27
+  - id: orbit_periodic_signed_value
     type: b24le
-    doc: "unknown, raw, raw; evidence: orbit (score 0.51) (signed 24-bit on the satellite; read here as unsigned)"
+    doc: "unknown, raw; evidence: orbit (score 0.51) (signed 24-bit on the satellite; read here as unsigned)"
   - id: unknown_30
     size: 2
-  - id: unknown_u16_32
+  - id: orbit_periodic_u16
     type: u2le
-    doc: "unknown, raw, raw; evidence: orbit (score 0.49)"
+    doc: "unknown, raw; evidence: orbit (score 0.49)"
   - id: unknown_34
     size: 1
-  - id: unknown_u24_35
+  - id: bus_or_load_candidate_2
     type: b24le
-    doc: "unknown, raw, raw; evidence: lagged (score 0.78)"
+    doc: "unknown, raw; evidence: lagged (score 0.78)"
   - id: unknown_38
     size: 34

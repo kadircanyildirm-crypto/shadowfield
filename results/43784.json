@@ -74,6 +74,14 @@
     "median_step_within_pass": 20.0,
     "mean": 294666680.725,
     "resets_in_window": 0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -133,6 +141,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 16.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -192,6 +208,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 16.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": [
      47
     ]
@@ -253,6 +277,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 16.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -312,6 +344,14 @@
     "drift_per_30_days_of_daily_low": -16257.343,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 16.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": [
      38
     ]
@@ -373,6 +413,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 16.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -432,6 +480,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 16.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -496,86 +552,94 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 16.0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": true,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": true,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    }
   ],
   "names": {
-   "summary": "A 97-byte beacon frame carrying a large big-endian u32 counter, a GNSS position and velocity block (ECEF and ECI components with 'no fix' values of -1), and a smooth voltage-like value that follows sunlight. It looks like a combined housekeeping and GNSS telemetry frame.",
+   "summary": "A 97-byte beacon containing a fast-running u4 counter, a GNSS position and velocity block (ECEF/ECI, about 1e5 raw per km, so units of 10 m), and a smooth narrow-band battery-like value at offset 59. Many GNSS fields hold -1 (no fix) in most frames, which is why the position fields show spurious sun correlations.",
    "fields": [
     {
      "offset": 29,
-     "name": "uptime_or_tick_counter",
+     "name": "uptime_counter",
      "category": "counter",
      "unit": "ticks",
-     "scale": "raw * 1",
-     "confidence": 0.567,
-     "rationale": "Monotonic u32 with 99.9% increases, no resets, and about 194 counts per second. It is not synced to wall clock, so it is likely an uptime or tick counter rather than a clock. [3/3 samples agree]"
+     "scale": "raw",
+     "confidence": 0.6,
+     "rationale": "Monotonic u4 counter with no resets in 16 days, rising about 194 per second; it is unaffected by sunlight. It could be a millisecond-scale or sub-tick uptime or timestamp, so the unit is uncertain. [3/3 samples agree]"
     },
     {
      "offset": 34,
      "name": "gnss_pos_ecef_x",
      "category": "navigation",
-     "unit": "m",
-     "scale": "raw / 100000 * 1000 (raw_per_km ~1e5, i.e. 10 cm units)",
-     "confidence": 0.883,
-     "rationale": "Matches ECEF X position computed from the TLE in 100% of fixed frames, with a scale of about 1e5 raw per km. That is 1e-2 m per count, so centimetres. Value -1 means no fix. [3/3 samples agree]"
+     "unit": "km",
+     "scale": "raw / 99995.39",
+     "confidence": 0.867,
+     "rationale": "Matches ECEF X from the TLE in 100% of fixed frames at about 1e5 raw per km (units of 10 m). The value -1 means no fix. [3/3 samples agree]"
     },
     {
      "offset": 38,
      "name": "gnss_pos_ecef_y",
      "category": "navigation",
-     "unit": "m",
-     "scale": "raw / 100 (cm to m)",
-     "confidence": 0.883,
-     "rationale": "Matches ECEF Y position with a scale of about 1e5 raw per km (centimetres). -1 is the no-fix value. [3/3 samples agree]"
+     "unit": "km",
+     "scale": "raw / 99994.52",
+     "confidence": 0.867,
+     "rationale": "Matches ECEF Y from the TLE in all fixed frames at about 1e5 raw per km. The value -1 means no fix. [3/3 samples agree]"
     },
     {
      "offset": 42,
      "name": "gnss_pos_eci_z",
      "category": "navigation",
-     "unit": "m",
-     "scale": "raw / 100 (cm to m)",
-     "confidence": 0.833,
-     "rationale": "Matches ECI Z position in 99.4% of fixed frames with a scale of about 1e5 raw per km (centimetres). The Z axis is the same in ECEF and ECI. -1 is the no-fix value. [3/3 samples agree]"
+     "unit": "km",
+     "scale": "raw / 100021.58",
+     "confidence": 0.817,
+     "rationale": "Matches the Z coordinate at 99.4% of frames at about 1e5 raw per km. Z is the same in ECI and ECEF, so the frame label is ambiguous. [3/3 samples agree]"
     },
     {
      "offset": 47,
      "name": "gnss_vel_ecef_x",
      "category": "navigation",
-     "unit": "m/s",
-     "scale": "raw / 100",
-     "confidence": 0.833,
-     "rationale": "Matches ECEF X velocity with a scale of about 1e5 raw per km/s, i.e. 1e-2 m/s per count (cm/s). It moves with the Y position as expected for orbital motion. [3/3 samples agree]"
+     "unit": "km/s",
+     "scale": "raw / 99979.17",
+     "confidence": 0.817,
+     "rationale": "Signed 3-byte value matching ECEF X velocity in all fixed frames at about 1e5 raw per km/s (10 m/s units). It moves with the Y position, as expected for orbital motion. [3/3 samples agree]"
     },
     {
      "offset": 51,
      "name": "gnss_vel_ecef_y",
      "category": "navigation",
-     "unit": "m/s",
-     "scale": "raw / 100 (tentative)",
-     "confidence": 0.367,
-     "rationale": "Position-kind match at 96.8% of frames, but the fitted scale of 2.56e7 per km/s is implausible. The field is probably a different width or format (e.g. 3-byte at a shifted offset) than s4be, with the same cm/s convention. Only the coordinate identification is reliable. [3/3 samples agree]"
+     "unit": "km/s",
+     "scale": "raw / 25602101.57",
+     "confidence": 0.4,
+     "rationale": "The match is 96.8% but the scale of 2.56e7 per km/s is implausible compared with the neighbouring velocity fields. The field is probably misaligned: it may be a different width or offset, or part of a neighbouring field. [3/3 samples agree]"
     },
     {
      "offset": 55,
      "name": "gnss_vel_eci_z",
      "category": "navigation",
-     "unit": "m/s",
-     "scale": "raw / 100",
-     "confidence": 0.833,
-     "rationale": "Matches ECI Z velocity in every fixed frame with about 1e5 raw per km/s (cm/s). The range of \u00b17.56 km/s fits LEO orbital speed. [3/3 samples agree]"
+     "unit": "km/s",
+     "scale": "raw / 99994.24",
+     "confidence": 0.817,
+     "rationale": "Signed 3-byte value matching the Z velocity in all fixed frames at about 1e5 raw per km/s. Z velocity is the same in ECI and ECEF. [3/3 samples agree]"
     },
     {
      "offset": 59,
      "name": "battery_voltage",
      "category": "power_battery",
      "unit": "mV",
-     "scale": "raw (or raw*0.001 V)",
+     "scale": "raw * 1",
      "confidence": 0.583,
-     "rationale": "Smooth and narrow (spread 2%), sun-correlated (rho 0.86), 8105-8324 in the 6000-8400 range of a two-cell Li-ion pack. It is higher in sun (8294) than in shadow (8158), with a ratio of 0.983 and a falling trend in shadow (-0.64). That is what a battery voltage does. [3/3 samples agree]"
+     "rationale": "Narrow band (spread 2%) in 8105-8324, consistent with a two-cell Li-ion pack in mV. It is higher in sun (rho 0.86), with a negative trend in shadow (-0.64) and a charged_by_sunlight hint. [3/3 samples agree]"
     }
    ],
-   "health": "No counter resets in the 16-day window, so no evidence of reboots. The battery voltage sits near 8.1-8.3 V, with a normal sun/shadow swing and no drift in its daily low or high. The data is too short to judge ageing or thermal trends."
+   "health": "No reboots were seen: the counter shows 0 resets in 16 days. The battery-like voltage is stable with no measurable drift, and it dips in shadow and recovers in sun as expected. There is no thermal data, so the evidence is limited."
   },
   "evaluation": {
    "true_fields": 8,
@@ -799,6 +863,14 @@
     "median_step_within_pass": 0.0,
     "mean": 436932993.336,
     "resets_in_window": 0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": true,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      158
     ]
@@ -864,6 +936,14 @@
     "mean": 7624.889,
     "resets_in_window": 18,
     "last_reset_days_before_end": 0.1,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -923,6 +1003,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -982,6 +1070,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": [
      47
     ]
@@ -1043,6 +1139,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -1102,6 +1206,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": [
      38
     ]
@@ -1163,6 +1275,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -1222,6 +1342,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -1286,6 +1414,14 @@
     "drift_per_30_days_of_daily_low": -14.914,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": true,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": true,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -1349,6 +1485,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -6.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": true,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_solar",
     "moves_with_offsets": [
      80,
      82,
@@ -1417,6 +1561,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 42.3,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -1481,6 +1633,14 @@
     "drift_per_30_days_of_daily_low": 19.0,
     "drift_per_30_days_of_daily_high": 1011.078,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": true,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_solar",
     "moves_with_offsets": []
    },
    {
@@ -1545,6 +1705,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -21.2,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": true,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_solar",
     "moves_with_offsets": [
      76,
      84,
@@ -1613,6 +1781,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -122.25,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": true,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_solar",
     "moves_with_offsets": [
      76
     ]
@@ -1679,6 +1855,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 30.6,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": true,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_solar",
     "moves_with_offsets": [
      76,
      80,
@@ -1747,6 +1931,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -18.5,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": [
      76,
      80,
@@ -1805,6 +1997,14 @@
     "drift_per_30_days_of_daily_low": 0.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": true,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": []
    },
    {
@@ -1868,6 +2068,14 @@
     "drift_per_30_days_of_daily_low": 16.705,
     "drift_per_30_days_of_daily_high": 96.625,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -1931,6 +2139,14 @@
     "drift_per_30_days_of_daily_low": 1.25,
     "drift_per_30_days_of_daily_high": -13.5,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": [
      153
     ]
@@ -1996,6 +2212,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": -8.036,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": [
      141
     ]
@@ -2059,6 +2283,14 @@
     "median_step_within_pass": 1.0,
     "mean": 29915956.928,
     "resets_in_window": 0,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": true,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      27
     ]
@@ -2124,6 +2356,14 @@
     "drift_per_30_days_of_daily_low": 2.0,
     "drift_per_30_days_of_daily_high": -0.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": true,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      163,
      164,
@@ -2191,6 +2431,14 @@
     "drift_per_30_days_of_daily_low": 2.196,
     "drift_per_30_days_of_daily_high": -6.633,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": true,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      162,
      164,
@@ -2258,6 +2506,14 @@
     "drift_per_30_days_of_daily_low": 1.9,
     "drift_per_30_days_of_daily_high": 3.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      162,
      163,
@@ -2323,6 +2579,14 @@
     "drift_per_30_days_of_daily_low": -0.167,
     "drift_per_30_days_of_daily_high": 6.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      169,
      170,
@@ -2389,6 +2653,14 @@
     "drift_per_30_days_of_daily_low": 3.542,
     "drift_per_30_days_of_daily_high": 0.909,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      162,
      163,
@@ -2454,6 +2726,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 2.5,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      168,
      169,
@@ -2523,6 +2803,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 3.709,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      167,
      169,
@@ -2592,6 +2880,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 3.804,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      165,
      167,
@@ -2662,6 +2958,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 4.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      165,
      167,
@@ -2732,6 +3036,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 3.804,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      165,
      167,
@@ -2802,6 +3114,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 3.0,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      167,
      168,
@@ -2871,6 +3191,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 3.292,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      167,
      168,
@@ -2940,6 +3268,14 @@
     "drift_per_30_days_of_daily_low": -0.0,
     "drift_per_30_days_of_daily_high": 2.583,
     "window_days": 15.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      167,
      168,
@@ -2952,196 +3288,196 @@
    }
   ],
   "names": {
-   "summary": "A 214-byte housekeeping beacon with uptime and time counters, a GNSS position and velocity block in ECEF/ECI coordinates, solar-panel and power channels that follow sunlight, an attitude quaternion, and a block of temperature-like sensors. Every frame is in sunlight or follows an eclipse by less than 80 minutes, so the lagged correlations are real physics.",
+   "summary": "A 214-byte housekeeping/telemetry beacon containing counters, a GNSS fix (ECEF position and velocity, with no-fix values of -1 in most frames), an attitude quaternion, solar-array currents or powers, and a group of temperatures. Temperature-like signed bytes show thermal inertia of about 20 min. The orbit is LEO at 481 km, and every frame has an eclipse in the previous 80 min.",
    "fields": [
     {
      "offset": 27,
-     "name": "unix_time_s",
-     "category": "clock",
+     "name": "uptime_or_obc_time_counter",
+     "category": "counter",
      "unit": "s",
-     "scale": "raw",
+     "scale": "raw * 1",
      "confidence": 0.433,
-     "rationale": "u4 that only rises, at 0.003 per second of frame time. The value 436.9M is not a Unix epoch, so it may be a mission-elapsed counter or a slowly advancing tick count. It moves with offset 158 but has a poor rate match. [3/3 samples agree]"
+     "rationale": "Monotonic u4 with no resets, at 0.003 counts/s (apparently sampled slowly); flat vs sun. Probably an uptime or a similar count, though the rate is odd. [3/3 samples agree]"
     },
     {
      "offset": 31,
-     "name": "rolling_packet_counter",
+     "name": "packet_sequence_counter",
      "category": "counter",
      "unit": "counts",
-     "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "u2 that rises about 4.3 per second and wraps often (18 resets). It is a fast sequence or tick counter that wraps by design, so the wraps are not reboots. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.467,
+     "rationale": "u2 counter that rolls over (18 wraps), with a median step of 226 within a pass. It is sun-independent, so it is a sequence or frame counter that wraps by design. [3/3 samples agree]"
     },
     {
      "offset": 34,
      "name": "gnss_pos_ecef_x",
      "category": "navigation",
-     "unit": "m",
-     "scale": "raw * 0.01",
-     "confidence": 0.817,
-     "rationale": "Position match with ECEF x. About 99910 raw per km suggests 10 m resolution (raw/100 = m? raw_per_km of ~1e5 means 0.01 km units, i.e. 10 m). Median -1 is the no-fix value. [3/3 samples agree]"
+     "unit": "cm",
+     "scale": "raw / 1e5 km => raw * 0.00001 km (raw*0.01 m)",
+     "confidence": 0.833,
+     "rationale": "Linear in ECEF X with 99910 raw per km (about 1e5, centimetres); all matched frames agree. [3/3 samples agree]"
     },
     {
      "offset": 38,
      "name": "gnss_pos_ecef_y",
      "category": "navigation",
-     "unit": "m",
-     "scale": "raw * 0.01",
-     "confidence": 0.817,
-     "rationale": "Position match with ECEF y at about 1e5 raw per km, in the same 10 m units as x. [3/3 samples agree]"
+     "unit": "cm",
+     "scale": "raw * 0.00001 km",
+     "confidence": 0.833,
+     "rationale": "Linear in ECEF Y at about 1e5 raw/km, so centimetres, consistent with the X field. [3/3 samples agree]"
     },
     {
      "offset": 42,
      "name": "gnss_pos_eci_z",
      "category": "navigation",
-     "unit": "m",
-     "scale": "raw * 0.01",
-     "confidence": 0.767,
-     "rationale": "Matches the z component at about 1e5 raw per km. Z is the same in ECI and ECEF, so the frame label is ambiguous. [3/3 samples agree]"
+     "unit": "cm",
+     "scale": "raw * 0.00001 km",
+     "confidence": 0.783,
+     "rationale": "Matches the Z coordinate at about 1e5 raw/km. ECI vs ECEF Z is identical, so the frame is ambiguous; likely the ECEF Z of the same block. [3/3 samples agree]"
     },
     {
      "offset": 47,
      "name": "gnss_vel_ecef_x",
      "category": "navigation",
-     "unit": "m/s",
-     "scale": "raw * 0.01",
-     "confidence": 0.8,
-     "rationale": "Matches ECEF x velocity with 1e5 raw per km/s, so cm/s. It is a 3-byte signed value. [3/3 samples agree]"
+     "unit": "mm/s",
+     "scale": "raw * 0.00001 km/s",
+     "confidence": 0.783,
+     "rationale": "Linear in ECEF X velocity at about 1e5 raw per km/s (3-byte signed, mm/s... 1e5 raw per km/s = 0.01 m/s units). Moves with ECEF Y position. [3/3 samples agree]"
     },
     {
      "offset": 51,
      "name": "gnss_vel_ecef_y",
      "category": "navigation",
-     "unit": "m/s",
-     "scale": "raw * 0.01 (probable)",
-     "confidence": 0.333,
-     "rationale": "The match is flagged as vel_ecef_y, but the raw_per_km_per_s of 2.56e7 is implausible. The offset probably straddles a field boundary, so a 3-byte read at offset 52 would likely fit the 1e5 scale. [3/3 samples agree]"
+     "unit": "km/s",
+     "scale": "raw / 25606409",
+     "confidence": 0.283,
+     "rationale": "Matches Y velocity in 98% of frames, but the scale of 2.56e7 is odd, versus 1e5 for the neighbouring fields. This is probably a misaligned field and the alignment is uncertain. [3/3 samples agree]"
     },
     {
      "offset": 55,
-     "name": "gnss_vel_eci_z",
+     "name": "gnss_vel_z",
      "category": "navigation",
      "unit": "m/s",
      "scale": "raw * 0.01",
-     "confidence": 0.733,
-     "rationale": "Matches z velocity with 1e5 raw per km/s, cm/s. A 3-byte signed field. [3/3 samples agree]"
+     "confidence": 0.767,
+     "rationale": "s3 value matching z velocity (ECI in the evidence) at about 1e5 raw per km/s, so cm/s. [3/3 samples agree]"
     },
     {
      "offset": 59,
      "name": "battery_voltage",
      "category": "power_battery",
      "unit": "mV",
-     "scale": "raw",
-     "confidence": 0.517,
-     "rationale": "Narrow range of 8105-8315 (about 2% spread), higher in sun than in shadow, with a falling trend in shadow. This is consistent with a two-cell Li-ion pack at about 8.2 V. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.55,
+     "rationale": "Narrow band at 8105-8315, consistent with a two-cell pack in mV. It is smooth, higher in sun (rho 0.86) and falls in shadow, and the power hint says battery. [3/3 samples agree]"
     },
     {
      "offset": 76,
-     "name": "solar_array_current_a",
+     "name": "solar_current_a",
      "category": "power_solar",
-     "unit": "raw",
-     "scale": "raw",
-     "confidence": 0.367,
-     "rationale": "u1 that is near 1 in shadow and about 12 in sun, tied to the other solar channels. The scale is unknown. [3/3 samples agree]"
+     "unit": "counts",
+     "scale": "raw * 1",
+     "confidence": 0.433,
+     "rationale": "Near 1 in shadow and about 12 in sun, so a solar input. It moves with the other array channels. The scale is unknown. [3/3 samples agree]"
     },
     {
      "offset": 77,
-     "name": "solar_or_load_current_u1",
-     "category": "power_solar",
-     "unit": "raw",
-     "scale": "raw",
-     "confidence": 0.2,
-     "rationale": "Rough 0-255 byte that is higher in sun (133 vs 51), with a weaker correlation than the other current channels. [2/3 samples agree]"
+     "name": "solar_or_load_byte",
+     "category": "unknown",
+     "unit": "counts",
+     "scale": "raw * 1",
+     "confidence": 0.217,
+     "rationale": "Rough 0-255 byte, higher in sun (rho 0.54) but noisy, so the class is unclear. [3/3 samples agree]"
     },
     {
      "offset": 78,
-     "name": "solar_array_current_total",
-     "category": "power_solar",
-     "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "Plateau near 4500 in sun and about 320 in shadow with no integrating trend, as expected for a generation current. [3/3 samples agree]"
-    },
-    {
-     "offset": 80,
      "name": "solar_panel_current_1",
      "category": "power_solar",
      "unit": "mA",
      "scale": "raw",
      "confidence": 0.5,
-     "rationale": "About 1900 in sun and about 300 in shadow, with rho_sun 0.92, which fits a solar input current. It moves with 76, 84 and 86. [3/3 samples agree]"
+     "rationale": "Shadow ~320 vs sun ~4500, so it is sun driven. The solar hint is consistent. [3/3 samples agree]"
+    },
+    {
+     "offset": 80,
+     "name": "solar_panel_1_current",
+     "category": "power_solar",
+     "unit": "mA",
+     "scale": "raw * 1",
+     "confidence": 0.533,
+     "rationale": "Plateau of ~1900 in sun, ~300 in shadow, rho 0.92; moves with the other panel channels. [3/3 samples agree]"
     },
     {
      "offset": 82,
-     "name": "solar_panel_current_2",
+     "name": "solar_panel_2_current",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "Near 1 in shadow and about 290 in sun, rough, with rho_sun 0.945. This is a per-panel current. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.533,
+     "rationale": "Near 1 in shadow and ~290 in sun (rho 0.945), rough, a typical array input. [3/3 samples agree]"
     },
     {
      "offset": 84,
-     "name": "solar_panel_current_3",
+     "name": "solar_panel_3_current",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "Floor value of 5 in shadow and about 330 in sun, with rho_sun 0.95. Same group as 80 and 82. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.533,
+     "rationale": "Constant 5 in shadow and ~330 in sun, rho 0.95; part of the panel group. [3/3 samples agree]"
     },
     {
      "offset": 86,
-     "name": "solar_panel_current_4",
+     "name": "solar_panel_4_current",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.45,
-     "rationale": "Floor value of 8 in shadow, rising through the sunlit period, moving with the other panel currents. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.483,
+     "rationale": "Constant 8 in shadow, rising in sun, rho 0.93; grouped with the other panels. [3/3 samples agree]"
     },
     {
      "offset": 88,
      "name": "attitude_quaternion",
      "category": "attitude",
-     "unit": "unitless",
-     "scale": "4 x float32 BE, unit norm",
-     "confidence": 0.85,
-     "rationale": "Four float32 values, with unit norm in 100% of the frames. They are a quaternion. [3/3 samples agree]"
+     "unit": "unit quaternion",
+     "scale": "raw (float32 x4)",
+     "confidence": 0.783,
+     "rationale": "Four float32 values with unit norm in 100% of frames, so a quaternion. The first component is near 1, so the attitude is nearly constant. [3/3 samples agree]"
     },
     {
      "offset": 139,
-     "name": "power_or_charge_u2le",
-     "category": "power_bus",
+     "name": "battery_current_or_charge_counter",
+     "category": "power_battery",
      "unit": "counts",
-     "scale": "raw",
-     "confidence": 0.2,
-     "rationale": "Little-endian u2 that is lagged by about 20 minutes to sunlight and higher in sun, with a moderate correlation of 0.43. It may be a battery or charge current. [2/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.3,
+     "rationale": "Lagged sun correlation with tau of 20 min, higher in sun, over a range of 4-764. The hint says battery, but the evidence is weak. [3/3 samples agree]"
     },
     {
      "offset": 141,
-     "name": "aux_sensor_a",
-     "category": "unknown",
+     "name": "temp_internal_a",
+     "category": "thermal",
      "unit": "counts",
-     "scale": "raw",
-     "confidence": 0.2,
-     "rationale": "Mostly a constant near 54-71 with an occasional 255, anti-correlated with sun. It moves with offset 153 and is probably a status or ADC channel. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.3,
+     "rationale": "Narrow band (54-71) that is warmer in shadow, moving with offset 153. The occasional 255 is probably a sentinel; this looks like an internal or heated component. [3/3 samples agree]"
     },
     {
      "offset": 153,
-     "name": "aux_sensor_b",
-     "category": "unknown",
+     "name": "temp_internal_b",
+     "category": "thermal",
      "unit": "counts",
-     "scale": "raw",
-     "confidence": 0.2,
-     "rationale": "Near-identical behaviour to offset 141, so the two probably form a pair. The purpose is unclear. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.3,
+     "rationale": "Behaves like offset 141: narrow, warmer in shadow, with 255 outliers. [3/3 samples agree]"
     },
     {
      "offset": 158,
-     "name": "uptime_seconds",
+     "name": "uptime_or_tick_counter",
      "category": "counter",
      "unit": "s",
-     "scale": "raw",
-     "confidence": 0.633,
-     "rationale": "u4 rising at 0.0167 per second of frame time, which is one count per minute. Uptime in minutes, with no resets in the 15.8-day window. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.267,
+     "rationale": "u4 counter of about 3e7 that increases at 0.0167 per second, so it is probably a slow tick (about one per minute) or a time count. It has no resets. [2/3 samples agree]"
     },
     {
      "offset": 162,
@@ -3149,8 +3485,8 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.683,
-     "rationale": "Signed byte, -17 to 23, trends up in sun and down in shadow, lag tau 20 min with rho 0.98. It moves with 164 and 166. [3/3 samples agree]"
+     "confidence": 0.7,
+     "rationale": "Signed byte -17..23, tau 20 min, rho_lag 0.98. Trends up in sun and down in shadow, and moves with 163, 164 and 166. [3/3 samples agree]"
     },
     {
      "offset": 163,
@@ -3158,8 +3494,8 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.617,
-     "rationale": "Signed byte with a larger swing (-13 to 33) and the same trend, rho_sun 0.87. It is part of the same thermal group. [3/3 samples agree]"
+     "confidence": 0.683,
+     "rationale": "Signed byte, swings -13..33, correlated with the group. [3/3 samples agree]"
     },
     {
      "offset": 164,
@@ -3167,17 +3503,17 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.667,
-     "rationale": "Lagged tau 20 min with rho 0.98, trends up in sun and down in shadow. [3/3 samples agree]"
+     "confidence": 0.7,
+     "rationale": "Signed byte, tau 20 min, rho 0.98. [3/3 samples agree]"
     },
     {
      "offset": 165,
-     "name": "internal_temp_1",
+     "name": "temp_panel_4",
      "category": "thermal",
      "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.433,
-     "rationale": "Signed byte with a smaller range of -27 to 9, warmer in shadow, with a strong in-regime trend that reverses with the regime. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.5,
+     "rationale": "Signed byte with the same sun/shadow trend signs, but an orbit-phase fit rather than a lag fit, and it is lower in sun. It may be a temperature with an offset. [3/3 samples agree]"
     },
     {
      "offset": 166,
@@ -3185,83 +3521,83 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.667,
-     "rationale": "Lagged tau 20 min, rho 0.985, same behaviour as 162 and 164. [3/3 samples agree]"
+     "confidence": 0.7,
+     "rationale": "Signed byte, tau 20 min, rho 0.985. [3/3 samples agree]"
     },
     {
      "offset": 167,
-     "name": "internal_temp_a",
+     "name": "temp_internal_1",
      "category": "thermal",
      "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "Small positive byte values of 4-24, higher in shadow, rising after sunset and falling in sun. It is an inverse-heating group with 168-174. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.467,
+     "rationale": "Small positive byte, warmer in shadow, falling in sun (trend 0.84, higher after sunset) with a long time constant. It is one of a group with 168-174, so it is likely a heated or internal temperature. [3/3 samples agree]"
     },
     {
      "offset": 168,
-     "name": "internal_temp_b",
+     "name": "temp_internal_2",
      "category": "thermal",
      "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "Same pattern as 167, and the two move together. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.467,
+     "rationale": "Same behaviour as 167 and moves with it as a group. [3/3 samples agree]"
     },
     {
      "offset": 169,
-     "name": "internal_temp_c",
+     "name": "temp_internal_3",
      "category": "thermal",
      "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "Same group, warmer in shadow. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.467,
+     "rationale": "Same group behaviour: warmer in shadow, orbit-phase repeating. [3/3 samples agree]"
     },
     {
      "offset": 170,
-     "name": "internal_temp_d",
+     "name": "temp_internal_4",
      "category": "thermal",
      "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "Same group, warmer in shadow. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.467,
+     "rationale": "Same group behaviour, with a 1-21 range. [3/3 samples agree]"
     },
     {
      "offset": 171,
-     "name": "internal_temp_e",
+     "name": "temp_internal_5",
      "category": "thermal",
      "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "Same group, warmer in shadow. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.467,
+     "rationale": "Same group behaviour, with a slightly weaker lag correlation. [3/3 samples agree]"
     },
     {
      "offset": 172,
-     "name": "internal_temp_f",
+     "name": "temp_internal_6",
      "category": "thermal",
      "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "Same group, warmer in shadow. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.467,
+     "rationale": "Same group behaviour, repeating with orbital phase. [3/3 samples agree]"
     },
     {
      "offset": 173,
-     "name": "internal_temp_g",
+     "name": "temp_internal_7",
      "category": "thermal",
      "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "Same group, warmer in shadow. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.467,
+     "rationale": "Same group behaviour, with the largest shadow/sun ratio. [3/3 samples agree]"
     },
     {
      "offset": 174,
-     "name": "internal_temp_h",
+     "name": "temp_internal_8",
      "category": "thermal",
      "unit": "degC",
-     "scale": "raw",
-     "confidence": 0.417,
-     "rationale": "Same group, warmer in shadow. [3/3 samples agree]"
+     "scale": "raw * 1",
+     "confidence": 0.467,
+     "rationale": "Same group behaviour as 173. [3/3 samples agree]"
     }
    ],
-   "health": "No reboots are seen: the uptime counter (158) has no resets in 15.8 days. The battery voltage (59) has a falling daily low of about 15 raw units per 30 days. That is a weak ageing hint, and with only two weeks of data it may be a seasonal effect. Thermal behaviour is regular, with panel temperatures swinging with the orbit, so there is no obvious fault."
+   "health": "No reboots are visible: the u4 counters have no resets, and the u2 counter that wraps does so by design. Battery voltage (about 8.1-8.3 V) looks charged by sunlight, though its daily low drifts down by about 15 per 30 days; over 16 days this could be seasonal, so I am not sure it is ageing. Temperatures swing normally with the eclipse cycle, so I see no thermal anomaly."
   },
   "evaluation": {
    "true_fields": 48,
@@ -3272,12 +3608,12 @@
    "located_exact_fraction": 0.9791666666666666,
    "kind_accuracy": 0.9629629629629629,
    "precision": 0.9411764705882353,
-   "llm_category_accuracy": 1.0,
+   "llm_category_accuracy": 0.9629629629629629,
    "llm_judged": 27,
-   "llm_answered": 1.0,
+   "llm_answered": 0.9629629629629629,
    "llm_selective_accuracy": 1.0,
    "llm_fine_accuracy": 1.0,
-   "llm_fine_judged": 7,
+   "llm_fine_judged": 6,
    "truth": [
     {
      "name": "csp_header_source_port",

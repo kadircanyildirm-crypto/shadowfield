@@ -1,0 +1,2809 @@
+[
+ {
+  "frame_type": "OK0KST:len59",
+  "frames": 180,
+  "passes": 54,
+  "orbit": {
+   "mean_altitude_km": 592,
+   "max_abs_latitude_deg": 65.3,
+   "beta_angle_range_deg": [
+    -9.7,
+    -9.6
+   ],
+   "fraction_of_frames_in_sunlight": 0.322,
+   "fraction_of_frames_with_an_eclipse_in_the_previous_80_min": 1.0,
+   "days_covered": 14.6
+  },
+  "fields": [
+   {
+    "offset": 1,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.806,
+    "rough": 0.298,
+    "min": 46.0,
+    "max": 57.0,
+    "p5": 46.0,
+    "p95": 56.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.806,
+    "sun_mean": 46.189655172413794,
+    "shadow_mean": 52.9344262295082,
+    "p": 1.8721398506987137e-13,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 53.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 53.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 54.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 46.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 46.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 46.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.321,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.169,
+    "sun_minus_shadow_in_std": -2.08,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.712,
+     "10": -0.712,
+     "20": -0.712,
+     "40": -0.709,
+     "80": -0.704
+    },
+    "rank_corr_abs_beta": -0.185,
+    "relative_spread_p5_p95": 0.194,
+    "shadow_over_sun_median_ratio": 1.174,
+    "distinct_values": 11,
+    "median_step_within_pass": 0.0,
+    "mean": 50.761,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 10.2,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     10
+    ]
+   },
+   {
+    "offset": 4,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.776,
+    "rough": 0.6,
+    "min": 44.0,
+    "max": 57.0,
+    "p5": 44.0,
+    "p95": 57.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.776,
+    "sun_mean": 44.310344827586206,
+    "shadow_mean": 52.77049180327869,
+    "p": 5.220885866920747e-12,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 53.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 52.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 53.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 44.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 44.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 44.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.321,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.139,
+    "sun_minus_shadow_in_std": -1.9,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.7,
+     "10": -0.698,
+     "20": -0.699,
+     "40": -0.701,
+     "80": -0.703
+    },
+    "rank_corr_abs_beta": -0.126,
+    "relative_spread_p5_p95": 0.26,
+    "shadow_over_sun_median_ratio": 1.205,
+    "distinct_values": 11,
+    "median_step_within_pass": 3.0,
+    "mean": 50.044,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 5.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 5,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.799,
+    "rough": 0.559,
+    "min": 34.0,
+    "max": 63.0,
+    "p5": 34.0,
+    "p95": 62.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.799,
+    "sun_mean": 34.03448275862069,
+    "shadow_mean": 53.459016393442624,
+    "p": 4.669624275581172e-13,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 59.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 59.5,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 55.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 34.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 34.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 34.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.321,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.236,
+    "sun_minus_shadow_in_std": -1.93,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.596,
+     "10": -0.595,
+     "20": -0.595,
+     "40": -0.587,
+     "80": -0.575
+    },
+    "rank_corr_abs_beta": -0.034,
+    "relative_spread_p5_p95": 0.519,
+    "shadow_over_sun_median_ratio": 1.706,
+    "distinct_values": 12,
+    "median_step_within_pass": 0.0,
+    "mean": 47.2,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 56.25,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     17,
+     31,
+     51,
+     57
+    ]
+   },
+   {
+    "offset": 9,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.842,
+    "rough": 0.151,
+    "min": 46.0,
+    "max": 57.0,
+    "p5": 46.0,
+    "p95": 57.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.842,
+    "sun_mean": 46.241379310344826,
+    "shadow_mean": 53.31967213114754,
+    "p": 1.3990445560605818e-15,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 53.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 54.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 53.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 46.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 46.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 46.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.321,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.081,
+    "sun_minus_shadow_in_std": -1.77,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.686,
+     "10": -0.686,
+     "20": -0.686,
+     "40": -0.685,
+     "80": -0.682
+    },
+    "rank_corr_abs_beta": -0.159,
+    "relative_spread_p5_p95": 0.208,
+    "shadow_over_sun_median_ratio": 1.152,
+    "distinct_values": 9,
+    "median_step_within_pass": 0.0,
+    "mean": 51.039,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 20.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 10,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.752,
+    "rough": 0.717,
+    "min": 33.0,
+    "max": 63.0,
+    "p5": 33.0,
+    "p95": 63.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": 0.752,
+    "sun_mean": 61.96551724137931,
+    "shadow_mean": 52.67213114754098,
+    "p": 5.828018198921653e-11,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 58.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 58.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 54.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 63.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 63.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 63.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.321,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.264,
+    "sun_minus_shadow_in_std": 0.57,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.714,
+     "10": 0.714,
+     "20": 0.713,
+     "40": 0.722,
+     "80": 0.733
+    },
+    "rank_corr_abs_beta": 0.189,
+    "relative_spread_p5_p95": 0.508,
+    "shadow_over_sun_median_ratio": 0.905,
+    "distinct_values": 11,
+    "median_step_within_pass": 0.0,
+    "mean": 55.667,
+    "drift_per_30_days_of_daily_low": -12.857,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": [
+     1,
+     38,
+     42
+    ]
+   },
+   {
+    "offset": 11,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.62,
+    "rough": 0.512,
+    "min": 48.0,
+    "max": 57.0,
+    "p5": 48.0,
+    "p95": 57.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.62,
+    "sun_mean": 48.0,
+    "shadow_mean": 52.557377049180324,
+    "p": 5.837741881358607e-07,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 54.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 53.5,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 48.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 48.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 48.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 48.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.372,
+    "sun_minus_shadow_in_std": -1.41,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.349,
+     "10": -0.349,
+     "20": -0.35,
+     "40": -0.336,
+     "80": -0.319
+    },
+    "rank_corr_abs_beta": -0.057,
+    "relative_spread_p5_p95": 0.184,
+    "shadow_over_sun_median_ratio": 1.104,
+    "distinct_values": 10,
+    "median_step_within_pass": 0.0,
+    "mean": 51.089,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 21.818,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     17,
+     31,
+     45,
+     51
+    ]
+   },
+   {
+    "offset": 12,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.804,
+    "rough": 0.403,
+    "min": 44.0,
+    "max": 57.0,
+    "p5": 44.0,
+    "p95": 56.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.804,
+    "sun_mean": 44.13793103448276,
+    "shadow_mean": 51.24590163934426,
+    "p": 2.4576785442405367e-13,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 51.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 52.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 48.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 44.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 44.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 44.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.321,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.216,
+    "sun_minus_shadow_in_std": -1.68,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.599,
+     "10": -0.599,
+     "20": -0.599,
+     "40": -0.592,
+     "80": -0.581
+    },
+    "rank_corr_abs_beta": -0.001,
+    "relative_spread_p5_p95": 0.25,
+    "shadow_over_sun_median_ratio": 1.159,
+    "distinct_values": 11,
+    "median_step_within_pass": 0.0,
+    "mean": 48.956,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 24.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     17,
+     31,
+     36,
+     51,
+     57
+    ]
+   },
+   {
+    "offset": 13,
+    "type": "u1",
+    "kind": "lagged",
+    "score": 0.672,
+    "rough": 0.858,
+    "min": 33.0,
+    "max": 63.0,
+    "p5": 33.0,
+    "p95": 63.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_lag": 0.672,
+    "tau_min": 80,
+    "rho_sun": 0.605,
+    "p": 2.6313994442169484e-08,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 59.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 58.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 52.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 60.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 63.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 63.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.681,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.333,
+    "sun_minus_shadow_in_std": 0.58,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.66,
+     "10": 0.661,
+     "20": 0.66,
+     "40": 0.67,
+     "80": 0.682
+    },
+    "rank_corr_abs_beta": 0.208,
+    "relative_spread_p5_p95": 0.5,
+    "shadow_over_sun_median_ratio": 0.905,
+    "distinct_values": 11,
+    "median_step_within_pass": 3.0,
+    "mean": 55.128,
+    "drift_per_30_days_of_daily_low": -9.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 14,
+    "type": "u1",
+    "kind": "lagged",
+    "score": 0.517,
+    "rough": 0.772,
+    "min": 33.0,
+    "max": 63.0,
+    "p5": 33.0,
+    "p95": 62.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_lag": 0.517,
+    "tau_min": 40,
+    "rho_sun": 0.316,
+    "p": 6.308789938666935e-05,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 59.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 58.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 52.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 53.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 60.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 61.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.707,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.403,
+    "sun_minus_shadow_in_std": 0.41,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.518,
+     "10": 0.519,
+     "20": 0.518,
+     "40": 0.526,
+     "80": 0.523
+    },
+    "rank_corr_abs_beta": 0.045,
+    "relative_spread_p5_p95": 0.5,
+    "shadow_over_sun_median_ratio": 0.933,
+    "distinct_values": 11,
+    "median_step_within_pass": 1.0,
+    "mean": 53.756,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 16,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.582,
+    "rough": 0.625,
+    "min": 35.0,
+    "max": 63.0,
+    "p5": 55.85,
+    "p95": 63.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.582,
+    "sun_mean": 58.3448275862069,
+    "shadow_mean": 62.02459016393443,
+    "p": 3.98483494952459e-06,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 63.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 63.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 63.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 58.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 61.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 59.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.052,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.486,
+    "sun_minus_shadow_in_std": -1.13,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.313,
+     "10": -0.312,
+     "20": -0.313,
+     "40": -0.296,
+     "80": -0.276
+    },
+    "rank_corr_abs_beta": -0.04,
+    "relative_spread_p5_p95": 0.113,
+    "shadow_over_sun_median_ratio": 1.068,
+    "distinct_values": 11,
+    "median_step_within_pass": 1.0,
+    "mean": 60.839,
+    "drift_per_30_days_of_daily_low": 3.75,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 17,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.861,
+    "rough": 0.351,
+    "min": 44.0,
+    "max": 57.0,
+    "p5": 44.0,
+    "p95": 56.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": 0.861,
+    "sun_mean": 52.275862068965516,
+    "shadow_mean": 44.459016393442624,
+    "p": 7.004960882337928e-17,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 44.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 44.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 44.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 53.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 49.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 53.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.113,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.478,
+    "sun_minus_shadow_in_std": 2.2,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.589,
+     "10": 0.588,
+     "20": 0.589,
+     "40": 0.574,
+     "80": 0.55
+    },
+    "rank_corr_abs_beta": 0.102,
+    "relative_spread_p5_p95": 0.273,
+    "shadow_over_sun_median_ratio": 0.83,
+    "distinct_values": 10,
+    "median_step_within_pass": 0.0,
+    "mean": 46.978,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -16.2,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": [
+     5,
+     11,
+     12,
+     20,
+     25,
+     31,
+     33,
+     36,
+     45,
+     50,
+     51,
+     57
+    ]
+   },
+   {
+    "offset": 18,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.869,
+    "rough": 0.187,
+    "min": 44.0,
+    "max": 57.0,
+    "p5": 44.0,
+    "p95": 53.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.869,
+    "sun_mean": 44.1551724137931,
+    "shadow_mean": 51.19672131147541,
+    "p": 1.6616814523797298e-17,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 51.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 51.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 51.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 44.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 44.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 44.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.229,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.128,
+    "sun_minus_shadow_in_std": -2.0,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.745,
+     "10": -0.744,
+     "20": -0.745,
+     "40": -0.746,
+     "80": -0.739
+    },
+    "rank_corr_abs_beta": -0.213,
+    "relative_spread_p5_p95": 0.176,
+    "shadow_over_sun_median_ratio": 1.159,
+    "distinct_values": 11,
+    "median_step_within_pass": 0.0,
+    "mean": 48.928,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 20,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.734,
+    "rough": 0.57,
+    "min": 45.0,
+    "max": 59.0,
+    "p5": 45.0,
+    "p95": 59.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.734,
+    "sun_mean": 45.810344827586206,
+    "shadow_mean": 52.77049180327869,
+    "p": 2.6888659613955593e-10,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 59.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 52.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 51.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 45.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 45.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 45.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.464,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.438,
+    "sun_minus_shadow_in_std": -1.46,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.448,
+     "10": -0.448,
+     "20": -0.448,
+     "40": -0.436,
+     "80": -0.422
+    },
+    "rank_corr_abs_beta": -0.042,
+    "relative_spread_p5_p95": 0.269,
+    "shadow_over_sun_median_ratio": 1.156,
+    "distinct_values": 11,
+    "median_step_within_pass": 0.0,
+    "mean": 50.528,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 30.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": [
+     17,
+     31,
+     51,
+     57
+    ]
+   },
+   {
+    "offset": 25,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.629,
+    "rough": 0.601,
+    "min": 48.0,
+    "max": 63.0,
+    "p5": 48.0,
+    "p95": 62.04999999999998,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": 0.629,
+    "sun_mean": 54.86206896551724,
+    "shadow_mean": 49.377049180327866,
+    "p": 3.5061841848274507e-07,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 48.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 48.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 48.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 53.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 54.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 54.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.01,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.477,
+    "sun_minus_shadow_in_std": 1.09,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.393,
+     "10": 0.392,
+     "20": 0.393,
+     "40": 0.379,
+     "80": 0.361
+    },
+    "rank_corr_abs_beta": 0.03,
+    "relative_spread_p5_p95": 0.293,
+    "shadow_over_sun_median_ratio": 0.906,
+    "distinct_values": 10,
+    "median_step_within_pass": 0.0,
+    "mean": 51.144,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -30.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": [
+     17,
+     31,
+     51
+    ]
+   },
+   {
+    "offset": 26,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.605,
+    "rough": 0.405,
+    "min": 46.0,
+    "max": 57.0,
+    "p5": 46.0,
+    "p95": 56.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.605,
+    "sun_mean": 47.08620689655172,
+    "shadow_mean": 51.68852459016394,
+    "p": 1.2690910069248594e-06,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 52.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 51.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 51.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 46.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 46.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 46.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.559,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.331,
+    "sun_minus_shadow_in_std": -1.62,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.377,
+     "10": -0.377,
+     "20": -0.377,
+     "40": -0.363,
+     "80": -0.342
+    },
+    "rank_corr_abs_beta": 0.044,
+    "relative_spread_p5_p95": 0.196,
+    "shadow_over_sun_median_ratio": 1.109,
+    "distinct_values": 11,
+    "median_step_within_pass": 0.0,
+    "mean": 50.206,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 12.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 30,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.821,
+    "rough": 0.181,
+    "min": 44.0,
+    "max": 55.0,
+    "p5": 45.0,
+    "p95": 54.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.821,
+    "sun_mean": 44.86206896551724,
+    "shadow_mean": 52.967213114754095,
+    "p": 2.9721004649332673e-14,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 53.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 53.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 53.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 45.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 45.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 45.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.56,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.104,
+    "sun_minus_shadow_in_std": -2.07,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.718,
+     "10": -0.717,
+     "20": -0.717,
+     "40": -0.704,
+     "80": -0.686
+    },
+    "rank_corr_abs_beta": -0.193,
+    "relative_spread_p5_p95": 0.173,
+    "shadow_over_sun_median_ratio": 1.178,
+    "distinct_values": 7,
+    "median_step_within_pass": 0.0,
+    "mean": 50.356,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 31,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.809,
+    "rough": 0.384,
+    "min": 44.0,
+    "max": 48.0,
+    "p5": 44.0,
+    "p95": 48.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": 0.809,
+    "sun_mean": 47.58620689655172,
+    "shadow_mean": 44.459016393442624,
+    "p": 1.3618989159477108e-13,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 44.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 44.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 44.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 48.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 48.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 48.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.56,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.478,
+    "sun_minus_shadow_in_std": 2.32,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.517,
+     "10": 0.517,
+     "20": 0.517,
+     "40": 0.5,
+     "80": 0.477
+    },
+    "rank_corr_abs_beta": 0.072,
+    "relative_spread_p5_p95": 0.091,
+    "shadow_over_sun_median_ratio": 0.917,
+    "distinct_values": 4,
+    "median_step_within_pass": 0.0,
+    "mean": 45.467,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": [
+     5,
+     11,
+     12,
+     17,
+     20,
+     25,
+     36,
+     45,
+     50,
+     51,
+     57
+    ]
+   },
+   {
+    "offset": 32,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.885,
+    "rough": 0.526,
+    "min": 46.0,
+    "max": 57.0,
+    "p5": 46.0,
+    "p95": 54.04999999999998,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.885,
+    "sun_mean": 46.275862068965516,
+    "shadow_mean": 49.83606557377049,
+    "p": 6.176206973202899e-19,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 49.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 49.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 49.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 46.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 46.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 46.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.56,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.356,
+    "sun_minus_shadow_in_std": -1.25,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.797,
+     "10": -0.797,
+     "20": -0.797,
+     "40": -0.784,
+     "80": -0.76
+    },
+    "rank_corr_abs_beta": -0.159,
+    "relative_spread_p5_p95": 0.164,
+    "shadow_over_sun_median_ratio": 1.065,
+    "distinct_values": 10,
+    "median_step_within_pass": 0.0,
+    "mean": 48.689,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 6.6,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     38,
+     42
+    ]
+   },
+   {
+    "offset": 33,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.852,
+    "rough": 0.345,
+    "min": 46.0,
+    "max": 57.0,
+    "p5": 48.0,
+    "p95": 54.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.852,
+    "sun_mean": 48.310344827586206,
+    "shadow_mean": 53.631147540983605,
+    "p": 3.3673415232018945e-16,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 54.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 54.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 54.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 49.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 49.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 48.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.328,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.236,
+    "sun_minus_shadow_in_std": -2.14,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.647,
+     "10": -0.648,
+     "20": -0.647,
+     "40": -0.634,
+     "80": -0.616
+    },
+    "rank_corr_abs_beta": -0.177,
+    "relative_spread_p5_p95": 0.111,
+    "shadow_over_sun_median_ratio": 1.125,
+    "distinct_values": 10,
+    "median_step_within_pass": 0.0,
+    "mean": 51.917,
+    "drift_per_30_days_of_daily_low": 3.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     17,
+     51
+    ]
+   },
+   {
+    "offset": 34,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.789,
+    "rough": 0.664,
+    "min": 40.0,
+    "max": 61.0,
+    "p5": 40.0,
+    "p95": 60.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": 0.789,
+    "sun_mean": 53.827586206896555,
+    "shadow_mean": 46.467213114754095,
+    "p": 1.322046807275059e-12,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 49.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 48.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 48.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 52.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 53.5,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 53.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.113,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.59,
+    "sun_minus_shadow_in_std": 1.0,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.81,
+     "10": 0.81,
+     "20": 0.81,
+     "40": 0.798,
+     "80": 0.771
+    },
+    "rank_corr_abs_beta": 0.202,
+    "relative_spread_p5_p95": 0.417,
+    "shadow_over_sun_median_ratio": 0.906,
+    "distinct_values": 11,
+    "median_step_within_pass": 1.0,
+    "mean": 48.839,
+    "drift_per_30_days_of_daily_low": -4.25,
+    "drift_per_30_days_of_daily_high": -11.538,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": [
+     38,
+     42
+    ]
+   },
+   {
+    "offset": 35,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.721,
+    "rough": 0.62,
+    "min": 44.0,
+    "max": 57.0,
+    "p5": 44.0,
+    "p95": 57.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.721,
+    "sun_mean": 44.96551724137931,
+    "shadow_mean": 52.58196721311475,
+    "p": 8.028215055463204e-10,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 50.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 55.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 51.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 44.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 44.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 44.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.561,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.046,
+    "sun_minus_shadow_in_std": -1.85,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.587,
+     "10": -0.587,
+     "20": -0.587,
+     "40": -0.575,
+     "80": -0.552
+    },
+    "rank_corr_abs_beta": -0.119,
+    "relative_spread_p5_p95": 0.255,
+    "shadow_over_sun_median_ratio": 1.193,
+    "distinct_values": 11,
+    "median_step_within_pass": 2.0,
+    "mean": 50.128,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 22.5,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 36,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.808,
+    "rough": 0.794,
+    "min": 44.0,
+    "max": 57.0,
+    "p5": 45.0,
+    "p95": 57.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.808,
+    "sun_mean": 44.86206896551724,
+    "shadow_mean": 51.51639344262295,
+    "p": 1.6106211517443646e-13,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 51.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 53.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 51.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 45.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 45.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 45.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.56,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.196,
+    "sun_minus_shadow_in_std": -1.37,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.616,
+     "10": -0.615,
+     "20": -0.616,
+     "40": -0.603,
+     "80": -0.582
+    },
+    "rank_corr_abs_beta": -0.153,
+    "relative_spread_p5_p95": 0.245,
+    "shadow_over_sun_median_ratio": 1.133,
+    "distinct_values": 11,
+    "median_step_within_pass": 2.0,
+    "mean": 49.372,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 21.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     12,
+     17,
+     31,
+     51
+    ]
+   },
+   {
+    "offset": 38,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.888,
+    "rough": 0.37,
+    "min": 46.0,
+    "max": 53.0,
+    "p5": 46.0,
+    "p95": 53.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.888,
+    "sun_mean": 46.172413793103445,
+    "shadow_mean": 50.68852459016394,
+    "p": 3.3853561239467706e-19,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 50.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 50.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 50.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 46.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 46.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 46.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.401,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.478,
+    "sun_minus_shadow_in_std": -1.69,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.831,
+     "10": -0.832,
+     "20": -0.831,
+     "40": -0.82,
+     "80": -0.795
+    },
+    "rank_corr_abs_beta": -0.194,
+    "relative_spread_p5_p95": 0.14,
+    "shadow_over_sun_median_ratio": 1.087,
+    "distinct_values": 4,
+    "median_step_within_pass": 0.0,
+    "mean": 49.233,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     10,
+     32,
+     34,
+     42
+    ]
+   },
+   {
+    "offset": 39,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.599,
+    "rough": 0.808,
+    "min": 41.0,
+    "max": 62.0,
+    "p5": 43.0,
+    "p95": 55.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": 0.599,
+    "sun_mean": 52.724137931034484,
+    "shadow_mean": 49.5655737704918,
+    "p": 1.6712836952513744e-06,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 51.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 51.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 51.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 55.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 54.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 53.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.327,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.371,
+    "sun_minus_shadow_in_std": 0.75,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.568,
+     "10": 0.568,
+     "20": 0.568,
+     "40": 0.556,
+     "80": 0.531
+    },
+    "rank_corr_abs_beta": 0.139,
+    "relative_spread_p5_p95": 0.231,
+    "shadow_over_sun_median_ratio": 0.944,
+    "distinct_values": 9,
+    "median_step_within_pass": 1.0,
+    "mean": 50.583,
+    "drift_per_30_days_of_daily_low": -6.0,
+    "drift_per_30_days_of_daily_high": -3.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 42,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.89,
+    "rough": 0.42,
+    "min": 44.0,
+    "max": 51.0,
+    "p5": 45.0,
+    "p95": 51.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.89,
+    "sun_mean": 44.91379310344828,
+    "shadow_mean": 48.68852459016394,
+    "p": 2.037223598199894e-19,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 48.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 48.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 48.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 45.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 45.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 45.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.401,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.478,
+    "sun_minus_shadow_in_std": -1.46,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.845,
+     "10": -0.845,
+     "20": -0.845,
+     "40": -0.834,
+     "80": -0.811
+    },
+    "rank_corr_abs_beta": -0.214,
+    "relative_spread_p5_p95": 0.125,
+    "shadow_over_sun_median_ratio": 1.067,
+    "distinct_values": 4,
+    "median_step_within_pass": 0.0,
+    "mean": 47.472,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": [
+     10,
+     32,
+     34,
+     38
+    ]
+   },
+   {
+    "offset": 45,
+    "type": "u1",
+    "kind": "orbit",
+    "score": 0.543,
+    "rough": 0.675,
+    "min": 44.0,
+    "max": 51.0,
+    "p5": 44.0,
+    "p95": 51.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "r2_orbit": 0.364,
+    "p": 2.2113174933608875e-05,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 44.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 44.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 44.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 50.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 51.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 50.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.338,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.478,
+    "sun_minus_shadow_in_std": 1.86,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.253,
+     "10": 0.252,
+     "20": 0.253,
+     "40": 0.244,
+     "80": 0.238
+    },
+    "rank_corr_abs_beta": 0.026,
+    "relative_spread_p5_p95": 0.159,
+    "shadow_over_sun_median_ratio": 0.88,
+    "distinct_values": 6,
+    "median_step_within_pass": 0.0,
+    "mean": 46.944,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": [
+     11,
+     17,
+     31,
+     51,
+     57
+    ]
+   },
+   {
+    "offset": 46,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.622,
+    "rough": 0.781,
+    "min": 33.0,
+    "max": 63.0,
+    "p5": 33.0,
+    "p95": 63.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": 0.622,
+    "sun_mean": 59.89655172413793,
+    "shadow_mean": 50.18032786885246,
+    "p": 5.078493467488702e-07,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 55.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 55.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 54.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 60.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 62.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 61.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.026,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.437,
+    "sun_minus_shadow_in_std": 0.77,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.664,
+     "10": 0.664,
+     "20": 0.663,
+     "40": 0.671,
+     "80": 0.681
+    },
+    "rank_corr_abs_beta": 0.205,
+    "relative_spread_p5_p95": 0.545,
+    "shadow_over_sun_median_ratio": 0.887,
+    "distinct_values": 11,
+    "median_step_within_pass": 1.0,
+    "mean": 53.311,
+    "drift_per_30_days_of_daily_low": -3.0,
+    "drift_per_30_days_of_daily_high": -3.75,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 47,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.697,
+    "rough": 0.558,
+    "min": 44.0,
+    "max": 57.0,
+    "p5": 44.0,
+    "p95": 57.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.697,
+    "sun_mean": 44.94827586206897,
+    "shadow_mean": 52.80327868852459,
+    "p": 4.851710451928326e-09,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 53.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 53.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 51.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 44.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 44.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 44.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.4,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.188,
+    "sun_minus_shadow_in_std": -1.7,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.494,
+     "10": -0.494,
+     "20": -0.494,
+     "40": -0.48,
+     "80": -0.459
+    },
+    "rank_corr_abs_beta": -0.112,
+    "relative_spread_p5_p95": 0.255,
+    "shadow_over_sun_median_ratio": 1.182,
+    "distinct_values": 11,
+    "median_step_within_pass": 2.0,
+    "mean": 50.272,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 18.75,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 50,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.823,
+    "rough": 0.512,
+    "min": 46.0,
+    "max": 57.0,
+    "p5": 46.0,
+    "p95": 57.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.823,
+    "sun_mean": 46.13793103448276,
+    "shadow_mean": 54.34426229508197,
+    "p": 2.2421904451582196e-14,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 57.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 57.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 51.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 46.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 46.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 46.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.33,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.296,
+    "sun_minus_shadow_in_std": -2.01,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.588,
+     "10": -0.588,
+     "20": -0.589,
+     "40": -0.574,
+     "80": -0.551
+    },
+    "rank_corr_abs_beta": -0.12,
+    "relative_spread_p5_p95": 0.216,
+    "shadow_over_sun_median_ratio": 1.196,
+    "distinct_values": 5,
+    "median_step_within_pass": 0.0,
+    "mean": 51.7,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 22.5,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": [
+     17,
+     31,
+     51
+    ]
+   },
+   {
+    "offset": 51,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.847,
+    "rough": 0.361,
+    "min": 44.0,
+    "max": 55.0,
+    "p5": 44.0,
+    "p95": 51.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": 0.847,
+    "sun_mean": 49.724137931034484,
+    "shadow_mean": 44.459016393442624,
+    "p": 6.701923713877228e-16,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 44.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 44.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 44.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 50.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 49.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 50.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.133,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.478,
+    "sun_minus_shadow_in_std": 2.22,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.581,
+     "10": 0.581,
+     "20": 0.582,
+     "40": 0.568,
+     "80": 0.548
+    },
+    "rank_corr_abs_beta": 0.092,
+    "relative_spread_p5_p95": 0.159,
+    "shadow_over_sun_median_ratio": 0.88,
+    "distinct_values": 7,
+    "median_step_within_pass": 0.0,
+    "mean": 46.156,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -7.5,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": null,
+    "moves_with_offsets": [
+     5,
+     11,
+     12,
+     17,
+     20,
+     25,
+     31,
+     33,
+     36,
+     45,
+     50,
+     57
+    ]
+   },
+   {
+    "offset": 52,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.565,
+    "rough": 0.58,
+    "min": 48.0,
+    "max": 59.0,
+    "p5": 48.0,
+    "p95": 58.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": 0.565,
+    "sun_mean": 52.62068965517241,
+    "shadow_mean": 49.532786885245905,
+    "p": 8.68451653393457e-06,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 50.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 50.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 50.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 52.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 58.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 51.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.273,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.464,
+    "sun_minus_shadow_in_std": 0.39,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.563,
+     "10": 0.567,
+     "20": 0.564,
+     "40": 0.554,
+     "80": 0.526
+    },
+    "rank_corr_abs_beta": 0.144,
+    "relative_spread_p5_p95": 0.2,
+    "shadow_over_sun_median_ratio": 0.98,
+    "distinct_values": 10,
+    "median_step_within_pass": 1.0,
+    "mean": 50.528,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -10.286,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 53,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.838,
+    "rough": 0.337,
+    "min": 44.0,
+    "max": 55.0,
+    "p5": 44.0,
+    "p95": 55.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.838,
+    "sun_mean": 44.37931034482759,
+    "shadow_mean": 52.532786885245905,
+    "p": 2.5413879723471247e-15,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 53.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 53.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 53.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 44.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 44.0,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 44.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.33,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.088,
+    "sun_minus_shadow_in_std": -2.19,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.657,
+     "10": -0.657,
+     "20": -0.657,
+     "40": -0.643,
+     "80": -0.621
+    },
+    "rank_corr_abs_beta": -0.136,
+    "relative_spread_p5_p95": 0.208,
+    "shadow_over_sun_median_ratio": 1.205,
+    "distinct_values": 7,
+    "median_step_within_pass": 0.0,
+    "mean": 49.906,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": 12.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 57,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.769,
+    "rough": 0.57,
+    "min": 48.0,
+    "max": 57.0,
+    "p5": 48.0,
+    "p95": 56.0,
+    "n_frames": 180,
+    "n_passes": 54,
+    "rho_sun": -0.769,
+    "sun_mean": 49.672413793103445,
+    "shadow_mean": 54.82786885245902,
+    "p": 1.105964756705495e-11,
+    "response_profile": {
+     "shadow 6-10 min after sunset": {
+      "median": 56.0,
+      "n": 23
+     },
+     "shadow 10-13 min after sunset": {
+      "median": 56.0,
+      "n": 48
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 55.0,
+      "n": 51
+     },
+     "sun 26-49 min after sunrise": {
+      "median": 49.0,
+      "n": 17
+     },
+     "sun 49-50 min after sunrise": {
+      "median": 49.5,
+      "n": 6
+     },
+     "sun 50-53 min after sunrise": {
+      "median": 49.0,
+      "n": 35
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.219,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.5,
+    "sun_minus_shadow_in_std": -2.27,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.486,
+     "10": -0.486,
+     "20": -0.486,
+     "40": -0.469,
+     "80": -0.446
+    },
+    "rank_corr_abs_beta": -0.047,
+    "relative_spread_p5_p95": 0.143,
+    "shadow_over_sun_median_ratio": 1.143,
+    "distinct_values": 8,
+    "median_step_within_pass": 1.0,
+    "mean": 53.167,
+    "drift_per_30_days_of_daily_low": 5.5,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 14.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
+    "moves_with_offsets": [
+     5,
+     12,
+     17,
+     20,
+     31,
+     45,
+     51
+    ]
+   }
+  ],
+  "names": {
+   "summary": "A 59-byte beacon whose candidate fields are all single bytes confined to roughly 33-63 (mostly 44-57), with sun/shadow steps of a few counts. This looks like a block of low-resolution housekeeping bytes, probably ADC readings or temperatures. The shared value range and shared step values (44, 46, 48, 53, 57, 63) suggest quantised sensor channels rather than distinct physical scales.",
+   "fields": [
+    {
+     "offset": 1,
+     "name": "sensor_a",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.1,
+     "rationale": "Lower in sun (46) than in shadow (53), rho -0.81, smooth. The byte range is too narrow to assign a unit, and the bus hint is weak. [2/3 samples agree]"
+    },
+    {
+     "offset": 4,
+     "name": "sensor_b",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Higher in shadow (53 vs 44), rho -0.78. It has the same quantised levels as its neighbours, so no unit is supported. [2/3 samples agree]"
+    },
+    {
+     "offset": 5,
+     "name": "sensor_c",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Shadow 55-59 vs sun 34, with a large swing. It moves with offsets 17, 31, 51 and 57, so it is part of a correlated group. [2/3 samples agree]"
+    },
+    {
+     "offset": 9,
+     "name": "sensor_d",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Smooth, higher in shadow (53 vs 46), rho -0.84. No physical unit can be identified. [2/3 samples agree]"
+    },
+    {
+     "offset": 10,
+     "name": "sensor_e",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.1,
+     "rationale": "Higher in sun (63 vs 53-58) and rising with sunlight history. This is battery-like in direction but too coarse to call a voltage. [2/3 samples agree]"
+    },
+    {
+     "offset": 11,
+     "name": "sensor_f",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Weak sun correlation (rho -0.62), higher in shadow, steps down late in shadow. [2/3 samples agree]"
+    },
+    {
+     "offset": 12,
+     "name": "sensor_g",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Higher in shadow (51 vs 44), rho -0.80. Moves with 17, 31, 36, 51 and 57. [2/3 samples agree]"
+    },
+    {
+     "offset": 13,
+     "name": "sensor_h",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.117,
+     "rationale": "Rises through sun (trend +0.68), falls in shadow (-0.33), tau about 80 min. It integrates sunlight like a thermal or charge state, but the range is too coarse to say which. [2/3 samples agree]"
+    },
+    {
+     "offset": 14,
+     "name": "sensor_i",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.107,
+     "rationale": "Rises in sun (+0.71) and falls in shadow (-0.40), tau about 40 min. This is a thermal-inertia pattern but the unit is unknown. [2/3 samples agree]"
+    },
+    {
+     "offset": 16,
+     "name": "sensor_j",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.1,
+     "rationale": "Narrow range (spread 0.11), higher in shadow, rho -0.58. Little to support a classification. [3/3 samples agree]"
+    },
+    {
+     "offset": 17,
+     "name": "sensor_k",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Higher in sun (52 vs 44), rho +0.86. It moves with many other fields, indicating a common mode. [2/3 samples agree]"
+    },
+    {
+     "offset": 18,
+     "name": "sensor_l",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Smooth, higher in shadow (51 vs 44), rho -0.87. [2/3 samples agree]"
+    },
+    {
+     "offset": 20,
+     "name": "sensor_m",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Higher in shadow with a spike at 6-10 min after sunset. It follows the same pattern as the group at 17, 31, 51 and 57. [2/3 samples agree]"
+    },
+    {
+     "offset": 25,
+     "name": "sensor_n",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Higher in sun (55 vs 49), moderate correlation, rough. [2/3 samples agree]"
+    },
+    {
+     "offset": 26,
+     "name": "sensor_o",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Weak correlation (rho -0.6), slightly higher in shadow. [2/3 samples agree]"
+    },
+    {
+     "offset": 30,
+     "name": "sensor_p",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Smooth, higher in shadow (53 vs 45), rho -0.82. [2/3 samples agree]"
+    },
+    {
+     "offset": 31,
+     "name": "sensor_q",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.083,
+     "rationale": "Only 4 distinct values (44-48), higher in sun, rho +0.81. Looks like a coarse, quantised sensor. [2/3 samples agree]"
+    },
+    {
+     "offset": 32,
+     "name": "sensor_r",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Strong negative sun correlation (-0.89), higher in shadow. Moves with 38 and 42. [2/3 samples agree]"
+    },
+    {
+     "offset": 33,
+     "name": "sensor_s",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Higher in shadow (54 vs 48), rho -0.85. [2/3 samples agree]"
+    },
+    {
+     "offset": 34,
+     "name": "sensor_t",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Higher in sun, shadow trend strongly negative, correlation 0.81 at short lag. Moves with 38 and 42. [2/3 samples agree]"
+    },
+    {
+     "offset": 35,
+     "name": "sensor_u",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Higher in shadow (52.6 vs 45), rough. [2/3 samples agree]"
+    },
+    {
+     "offset": 36,
+     "name": "sensor_v",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Higher in shadow (51.5 vs 44.9), rough, rho -0.81. [2/3 samples agree]"
+    },
+    {
+     "offset": 38,
+     "name": "sensor_w",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Only 4 values, higher in shadow, rho -0.89, groups with 32, 34 and 42. [2/3 samples agree]"
+    },
+    {
+     "offset": 39,
+     "name": "sensor_x",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.093,
+     "rationale": "Weak, rough, slightly higher in sun. [3/3 samples agree]"
+    },
+    {
+     "offset": 42,
+     "name": "sensor_y",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.09,
+     "rationale": "Only 4 values, rho -0.89, groups with 32, 34 and 38. [2/3 samples agree]"
+    },
+    {
+     "offset": 45,
+     "name": "sensor_z",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.093,
+     "rationale": "Orbit-phase field, weak (r2 0.36), higher in sun, only 6 values. [3/3 samples agree]"
+    },
+    {
+     "offset": 46,
+     "name": "sensor_aa",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Higher in sun (60 vs 50), rough, wide spread. [2/3 samples agree]"
+    },
+    {
+     "offset": 47,
+     "name": "sensor_ab",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Higher in shadow (52.8 vs 44.9), rough. [2/3 samples agree]"
+    },
+    {
+     "offset": 50,
+     "name": "sensor_ac",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Higher in shadow, peaks just after sunset and then decays (57 to 51). [2/3 samples agree]"
+    },
+    {
+     "offset": 51,
+     "name": "sensor_ad",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.083,
+     "rationale": "Higher in sun (50 vs 44), rho +0.85, correlated with many fields. [2/3 samples agree]"
+    },
+    {
+     "offset": 52,
+     "name": "sensor_ae",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.093,
+     "rationale": "Weak, flat between sun and shadow. [3/3 samples agree]"
+    },
+    {
+     "offset": 53,
+     "name": "sensor_af",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.083,
+     "rationale": "Higher in shadow (53 vs 44), rho -0.84. [2/3 samples agree]"
+    },
+    {
+     "offset": 57,
+     "name": "sensor_ag",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.067,
+     "rationale": "Higher in shadow (55 vs 49.7), falls through shadow. [2/3 samples agree]"
+    }
+   ],
+   "health": "Not enough evidence. No counters or clocks are identified, so reboots cannot be assessed. The fields cannot be assigned units, so battery and thermal trends cannot be judged."
+  },
+  "evaluation": {
+   "true_fields": 1,
+   "physical_true_fields": 1,
+   "recall_physical": 1.0,
+   "exact_physical": 1.0,
+   "value_exact_physical": 1.0,
+   "located_exact_fraction": 0.0,
+   "kind_accuracy": 1.0,
+   "precision": 0.030303030303030304,
+   "llm_category_accuracy": 0.0,
+   "llm_judged": 1,
+   "llm_answered": 0.0,
+   "llm_selective_accuracy": NaN,
+   "llm_fine_accuracy": NaN,
+   "llm_fine_judged": 0,
+   "truth": [
+    {
+     "name": "eps_bat_charge",
+     "offset": 30,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "power",
+     "located": "affine",
+     "fine": "power_battery",
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 30,
+     "kind": "sun",
+     "kind_ok": true
+    }
+   ]
+  }
+ }
+]

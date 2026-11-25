@@ -75,6 +75,14 @@
     "mean": 16930639.722,
     "resets_in_window": 11,
     "last_reset_days_before_end": 3.7,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": true,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      27
     ]
@@ -142,6 +150,14 @@
     "mean": 2277474364.919,
     "resets_in_window": 1,
     "last_reset_days_before_end": 3.6,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": []
    },
    {
@@ -205,6 +221,14 @@
     "mean": 173986.272,
     "resets_in_window": 11,
     "last_reset_days_before_end": 3.7,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": true,
+    "power_class_hint": null,
     "moves_with_offsets": [
      2
     ]
@@ -268,6 +292,14 @@
     "drift_per_30_days_of_daily_low": 3.162,
     "drift_per_30_days_of_daily_high": 2.4,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      35
     ]
@@ -333,6 +365,14 @@
     "drift_per_30_days_of_daily_low": -11.107,
     "drift_per_30_days_of_daily_high": -10.342,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": true,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      39
     ]
@@ -398,6 +438,14 @@
     "drift_per_30_days_of_daily_low": 2.59,
     "drift_per_30_days_of_daily_high": 3.0,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": true,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_bus",
     "moves_with_offsets": [
      33
     ]
@@ -463,6 +511,14 @@
     "drift_per_30_days_of_daily_low": -17.82,
     "drift_per_30_days_of_daily_high": -6.257,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": true,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      43
     ]
@@ -529,6 +585,14 @@
     "drift_per_30_days_of_daily_low": 0.555,
     "drift_per_30_days_of_daily_high": 12.682,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": true,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      39
     ]
@@ -595,6 +659,14 @@
     "drift_per_30_days_of_daily_low": -67.408,
     "drift_per_30_days_of_daily_high": -95.086,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": true,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      34,
      37
@@ -662,6 +734,14 @@
     "drift_per_30_days_of_daily_low": -6.182,
     "drift_per_30_days_of_daily_high": 23.267,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": true,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      43
     ]
@@ -728,6 +808,14 @@
     "drift_per_30_days_of_daily_low": -80.0,
     "drift_per_30_days_of_daily_high": -55.497,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": false,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": true,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      36,
      41
@@ -795,6 +883,14 @@
     "drift_per_30_days_of_daily_low": 150.357,
     "drift_per_30_days_of_daily_high": 21.0,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": []
    },
    {
@@ -858,6 +954,14 @@
     "drift_per_30_days_of_daily_low": 0.671,
     "drift_per_30_days_of_daily_high": 3.226,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      50,
      52
@@ -924,6 +1028,14 @@
     "drift_per_30_days_of_daily_low": 0.75,
     "drift_per_30_days_of_daily_high": 3.176,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      49,
      52
@@ -990,6 +1102,14 @@
     "drift_per_30_days_of_daily_low": 0.462,
     "drift_per_30_days_of_daily_high": 3.333,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      49,
      50,
@@ -1057,13 +1177,21 @@
     "drift_per_30_days_of_daily_low": -1.333,
     "drift_per_30_days_of_daily_high": 2.143,
     "window_days": 44.8,
+    "sign_flips_between_sun_and_shadow": false,
+    "near_zero_in_shadow": false,
+    "integrates_sunlight": true,
+    "regulated_narrow_band": false,
+    "higher_in_shadow": false,
+    "charged_by_sunlight": false,
+    "flat_between_sun_and_shadow": false,
+    "power_class_hint": "power_battery",
     "moves_with_offsets": [
      52
     ]
    }
   ],
   "names": {
-   "summary": "58-byte housekeeping/telemetry beacon with a boot counter-like u4 sequence, a millisecond uptime clock, a sub-counter, and groups of voltages, currents and four panel temperatures. Fields at 34/36/39/43 look like solar or battery voltages and currents; 49-53 look like four outer-panel temperatures.",
+   "summary": "58-byte housekeeping beacon with a 4-byte uptime-like counter, a millisecond clock, a 3-byte counter, a few small bytes, then power/thermal blocks. Contains what looks like two battery or solar-channel voltage/current pairs, a 3-voltage/current-like group, and four panel temperatures at offsets 49-53.",
    "fields": [
     {
      "offset": 2,
@@ -1071,8 +1199,8 @@
      "category": "counter",
      "unit": "count",
      "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "Monotonic u4 increasing about 0.001/s with 11 resets, moving with offset 27. It looks like a tick counter that resets on reboot. [3/3 samples agree]"
+     "confidence": 0.533,
+     "rationale": "u4 counter that only increases at about 0.001/s with 11 resets; it is probably a ms-derived or packet counter that is not sun-related. [3/3 samples agree]"
     },
     {
      "offset": 15,
@@ -1080,8 +1208,8 @@
      "category": "clock",
      "unit": "ms",
      "scale": "raw * 0.001 s",
-     "confidence": 0.583,
-     "rationale": "Tracks wall-clock at 1000 counts/s with one reset 3.6 days before the end. The reset roughly coincides with the counter resets at 2 and 27, so a reboot is likely. [3/3 samples agree]"
+     "confidence": 0.533,
+     "rationale": "Tracks time at about 1000 units/s, so it is a millisecond uptime. It has one reset 3.6 days before the end, consistent with a reboot. [3/3 samples agree]"
     },
     {
      "offset": 27,
@@ -1090,88 +1218,88 @@
      "unit": "count",
      "scale": "raw",
      "confidence": 0.4,
-     "rationale": "u3 counter with 11 resets at the same time as offset 2, joined by carry, so it is probably part of the same counter pair. [3/3 samples agree]"
+     "rationale": "u3 counter increasing at about 0.007 per s, resetting together with offset 2 (11 resets). Probably a tick or packet counter tied to uptime. [3/3 samples agree]"
     },
     {
      "offset": 33,
-     "name": "unknown_small_value_a",
-     "category": "unknown",
-     "unit": "count",
+     "name": "temp_a",
+     "category": "thermal",
+     "unit": "degC",
      "scale": "raw",
-     "confidence": 0.133,
-     "rationale": "Small u1 with 8-18 range, partly orbit-dependent (r2 0.38) and anti-correlated with sunlight. It moves with offset 35, so it is probably a low-level current or sensor reading. [2/3 samples agree]"
+     "confidence": 0.35,
+     "rationale": "Small range 8-18, higher in shadow than in sun, trends upward in sun and moves with offset 35. Looks like an internal board temperature, though that is only a guess. [3/3 samples agree]"
     },
     {
      "offset": 34,
-     "name": "solar_panel_current_1",
-     "category": "power_solar",
-     "unit": "mA",
+     "name": "battery_a_state_of_charge",
+     "category": "power_battery",
+     "unit": "%",
      "scale": "raw",
-     "confidence": 0.233,
-     "rationale": "u1 that is high in sun and lower in shadow (rho 0.85), moving with the 3.7-4.2 k channel at offset 39. It may be a panel or bus current in an unknown unit. [2/3 samples agree]"
+     "confidence": 0.4,
+     "rationale": "Byte in 30..96 that is higher in sun (78 vs 59) and moves with the 4000 mV voltage at offset 39, consistent with a state of charge in percent. The sun-correlated lag matches battery charging. [3/3 samples agree]"
     },
     {
      "offset": 35,
-     "name": "unknown_small_value_b",
-     "category": "unknown",
-     "unit": "count",
+     "name": "temp_b",
+     "category": "thermal",
+     "unit": "degC",
      "scale": "raw",
-     "confidence": 0.133,
-     "rationale": "Small u1 with 8-31 range, slightly higher in shadow, correlated with offset 33. This suggests a quiescent load or offset. [2/3 samples agree]"
+     "confidence": 0.35,
+     "rationale": "Small range 8-31, slightly warmer in shadow, and moves with offset 33. Likely a second internal temperature. [3/3 samples agree]"
     },
     {
      "offset": 36,
-     "name": "solar_panel_current_2",
+     "name": "battery_b_state_of_charge",
+     "category": "power_battery",
+     "unit": "%",
+     "scale": "raw",
+     "confidence": 0.4,
+     "rationale": "Byte in 28..93 that is higher in sun (82 vs 56) and moves with the voltage at offset 43; it is a second state-of-charge value paired with a second battery. [3/3 samples agree]"
+    },
+    {
+     "offset": 37,
+     "name": "battery_a_current",
+     "category": "power_battery",
+     "unit": "mA",
+     "scale": "raw",
+     "confidence": 0.517,
+     "rationale": "Signed s2 that flips from about +81 in sun to -103 in shadow, so it is charging in sun and discharging in shadow. It moves with the voltage at offset 39. [3/3 samples agree]"
+    },
+    {
+     "offset": 39,
+     "name": "battery_a_voltage",
+     "category": "power_battery",
+     "unit": "mV",
+     "scale": "raw",
+     "confidence": 0.617,
+     "rationale": "u2 in 3708-4216 is in the single Li-ion cell range, with a narrow spread (0.098) and higher in sun than shadow. [3/3 samples agree]"
+    },
+    {
+     "offset": 41,
+     "name": "battery_b_current",
+     "category": "power_battery",
+     "unit": "mA",
+     "scale": "raw",
+     "confidence": 0.517,
+     "rationale": "Signed s2 that is positive in sun (+100) and negative in shadow (-149), a battery current. It pairs with the voltage at offset 43. [3/3 samples agree]"
+    },
+    {
+     "offset": 43,
+     "name": "battery_b_voltage",
+     "category": "power_battery",
+     "unit": "mV",
+     "scale": "raw",
+     "confidence": 0.617,
+     "rationale": "u2 in 3740-4196 is a Li-ion cell voltage with a narrow range, higher in sun, moving with offsets 36 and 41. [3/3 samples agree]"
+    },
+    {
+     "offset": 45,
+     "name": "solar_or_bus_current",
      "category": "power_solar",
      "unit": "mA",
      "scale": "raw",
      "confidence": 0.333,
-     "rationale": "u1 that is high in sun and lower in shadow (rho 0.83), moving with offset 43. It is probably a second panel or bus current. [3/3 samples agree]"
-    },
-    {
-     "offset": 37,
-     "name": "battery_current_a",
-     "category": "power_battery",
-     "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.45,
-     "rationale": "Signed s2, positive in sun (mean +81) and negative in shadow (-103), which fits a charge/discharge current. It moves with the voltage at 39. [3/3 samples agree]"
-    },
-    {
-     "offset": 39,
-     "name": "battery_voltage_a",
-     "category": "power_battery",
-     "unit": "mV",
-     "scale": "raw",
-     "confidence": 0.55,
-     "rationale": "Range 3708-4216 with a spread of about 10%, which fits a single Li-ion cell in mV. It is higher in sun and moves with the current at 37. [3/3 samples agree]"
-    },
-    {
-     "offset": 41,
-     "name": "battery_current_b",
-     "category": "power_battery",
-     "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.45,
-     "rationale": "Signed s2, charging in sun and discharging in shadow, and it moves with the voltage at 43. [3/3 samples agree]"
-    },
-    {
-     "offset": 43,
-     "name": "battery_voltage_b",
-     "category": "power_battery",
-     "unit": "mV",
-     "scale": "raw",
-     "confidence": 0.55,
-     "rationale": "Range 3740-4196 with a low spread, so a Li-ion cell in mV, higher in sun. It pairs with the current at 41. [3/3 samples agree]"
-    },
-    {
-     "offset": 45,
-     "name": "solar_array_current",
-     "category": "power_solar",
-     "unit": "mA",
-     "scale": "raw",
-     "confidence": 0.233,
-     "rationale": "Range 467-1528, higher in sun (1300 vs 987), rough, and with a trend in sun. Probably a solar input or bus current. [2/3 samples agree]"
+     "rationale": "u2 in 467-1528 is higher in sun (1301 vs 987) and rises after sunrise, but it is not near zero in shadow. It may be solar input or charge current, though the hint is battery. [3/3 samples agree]"
     },
     {
      "offset": 49,
@@ -1179,8 +1307,8 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.633,
-     "rationale": "Signed byte in the -23..30 range with a lagged sun response (tau 10 min), rising in sun and falling in shadow. It moves with the other panel temperatures. [3/3 samples agree]"
+     "confidence": 0.667,
+     "rationale": "Signed byte -23..30 rises in sun and falls in shadow, lag about 10 min. Moves with offsets 50 and 52, so it belongs to a panel temperature group. [3/3 samples agree]"
     },
     {
      "offset": 50,
@@ -1188,8 +1316,8 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.633,
-     "rationale": "Same behaviour as offset 49: signed degC, tau about 10 min, trending up in sun and down in shadow. [3/3 samples agree]"
+     "confidence": 0.667,
+     "rationale": "Same signed range and response as offset 49, with a 10 min lag. Part of the panel temperature group. [3/3 samples agree]"
     },
     {
      "offset": 52,
@@ -1197,8 +1325,8 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.633,
-     "rationale": "Lagged correlation 0.947 with tau 10 min and strong in-regime trends, grouped with 49, 50 and 53. [3/3 samples agree]"
+     "confidence": 0.667,
+     "rationale": "Signed byte -18..28 follows sun with the strongest lag correlation (0.947), moves with 49, 50 and 53. [3/3 samples agree]"
     },
     {
      "offset": 53,
@@ -1206,11 +1334,11 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.633,
-     "rationale": "Signed degC swinging about 25 degrees between sun and shadow, with positive trend in sun and negative in shadow, moving with 52. [3/3 samples agree]"
+     "confidence": 0.667,
+     "rationale": "Signed byte -20..30, sun-high, falling steadily in shadow (trend -0.87), moves with 52. Panel temperature group. [3/3 samples agree]"
     }
    ],
-   "health": "One reboot-like reset was seen about 3.6-3.7 days before the end, and the counters have 11 resets in total, which may include wraps by design. Battery voltages show a downward drift of about 55-95 mV per 30 days in the daily lows and highs, which may suggest ageing, but with only 45 days of data this could be seasonal, so confidence is low. Panel temperatures swing normally with the eclipse."
+   "health": "Counters at offsets 2 and 27 reset 11 times in 44.8 days, with the latest 3.7 days before the end, which suggests repeated reboots. The clock at offset 15 reset once, 3.6 days before the end, and is probably the same event. The battery voltage daily lows fall by about 70-80 mV per 30 days, which may point to ageing or a seasonal effect, so I am not sure. Panel temperatures swing about 50 degC between sun and shadow, which is normal."
   },
   "evaluation": {
    "true_fields": 18,
@@ -1221,11 +1349,11 @@
    "located_exact_fraction": 0.9444444444444444,
    "kind_accuracy": 0.8666666666666667,
    "precision": 1.0,
-   "llm_category_accuracy": 0.8666666666666667,
+   "llm_category_accuracy": 1.0,
    "llm_judged": 15,
-   "llm_answered": 0.8666666666666667,
+   "llm_answered": 1.0,
    "llm_selective_accuracy": 1.0,
-   "llm_fine_accuracy": 0.5714285714285714,
+   "llm_fine_accuracy": 0.8571428571428571,
    "llm_fine_judged": 7,
    "truth": [
     {

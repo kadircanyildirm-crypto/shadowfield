@@ -13,10 +13,10 @@ seq:
     doc: "clock, s, raw; evidence: clock (score 1.00)"
   - id: unknown_21
     size: 4
-  - id: solar_array_current
+  - id: solar_panel_current
     type: u2le
     doc: "power_solar, mA, raw; evidence: sun (score 0.93)"
-  - id: battery_cell1_voltage
+  - id: battery_cell_voltage
     type: u2le
     doc: "power_battery, mV, raw; evidence: sun (score 0.62)"
   - id: battery_pack_voltage
@@ -24,12 +24,12 @@ seq:
     doc: "power_battery, mV, raw; evidence: sun (score 0.61)"
   - id: unknown_31
     size: 2
-  - id: unknown_small_a
+  - id: internal_temp_a
     type: u1
-    doc: "unknown, counts, raw; evidence: orbit (score 0.40)"
-  - id: unknown_small_b
+    doc: "unknown, degC, raw; evidence: orbit (score 0.40)"
+  - id: internal_temp_b
     type: u1
-    doc: "unknown, counts, raw; evidence: orbit (score 0.38)"
+    doc: "unknown, degC, raw; evidence: orbit (score 0.38)"
   - id: unknown_35
     size: 8
   - id: panel_temp_1
@@ -52,12 +52,12 @@ seq:
   - id: unknown_59
     size: 6
   - id: sequence_counter
-    type: s1
+    type: u1
     doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_66
     size: 2
-  - id: unknown_small_c
+  - id: internal_temp_c
     type: s1
-    doc: "unknown, counts, raw; evidence: orbit (score 0.42)"
+    doc: "unknown, degC, raw; evidence: orbit (score 0.42)"
   - id: unknown_69
     size: 3
