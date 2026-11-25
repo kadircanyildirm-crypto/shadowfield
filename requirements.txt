@@ -1,0 +1,11 @@
+anthropic==2.14.0
+numpy==2.5.5
+pandas==3.1.1
+ppigrf==2.1.0
+pydantic==2.14.4
+requests==2.34.2
+satnogs-decoders==1.132.1
+scipy==1.18.1
+sgp4==2.27
+# only for tests/check_physics.py
+skyfield==1.55

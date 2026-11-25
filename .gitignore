@@ -1,0 +1,12 @@
+.env
+.venv/
+data/
+__pycache__/
+*.pyc
+sats.json
+inorbit.txt
+node_modules/
+tools/ksc/node_modules/
+results_nollm/
+.pytest_cache/
+prof.out

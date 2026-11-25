@@ -1,0 +1,517 @@
+[
+ {
+  "frame_type": "raw:len19",
+  "frames": 217,
+  "passes": 74,
+  "orbit": {
+   "mean_altitude_km": 659,
+   "max_abs_latitude_deg": 70.9,
+   "beta_angle_range_deg": [
+    60.2,
+    63.9
+   ],
+   "fraction_of_frames_in_sunlight": 1.0,
+   "fraction_of_frames_with_an_eclipse_in_the_previous_80_min": 1.0,
+   "days_covered": 18.5
+  },
+  "fields": [
+   {
+    "offset": 5,
+    "type": "u1",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.049,
+    "min": 1.0,
+    "max": 255.0,
+    "p5": 5.800000000000001,
+    "p95": 210.59999999999997,
+    "n_frames": 217,
+    "n_passes": 74,
+    "frac_up_in_pass": 1.0,
+    "per_second": 0.011111111111111112,
+    "rolling": true,
+    "wraps_in_pass": 1,
+    "p": 0.0,
+    "response_profile": {
+     "sun 12-37 min after sunrise": {
+      "median": 44.0,
+      "n": 62
+     },
+     "sun 37-56 min after sunrise": {
+      "median": 60.0,
+      "n": 79
+     },
+     "sun 56-81 min after sunrise": {
+      "median": 74.5,
+      "n": 76
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.114,
+    "trend_in_shadow_vs_minutes_since_sunset": null,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.123,
+     "10": 0.148,
+     "20": 0.165,
+     "40": 0.223,
+     "80": 0.293
+    },
+    "rank_corr_abs_beta": 0.286,
+    "relative_spread_p5_p95": 3.471,
+    "distinct_values": 131,
+    "median_step_within_pass": 1.0,
+    "mean": 76.235,
+    "resets_in_window": 6,
+    "last_reset_days_before_end": 0.1,
+    "moves_with_offsets": []
+   }
+  ],
+  "names": {
+   "summary": "A 19-byte beacon frame with one candidate field found, a single-byte rolling counter at offset 5. The rest of the frame is not characterised by the engine, so the frame type cannot be identified beyond this.",
+   "fields": [
+    {
+     "offset": 5,
+     "name": "frame_sequence_counter",
+     "category": "counter",
+     "unit": "counts",
+     "scale": "raw * 1",
+     "confidence": 0.7,
+     "rationale": "u1 that only increases with a median step of 1 within a pass and wraps at 255. The rate of 0.0111/s is about one count per 90 s, so it is likely a beacon or frame sequence number. It could instead be a slow uptime or tick counter, since it wraps often and shows 6 resets in the window. The weak sun correlations only reflect the monotonic rise over passes."
+    }
+   ],
+   "health": "Not enough evidence. The only field is a 1-byte counter that wraps by design at 255, so the 6 resets in the window (last 0.1 days before the end) are most likely wraps, not reboots. There are no battery or thermal fields to assess."
+  },
+  "evaluation": {
+   "true_fields": 4,
+   "physical_true_fields": 4,
+   "recall_physical": 0.25,
+   "exact_physical": 0.25,
+   "kind_accuracy": 1.0,
+   "precision": 1.0,
+   "llm_category_accuracy": 1.0,
+   "llm_judged": 1,
+   "truth": [
+    {
+     "name": "strx_header_seq",
+     "offset": 5,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "counter",
+     "found": true,
+     "how": "exact",
+     "kind": "counter",
+     "kind_ok": true
+    },
+    {
+     "name": "ipcmbatv",
+     "offset": 13,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "found": false,
+     "how": "",
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "vpcmbatv",
+     "offset": 15,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "found": false,
+     "how": "",
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "eps_temperature",
+     "offset": 17,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "thermal",
+     "found": false,
+     "how": "",
+     "kind": "",
+     "kind_ok": false
+    }
+   ]
+  }
+ },
+ {
+  "frame_type": "raw:len20",
+  "frames": 678,
+  "passes": 136,
+  "orbit": {
+   "mean_altitude_km": 659,
+   "max_abs_latitude_deg": 69.3,
+   "beta_angle_range_deg": [
+    75.9,
+    81.4
+   ],
+   "fraction_of_frames_in_sunlight": 1.0,
+   "fraction_of_frames_with_an_eclipse_in_the_previous_80_min": 0.0,
+   "days_covered": 21.1
+  },
+  "fields": [
+   {
+    "offset": 5,
+    "type": "u1",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.11,
+    "min": 1.0,
+    "max": 255.0,
+    "p5": 14.0,
+    "p95": 233.14999999999998,
+    "n_frames": 678,
+    "n_passes": 136,
+    "frac_up_in_pass": 1.0,
+    "per_second": 0.06142322097378277,
+    "rolling": true,
+    "wraps_in_pass": 1,
+    "p": 0.0,
+    "response_profile": {},
+    "trend_in_sun_vs_minutes_since_sunrise": NaN,
+    "trend_in_shadow_vs_minutes_since_sunset": null,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.01,
+     "10": -0.047,
+     "20": 0.06,
+     "40": 0.045,
+     "80": NaN
+    },
+    "rank_corr_abs_beta": -0.073,
+    "relative_spread_p5_p95": 1.842,
+    "distinct_values": 230,
+    "median_step_within_pass": 3.0,
+    "mean": 121.655,
+    "resets_in_window": 33,
+    "last_reset_days_before_end": 0.5,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 18,
+    "type": "u2le",
+    "kind": "counter",
+    "score": 0.996,
+    "rough": 0.001,
+    "min": 272.0,
+    "max": 16928.0,
+    "p5": 1231.55,
+    "p95": 16187.45,
+    "n_frames": 678,
+    "n_passes": 136,
+    "frac_up": 0.9964,
+    "per_second": -0.0006881972975607806,
+    "resets": 10,
+    "p": 0.0,
+    "joined": "carry",
+    "response_profile": {},
+    "trend_in_sun_vs_minutes_since_sunrise": NaN,
+    "trend_in_shadow_vs_minutes_since_sunset": null,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.03,
+     "10": -0.027,
+     "20": -0.006,
+     "40": 0.027,
+     "80": NaN
+    },
+    "rank_corr_abs_beta": 0.122,
+    "relative_spread_p5_p95": 2.001,
+    "distinct_values": 654,
+    "median_step_within_pass": 3.0,
+    "mean": 7809.022,
+    "resets_in_window": 10,
+    "last_reset_days_before_end": 0.5,
+    "moves_with_offsets": []
+   }
+  ],
+  "names": {
+   "summary": "A 20-byte beacon frame where only two candidate fields were found, and both are monotonic counters. Offset 5 looks like a one-byte rolling sequence or frame counter that wraps at 255. Offset 18 looks like a 16-bit little-endian counter, probably uptime or a packet count, that has reset several times.",
+   "fields": [
+    {
+     "offset": 5,
+     "name": "frame_sequence_counter",
+     "category": "counter",
+     "unit": "counts",
+     "scale": "raw",
+     "confidence": 0.6,
+     "rationale": "u1 that only rises in pass (frac_up_in_pass 1.0) at about 0.061/s, with a median step of 3 between frames and a wrap at 255. The 33 'resets' are mostly the by-design wraps of a 1-byte counter, so they are not reboot evidence."
+    },
+    {
+     "offset": 18,
+     "name": "uptime_or_packet_counter",
+     "category": "counter",
+     "unit": "counts",
+     "scale": "raw",
+     "confidence": 0.45,
+     "rationale": "u2le that rises in 99.6% of steps, with a median step of 3 and 10 resets in 21 days, the last 0.5 days before the end. Its overall per_second rate is slightly negative because of the resets. The 16-bit range of 272-16928 suggests either a counter reset by reboots or a slow wrap. Its meaning (uptime, packets or boot-related) is uncertain."
+    }
+   ],
+   "health": "Not enough evidence for battery or thermal health, since no such fields were identified and every frame is in sunlight. The 1-byte counter wraps by design, so its 33 resets say nothing about reboots. The 16-bit counter reset 10 times in 21 days, with the last reset about 0.5 days before the end of the window. That could indicate occasional reboots, but it could also be a wrap or a deliberate reset, so this is weak evidence."
+  },
+  "evaluation": {
+   "true_fields": 1,
+   "physical_true_fields": 1,
+   "recall_physical": 1.0,
+   "exact_physical": 1.0,
+   "kind_accuracy": 1.0,
+   "precision": 0.5,
+   "llm_category_accuracy": 1.0,
+   "llm_judged": 1,
+   "truth": [
+    {
+     "name": "strx_header_seq",
+     "offset": 5,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "counter",
+     "found": true,
+     "how": "exact",
+     "kind": "counter",
+     "kind_ok": true
+    }
+   ]
+  }
+ },
+ {
+  "frame_type": "raw:len32",
+  "frames": 623,
+  "passes": 126,
+  "orbit": {
+   "mean_altitude_km": 659,
+   "max_abs_latitude_deg": 69.4,
+   "beta_angle_range_deg": [
+    75.9,
+    81.4
+   ],
+   "fraction_of_frames_in_sunlight": 1.0,
+   "fraction_of_frames_with_an_eclipse_in_the_previous_80_min": 0.0,
+   "days_covered": 21.1
+  },
+  "fields": [
+   {
+    "offset": 5,
+    "type": "u1",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.094,
+    "min": 1.0,
+    "max": 255.0,
+    "p5": 13.0,
+    "p95": 229.0,
+    "n_frames": 623,
+    "n_passes": 126,
+    "frac_up_in_pass": 1.0,
+    "per_second": 0.05001248751248751,
+    "rolling": true,
+    "wraps_in_pass": 2,
+    "p": 0.0,
+    "response_profile": {},
+    "trend_in_sun_vs_minutes_since_sunrise": NaN,
+    "trend_in_shadow_vs_minutes_since_sunset": null,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.016,
+     "10": -0.026,
+     "20": 0.086,
+     "40": 0.023,
+     "80": NaN
+    },
+    "rank_corr_abs_beta": -0.043,
+    "relative_spread_p5_p95": 1.862,
+    "distinct_values": 219,
+    "median_step_within_pass": 3.0,
+    "mean": 119.04,
+    "resets_in_window": 29,
+    "last_reset_days_before_end": 0.5,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 14,
+    "type": "u3le",
+    "kind": "counter",
+    "score": 0.996,
+    "rough": 0.001,
+    "min": 6420.0,
+    "max": 172922.0,
+    "p5": 15241.0,
+    "p95": 165631.0,
+    "n_frames": 623,
+    "n_passes": 126,
+    "frac_up": 0.996,
+    "per_second": -0.00507223234581353,
+    "resets": 10,
+    "p": 0.0,
+    "joined": "carry",
+    "response_profile": {},
+    "trend_in_sun_vs_minutes_since_sunrise": NaN,
+    "trend_in_shadow_vs_minutes_since_sunset": null,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.055,
+     "10": -0.03,
+     "20": -0.051,
+     "40": 0.032,
+     "80": NaN
+    },
+    "rank_corr_abs_beta": 0.096,
+    "relative_spread_p5_p95": 1.945,
+    "distinct_values": 459,
+    "median_step_within_pass": 1.0,
+    "mean": 80383.632,
+    "resets_in_window": 10,
+    "last_reset_days_before_end": 0.5,
+    "moves_with_offsets": [
+     24
+    ]
+   },
+   {
+    "offset": 24,
+    "type": "u3le",
+    "kind": "counter",
+    "score": 0.996,
+    "rough": 0.001,
+    "min": 7719828.0,
+    "max": 7886330.0,
+    "p5": 7728649.0,
+    "p95": 7879039.0,
+    "n_frames": 623,
+    "n_passes": 126,
+    "frac_up": 0.996,
+    "per_second": -0.00507223234581353,
+    "resets": 10,
+    "p": 0.0,
+    "joined": "carry",
+    "response_profile": {},
+    "trend_in_sun_vs_minutes_since_sunrise": NaN,
+    "trend_in_shadow_vs_minutes_since_sunset": null,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.055,
+     "10": -0.03,
+     "20": -0.051,
+     "40": 0.032,
+     "80": NaN
+    },
+    "rank_corr_abs_beta": 0.096,
+    "relative_spread_p5_p95": 0.019,
+    "distinct_values": 459,
+    "median_step_within_pass": 1.0,
+    "mean": 7793791.632,
+    "resets_in_window": 10,
+    "last_reset_days_before_end": 0.5,
+    "moves_with_offsets": [
+     14
+    ]
+   }
+  ],
+  "names": {
+   "summary": "A 32-byte beacon frame where the only detected fields are three monotonic counters. No sun-correlated, thermal, power or magnetometer fields were located. The orbit is in full sunlight (beta 76-81 deg), so no eclipse response can be measured.",
+   "fields": [
+    {
+     "offset": 5,
+     "name": "frame_sequence_counter",
+     "category": "counter",
+     "unit": "counts",
+     "scale": "raw",
+     "confidence": 0.6,
+     "rationale": "A u1 that only rises at about 0.05 per second (one count per roughly 20 s) and wraps 1-255 (29 wraps in 21 days). It is a rolling sequence number, so wraps are by design and not reboots."
+    },
+    {
+     "offset": 14,
+     "name": "uptime_or_packet_counter_low",
+     "category": "counter",
+     "unit": "counts",
+     "scale": "raw",
+     "confidence": 0.35,
+     "rationale": "A u3le counter that increments by 1 per step within a pass and has 10 resets. It moves exactly with offset 24, and the fitted rate is negative because of the resets. It could be a boot-session counter or a time-since-boot value."
+    },
+    {
+     "offset": 24,
+     "name": "uptime_or_packet_counter_high_offset",
+     "category": "counter",
+     "unit": "counts",
+     "scale": "raw",
+     "confidence": 0.3,
+     "rationale": "It has the same resets, step and rate as offset 14, with a constant offset of about 7.71 million. It is probably a second counter that is a copy or derivative of offset 14, such as a different base or a sum."
+    }
+   ],
+   "health": "The two u3le counters share 10 resets, the last about 0.5 days before the end of the window, which suggests possible reboots roughly every two days, though they could be designed counter rollovers. Only counters were found, so battery and thermal health cannot be judged. Not enough evidence beyond the possible reboot pattern."
+  },
+  "evaluation": {
+   "true_fields": 5,
+   "physical_true_fields": 5,
+   "recall_physical": 0.6,
+   "exact_physical": 0.4,
+   "kind_accuracy": 1.0,
+   "precision": 1.0,
+   "llm_category_accuracy": 1.0,
+   "llm_judged": 3,
+   "truth": [
+    {
+     "name": "strx_header_seq",
+     "offset": 5,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "counter",
+     "found": true,
+     "how": "exact",
+     "kind": "counter",
+     "kind_ok": true
+    },
+    {
+     "name": "uptime",
+     "offset": 14,
+     "width": 3,
+     "endian": "le",
+     "signed": false,
+     "category": "counter",
+     "found": true,
+     "how": "exact",
+     "kind": "counter",
+     "kind_ok": true
+    },
+    {
+     "name": "eps_voltage_battery",
+     "offset": 18,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "found": false,
+     "how": "",
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "eps_current_battery",
+     "offset": 20,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "found": false,
+     "how": "",
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "unix_time",
+     "offset": 24,
+     "width": 4,
+     "endian": "le",
+     "signed": false,
+     "category": "clock",
+     "found": true,
+     "how": "overlap",
+     "kind": "counter",
+     "kind_ok": true
+    }
+   ]
+  }
+ }
+]

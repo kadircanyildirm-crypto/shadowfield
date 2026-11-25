@@ -1,0 +1,1445 @@
+[
+ {
+  "frame_type": "DP0UWH:len58",
+  "frames": 1105,
+  "passes": 411,
+  "orbit": {
+   "mean_altitude_km": 404,
+   "max_abs_latitude_deg": 66.3,
+   "beta_angle_range_deg": [
+    22.8,
+    26.5
+   ],
+   "fraction_of_frames_in_sunlight": 0.517,
+   "fraction_of_frames_with_an_eclipse_in_the_previous_80_min": 1.0,
+   "days_covered": 44.8
+  },
+  "fields": [
+   {
+    "offset": 2,
+    "type": "u2le",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.001,
+    "min": 158.0,
+    "max": 44492.0,
+    "p5": 2420.8,
+    "p95": 41979.8,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "frac_up": 1.0,
+    "per_second": 0.001004779410668551,
+    "resets": 11,
+    "p": 0.0,
+    "joined": "carry",
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 24963.5,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 23231.5,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 22820.5,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 20896.5,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 19631.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 23205.5,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.068,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.018,
+    "sun_minus_shadow_in_std": -0.2,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.004,
+     "10": 0.004,
+     "20": 0.005,
+     "40": 0.008,
+     "80": 0.019
+    },
+    "rank_corr_abs_beta": 0.035,
+    "relative_spread_p5_p95": 1.733,
+    "shadow_over_sun_median_ratio": 1.121,
+    "distinct_values": 1092,
+    "median_step_within_pass": 9.0,
+    "mean": 22351.722,
+    "resets_in_window": 11,
+    "last_reset_days_before_end": 3.7,
+    "moves_with_offsets": [
+     27
+    ]
+   },
+   {
+    "offset": 15,
+    "type": "u4le",
+    "kind": "clock",
+    "score": 0.999,
+    "rough": 0.0,
+    "min": 3515401.0,
+    "max": 4291906238.0,
+    "p5": 186623397.8,
+    "p95": 4047640645.2,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "frac_up": 1.0,
+    "per_second": 999.9969224201868,
+    "resets": 1,
+    "clock_scale": 1000.0,
+    "epoch_offset_s": 1791002674.865,
+    "epoch_guess": "custom",
+    "p": 0.0,
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 1976751897.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 2491064804.5,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 2441607632.5,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 1994651844.5,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 2103357921.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 2876004015.5,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.2,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.1,
+    "sun_minus_shadow_in_std": 0.06,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.05,
+     "10": 0.051,
+     "20": 0.051,
+     "40": 0.046,
+     "80": 0.044
+    },
+    "rank_corr_abs_beta": 0.462,
+    "relative_spread_p5_p95": 1.637,
+    "shadow_over_sun_median_ratio": 0.973,
+    "distinct_values": 1105,
+    "median_step_within_pass": 59665.0,
+    "mean": 2277474364.919,
+    "resets_in_window": 1,
+    "last_reset_days_before_end": 3.6,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 27,
+    "type": "u3le",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.001,
+    "min": 1181.0,
+    "max": 342743.0,
+    "p5": 18913.6,
+    "p95": 325324.4,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "frac_up": 1.0,
+    "per_second": 0.00718454575823278,
+    "resets": 11,
+    "p": 0.0,
+    "joined": "carry",
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 192510.5,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 181100.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 176257.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 162794.5,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 151572.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 180534.5,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.066,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.024,
+    "sun_minus_shadow_in_std": -0.18,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.002,
+     "10": -0.002,
+     "20": -0.002,
+     "40": 0.001,
+     "80": 0.012
+    },
+    "rank_corr_abs_beta": 0.028,
+    "relative_spread_p5_p95": 1.742,
+    "shadow_over_sun_median_ratio": 1.113,
+    "distinct_values": 1104,
+    "median_step_within_pass": 62.0,
+    "mean": 173986.272,
+    "resets_in_window": 11,
+    "last_reset_days_before_end": 3.7,
+    "moves_with_offsets": [
+     2
+    ]
+   },
+   {
+    "offset": 33,
+    "type": "u1",
+    "kind": "orbit",
+    "score": 0.558,
+    "rough": 0.041,
+    "min": 8.0,
+    "max": 18.0,
+    "p5": 11.0,
+    "p95": 18.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "r2_orbit": 0.384,
+    "p": 5.94959440540994e-35,
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 16.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 16.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 16.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 13.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 14.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 16.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.538,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.114,
+    "sun_minus_shadow_in_std": -0.99,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.206,
+     "10": -0.205,
+     "20": -0.205,
+     "40": -0.177,
+     "80": -0.135
+    },
+    "rank_corr_abs_beta": 0.689,
+    "relative_spread_p5_p95": 0.467,
+    "shadow_over_sun_median_ratio": 1.143,
+    "distinct_values": 11,
+    "median_step_within_pass": 0.0,
+    "mean": 14.786,
+    "drift_per_30_days_of_daily_low": 3.162,
+    "drift_per_30_days_of_daily_high": 2.4,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     35
+    ]
+   },
+   {
+    "offset": 34,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.85,
+    "rough": 0.2,
+    "min": 30.0,
+    "max": 96.0,
+    "p5": 45.0,
+    "p95": 90.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_sun": 0.85,
+    "sun_mean": 78.64098073555166,
+    "shadow_mean": 58.79026217228464,
+    "p": 7.668505891039402e-116,
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 63.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 61.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 56.5,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 81.5,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 81.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 73.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.371,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.245,
+    "sun_minus_shadow_in_std": 1.36,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.657,
+     "10": 0.657,
+     "20": 0.656,
+     "40": 0.62,
+     "80": 0.554
+    },
+    "rank_corr_abs_beta": -0.334,
+    "relative_spread_p5_p95": 0.652,
+    "shadow_over_sun_median_ratio": 0.769,
+    "distinct_values": 64,
+    "median_step_within_pass": 2.0,
+    "mean": 69.048,
+    "drift_per_30_days_of_daily_low": -11.107,
+    "drift_per_30_days_of_daily_high": -10.342,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     39
+    ]
+   },
+   {
+    "offset": 35,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.525,
+    "rough": 0.057,
+    "min": 8.0,
+    "max": 31.0,
+    "p5": 10.0,
+    "p95": 17.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_sun": -0.525,
+    "sun_mean": 13.450087565674256,
+    "shadow_mean": 14.764044943820224,
+    "p": 1.5306352330737365e-30,
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 14.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 15.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 15.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 13.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 13.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 15.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.488,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.16,
+    "sun_minus_shadow_in_std": -0.5,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.218,
+     "10": -0.217,
+     "20": -0.217,
+     "40": -0.195,
+     "80": -0.161
+    },
+    "rank_corr_abs_beta": 0.715,
+    "relative_spread_p5_p95": 0.5,
+    "shadow_over_sun_median_ratio": 1.071,
+    "distinct_values": 12,
+    "median_step_within_pass": 0.0,
+    "mean": 14.085,
+    "drift_per_30_days_of_daily_low": 2.59,
+    "drift_per_30_days_of_daily_high": 3.0,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     33
+    ]
+   },
+   {
+    "offset": 36,
+    "type": "u1",
+    "kind": "sun",
+    "score": 0.829,
+    "rough": 0.118,
+    "min": 28.0,
+    "max": 93.0,
+    "p5": 38.0,
+    "p95": 89.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_sun": 0.829,
+    "sun_mean": 81.63922942206655,
+    "shadow_mean": 55.735955056179776,
+    "p": 4.272839563247575e-105,
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 58.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 49.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 53.5,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 83.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 83.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 83.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.041,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.15,
+    "sun_minus_shadow_in_std": 1.75,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.695,
+     "10": 0.695,
+     "20": 0.694,
+     "40": 0.657,
+     "80": 0.598
+    },
+    "rank_corr_abs_beta": -0.308,
+    "relative_spread_p5_p95": 0.699,
+    "shadow_over_sun_median_ratio": 0.645,
+    "distinct_values": 63,
+    "median_step_within_pass": 1.0,
+    "mean": 69.121,
+    "drift_per_30_days_of_daily_low": -17.82,
+    "drift_per_30_days_of_daily_high": -6.257,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     43
+    ]
+   },
+   {
+    "offset": 37,
+    "type": "s2le",
+    "kind": "sun",
+    "score": 0.714,
+    "rough": 0.469,
+    "min": -367.0,
+    "max": 357.0,
+    "p5": -253.0,
+    "p95": 195.79999999999995,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_sun": 0.714,
+    "sun_mean": 81.09807355516638,
+    "shadow_mean": -102.93258426966293,
+    "p": 2.7306690547489287e-65,
+    "joined": "sign",
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": -2.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": -44.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": -142.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 119.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 105.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 55.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.228,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.12,
+    "sun_minus_shadow_in_std": 1.31,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.585,
+     "10": 0.585,
+     "20": 0.584,
+     "40": 0.542,
+     "80": 0.479
+    },
+    "rank_corr_abs_beta": 0.002,
+    "relative_spread_p5_p95": 448.8,
+    "shadow_over_sun_median_ratio": -0.994,
+    "distinct_values": 376,
+    "median_step_within_pass": 42.0,
+    "mean": -7.836,
+    "drift_per_30_days_of_daily_low": 0.555,
+    "drift_per_30_days_of_daily_high": 12.682,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     39
+    ]
+   },
+   {
+    "offset": 39,
+    "type": "u2le",
+    "kind": "sun",
+    "score": 0.829,
+    "rough": 0.247,
+    "min": 3708.0,
+    "max": 4216.0,
+    "p5": 3784.0,
+    "p95": 4172.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_sun": 0.829,
+    "sun_mean": 4058.5148861646235,
+    "shadow_mean": 3888.5393258426966,
+    "p": 2.2484044694136287e-105,
+    "joined": "wrap",
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 3924.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 3904.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 3870.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 4088.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 4080.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 4000.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.377,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.246,
+    "sun_minus_shadow_in_std": 1.33,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.646,
+     "10": 0.646,
+     "20": 0.645,
+     "40": 0.607,
+     "80": 0.543
+    },
+    "rank_corr_abs_beta": -0.314,
+    "relative_spread_p5_p95": 0.098,
+    "shadow_over_sun_median_ratio": 0.962,
+    "distinct_values": 126,
+    "median_step_within_pass": 16.0,
+    "mean": 3976.373,
+    "drift_per_30_days_of_daily_low": -67.408,
+    "drift_per_30_days_of_daily_high": -95.086,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     34,
+     37
+    ]
+   },
+   {
+    "offset": 41,
+    "type": "s2le",
+    "kind": "sun",
+    "score": 0.785,
+    "rough": 0.264,
+    "min": -316.0,
+    "max": 340.0,
+    "p5": -311.0,
+    "p95": 184.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_sun": 0.785,
+    "sun_mean": 100.38178633975481,
+    "shadow_mean": -148.50749063670412,
+    "p": 3.8523155645925406e-87,
+    "joined": "sign",
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": -226.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": -224.5,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": -3.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 117.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 116.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 125.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.062,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.132,
+    "sun_minus_shadow_in_std": 1.48,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.668,
+     "10": 0.668,
+     "20": 0.667,
+     "40": 0.62,
+     "80": 0.554
+    },
+    "rank_corr_abs_beta": 0.019,
+    "relative_spread_p5_p95": 247.5,
+    "shadow_over_sun_median_ratio": -1.121,
+    "distinct_values": 309,
+    "median_step_within_pass": 17.0,
+    "mean": -19.896,
+    "drift_per_30_days_of_daily_low": -6.182,
+    "drift_per_30_days_of_daily_high": 23.267,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     43
+    ]
+   },
+   {
+    "offset": 43,
+    "type": "u2le",
+    "kind": "sun",
+    "score": 0.821,
+    "rough": 0.142,
+    "min": 3740.0,
+    "max": 4196.0,
+    "p5": 3772.0,
+    "p95": 4160.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_sun": 0.821,
+    "sun_mean": 4087.2644483362524,
+    "shadow_mean": 3888.921348314607,
+    "p": 9.470627270893532e-102,
+    "joined": "wrap",
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 3882.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 3862.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 3940.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 4098.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 4104.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 4100.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.047,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.044,
+    "sun_minus_shadow_in_std": 1.52,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.679,
+     "10": 0.679,
+     "20": 0.678,
+     "40": 0.639,
+     "80": 0.578
+    },
+    "rank_corr_abs_beta": -0.277,
+    "relative_spread_p5_p95": 0.097,
+    "shadow_over_sun_median_ratio": 0.953,
+    "distinct_values": 115,
+    "median_step_within_pass": 8.0,
+    "mean": 3991.414,
+    "drift_per_30_days_of_daily_low": -80.0,
+    "drift_per_30_days_of_daily_high": -55.497,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     36,
+     41
+    ]
+   },
+   {
+    "offset": 45,
+    "type": "u2le",
+    "kind": "sun",
+    "score": 0.758,
+    "rough": 0.334,
+    "min": 467.0,
+    "max": 1528.0,
+    "p5": 542.0,
+    "p95": 1356.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_sun": 0.758,
+    "sun_mean": 1300.889667250438,
+    "shadow_mean": 986.6816479400749,
+    "p": 5.870570622336964e-78,
+    "joined": "wrap",
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 1201.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 1247.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": 928.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 1306.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 1317.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 1341.5,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.444,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.172,
+    "sun_minus_shadow_in_std": 1.2,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.741,
+     "10": 0.741,
+     "20": 0.74,
+     "40": 0.715,
+     "80": 0.667
+    },
+    "rank_corr_abs_beta": 0.163,
+    "relative_spread_p5_p95": 0.636,
+    "shadow_over_sun_median_ratio": 0.758,
+    "distinct_values": 360,
+    "median_step_within_pass": 15.0,
+    "mean": 1149.046,
+    "drift_per_30_days_of_daily_low": 150.357,
+    "drift_per_30_days_of_daily_high": 21.0,
+    "window_days": 44.8,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 49,
+    "type": "s1",
+    "kind": "lagged",
+    "score": 0.929,
+    "rough": 0.085,
+    "min": -23.0,
+    "max": 30.0,
+    "p5": -6.799999999999997,
+    "p95": 27.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_lag": 0.929,
+    "tau_min": 10,
+    "rho_sun": 0.877,
+    "p": 1.1872424527267778e-178,
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 5.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 1.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": -4.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 19.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 23.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 25.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.504,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.829,
+    "sun_minus_shadow_in_std": 1.8,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.907,
+     "10": 0.908,
+     "20": 0.907,
+     "40": 0.891,
+     "80": 0.853
+    },
+    "rank_corr_abs_beta": 0.085,
+    "relative_spread_p5_p95": 2.414,
+    "shadow_over_sun_median_ratio": 0.043,
+    "distinct_values": 52,
+    "median_step_within_pass": 0.0,
+    "mean": 11.596,
+    "drift_per_30_days_of_daily_low": 0.671,
+    "drift_per_30_days_of_daily_high": 3.226,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     50,
+     52
+    ]
+   },
+   {
+    "offset": 50,
+    "type": "s1",
+    "kind": "lagged",
+    "score": 0.925,
+    "rough": 0.08,
+    "min": -21.0,
+    "max": 30.0,
+    "p5": -7.799999999999997,
+    "p95": 27.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_lag": 0.925,
+    "tau_min": 10,
+    "rho_sun": 0.858,
+    "p": 7.537092920252559e-174,
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 5.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 0.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": -4.5,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 20.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 23.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 25.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.526,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.851,
+    "sun_minus_shadow_in_std": 1.83,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.905,
+     "10": 0.905,
+     "20": 0.905,
+     "40": 0.891,
+     "80": 0.855
+    },
+    "rank_corr_abs_beta": 0.08,
+    "relative_spread_p5_p95": 2.175,
+    "shadow_over_sun_median_ratio": 0.0,
+    "distinct_values": 50,
+    "median_step_within_pass": 0.0,
+    "mean": 11.762,
+    "drift_per_30_days_of_daily_low": 0.75,
+    "drift_per_30_days_of_daily_high": 3.176,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     49,
+     52
+    ]
+   },
+   {
+    "offset": 52,
+    "type": "s1",
+    "kind": "lagged",
+    "score": 0.947,
+    "rough": 0.086,
+    "min": -18.0,
+    "max": 28.0,
+    "p5": -5.0,
+    "p95": 27.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_lag": 0.947,
+    "tau_min": 10,
+    "rho_sun": 0.871,
+    "p": 2.3570457482543796e-203,
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 7.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 2.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": -2.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 21.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 24.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 26.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.683,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.861,
+    "sun_minus_shadow_in_std": 1.84,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.939,
+     "10": 0.939,
+     "20": 0.939,
+     "40": 0.926,
+     "80": 0.892
+    },
+    "rank_corr_abs_beta": 0.108,
+    "relative_spread_p5_p95": 1.882,
+    "shadow_over_sun_median_ratio": 0.083,
+    "distinct_values": 44,
+    "median_step_within_pass": 0.0,
+    "mean": 13.129,
+    "drift_per_30_days_of_daily_low": 0.462,
+    "drift_per_30_days_of_daily_high": 3.333,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     49,
+     50,
+     53
+    ]
+   },
+   {
+    "offset": 53,
+    "type": "s1",
+    "kind": "sun",
+    "score": 0.874,
+    "rough": 0.081,
+    "min": -20.0,
+    "max": 30.0,
+    "p5": -7.0,
+    "p95": 28.0,
+    "n_frames": 1105,
+    "n_passes": 411,
+    "rho_sun": 0.874,
+    "sun_mean": 24.654991243432576,
+    "shadow_mean": 0.7059925093632958,
+    "p": 1.9284856319565063e-130,
+    "response_profile": {
+     "shadow 3-9 min after sunset": {
+      "median": 5.0,
+      "n": 164
+     },
+     "shadow 9-12 min after sunset": {
+      "median": 1.0,
+      "n": 166
+     },
+     "shadow 12-32 min after sunset": {
+      "median": -5.0,
+      "n": 204
+     },
+     "sun 21-41 min after sunrise": {
+      "median": 23.0,
+      "n": 166
+     },
+     "sun 41-45 min after sunrise": {
+      "median": 26.0,
+      "n": 181
+     },
+     "sun 45-51 min after sunrise": {
+      "median": 27.0,
+      "n": 224
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.54,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.871,
+    "sun_minus_shadow_in_std": 1.94,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.916,
+     "10": 0.915,
+     "20": 0.915,
+     "40": 0.901,
+     "80": 0.866
+    },
+    "rank_corr_abs_beta": 0.057,
+    "relative_spread_p5_p95": 1.944,
+    "shadow_over_sun_median_ratio": 0.0,
+    "distinct_values": 50,
+    "median_step_within_pass": 0.0,
+    "mean": 13.081,
+    "drift_per_30_days_of_daily_low": -1.333,
+    "drift_per_30_days_of_daily_high": 2.143,
+    "window_days": 44.8,
+    "moves_with_offsets": [
+     52
+    ]
+   }
+  ],
+  "names": {
+   "summary": "A 58-byte housekeeping beacon with uptime and sequence counters, a millisecond clock, and a block of solar-panel voltage/current pairs, followed by a group of four panel-like temperatures. The counters reset together 11 times, which suggests reboots.",
+   "fields": [
+    {
+     "offset": 2,
+     "name": "reboot_frame_counter",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.5,
+     "rationale": "u2 counter that only increases at about 0.001/s and resets 11 times. It moves with the u3 at offset 27 and is unrelated to sunlight, so it is probably an uptime or packet counter."
+    },
+    {
+     "offset": 15,
+     "name": "uptime_ms",
+     "category": "clock",
+     "unit": "s",
+     "scale": "raw * 0.001",
+     "confidence": 0.6,
+     "rationale": "u4 that advances about 1000 per second, so it is a millisecond counter. One reset gives a uptime-style clock, and it has no known epoch."
+    },
+    {
+     "offset": 27,
+     "name": "operation_counter",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.45,
+     "rationale": "u3 counter that rises at 0.007/s and resets 11 times in step with offset 2. It is probably a second event or cycle counter."
+    },
+    {
+     "offset": 33,
+     "name": "temperature_a",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.3,
+     "rationale": "Small u1 in the 8-18 range that rises with minutes since sunrise and moves with offset 35. It is slightly warmer in shadow, so it may be an internal temperature, but evidence is weak."
+    },
+    {
+     "offset": 34,
+     "name": "solar_panel_1_current",
+     "category": "power_solar",
+     "unit": "mA",
+     "scale": "raw",
+     "confidence": 0.35,
+     "rationale": "u1 that follows sunlight (rho 0.85) and moves with the voltage at offset 39. The units and scale are guessed."
+    },
+    {
+     "offset": 35,
+     "name": "temperature_b",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.3,
+     "rationale": "Small u1 in the 8-31 range that moves with offset 33 and is slightly warmer in shadow. It is likely another internal temperature."
+    },
+    {
+     "offset": 36,
+     "name": "solar_panel_2_current",
+     "category": "power_solar",
+     "unit": "mA",
+     "scale": "raw",
+     "confidence": 0.35,
+     "rationale": "u1 that follows sunlight (rho 0.83) and moves with the voltage at offset 43. It resembles offset 34, so it is probably a panel current."
+    },
+    {
+     "offset": 37,
+     "name": "battery_current_1",
+     "category": "power_battery",
+     "unit": "mA",
+     "scale": "raw",
+     "confidence": 0.4,
+     "rationale": "Signed s2 that is positive in sun and negative in shadow, so it is a charge/discharge current. It moves with the voltage at offset 39."
+    },
+    {
+     "offset": 39,
+     "name": "battery_voltage_1",
+     "category": "power_battery",
+     "unit": "mV",
+     "scale": "raw",
+     "confidence": 0.5,
+     "rationale": "u2 in 3700-4200 with narrow spread (0.098), which fits a single Li-ion cell in mV. It follows sunlight and is lower in shadow."
+    },
+    {
+     "offset": 41,
+     "name": "battery_current_2",
+     "category": "power_battery",
+     "unit": "mA",
+     "scale": "raw",
+     "confidence": 0.4,
+     "rationale": "Signed s2 that is positive in sun and negative in shadow, so it is a charge/discharge current. It moves with the voltage at offset 43."
+    },
+    {
+     "offset": 43,
+     "name": "battery_voltage_2",
+     "category": "power_battery",
+     "unit": "mV",
+     "scale": "raw",
+     "confidence": 0.5,
+     "rationale": "u2 in 3740-4196 with narrow spread, which fits a Li-ion cell in mV. It follows sunlight like offset 39 and is lower in shadow."
+    },
+    {
+     "offset": 45,
+     "name": "bus_or_solar_input_power",
+     "category": "power_bus",
+     "unit": "mW",
+     "scale": "raw",
+     "confidence": 0.25,
+     "rationale": "u2 in 467-1528 that follows sunlight, with a shadow-to-sun ratio of 0.76 and a wide spread. The identity is uncertain, and it could be a solar input or a load."
+    },
+    {
+     "offset": 49,
+     "name": "panel_temperature_1",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.6,
+     "rationale": "s1 in the -23..30 range with a lag of about 10 min. It rises in sun and falls in shadow, and it moves with offsets 50 and 52, like an outer panel temperature."
+    },
+    {
+     "offset": 50,
+     "name": "panel_temperature_2",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.6,
+     "rationale": "s1 in the -21..30 range with tau 10 min. It trends with sunlight and moves with the other panel temperatures."
+    },
+    {
+     "offset": 52,
+     "name": "panel_temperature_3",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.6,
+     "rationale": "s1 in the -18..28 range with tau 10 min and a strong lag correlation (0.947). It moves with the other three panel temperatures."
+    },
+    {
+     "offset": 53,
+     "name": "panel_temperature_4",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.6,
+     "rationale": "s1 in the -20..30 range, rising in sun (+0.54) and falling in shadow (-0.87). It is part of the same four-panel group."
+    }
+   ],
+   "health": "Both counters reset 11 times in 45 days, with the last reset about 3.7 days before the end of the window, so the spacecraft may be rebooting. The uptime clock reset once, 3.6 days before the end. The two battery voltages look normal for single Li-ion cells, but their daily lows and highs drift down by roughly 55-95 mV per 30 days. That could be ageing or season effects, so I am not sure which. Panel temperatures look normal."
+  },
+  "evaluation": {
+   "true_fields": 18,
+   "physical_true_fields": 15,
+   "recall_physical": 1.0,
+   "exact_physical": 0.9333333333333333,
+   "kind_accuracy": 0.8666666666666667,
+   "precision": 1.0,
+   "llm_category_accuracy": 0.8666666666666667,
+   "llm_judged": 15,
+   "truth": [
+    {
+     "name": "beacon_header_packet_id",
+     "offset": 2,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "other",
+     "found": true,
+     "how": "exact",
+     "kind": "counter",
+     "kind_ok": false
+    },
+    {
+     "name": "beacon_payload_timestamp",
+     "offset": 16,
+     "width": 4,
+     "endian": "le",
+     "signed": false,
+     "category": "clock",
+     "found": true,
+     "how": "overlap",
+     "kind": "clock",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_uptime",
+     "offset": 27,
+     "width": 3,
+     "endian": "le",
+     "signed": false,
+     "category": "counter",
+     "found": true,
+     "how": "exact",
+     "kind": "counter",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_subsystem_status_bitmap",
+     "offset": 31,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "other",
+     "found": false,
+     "how": "",
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "beacon_payload_batt_a_temp",
+     "offset": 33,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "thermal",
+     "found": true,
+     "how": "exact",
+     "kind": "orbit",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_batt_a_state_of_charge",
+     "offset": 34,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "power",
+     "found": true,
+     "how": "exact",
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_batt_b_temp",
+     "offset": 35,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "thermal",
+     "found": true,
+     "how": "exact",
+     "kind": "sun",
+     "kind_ok": false
+    },
+    {
+     "name": "beacon_payload_batt_b_state_of_charge",
+     "offset": 36,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "power",
+     "found": true,
+     "how": "exact",
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_batt_a_current",
+     "offset": 37,
+     "width": 2,
+     "endian": "le",
+     "signed": true,
+     "category": "power",
+     "found": true,
+     "how": "exact",
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_batt_a_voltage",
+     "offset": 39,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "found": true,
+     "how": "exact",
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_batt_b_current",
+     "offset": 41,
+     "width": 2,
+     "endian": "le",
+     "signed": true,
+     "category": "power",
+     "found": true,
+     "how": "exact",
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_batt_b_voltage",
+     "offset": 43,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "found": true,
+     "how": "exact",
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_power_consumption",
+     "offset": 45,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "found": true,
+     "how": "exact",
+     "kind": "sun",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_panel_neg_x_temp",
+     "offset": 49,
+     "width": 1,
+     "endian": "be",
+     "signed": true,
+     "category": "thermal",
+     "found": true,
+     "how": "exact",
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_panel_pos_y_temp",
+     "offset": 50,
+     "width": 1,
+     "endian": "be",
+     "signed": true,
+     "category": "thermal",
+     "found": true,
+     "how": "exact",
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_panel_pos_z_temp",
+     "offset": 52,
+     "width": 1,
+     "endian": "be",
+     "signed": true,
+     "category": "thermal",
+     "found": true,
+     "how": "exact",
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_payload_panel_neg_z_temp",
+     "offset": 53,
+     "width": 1,
+     "endian": "be",
+     "signed": true,
+     "category": "thermal",
+     "found": true,
+     "how": "exact",
+     "kind": "sun",
+     "kind_ok": false
+    },
+    {
+     "name": "beacon_payload_crc",
+     "offset": 56,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "other",
+     "found": false,
+     "how": "",
+     "kind": "",
+     "kind_ok": false
+    }
+   ]
+  }
+ }
+]
