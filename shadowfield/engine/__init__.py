@@ -1,5 +1,5 @@
 """The Shadowfield engine: telemetry fields from raw frames and orbital physics."""
-from .analyze import analyze
+from .core import analyze
 from .evidence import describe
 from .field import WIDTHS, Field, _decode, _split
 from .stats import ALPHA

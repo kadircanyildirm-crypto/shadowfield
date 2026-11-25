@@ -63,11 +63,19 @@ def _width_ok(f: Field, ctx: dict) -> bool:
     """
     if f.width == 1 or f.signed == "f" or f.kind in ("clock", "magnet", "position", "attitude"):
         return True
-    n, frac = _carry(ctx["B"], f, ctx["same"])
-    # structural proof that these bytes form one number
+    # structural proof that these bytes form one number (sign extension, wrap point)
     if _boundary(ctx["B"], f):
         f.detail["joined"] = "sign" if f.signed else "wrap"
         return True
+    # The lowest byte of a real multi-byte number moves (it carries the finest resolution).
+    # A padding or status byte with a handful of values at the bottom means the reading
+    # is shifted by one: it cuts a real field and swallows its neighbour (carries then
+    # appear too, from the real field it cuts). A regulated voltage's low byte also takes
+    # few values, but it follows the physics.
+    lowest = f.offset + f.width - 1 if f.endian == "be" else f.offset
+    if np.unique(ctx["B"][:, lowest]).size < 16 and _span_best(ctx["phys_best"], lowest, lowest + 1) < 0.3:
+        return False
+    n, frac = _carry(ctx["B"], f, ctx["same"])
     if n >= 5 and frac >= 0.5:
         f.detail["joined"] = "carry"
         return True

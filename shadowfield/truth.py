@@ -57,6 +57,9 @@ def fine_category(name: str) -> str | None:
 
 def category(name: str) -> str:
     n = name.lower()
+    # a voltage or current of something (an RTC's backup battery, a GNSS receiver) is power
+    if re.search(r"volt|vbat|(^|_)vbus|curr|(^|_)amp|_ma(_|$)|_mv(_|$)", n) and not re.search(r"temp", n):
+        return "power"
     for cat, pat in CATEGORY_PATTERNS:
         if re.search(pat, n):
             return cat

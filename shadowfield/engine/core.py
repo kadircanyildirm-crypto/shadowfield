@@ -80,14 +80,20 @@ def readings(B: np.ndarray, quick: bool = False) -> tuple[list, list]:
             ax = np.abs(x)
             sane = (x == 0) | ((ax > 1e-6) & (ax < 1e10))
             nz = x != 0
-            # random bytes read as floats give wild exponents; real values stay in range
-            # a real float has all four bytes moving and a busy lowest mantissa byte; an
-            # integer read as a float (a temperature plus constant neighbours) does not
-            bytes_move = all(np.unique(B[nz, o + i]).size > 1 for i in range(4)) if nz.any() else False
-            lsb = o if endian == "le" else o + 3
-            busy = np.unique(B[nz, lsb]).size >= min(32, max(8, nz.sum() // 8)) if nz.any() else False
+            # Random bytes read as floats give wild exponents; real values stay in range. An
+            # integer byte read as the low end of a float (a temperature next to constant bytes)
+            # only moves the lowest mantissa bits, a relative change of ~1e-6; a real float
+            # measurement moves by a sizeable fraction of its value (even if it is quantised,
+            # like 23.5 degC, whose low mantissa bytes are zero).
+            xs = x[nz]
+            med = np.median(np.abs(xs)) if nz.any() else 0.0
+            rel = (np.percentile(xs, 95) - np.percentile(xs, 5)) / med if med > 0 else 0.0
+            # ...and a float's top byte (sign + high exponent bits) takes few values, while an
+            # integer field sitting where the exponent would be takes dozens
+            top = o if endian == "be" else o + 3
+            few_exp = np.unique(B[nz, top]).size <= 16 if nz.any() else False
             if (sane.mean() >= 0.98 and nz.sum() >= 30 and np.unique(x[: min(n, 2000)]).size >= 4
-                    and bytes_move and busy):
+                    and rel >= 1e-3 and few_exp):
                 cand.append((o, 4, endian, "f"))
                 X.append(x)
     return cand, X
