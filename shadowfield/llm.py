@@ -99,6 +99,14 @@ How the physics separates field types:
 - Two quantities that move together (a battery voltage and its state of charge, four panel
   temperatures) form a group; name them consistently.
 - Power consumption or bus load: weakly sun-correlated and rough.
+- Power fields also carry a physics signature and power_class_hint, the engine's guess at the
+  class: sign_flips_between_sun_and_shadow (a battery current charging in sun and discharging
+  in shadow), near_zero_in_shadow (a solar input), charged_by_sunlight (a battery voltage or state
+  of charge: smooth, clearly higher after sunlight, in a narrow band), and regulated_narrow_band
+  with flat_between_sun_and_shadow, or higher_in_shadow (a bus or load). On the development
+  satellites the hint was right about three times in four, and almost never wrong for battery
+  or solar. Use it for power_battery / power_solar / power_bus unless the raw range or another
+  clue clearly contradicts it.
 - Raw ranges carry units. A Li-ion cell reads 3000-4200 mV (two cells 6000-8400, three
   9000-12600). A field confined to 0..100 that moves with such a voltage is a state of charge in
   percent, not a current. Currents in mA are usually signed or start near 0.

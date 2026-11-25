@@ -38,9 +38,9 @@ KIND_TO_CATEGORIES = {
 
 
 FINE_POWER = [  # order matters: "solar_cells_current" is solar, "cell_voltage" is battery
-    ("power_solar", r"solar|(^|_)sol_|panel.*(curr|volt)|mppt|(^|_)sun|array"),
+    ("power_solar", r"solar|(^|_)sol_|panel.*(curr|volt)|mppt|(^|_)sun|array|(^|_)pv(_|\d)|photo"),
     ("power_battery", r"bat|(^|_)cell|(^|_)soc|state_of_charge|charge"),
-    ("power_bus", r"(^|_)bus|consumption|load|(^|_)power(_|$)|pwr|vcc|3v3|5v"),
+    ("power_bus", r"(^|_)bus|consumption|load|(^|_)power(_|$)|pwr|vcc|3v3|5v|(^|_)out_|_ch_?amp|_ch\d"),
 ]
 
 

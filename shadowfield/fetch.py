@@ -35,7 +35,11 @@ class Frame:
 
 def _get(url: str, params: dict | None = None, tries: int = 5, max_wait: int = 3600) -> requests.Response:
     for i in range(tries):
-        r = requests.get(url, params=params, headers=UA, timeout=60)
+        try:
+            r = requests.get(url, params=params, headers=UA, timeout=60)
+        except (requests.ConnectionError, requests.Timeout):  # the API is slow at times: back off, retry
+            time.sleep(10 * (i + 1))
+            continue
         if r.status_code == 429:
             wait = int(r.headers.get("Retry-After", "10")) + 5
             if wait > max_wait:
@@ -48,8 +52,7 @@ def _get(url: str, params: dict | None = None, tries: int = 5, max_wait: int = 3
             continue
         r.raise_for_status()
         return r
-    r.raise_for_status()
-    return r
+    raise requests.ConnectionError(f"gave up on {url} after {tries} tries")
 
 
 def list_observations(norad: int, max_obs: int = 400, pause: float = 6.0,

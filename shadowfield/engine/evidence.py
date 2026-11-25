@@ -84,7 +84,52 @@ def describe(fields: list[Field], df: pd.DataFrame, phys: pd.DataFrame) -> None:
                     d["drift_per_30_days_of_daily_low"] = round(float(stats.theilslopes(lo, ud)[0] * 30), 3)
                     d["drift_per_30_days_of_daily_high"] = round(float(stats.theilslopes(hi, ud)[0] * 30), 3)
                     d["window_days"] = round(float(days.max()), 1)
+        d.update(_power_signature(x, sun, shade, {**f.detail, **d}))
         # fields that move together are often the same kind of sensor (four panel temperatures...)
         d["moves_with_offsets"] = [g.offset for g in fields if g is not f and
                                    abs(np.corrcoef(rx, ranked[id(g)])[0, 1]) > 0.85]
         f.detail.update(d)
+
+
+def _power_signature(x: np.ndarray, sun: np.ndarray, shade: np.ndarray, d: dict) -> dict:
+    """Physics that separates a battery, a solar input and a bus from one another.
+
+    battery current   charges in sunlight, discharges in shadow: the sign flips
+    solar input       falls to (almost) nothing in shadow
+    battery voltage / state of charge   integrates sunlight: climbs through sun, sinks through shadow
+    bus               regulated (a very narrow band), or drawn harder in shadow (heaters)
+    """
+    out = {}
+    if not (sun.sum() >= 10 and shade.sum() >= 10):
+        return out
+    ms, mh = float(np.median(x[sun])), float(np.median(x[shade]))
+    lo, hi = np.percentile(x, [2, 98])
+    rng = hi - lo if hi > lo else 1.0
+    out["sign_flips_between_sun_and_shadow"] = bool(ms * mh < 0 and min(abs(ms), abs(mh)) > 0.05 * rng)
+    out["near_zero_in_shadow"] = bool(abs(mh - lo) < 0.1 * rng and abs(ms - mh) > 0.4 * rng and abs(mh) < 0.15 * max(abs(ms), 1e-9) + 0.1 * rng)
+    ts, th = d.get("trend_in_sun_vs_minutes_since_sunrise"), d.get("trend_in_shadow_vs_minutes_since_sunset")
+    out["integrates_sunlight"] = bool(ts is not None and th is not None and ts > 0.15 and th < -0.15)
+    spread = d.get("relative_spread_p5_p95")
+    out["regulated_narrow_band"] = bool(spread is not None and spread < 0.03)
+    out["higher_in_shadow"] = bool(mh > ms and abs(ms - mh) > 0.1 * rng)
+    rough = d.get("rough", 1.0)
+    contrast = d.get("sun_minus_shadow_in_std") or 0.0
+    soc_like = 0 <= lo and hi <= 100
+    # A battery's voltage or charge is smooth and clearly higher after sunlight; its band is
+    # narrow (a Li-ion cell spans ~4%), which a regulated bus shares, but a regulated bus
+    # stays flat between sun and shadow.
+    out["charged_by_sunlight"] = bool(contrast >= 1.0 and rough < 0.35 and spread is not None
+                                      and (spread <= 0.35 or (soc_like and spread <= 1.0)))
+    out["flat_between_sun_and_shadow"] = bool(abs(contrast) < 0.5)
+    if out["sign_flips_between_sun_and_shadow"]:
+        hint = "power_battery"   # charge / discharge current
+    elif out["near_zero_in_shadow"]:
+        hint = "power_solar"
+    elif out["charged_by_sunlight"] or (out["integrates_sunlight"] and not out["regulated_narrow_band"]):
+        hint = "power_battery"   # voltage or state of charge
+    elif (out["regulated_narrow_band"] and out["flat_between_sun_and_shadow"]) or out["higher_in_shadow"]:
+        hint = "power_bus"
+    else:
+        hint = None
+    out["power_class_hint"] = hint
+    return out
