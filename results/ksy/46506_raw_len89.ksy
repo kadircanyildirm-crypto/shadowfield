@@ -12,74 +12,30 @@ seq:
     type: b24le
     doc: "counter, counts, raw; evidence: counter (score 0.99)"
   - id: unknown_25
-    size: 8
-  - id: unknown_field_33
-    type: b24be
-    doc: "unknown, raw, raw; evidence: lagged (score 0.33)"
-  - id: unknown_36
-    size: 1
-  - id: secondary_counter_37
+    size: 12
+  - id: reset_linked_counter_a
     type: b24le
     doc: "counter, counts, raw; evidence: counter (score 0.99)"
   - id: unknown_40
     size: 5
   - id: seconds_since_boot
     type: b24le
-    doc: "clock, s, raw; evidence: counter (score 0.99)"
+    doc: "counter, s, raw * 1; evidence: counter (score 0.99)"
   - id: unknown_48
-    size: 1
-  - id: unknown_field_49
-    type: u1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.36)"
-  - id: unknown_field_50
-    type: u1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.36)"
-  - id: unknown_field_51
-    type: u1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.36)"
-  - id: unknown_field_52
-    type: u2be
-    doc: "unknown, raw, raw; evidence: lagged (score 0.37)"
-  - id: unknown_field_54
-    type: u1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.33)"
-  - id: unknown_field_55
-    type: u2le
-    doc: "unknown, raw, raw; evidence: lagged (score 0.34)"
-  - id: unknown_57
-    size: 1
-  - id: unknown_field_58
-    type: s1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.34)"
-  - id: unknown_59
-    size: 1
-  - id: unknown_field_60
-    type: s1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.34)"
-  - id: unknown_field_61
-    type: u2le
-    doc: "unknown, raw, raw; evidence: lagged (score 0.38)"
-  - id: unknown_field_63
-    type: s1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.35)"
-  - id: unknown_field_64
-    type: s1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.38)"
-  - id: unknown_field_65
-    type: s1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.35)"
-  - id: unknown_field_66
-    type: s1
-    doc: "unknown, raw, raw; evidence: lagged (score 0.37)"
-  - id: unknown_67
-    size: 1
-  - id: unknown_field_68
-    type: u4le
-    doc: "unknown, raw, raw; evidence: lagged (score 0.38)"
-  - id: unknown_72
     size: 3
-  - id: unknown_float_75
-    type: f4le
-    doc: "unknown, raw, raw; evidence: lagged (score 0.37)"
-  - id: unknown_79
-    size: 10
+  - id: boot_related_byte
+    type: u1
+    doc: "unknown, counts, raw; evidence: lagged (score 0.76)"
+  - id: boot_related_u16
+    type: u2be
+    doc: "unknown, counts, raw; evidence: lagged (score 0.68)"
+  - id: unknown_54
+    size: 14
+  - id: misaligned_counter_field
+    type: u4le
+    doc: "unknown, counts, raw; evidence: lagged (score 0.74)"
+  - id: unknown_72
+    size: 17
+instances:
+  seconds_since_boot_s:
+    value: seconds_since_boot * 1

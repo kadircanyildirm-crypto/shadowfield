@@ -10,9 +10,12 @@ seq:
     size: 5
   - id: frame_sequence_counter
     type: u1
-    doc: "counter, counts, raw * 1; evidence: counter (score 1.00)"
+    doc: "counter, count, raw; evidence: counter (score 1.00)"
   - id: unknown_6
-    size: 13
+    size: 11
+  - id: battery_voltage_or_temperature_raw
+    type: u2le
+    doc: "power_battery, mV, raw * 1; evidence: lagged (score 0.56)"
 instances:
-  frame_sequence_counter_counts:
-    value: frame_sequence_counter * 1
+  battery_voltage_or_temperature_raw_mv:
+    value: battery_voltage_or_temperature_raw * 1

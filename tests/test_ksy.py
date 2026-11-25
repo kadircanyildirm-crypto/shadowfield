@@ -68,4 +68,6 @@ def test_ksy_compiles_and_matches_engine(path, tmp_path):
     for ident, off, w, en, sg in fields:
         ours = _decode(B, off, w, en, sg)
         theirs = np.array([getattr(p, ident) for p in parsed], dtype=float)
+        if sg == "f":  # the engine reads NaN/inf floats (no-fix frames) as 0
+            theirs = np.where(np.isfinite(theirs), theirs, 0.0)
         assert np.allclose(ours, theirs, equal_nan=True), ident

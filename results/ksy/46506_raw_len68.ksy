@@ -8,13 +8,18 @@ doc: |
 seq:
   - id: unknown_0
     size: 22
+  - id: uptime_or_tick_counter
+    type: u4le
+    doc: "counter, counts, raw * 1; evidence: counter (score 0.99)"
+  - id: unknown_26
+    size: 34
   - id: frame_sequence_counter
-    type: u2le
-    doc: "counter, counts, raw; evidence: counter (score 0.99)"
-  - id: unknown_24
-    size: 38
-  - id: frame_counter_low_byte
-    type: s1
-    doc: "counter, counts, raw + 128 (unsigned wrap); evidence: counter (score 0.98)"
+    type: b24be
+    doc: "counter, counts, raw * 1; evidence: counter (score 0.98)"
   - id: unknown_63
     size: 5
+instances:
+  uptime_or_tick_counter_counts:
+    value: uptime_or_tick_counter * 1
+  frame_sequence_counter_counts:
+    value: frame_sequence_counter * 1

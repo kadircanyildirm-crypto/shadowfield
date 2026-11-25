@@ -8,70 +8,101 @@ doc: |
 seq:
   - id: unknown_0
     size: 8
-  - id: uptime_counter_ticks
+  - id: uptime_counter_a
     type: b24le
-    doc: "counter, ticks, raw; evidence: counter (score 1.00)"
+    doc: "counter, s, raw * 1.0; evidence: counter (score 1.00)"
   - id: unknown_11
     size: 1
-  - id: uptime_counter_secondary
-    type: b24le
-    doc: "counter, s, raw; evidence: counter (score 1.00)"
-  - id: unknown_15
-    size: 7
-  - id: counter_u2_slow
-    type: u2le
-    doc: "counter, counts, raw; evidence: counter (score 1.00)"
-  - id: unknown_24
+  - id: uptime_seconds
+    type: u4le
+    doc: "counter, s, raw * 1.0; evidence: counter (score 1.00)"
+  - id: unknown_16
     size: 6
-  - id: solar_panel_current_a
+  - id: slow_counter
+    type: u4le
+    doc: "counter, counts, raw * 1.0; evidence: counter (score 1.00)"
+  - id: unknown_26
+    size: 4
+  - id: solar_panel_current_1
     type: u2le
-    doc: "power_solar, mA, raw; evidence: sun (score 0.86)"
-  - id: solar_input_aux_adc
-    type: u1
-    doc: "power_solar, counts, raw; evidence: sun (score 0.72)"
-  - id: solar_current_small_a
-    type: u1
-    doc: "power_solar, mA, raw; evidence: sun (score 0.84)"
-  - id: solar_panel_current_b
+    doc: "power_solar, mA, raw * 1.0; evidence: sun (score 0.86)"
+  - id: solar_panel_current_2
     type: u2le
-    doc: "power_solar, mA, raw; evidence: sun (score 0.66)"
-  - id: solar_panel_current_c
+    doc: "power_solar, mA, raw * 1.0; evidence: sun (score 0.84)"
+  - id: solar_panel_current_3
     type: u2le
-    doc: "power_solar, mA, raw; evidence: sun (score 0.91)"
-  - id: solar_panel_current_d
+    doc: "power_solar, mA, raw * 1.0; evidence: sun (score 0.66)"
+  - id: solar_channel_1_aux
     type: u2le
-    doc: "power_solar, mA, raw; evidence: sun (score 0.85)"
-  - id: unknown_40
-    size: 1
-  - id: solar_panel_current_e
-    type: u2be
-    doc: "power_solar, mA, raw; evidence: sun (score 0.92)"
-  - id: solar_panel_current_f
-    type: u2be
-    doc: "power_solar, mA, raw; evidence: sun (score 0.92)"
-  - id: solar_sensor_small_g
+    doc: "power_solar, mA, raw * 1.0; evidence: sun (score 0.91)"
+  - id: solar_channel_2_aux
+    type: u2le
+    doc: "power_solar, mA, raw * 1.0; evidence: sun (score 0.85)"
+  - id: solar_channel_3_aux
+    type: u2le
+    doc: "power_solar, mA, raw * 1.0; evidence: sun (score 0.58)"
+  - id: solar_power_1
+    type: u2le
+    doc: "power_solar, mW, raw * 1.0; evidence: sun (score 0.91)"
+  - id: solar_power_2
+    type: u2le
+    doc: "power_solar, mW, raw * 1.0; evidence: sun (score 0.91)"
+  - id: sun_sensor_or_current_byte
     type: u1
-    doc: "power_solar, counts, raw; evidence: sun (score 0.86)"
-  - id: unknown_46
-    size: 1
-  - id: solar_sensor_small_h
+    doc: "power_solar, counts, raw * 1.0; evidence: sun (score 0.62)"
+  - id: charge_current_small
     type: u1
-    doc: "power_solar, counts, raw; evidence: sun (score 0.76)"
+    doc: "power_solar, count, raw * 1.0; evidence: sun (score 0.76)"
   - id: unknown_48
     size: 17
   - id: battery_voltage
     type: u2le
-    doc: "power_battery, mV, raw; evidence: lagged (score 0.76)"
+    doc: "power_battery, mV, raw * 1.0; evidence: lagged (score 0.76)"
   - id: charge_current
     type: u2le
-    doc: "power_bus, mA, raw; evidence: sun (score 0.85)"
+    doc: "power_bus, mA, raw * 1.0; evidence: sun (score 0.85)"
   - id: unknown_69
     size: 2
-  - id: temperature_a_raw
+  - id: temperature_a
     type: u2le
-    doc: "thermal, counts, raw; evidence: orbit (score 0.80)"
-  - id: temperature_b_raw
+    doc: "thermal, raw, raw * 1.0; evidence: orbit (score 0.80)"
+  - id: temperature_b
     type: u2le
-    doc: "thermal, counts, raw; evidence: orbit (score 0.78)"
+    doc: "thermal, raw, raw * 1.0; evidence: orbit (score 0.78)"
   - id: unknown_75
     size: 4
+instances:
+  uptime_counter_a_s:
+    value: uptime_counter_a * 1.0
+  uptime_seconds_s:
+    value: uptime_seconds * 1.0
+  slow_counter_counts:
+    value: slow_counter * 1.0
+  solar_panel_current_1_ma:
+    value: solar_panel_current_1 * 1.0
+  solar_panel_current_2_ma:
+    value: solar_panel_current_2 * 1.0
+  solar_panel_current_3_ma:
+    value: solar_panel_current_3 * 1.0
+  solar_channel_1_aux_ma:
+    value: solar_channel_1_aux * 1.0
+  solar_channel_2_aux_ma:
+    value: solar_channel_2_aux * 1.0
+  solar_channel_3_aux_ma:
+    value: solar_channel_3_aux * 1.0
+  solar_power_1_mw:
+    value: solar_power_1 * 1.0
+  solar_power_2_mw:
+    value: solar_power_2 * 1.0
+  sun_sensor_or_current_byte_counts:
+    value: sun_sensor_or_current_byte * 1.0
+  charge_current_small_count:
+    value: charge_current_small * 1.0
+  battery_voltage_mv:
+    value: battery_voltage * 1.0
+  charge_current_ma:
+    value: charge_current * 1.0
+  temperature_a_raw:
+    value: temperature_a * 1.0
+  temperature_b_raw:
+    value: temperature_b * 1.0

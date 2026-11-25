@@ -11,66 +11,63 @@ seq:
     doc: AX.25 address and control header
   - id: unknown_0
     size: 2
-  - id: reboot_frame_counter
-    type: u2le
+  - id: frame_counter
+    type: u4le
     doc: "counter, count, raw; evidence: counter (score 1.00)"
-  - id: unknown_4
-    size: 11
+  - id: unknown_6
+    size: 9
   - id: uptime_ms
     type: u4le
-    doc: "clock, s, raw * 0.001; evidence: clock (score 1.00)"
+    doc: "clock, ms, raw * 0.001 s; evidence: clock (score 1.00)"
   - id: unknown_19
     size: 8
-  - id: operation_counter
+  - id: secondary_counter
     type: b24le
     doc: "counter, count, raw; evidence: counter (score 1.00)"
   - id: unknown_30
     size: 3
-  - id: temperature_a
+  - id: unknown_small_value_a
     type: u1
-    doc: "thermal, degC, raw; evidence: orbit (score 0.56)"
-  - id: solar_panel_1_current
+    doc: "unknown, count, raw; evidence: orbit (score 0.56)"
+  - id: solar_panel_current_1
     type: u1
     doc: "power_solar, mA, raw; evidence: sun (score 0.85)"
-  - id: temperature_b
+  - id: unknown_small_value_b
     type: u1
-    doc: "thermal, degC, raw; evidence: sun (score 0.53)"
-  - id: solar_panel_2_current
+    doc: "unknown, count, raw; evidence: sun (score 0.53)"
+  - id: solar_panel_current_2
     type: u1
     doc: "power_solar, mA, raw; evidence: sun (score 0.83)"
-  - id: battery_current_1
+  - id: battery_current_a
     type: s2le
     doc: "power_battery, mA, raw; evidence: sun (score 0.71)"
-  - id: battery_voltage_1
+  - id: battery_voltage_a
     type: u2le
     doc: "power_battery, mV, raw; evidence: sun (score 0.83)"
-  - id: battery_current_2
+  - id: battery_current_b
     type: s2le
     doc: "power_battery, mA, raw; evidence: sun (score 0.79)"
-  - id: battery_voltage_2
+  - id: battery_voltage_b
     type: u2le
     doc: "power_battery, mV, raw; evidence: sun (score 0.82)"
-  - id: bus_or_solar_input_power
+  - id: solar_array_current
     type: u2le
-    doc: "power_bus, mW, raw; evidence: sun (score 0.76)"
+    doc: "power_solar, mA, raw; evidence: sun (score 0.76)"
   - id: unknown_47
     size: 2
-  - id: panel_temperature_1
+  - id: panel_temp_1
     type: s1
     doc: "thermal, degC, raw; evidence: lagged (score 0.93)"
-  - id: panel_temperature_2
+  - id: panel_temp_2
     type: s1
     doc: "thermal, degC, raw; evidence: lagged (score 0.92)"
   - id: unknown_51
     size: 1
-  - id: panel_temperature_3
+  - id: panel_temp_3
     type: s1
     doc: "thermal, degC, raw; evidence: lagged (score 0.95)"
-  - id: panel_temperature_4
+  - id: panel_temp_4
     type: s1
     doc: "thermal, degC, raw; evidence: sun (score 0.87)"
   - id: unknown_54
     size: 4
-instances:
-  uptime_ms_s:
-    value: uptime_ms * 0.001

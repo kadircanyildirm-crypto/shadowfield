@@ -13,13 +13,8 @@ seq:
     doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_6
     size: 8
-  - id: uptime_or_packet_counter_low
+  - id: uptime_or_packet_counter
     type: b24le
-    doc: "counter, counts, raw; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw; evidence: counter (score 0.99)"
   - id: unknown_17
-    size: 7
-  - id: uptime_or_packet_counter_high_offset
-    type: b24le
-    doc: "counter, counts, raw; evidence: counter (score 1.00)"
-  - id: unknown_27
-    size: 5
+    size: 15

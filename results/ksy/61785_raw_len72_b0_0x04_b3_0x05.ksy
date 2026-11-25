@@ -8,31 +8,52 @@ doc: |
 seq:
   - id: unknown_0
     size: 8
-  - id: frame_counter
+  - id: uptime_counter
     type: b24le
-    doc: "counter, counts, raw; evidence: counter (score 1.00)"
+    doc: "counter, s, raw * 1; evidence: counter (score 1.00)"
   - id: unknown_11
     size: 5
-  - id: orbit_phase_byte
+  - id: unknown_byte_16
     type: u1
-    doc: "unknown, counts, raw; evidence: orbit (score 0.60)"
-  - id: sun_correlated_flag
+    doc: "unknown, raw; evidence: orbit (score 0.60)"
+  - id: unknown_sun_flag
     type: s1
     doc: "unknown, counts, raw; evidence: sun (score 0.95)"
-  - id: gnss_position_eci_y
+  - id: pos_eci_y
     type: f4le
-    doc: "navigation, m, raw / 1000 gives km (raw_per_km ~1009.7, so metres); evidence: position (score 0.97)"
-  - id: gnss_position_eci_component_unk
+    doc: "navigation, m, raw * 1; evidence: position (score 0.97)"
+  - id: position_eci_axis_candidate
     type: f4le
     doc: "navigation, m, raw; evidence: orbit (score 0.65)"
-  - id: gnss_position_or_velocity_component_unk
+  - id: vel_eci_component
     type: f4le
-    doc: "navigation, m or m/s, raw; evidence: orbit (score 0.66)"
-  - id: gnss_velocity_eci_y
+    doc: "navigation, m/s, raw * 1; evidence: orbit (score 0.66)"
+  - id: vel_eci_y
     type: f4le
-    doc: "navigation, m/s, raw (raw_per_km_per_s ~1004, so m/s); evidence: position (score 0.97)"
-  - id: nav_velocity_component_unk
+    doc: "navigation, m/s, raw * 1; evidence: position (score 0.97)"
+  - id: velocity_eci_axis_candidate
     type: f4le
     doc: "navigation, m/s, raw; evidence: sun (score 0.86)"
-  - id: unknown_38
-    size: 34
+  - id: attitude_quaternion_q0
+    type: f4le
+    doc: "attitude, unitless, raw; evidence: attitude (score 1.00)"
+  - id: attitude_quaternion_q1
+    type: f4le
+    doc: "attitude, unitless, raw; evidence: attitude (score 1.00)"
+  - id: attitude_quaternion_q2
+    type: f4le
+    doc: "attitude, unitless, raw; evidence: attitude (score 1.00)"
+  - id: attitude_quaternion_q3
+    type: f4le
+    doc: "attitude, unitless, raw; evidence: attitude (score 1.00)"
+  - id: unknown_54
+    size: 18
+instances:
+  uptime_counter_s:
+    value: uptime_counter * 1
+  pos_eci_y_m:
+    value: pos_eci_y * 1
+  vel_eci_component_m_s:
+    value: vel_eci_component * 1
+  vel_eci_y_m_s:
+    value: vel_eci_y * 1

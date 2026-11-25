@@ -8,114 +8,143 @@ doc: |
 seq:
   - id: unknown_0
     size: 27
-  - id: uptime_or_timestamp_seconds
+  - id: unix_time_s
     type: u4be
-    doc: "counter, count, raw; evidence: counter (score 1.00)"
-  - id: frame_sequence_counter
+    doc: "clock, s, raw; evidence: counter (score 1.00)"
+  - id: rolling_packet_counter
     type: u2be
-    doc: "counter, count, raw; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_33
     size: 1
   - id: gnss_pos_ecef_x
     type: s4be
-    doc: "navigation, m, raw * 0.01 (raw/99910 = km; ~1e5 raw/km so centimetres); evidence: position (score 1.00)"
+    doc: "navigation, m, raw * 0.01; evidence: position (score 1.00)"
   - id: gnss_pos_ecef_y
     type: s4be
     doc: "navigation, m, raw * 0.01; evidence: position (score 1.00)"
-  - id: gnss_pos_z
+  - id: gnss_pos_eci_z
     type: s4be
     doc: "navigation, m, raw * 0.01; evidence: position (score 1.00)"
+  - id: unknown_46
+    size: 1
   - id: gnss_vel_ecef_x
-    type: s4be
-    doc: "navigation, m/s, raw * 0.01; evidence: position (score 1.00)"
+    type: b24be
+    doc: "navigation, m/s, raw * 0.01; evidence: position (score 1.00) (signed 24-bit on the satellite; read here as unsigned)"
   - id: unknown_50
     size: 1
   - id: gnss_vel_ecef_y
     type: s4be
-    doc: "navigation, m/s, raw / 25606.4 (km/s scale 2.56e7 raw per km/s, doubtful); evidence: position (score 1.00)"
-  - id: gnss_vel_z
+    doc: "navigation, m/s, raw * 0.01 (probable); evidence: position (score 1.00)"
+  - id: gnss_vel_eci_z
     type: b24be
     doc: "navigation, m/s, raw * 0.01; evidence: position (score 1.00) (signed 24-bit on the satellite; read here as unsigned)"
   - id: unknown_58
     size: 1
-  - id: battery_or_bus_voltage_raw
+  - id: battery_voltage
     type: u2be
     doc: "power_battery, mV, raw; evidence: sun (score 0.86)"
   - id: unknown_61
     size: 15
-  - id: solar_input_count_small
+  - id: solar_array_current_a
     type: u1
-    doc: "power_solar, count, raw; evidence: sun (score 0.93)"
-  - id: solar_or_load_current_adc
+    doc: "power_solar, raw, raw; evidence: sun (score 0.93)"
+  - id: solar_or_load_current_u1
     type: u1
-    doc: "power_solar, ADC counts, raw; evidence: sun (score 0.54)"
+    doc: "power_solar, raw, raw; evidence: sun (score 0.54)"
   - id: solar_array_current_total
     type: u2be
     doc: "power_solar, mA, raw; evidence: sun (score 0.89)"
-  - id: solar_current_panel_a
+  - id: solar_panel_current_1
     type: u2be
     doc: "power_solar, mA, raw; evidence: sun (score 0.92)"
-  - id: solar_current_panel_b
+  - id: solar_panel_current_2
     type: u2be
     doc: "power_solar, mA, raw; evidence: sun (score 0.94)"
-  - id: solar_current_panel_c
+  - id: solar_panel_current_3
     type: u2be
     doc: "power_solar, mA, raw; evidence: sun (score 0.95)"
-  - id: solar_current_panel_d
+  - id: solar_panel_current_4
     type: u2be
     doc: "power_solar, mA, raw; evidence: sun (score 0.93)"
-  - id: unknown_88
-    size: 72
-  - id: uptime_seconds_counter
-    type: u2be
+  - id: attitude_quaternion_q0
+    type: f4be
+    doc: "attitude, unitless, 4 x float32 BE, unit norm; evidence: attitude (score 1.00)"
+  - id: attitude_quaternion_q1
+    type: f4be
+    doc: "attitude, unitless, 4 x float32 BE, unit norm; evidence: attitude (score 1.00)"
+  - id: attitude_quaternion_q2
+    type: f4be
+    doc: "attitude, unitless, 4 x float32 BE, unit norm; evidence: attitude (score 1.00)"
+  - id: attitude_quaternion_q3
+    type: f4be
+    doc: "attitude, unitless, 4 x float32 BE, unit norm; evidence: attitude (score 1.00)"
+  - id: unknown_104
+    size: 35
+  - id: power_or_charge_u2le
+    type: u2le
+    doc: "power_bus, counts, raw; evidence: lagged (score 0.44)"
+  - id: aux_sensor_a
+    type: u1
+    doc: "unknown, counts, raw; evidence: sun (score 0.41)"
+  - id: unknown_142
+    size: 11
+  - id: aux_sensor_b
+    type: u1
+    doc: "unknown, counts, raw; evidence: sun (score 0.37)"
+  - id: unknown_154
+    size: 4
+  - id: uptime_seconds
+    type: u4be
     doc: "counter, s, raw; evidence: counter (score 1.00)"
-  - id: temp_panel_1
+  - id: panel_temp_1
     type: s1
     doc: "thermal, degC, raw; evidence: lagged (score 0.98)"
-  - id: temp_panel_2
+  - id: panel_temp_2
     type: s1
     doc: "thermal, degC, raw; evidence: sun (score 0.87)"
-  - id: temp_panel_3
+  - id: panel_temp_3
     type: s1
     doc: "thermal, degC, raw; evidence: lagged (score 0.98)"
-  - id: temp_internal_1
+  - id: internal_temp_1
     type: s1
     doc: "thermal, degC, raw; evidence: orbit (score 0.86)"
-  - id: temp_panel_4
+  - id: panel_temp_4
     type: s1
     doc: "thermal, degC, raw; evidence: lagged (score 0.98)"
-  - id: temp_internal_2
+  - id: internal_temp_a
     type: u1
     doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: temp_internal_3
+  - id: internal_temp_b
     type: u1
     doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: temp_internal_4
+  - id: internal_temp_c
     type: u1
     doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: temp_internal_5
+  - id: internal_temp_d
     type: u1
     doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: temp_internal_6
+  - id: internal_temp_e
     type: u1
     doc: "thermal, degC, raw; evidence: orbit (score 0.86)"
-  - id: temp_internal_7
+  - id: internal_temp_f
     type: u1
     doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: temp_internal_8
+  - id: internal_temp_g
     type: u1
     doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
-  - id: temp_internal_9
+  - id: internal_temp_h
     type: u1
     doc: "thermal, degC, raw; evidence: orbit (score 0.87)"
   - id: unknown_175
     size: 39
 instances:
+  gnss_pos_ecef_x_m:
+    value: gnss_pos_ecef_x * 0.01
   gnss_pos_ecef_y_m:
     value: gnss_pos_ecef_y * 0.01
-  gnss_pos_z_m:
-    value: gnss_pos_z * 0.01
+  gnss_pos_eci_z_m:
+    value: gnss_pos_eci_z * 0.01
   gnss_vel_ecef_x_m_s:
     value: gnss_vel_ecef_x * 0.01
-  gnss_vel_z_m_s:
-    value: gnss_vel_z * 0.01
+  gnss_vel_eci_z_m_s:
+    value: gnss_vel_eci_z * 0.01

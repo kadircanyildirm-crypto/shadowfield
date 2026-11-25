@@ -8,11 +8,18 @@ doc: |
 seq:
   - id: unknown_0
     size: 5
-  - id: frame_sequence_counter
+  - id: beacon_sequence_counter_a
     type: u1
-    doc: "counter, counts, raw; evidence: counter (score 1.00)"
+    doc: "counter, counts, raw * 1; evidence: counter (score 1.00)"
   - id: unknown_6
     size: 12
-  - id: uptime_or_packet_counter
-    type: u2le
-    doc: "counter, counts, raw; evidence: counter (score 1.00)"
+  - id: beacon_sequence_counter_b
+    type: u1
+    doc: "counter, counts, raw * 1; evidence: counter (score 1.00)"
+  - id: unknown_19
+    size: 1
+instances:
+  beacon_sequence_counter_a_counts:
+    value: beacon_sequence_counter_a * 1
+  beacon_sequence_counter_b_counts:
+    value: beacon_sequence_counter_b * 1

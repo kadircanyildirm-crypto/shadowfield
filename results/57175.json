@@ -1,0 +1,1350 @@
+[
+ {
+  "frame_type": "EU11S:len200:b0=0x14:b6=0x10",
+  "frames": 161,
+  "passes": 27,
+  "orbit": {
+   "mean_altitude_km": 479,
+   "max_abs_latitude_deg": 71.4,
+   "beta_angle_range_deg": [
+    27.6,
+    27.7
+   ],
+   "fraction_of_frames_in_sunlight": 0.019,
+   "fraction_of_frames_with_an_eclipse_in_the_previous_80_min": 1.0,
+   "days_covered": 3.7
+  },
+  "fields": [
+   {
+    "offset": 2,
+    "type": "u2le",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.321,
+    "min": 58.0,
+    "max": 1308.0,
+    "p5": 58.0,
+    "p95": 1308.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "frac_up_in_pass": 1.0,
+    "per_second": 3.9,
+    "rolling": true,
+    "wraps_in_pass": 3,
+    "p": 0.0,
+    "joined": "carry",
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 996.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 527.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 644.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.096,
+    "sun_minus_shadow_in_std": -0.78,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.087,
+     "10": 0.086,
+     "20": 0.087,
+     "40": 0.088,
+     "80": 0.088
+    },
+    "rank_corr_abs_beta": -0.012,
+    "relative_spread_p5_p95": 1.83,
+    "shadow_over_sun_median_ratio": 1.841,
+    "distinct_values": 17,
+    "median_step_within_pass": 78.0,
+    "mean": 685.025,
+    "moves_with_offsets": [
+     21,
+     43,
+     157
+    ]
+   },
+   {
+    "offset": 5,
+    "type": "u1",
+    "kind": "lagged",
+    "score": 0.832,
+    "rough": 0.034,
+    "min": 44.0,
+    "max": 248.0,
+    "p5": 46.0,
+    "p95": 54.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": 0.832,
+    "tau_min": 40,
+    "rho_sun": 0.241,
+    "p": 7.375816161117442e-08,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 50.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 49.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 47.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.827,
+    "sun_minus_shadow_in_std": 5.74,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.831,
+     "10": 0.831,
+     "20": 0.831,
+     "40": 0.832,
+     "80": 0.83
+    },
+    "rank_corr_abs_beta": 0.068,
+    "relative_spread_p5_p95": 0.163,
+    "shadow_over_sun_median_ratio": 0.312,
+    "distinct_values": 13,
+    "median_step_within_pass": 0.0,
+    "mean": 51.043,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 13,
+    "type": "u2le",
+    "kind": "lagged",
+    "score": 0.818,
+    "rough": 0.034,
+    "min": 0.0,
+    "max": 22170.0,
+    "p5": 0.0,
+    "p95": 4031.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": 0.818,
+    "tau_min": 80,
+    "rho_sun": 0.162,
+    "p": 1.936758866357079e-07,
+    "joined": "lsb",
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 3410.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 0.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 0.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.82,
+    "sun_minus_shadow_in_std": 0.36,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.815,
+     "10": 0.815,
+     "20": 0.816,
+     "40": 0.817,
+     "80": 0.818
+    },
+    "rank_corr_abs_beta": -0.048,
+    "shadow_over_sun_median_ratio": 0.0,
+    "distinct_values": 32,
+    "median_step_within_pass": 0.0,
+    "mean": 1487.634,
+    "moves_with_offsets": [
+     61,
+     77,
+     85
+    ]
+   },
+   {
+    "offset": 21,
+    "type": "u4be",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.317,
+    "min": 1706240.0,
+    "max": 1706261.0,
+    "p5": 1706240.0,
+    "p95": 1706261.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "frac_up_in_pass": 1.0,
+    "per_second": 0.05,
+    "rolling": true,
+    "wraps_in_pass": 3,
+    "p": 0.0,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 1706256.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 1706248.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 1706249.5,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.096,
+    "sun_minus_shadow_in_std": -0.73,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.087,
+     "10": 0.086,
+     "20": 0.087,
+     "40": 0.088,
+     "80": 0.088
+    },
+    "rank_corr_abs_beta": -0.012,
+    "relative_spread_p5_p95": 0.0,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 17,
+    "median_step_within_pass": 1.0,
+    "mean": 1706250.391,
+    "moves_with_offsets": [
+     2,
+     43,
+     157
+    ]
+   },
+   {
+    "offset": 43,
+    "type": "u2le",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.321,
+    "min": 58.0,
+    "max": 1308.0,
+    "p5": 58.0,
+    "p95": 1308.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "frac_up_in_pass": 1.0,
+    "per_second": 3.9,
+    "rolling": true,
+    "wraps_in_pass": 3,
+    "p": 0.0,
+    "joined": "carry",
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 996.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 527.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 644.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.096,
+    "sun_minus_shadow_in_std": -0.78,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.087,
+     "10": 0.086,
+     "20": 0.087,
+     "40": 0.088,
+     "80": 0.088
+    },
+    "rank_corr_abs_beta": -0.012,
+    "relative_spread_p5_p95": 1.83,
+    "shadow_over_sun_median_ratio": 1.841,
+    "distinct_values": 17,
+    "median_step_within_pass": 78.0,
+    "mean": 685.025,
+    "moves_with_offsets": [
+     2,
+     21,
+     157
+    ]
+   },
+   {
+    "offset": 46,
+    "type": "u4le",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.0,
+    "min": 1787445711.0,
+    "max": 1787663754.0,
+    "p5": 1787445905.0,
+    "p95": 1787660101.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "frac_up": 1.0,
+    "per_second": 0.6782970229884172,
+    "resets": 0,
+    "p": 0.0,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 1787564313.5,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 1787545242.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 1787549293.5,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.122,
+    "sun_minus_shadow_in_std": -0.49,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.133,
+     "10": -0.133,
+     "20": -0.133,
+     "40": -0.137,
+     "80": -0.131
+    },
+    "rank_corr_abs_beta": 0.996,
+    "relative_spread_p5_p95": 0.0,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 161,
+    "median_step_within_pass": 20.0,
+    "mean": 1787554851.273,
+    "moves_with_offsets": [
+     68,
+     72
+    ]
+   },
+   {
+    "offset": 61,
+    "type": "u1",
+    "kind": "lagged",
+    "score": 0.815,
+    "rough": 0.081,
+    "min": 0.0,
+    "max": 192.0,
+    "p5": 63.0,
+    "p95": 192.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": -0.815,
+    "tau_min": 80,
+    "rho_sun": -0.128,
+    "p": 2.289253031037918e-07,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 64.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 192.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 192.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.824,
+    "sun_minus_shadow_in_std": -0.02,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.814,
+     "10": -0.814,
+     "20": -0.814,
+     "40": -0.814,
+     "80": -0.815
+    },
+    "rank_corr_abs_beta": 0.072,
+    "relative_spread_p5_p95": 0.672,
+    "shadow_over_sun_median_ratio": 1.005,
+    "distinct_values": 6,
+    "median_step_within_pass": 0.0,
+    "mean": 154.807,
+    "moves_with_offsets": [
+     13
+    ]
+   },
+   {
+    "offset": 64,
+    "type": "u1",
+    "kind": "lagged",
+    "score": 0.688,
+    "rough": 0.229,
+    "min": 2.0,
+    "max": 253.0,
+    "p5": 139.0,
+    "p95": 172.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": 0.688,
+    "tau_min": 80,
+    "rho_sun": -0.079,
+    "p": 7.187225418490559e-05,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 172.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 163.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 147.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.751,
+    "sun_minus_shadow_in_std": -4.55,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.684,
+     "10": 0.685,
+     "20": 0.687,
+     "40": 0.688,
+     "80": 0.688
+    },
+    "rank_corr_abs_beta": 0.143,
+    "relative_spread_p5_p95": 0.202,
+    "shadow_over_sun_median_ratio": 6.792,
+    "distinct_values": 13,
+    "median_step_within_pass": 0.0,
+    "mean": 156.267,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 65,
+    "type": "u1",
+    "kind": "orbit",
+    "score": 0.784,
+    "rough": 0.012,
+    "min": 132.0,
+    "max": 139.0,
+    "p5": 132.0,
+    "p95": 132.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "r2_orbit": 0.759,
+    "p": 1.3108560210704183e-06,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 132.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 132.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 132.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.19,
+    "sun_minus_shadow_in_std": 6.08,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.298,
+     "10": 0.297,
+     "20": 0.29,
+     "40": 0.289,
+     "80": 0.28
+    },
+    "rank_corr_abs_beta": -0.182,
+    "relative_spread_p5_p95": 0.0,
+    "shadow_over_sun_median_ratio": 0.971,
+    "distinct_values": 5,
+    "median_step_within_pass": 0.0,
+    "mean": 132.093,
+    "moves_with_offsets": []
+   },
+   {
+    "offset": 68,
+    "type": "u3le",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.0,
+    "min": 6982208.0,
+    "max": 6983060.0,
+    "p5": 6982208.0,
+    "p95": 6983045.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "frac_up": 1.0,
+    "per_second": 0.002648975295940209,
+    "resets": 0,
+    "p": 0.0,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 6982670.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 6982596.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 6982612.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.099,
+    "sun_minus_shadow_in_std": -0.49,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.112,
+     "10": -0.112,
+     "20": -0.112,
+     "40": -0.116,
+     "80": -0.11
+    },
+    "rank_corr_abs_beta": 0.997,
+    "relative_spread_p5_p95": 0.0,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 34,
+    "median_step_within_pass": 0.0,
+    "mean": 6982633.652,
+    "moves_with_offsets": [
+     46,
+     72
+    ]
+   },
+   {
+    "offset": 72,
+    "type": "u4le",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.0,
+    "min": 23759425.0,
+    "max": 23760277.0,
+    "p5": 23759425.0,
+    "p95": 23760262.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "frac_up": 1.0,
+    "per_second": 0.0026498028964720673,
+    "resets": 0,
+    "p": 0.0,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 23759888.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 23759813.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 23759829.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.099,
+    "sun_minus_shadow_in_std": -0.49,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.112,
+     "10": -0.112,
+     "20": -0.112,
+     "40": -0.116,
+     "80": -0.11
+    },
+    "rank_corr_abs_beta": 0.997,
+    "relative_spread_p5_p95": 0.0,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 34,
+    "median_step_within_pass": 0.0,
+    "mean": 23759850.969,
+    "moves_with_offsets": [
+     46,
+     68
+    ]
+   },
+   {
+    "offset": 77,
+    "type": "f4le",
+    "kind": "lagged",
+    "score": 0.91,
+    "rough": 0.077,
+    "min": -6.356589317321777,
+    "max": 22.170543670654297,
+    "p5": -3.720930337905884,
+    "p95": 4.031007766723633,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": 0.91,
+    "tau_min": 80,
+    "rho_sun": 0.142,
+    "p": 4.4871155244712257e-11,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 3.411,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": -0.465,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": -2.248,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.921,
+    "sun_minus_shadow_in_std": 0.46,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.908,
+     "10": 0.908,
+     "20": 0.909,
+     "40": 0.91,
+     "80": 0.91
+    },
+    "rank_corr_abs_beta": -0.092,
+    "relative_spread_p5_p95": 12.5,
+    "shadow_over_sun_median_ratio": -0.444,
+    "distinct_values": 57,
+    "median_step_within_pass": 0.15503883361816406,
+    "mean": 0.437,
+    "moves_with_offsets": [
+     13
+    ]
+   },
+   {
+    "offset": 85,
+    "type": "u1",
+    "kind": "lagged",
+    "score": 0.694,
+    "rough": 0.252,
+    "min": 0.0,
+    "max": 67.0,
+    "p5": 62.0,
+    "p95": 67.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": -0.694,
+    "tau_min": 10,
+    "rho_sun": -0.189,
+    "p": 5.895082214017586e-05,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 64.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 67.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 67.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.697,
+    "sun_minus_shadow_in_std": -0.39,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.694,
+     "10": -0.694,
+     "20": -0.693,
+     "40": -0.692,
+     "80": -0.692
+    },
+    "rank_corr_abs_beta": 0.118,
+    "relative_spread_p5_p95": 0.075,
+    "shadow_over_sun_median_ratio": 1.063,
+    "distinct_values": 7,
+    "median_step_within_pass": 0.0,
+    "mean": 64.168,
+    "moves_with_offsets": [
+     13
+    ]
+   },
+   {
+    "offset": 92,
+    "type": "u2le",
+    "kind": "lagged",
+    "score": 0.795,
+    "rough": 0.405,
+    "min": 0.0,
+    "max": 9514.0,
+    "p5": 0.0,
+    "p95": 9244.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": -0.795,
+    "tau_min": 80,
+    "rho_sun": -0.055,
+    "p": 7.086098204072101e-07,
+    "joined": "wrap",
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 8797.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 9019.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 9158.5,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.82,
+    "sun_minus_shadow_in_std": -0.03,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.791,
+     "10": -0.791,
+     "20": -0.793,
+     "40": -0.793,
+     "80": -0.795
+    },
+    "rank_corr_abs_beta": 0.07,
+    "relative_spread_p5_p95": 1.022,
+    "shadow_over_sun_median_ratio": 1.008,
+    "distinct_values": 99,
+    "median_step_within_pass": 54.0,
+    "mean": 8436.062,
+    "moves_with_offsets": [
+     100,
+     119
+    ]
+   },
+   {
+    "offset": 100,
+    "type": "u2le",
+    "kind": "lagged",
+    "score": 0.763,
+    "rough": 0.383,
+    "min": 0.0,
+    "max": 41533.0,
+    "p5": 0.0,
+    "p95": 41461.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": -0.763,
+    "tau_min": 80,
+    "rho_sun": 0.144,
+    "p": 3.6754596142971815e-06,
+    "joined": "wrap",
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 41390.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 41431.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 41451.0,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.829,
+    "sun_minus_shadow_in_std": 0.0,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.754,
+     "10": -0.754,
+     "20": -0.759,
+     "40": -0.76,
+     "80": -0.763
+    },
+    "rank_corr_abs_beta": 0.032,
+    "relative_spread_p5_p95": 1.001,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 18,
+    "median_step_within_pass": 10.0,
+    "mean": 38852.193,
+    "moves_with_offsets": [
+     92
+    ]
+   },
+   {
+    "offset": 119,
+    "type": "u2le",
+    "kind": "lagged",
+    "score": 0.71,
+    "rough": 0.386,
+    "min": 0.0,
+    "max": 47251.0,
+    "p5": 0.0,
+    "p95": 47185.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "rho_lag": -0.71,
+    "tau_min": 80,
+    "rho_sun": -0.084,
+    "p": 3.3018457788142864e-05,
+    "joined": "wrap",
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 46989.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 47054.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 47136.5,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": 0.727,
+    "sun_minus_shadow_in_std": -0.0,
+    "rank_corr_by_lag_tau_min": {
+     "5": -0.707,
+     "10": -0.707,
+     "20": -0.709,
+     "40": -0.708,
+     "80": -0.71
+    },
+    "rank_corr_abs_beta": 0.182,
+    "relative_spread_p5_p95": 1.003,
+    "shadow_over_sun_median_ratio": 1.001,
+    "distinct_values": 15,
+    "median_step_within_pass": 33.0,
+    "mean": 44141.627,
+    "moves_with_offsets": [
+     92
+    ]
+   },
+   {
+    "offset": 157,
+    "type": "u4be",
+    "kind": "counter",
+    "score": 1.0,
+    "rough": 0.317,
+    "min": 2304.0,
+    "max": 2325.0,
+    "p5": 2304.0,
+    "p95": 2325.0,
+    "n_frames": 161,
+    "n_passes": 27,
+    "frac_up_in_pass": 1.0,
+    "per_second": 0.05,
+    "rolling": true,
+    "wraps_in_pass": 3,
+    "p": 0.0,
+    "response_profile": {
+     "shadow 5-24 min after sunset": {
+      "median": 2320.0,
+      "n": 38
+     },
+     "shadow 24-27 min after sunset": {
+      "median": 2312.0,
+      "n": 58
+     },
+     "shadow 27-32 min after sunset": {
+      "median": 2313.5,
+      "n": 62
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": null,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.096,
+    "sun_minus_shadow_in_std": -0.73,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.087,
+     "10": 0.086,
+     "20": 0.087,
+     "40": 0.088,
+     "80": 0.088
+    },
+    "rank_corr_abs_beta": -0.012,
+    "relative_spread_p5_p95": 0.009,
+    "shadow_over_sun_median_ratio": 1.002,
+    "distinct_values": 17,
+    "median_step_within_pass": 1.0,
+    "mean": 2314.391,
+    "moves_with_offsets": [
+     2,
+     21,
+     43
+    ]
+   }
+  ],
+  "names": {
+   "summary": "A 200-byte beacon frame with several rolling counters, an epoch-based clock, uptime-like counters and a number of fields that drift smoothly after an unseen eclipse. Nearly all frames are in shadow (only 1.9% in sunlight), so the sun contrasts are weak and the lagged fields mostly show recovery or decay after the earlier eclipse.",
+   "fields": [
+    {
+     "offset": 2,
+     "name": "sequence_counter_a",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.433,
+     "rationale": "Rolling u2 counter that wraps within passes, rising about 3.9 per second. Same values as offset 43, so likely a duplicated frame or sequence counter. [3/3 samples agree]"
+    },
+    {
+     "offset": 5,
+     "name": "temperature_a",
+     "category": "thermal",
+     "unit": "degC",
+     "scale": "raw",
+     "confidence": 0.2,
+     "rationale": "Smooth u1 around 50 with a falling trend in shadow (-0.83) and tau of 40 min. It behaves like a slowly cooling internal temperature, but the unit is a guess. [2/3 samples agree]"
+    },
+    {
+     "offset": 13,
+     "name": "charge_current_or_power_raw",
+     "category": "power_battery",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.083,
+     "rationale": "Value is zero for most shadow frames and positive only early after sunset, so it decays after the earlier eclipse. It moves with offset 77, which is the same quantity in float form. [1/3 samples agree]"
+    },
+    {
+     "offset": 21,
+     "name": "frame_counter_be",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.417,
+     "rationale": "u4be counter that rises 0.05 per second and rolls within passes, and it moves with the offset 2, 43 and 157 counters. This looks like a packet or beacon sequence number. [3/3 samples agree]"
+    },
+    {
+     "offset": 43,
+     "name": "sequence_counter_b",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.4,
+     "rationale": "Identical to the offset 2 counter, with the same values and rate. It is a duplicate of that field. [3/3 samples agree]"
+    },
+    {
+     "offset": 46,
+     "name": "unix_time",
+     "category": "clock",
+     "unit": "s",
+     "scale": "raw (unix seconds)",
+     "confidence": 0.833,
+     "rationale": "u4le value around 1.7876e9 rising monotonically with no resets and in step with the offsets 68 and 72. This is consistent with a Unix timestamp from 2026. [3/3 samples agree]"
+    },
+    {
+     "offset": 61,
+     "name": "state_value_a",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.15,
+     "rationale": "Takes only 6 distinct values and steps from 64 to 192 over the pass, mirroring offset 13. It is probably a status or mode byte. [3/3 samples agree]"
+    },
+    {
+     "offset": 64,
+     "name": "housekeeping_temp_candidate",
+     "category": "thermal",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.2,
+     "rationale": "Declines in shadow (trend -0.75) over a range of about 139-172, with outliers at 2 and 253. This is plausible as a temperature, but the scaling is unknown. [3/3 samples agree]"
+    },
+    {
+     "offset": 65,
+     "name": "slow_orbit_value",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.117,
+     "rationale": "Almost constant at 132, with only a few values up to 139. The orbit r2 is modest and it is likely a quantised sensor reading. [3/3 samples agree]"
+    },
+    {
+     "offset": 68,
+     "name": "uptime_or_tick_counter",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.417,
+     "rationale": "u3 counter that rises monotonically at about 0.00265 per second with no resets. It moves with offset 72, which has the same rate. [3/3 samples agree]"
+    },
+    {
+     "offset": 72,
+     "name": "uptime_or_tick_counter_2",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.417,
+     "rationale": "u4 counter that rises at 0.00265 per second with no resets, tracking offset 68. It is likely an event or tick counter. [3/3 samples agree]"
+    },
+    {
+     "offset": 77,
+     "name": "charge_current_signed",
+     "category": "power_battery",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.167,
+     "rationale": "Float that is signed and falls after sunset (trend -0.92), moving with offset 13. This is consistent with a battery current that is recovering from an earlier eclipse. [2/3 samples agree]"
+    },
+    {
+     "offset": 85,
+     "name": "state_value_b",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.117,
+     "rationale": "Mostly sits at 62-67 with only 7 distinct values, and occasional zeros. It could be a status or sensor byte, and it moves with offset 13. [3/3 samples agree]"
+    },
+    {
+     "offset": 92,
+     "name": "accumulated_value_a",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.117,
+     "rationale": "u2 value that rises in shadow (trend +0.82) with wrapping noted. It moves with offsets 100 and 119 and could be an energy or time accumulator. [3/3 samples agree]"
+    },
+    {
+     "offset": 100,
+     "name": "accumulated_value_b",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.117,
+     "rationale": "Sits near 41400 in shadow and moves with offset 92. Probably an accumulator that wraps. [3/3 samples agree]"
+    },
+    {
+     "offset": 119,
+     "name": "accumulated_value_c",
+     "category": "unknown",
+     "unit": "raw",
+     "scale": "raw",
+     "confidence": 0.117,
+     "rationale": "Sits near 47000 in shadow and moves with offset 92. Likely another accumulator that wraps. [3/3 samples agree]"
+    },
+    {
+     "offset": 157,
+     "name": "frame_counter_c",
+     "category": "counter",
+     "unit": "count",
+     "scale": "raw",
+     "confidence": 0.383,
+     "rationale": "u4be counter rising 0.05 per second with the same pattern as offset 21. It is probably a related sequence counter. [3/3 samples agree]"
+    }
+   ],
+   "health": "Not enough evidence for a reliable assessment. The timestamp and the uptime counters show no resets over 3.7 days, which suggests no reboots. The battery and thermal fields cannot be identified with confidence, and nearly all frames are in shadow."
+  },
+  "evaluation": {
+   "true_fields": 18,
+   "physical_true_fields": 17,
+   "recall_physical": 0.8235294117647058,
+   "exact_physical": 0.17647058823529413,
+   "value_exact_physical": 0.17647058823529413,
+   "located_exact_fraction": 1.0,
+   "kind_accuracy": 0.9285714285714286,
+   "precision": 0.9411764705882353,
+   "llm_category_accuracy": 0.2857142857142857,
+   "llm_judged": 14,
+   "llm_answered": 0.5714285714285714,
+   "llm_selective_accuracy": 0.5,
+   "llm_fine_accuracy": 0.0,
+   "llm_fine_judged": 2,
+   "truth": [
+    {
+     "name": "beacon_uptime",
+     "offset": 1,
+     "width": 3,
+     "endian": "le",
+     "signed": false,
+     "category": "counter",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 2.0,
+     "kind": "counter",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_vbus",
+     "offset": 5,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 5.0,
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_reset_total_cnt",
+     "offset": 7,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "counter",
+     "located": "exact",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "beacon_pamp_temp",
+     "offset": 13,
+     "width": 2,
+     "endian": "le",
+     "signed": false,
+     "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 13.0,
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "beacon_tx_cnt",
+     "offset": 24,
+     "width": 1,
+     "endian": "be",
+     "signed": false,
+     "category": "counter",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 21.0,
+     "kind": "counter",
+     "kind_ok": true
+    },
+    {
+     "name": "tlm_trx_cmn_mcu_uptime",
+     "offset": 42,
+     "width": 3,
+     "endian": "le",
+     "signed": false,
+     "category": "counter",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 43.0,
+     "kind": "counter",
+     "kind_ok": true
+    },
+    {
+     "name": "tlm_trx_cmn_mcu_temp",
+     "offset": 58,
+     "width": 4,
+     "endian": "le",
+     "signed": "f",
+     "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 61.0,
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "tlm_trx_cmn_rtc_unixtime",
+     "offset": 46,
+     "width": 4,
+     "endian": "le",
+     "signed": false,
+     "category": "clock",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 46.0,
+     "kind": "counter",
+     "kind_ok": true
+    },
+    {
+     "name": "tlm_trx_cmn_rtc_vbat",
+     "offset": 54,
+     "width": 4,
+     "endian": "le",
+     "signed": "f",
+     "category": "clock",
+     "located": "exact",
+     "fine": NaN,
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "tlm_trx_vbus",
+     "offset": 63,
+     "width": 4,
+     "endian": "le",
+     "signed": "f",
+     "category": "power",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 65.0,
+     "kind": "orbit",
+     "kind_ok": true
+    },
+    {
+     "name": "tlm_trx_startup_previous",
+     "offset": 67,
+     "width": 4,
+     "endian": "le",
+     "signed": false,
+     "category": "other",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 68.0,
+     "kind": "counter",
+     "kind_ok": false
+    },
+    {
+     "name": "tlm_trx_startup_current",
+     "offset": 71,
+     "width": 4,
+     "endian": "le",
+     "signed": false,
+     "category": "power",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 72.0,
+     "kind": "counter",
+     "kind_ok": false
+    },
+    {
+     "name": "tlm_trx_ds600_temp",
+     "offset": 77,
+     "width": 4,
+     "endian": "le",
+     "signed": "f",
+     "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 77.0,
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "tlm_trx_tmp75_temp",
+     "offset": 82,
+     "width": 4,
+     "endian": "le",
+     "signed": "f",
+     "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 85.0,
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "tlm_trx_pamp_current_tx",
+     "offset": 91,
+     "width": 4,
+     "endian": "le",
+     "signed": "f",
+     "category": "power",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 92.0,
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "tlm_trx_pamp_voltage_tx",
+     "offset": 99,
+     "width": 4,
+     "endian": "le",
+     "signed": "f",
+     "category": "power",
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 100.0,
+     "kind": "lagged",
+     "kind_ok": true
+    },
+    {
+     "name": "tlm_trx_modem_pwr_fwd",
+     "offset": 114,
+     "width": 4,
+     "endian": "le",
+     "signed": "f",
+     "category": "power",
+     "located": "exact",
+     "fine": "power_bus",
+     "found": false,
+     "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
+     "kind": "",
+     "kind_ok": false
+    },
+    {
+     "name": "tlm_trx_modem_pwr_rev",
+     "offset": 118,
+     "width": 4,
+     "endian": "le",
+     "signed": "f",
+     "category": "power",
+     "located": "exact",
+     "fine": "power_bus",
+     "found": true,
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 119.0,
+     "kind": "lagged",
+     "kind_ok": true
+    }
+   ]
+  }
+ }
+]

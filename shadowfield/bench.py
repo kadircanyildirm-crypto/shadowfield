@@ -16,8 +16,6 @@ SATS = [  # norad, decoder, display name
     (43880, "uwe4", "UWE-4"),
     (61785, "geoscan", "Geoscan"),
     (60237, "grbbeta", "GRBBeta"),
-    (62394, "crocube", "CroCube"),
-    (57172, "sputnixusp", "Sputnix USP"),
     (43784, "snuglite", "SNUGLITE"),
     (46506, "netsat", "NetSat"),
     (41789, "alsat1n", "AlSat-1N"),

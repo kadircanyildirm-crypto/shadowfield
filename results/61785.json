@@ -296,6 +296,134 @@
     ]
    },
    {
+    "offset": 33,
+    "type": "u1",
+    "kind": "orbit",
+    "score": 0.398,
+    "rough": 0.028,
+    "min": 0.0,
+    "max": 18.0,
+    "p5": 6.0,
+    "p95": 13.0,
+    "n_frames": 1476,
+    "n_passes": 103,
+    "r2_orbit": 0.196,
+    "p": 3.122419093892832e-05,
+    "response_profile": {
+     "shadow 5-11 min after sunset": {
+      "median": 11.0,
+      "n": 192
+     },
+     "shadow 11-13 min after sunset": {
+      "median": 11.0,
+      "n": 261
+     },
+     "shadow 13-34 min after sunset": {
+      "median": 11.0,
+      "n": 275
+     },
+     "sun 27-44 min after sunrise": {
+      "median": 9.0,
+      "n": 222
+     },
+     "sun 44-47 min after sunrise": {
+      "median": 11.0,
+      "n": 276
+     },
+     "sun 47-51 min after sunrise": {
+      "median": 12.0,
+      "n": 250
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.597,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.128,
+    "sun_minus_shadow_in_std": 0.0,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.22,
+     "10": 0.219,
+     "20": 0.219,
+     "40": 0.222,
+     "80": 0.221
+    },
+    "rank_corr_abs_beta": -0.118,
+    "relative_spread_p5_p95": 0.636,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 18,
+    "median_step_within_pass": 0.0,
+    "mean": 10.474,
+    "drift_per_30_days_of_daily_low": 3.75,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 21.6,
+    "moves_with_offsets": [
+     34,
+     68
+    ]
+   },
+   {
+    "offset": 34,
+    "type": "u1",
+    "kind": "orbit",
+    "score": 0.382,
+    "rough": 0.025,
+    "min": 0.0,
+    "max": 18.0,
+    "p5": 7.0,
+    "p95": 14.0,
+    "n_frames": 1476,
+    "n_passes": 103,
+    "r2_orbit": 0.18,
+    "p": 6.749924880003109e-05,
+    "response_profile": {
+     "shadow 5-11 min after sunset": {
+      "median": 12.0,
+      "n": 192
+     },
+     "shadow 11-13 min after sunset": {
+      "median": 11.0,
+      "n": 261
+     },
+     "shadow 13-34 min after sunset": {
+      "median": 11.0,
+      "n": 275
+     },
+     "sun 27-44 min after sunrise": {
+      "median": 9.0,
+      "n": 222
+     },
+     "sun 44-47 min after sunrise": {
+      "median": 11.0,
+      "n": 276
+     },
+     "sun 47-51 min after sunrise": {
+      "median": 12.5,
+      "n": 250
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.565,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.128,
+    "sun_minus_shadow_in_std": 0.0,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.171,
+     "10": 0.171,
+     "20": 0.171,
+     "40": 0.174,
+     "80": 0.174
+    },
+    "rank_corr_abs_beta": -0.07,
+    "relative_spread_p5_p95": 0.636,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 19,
+    "median_step_within_pass": 0.0,
+    "mean": 10.811,
+    "drift_per_30_days_of_daily_low": 2.824,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 21.6,
+    "moves_with_offsets": [
+     33,
+     68
+    ]
+   },
+   {
     "offset": 43,
     "type": "s1",
     "kind": "sun",
@@ -684,10 +812,74 @@
     "resets_in_window": 27,
     "last_reset_days_before_end": 1.5,
     "moves_with_offsets": []
+   },
+   {
+    "offset": 68,
+    "type": "s1",
+    "kind": "orbit",
+    "score": 0.422,
+    "rough": 0.041,
+    "min": -13.0,
+    "max": 37.0,
+    "p5": 3.0,
+    "p95": 14.0,
+    "n_frames": 1476,
+    "n_passes": 103,
+    "r2_orbit": 0.22,
+    "p": 9.092531526164439e-06,
+    "response_profile": {
+     "shadow 5-11 min after sunset": {
+      "median": 11.0,
+      "n": 192
+     },
+     "shadow 11-13 min after sunset": {
+      "median": 11.0,
+      "n": 261
+     },
+     "shadow 13-34 min after sunset": {
+      "median": 10.0,
+      "n": 275
+     },
+     "sun 27-44 min after sunrise": {
+      "median": 10.0,
+      "n": 222
+     },
+     "sun 44-47 min after sunrise": {
+      "median": 11.0,
+      "n": 276
+     },
+     "sun 47-51 min after sunrise": {
+      "median": 12.0,
+      "n": 250
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": 0.581,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.22,
+    "sun_minus_shadow_in_std": 0.0,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.233,
+     "10": 0.233,
+     "20": 0.233,
+     "40": 0.235,
+     "80": 0.235
+    },
+    "rank_corr_abs_beta": -0.136,
+    "relative_spread_p5_p95": 1.0,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 25,
+    "median_step_within_pass": 0.0,
+    "mean": 10.523,
+    "drift_per_30_days_of_daily_low": 0.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 21.6,
+    "moves_with_offsets": [
+     33,
+     34
+    ]
    }
   ],
   "names": {
-   "summary": "A 72-byte housekeeping/telemetry beacon (first byte 0x84) with a Unix timestamp, a solar-array current, battery or bus voltages, four temperatures that move together, and a one-byte rolling sequence counter. All frames are in sunlight, but an eclipse occurred in the previous 80 minutes, so the lagged correlations are still meaningful.",
+   "summary": "A 72-byte housekeeping/telemetry beacon with a Unix timestamp, a solar input channel, three voltage-like channels near 4.1 V and 8.2 V, four temperatures that track sunlight, a rolling sequence counter, and a few small low-signal bytes. The mix looks like a power and thermal status frame from a 2S Li-ion cubesat.",
    "fields": [
     {
      "offset": 17,
@@ -696,34 +888,52 @@
      "unit": "s",
      "scale": "raw",
      "confidence": 0.95,
-     "rationale": "u4le ticking at 1.00 s/s with no resets, and the values match the Unix epoch (about 1.79e9). The small epoch offset of 20 s is likely a latency or packing delay."
+     "rationale": "u4le increasing at 1.0000058 s/s with Unix epoch guess and 0 resets. Values near 1.79e9 are consistent with a Unix timestamp. [3/3 samples agree]"
     },
     {
      "offset": 25,
      "name": "solar_array_current",
      "category": "power_solar",
      "unit": "mA",
-     "scale": "raw * 1.0",
-     "confidence": 0.7,
-     "rationale": "Reads exactly 0 in shadow and about 200 (p95 332) in sun. rho_sun is 0.93 with no trend inside each regime, so it is set directly by illumination. The unit and scale are guesses."
+     "scale": "raw",
+     "confidence": 0.683,
+     "rationale": "Zero in shadow, about 200 in sun (up to 398), rho_sun 0.93, rough and far above 1 spread: a solar input current. [3/3 samples agree]"
     },
     {
      "offset": 27,
-     "name": "battery_cell_voltage",
+     "name": "battery_cell1_voltage",
      "category": "power_battery",
      "unit": "mV",
-     "scale": "raw * 1.0",
-     "confidence": 0.6,
-     "rationale": "Range 4020-4141 is typical of a single Li-ion cell in mV. It is narrow (spread 0.013), higher in sun, with shadow/sun ratio 0.994. It moves with offsets 29 and 57, which are about twice its value, so they look like the two-cell stack."
+     "scale": "raw",
+     "confidence": 0.583,
+     "rationale": "4020-4141 is in the Li-ion cell range, narrow spread 1.3%, higher in sun and falling in shadow, and it moves with offsets 29 and 57. [3/3 samples agree]"
     },
     {
      "offset": 29,
      "name": "battery_pack_voltage",
      "category": "power_battery",
      "unit": "mV",
-     "scale": "raw * 1.0",
-     "confidence": 0.6,
-     "rationale": "Range 8118-8306 matches a two-cell Li-ion pack in mV (about 2x offset 27). It is smooth, rises in sun and falls in shadow, and moves with offsets 27 and 57."
+     "scale": "raw",
+     "confidence": 0.583,
+     "rationale": "8118-8306 is about twice the cell voltage (two cells in series), sun-correlated with a small spread, and it moves with offset 27. [3/3 samples agree]"
+    },
+    {
+     "offset": 33,
+     "name": "unknown_small_a",
+     "category": "unknown",
+     "unit": "counts",
+     "scale": "raw",
+     "confidence": 0.183,
+     "rationale": "Small byte of 0-18 with weak orbit dependence (r2 0.2) and no sun contrast. It moves with offsets 34 and 68, so it may be a related sensor. [3/3 samples agree]"
+    },
+    {
+     "offset": 34,
+     "name": "unknown_small_b",
+     "category": "unknown",
+     "unit": "counts",
+     "scale": "raw",
+     "confidence": 0.183,
+     "rationale": "Small byte of 0-19 with weak orbit dependence, behaving like offsets 33 and 68. The evidence does not identify it. [3/3 samples agree]"
     },
     {
      "offset": 43,
@@ -731,8 +941,8 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.7,
-     "rationale": "Signed byte in -19..53, about 24 degC warmer in sun. It trends down in shadow (-0.52) and moves with the other three faces. Signed values in this range are usually degC directly."
+     "confidence": 0.683,
+     "rationale": "Signed byte in -19..53 degC range, warm in sun and cooler in shadow, with a falling trend in shadow (-0.52). It moves with the other panel temperatures. [3/3 samples agree]"
     },
     {
      "offset": 44,
@@ -740,8 +950,8 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.7,
-     "rationale": "Signed byte in -15..31 with the same sun/shadow behaviour (rho_sun 0.86, lag correlations about 0.82) as the neighbouring panel temperatures."
+     "confidence": 0.683,
+     "rationale": "Signed byte in -15..31, rho_sun 0.86, falling in shadow. It is one of four temperatures that move together. [3/3 samples agree]"
     },
     {
      "offset": 45,
@@ -749,8 +959,8 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.7,
-     "rationale": "Signed byte in -26..55, warmer in sun, cooling in shadow (-0.60 trend). It forms a group with offsets 43, 44 and 46."
+     "confidence": 0.683,
+     "rationale": "Signed byte in -26..55 with the largest swing, rho_sun 0.86 and falling in shadow. It is in the same group as 43, 44 and 46. [3/3 samples agree]"
     },
     {
      "offset": 46,
@@ -758,39 +968,54 @@
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.7,
-     "rationale": "Signed byte in -16..41, same pattern as the other panel temperatures and moving with them."
+     "confidence": 0.683,
+     "rationale": "Signed byte in -16..41, rho_sun 0.86, with a clear shadow cooling trend. It tracks offset 44. [3/3 samples agree]"
     },
     {
      "offset": 57,
-     "name": "battery_pack_voltage_2",
+     "name": "battery_voltage_secondary",
      "category": "power_battery",
      "unit": "mV",
-     "scale": "raw * 1.0",
-     "confidence": 0.45,
-     "rationale": "Range 7979-8342 is similar to offset 29 and it moves with offsets 27 and 29. It has only 10 distinct values and is rougher, so it may be a bus voltage or a second reading of the pack."
+     "scale": "raw",
+     "confidence": 0.483,
+     "rationale": "7979-8342 follows the pack voltage at 29 (moves together, sun correlated), a second measurement of the same pack, but noisier. [3/3 samples agree]"
     },
     {
      "offset": 65,
-     "name": "frame_sequence_counter",
+     "name": "sequence_counter",
      "category": "counter",
-     "unit": "count",
-     "scale": "raw (signed byte, wraps at 256)",
-     "confidence": 0.8,
-     "rationale": "Rolling s1 counter increasing about 0.1 per second, with no sun correlation. The 27 wraps are by design for a 1-byte counter, not reboots."
+     "unit": "counts",
+     "scale": "raw",
+     "confidence": 0.7,
+     "rationale": "s1 that increments by 1 per frame step at about 0.1 per second and wraps repeatedly. The 27 resets are expected wraps of a signed byte, not reboots. [3/3 samples agree]"
+    },
+    {
+     "offset": 68,
+     "name": "unknown_small_c",
+     "category": "unknown",
+     "unit": "counts",
+     "scale": "raw",
+     "confidence": 0.183,
+     "rationale": "Signed byte, mostly 3-14, with weak orbit dependence (r2 0.22) that moves with offsets 33 and 34. The evidence is too weak to say more. [3/3 samples agree]"
     }
    ],
-   "health": "No reboots are evident: the clock has no resets and the 1-byte counter only wraps by design. Battery voltages look healthy, rising in sun and dipping in shadow, and the daily lows are rising (+47 to +98 mV per 30 days). That is more likely a season or sampling effect than ageing, and 22 days of data is too short to be sure. Panel temperatures swing by about 24 degC between sun and shadow, which is normal."
+   "health": "No clock resets were seen in 21.6 days, and the sequence counter wraps are by design. Battery voltages are stable and recover in sun, but the daily lows rise slightly. This is probably a seasonal effect, and no ageing is evident. Panel temperatures swing normally with illumination, so nothing looks abnormal."
   },
   "evaluation": {
    "true_fields": 20,
    "physical_true_fields": 15,
-   "recall_physical": 0.6,
-   "exact_physical": 0.6,
-   "kind_accuracy": 0.5555555555555556,
+   "recall_physical": 0.8,
+   "exact_physical": 0.8,
+   "value_exact_physical": 0.8,
+   "located_exact_fraction": 1.0,
+   "kind_accuracy": 0.6666666666666666,
    "precision": 1.0,
-   "llm_category_accuracy": 1.0,
-   "llm_judged": 9,
+   "llm_category_accuracy": 0.75,
+   "llm_judged": 12,
+   "llm_answered": 0.75,
+   "llm_selective_accuracy": 1.0,
+   "llm_fine_accuracy": 0.75,
+   "llm_fine_judged": 4,
    "truth": [
     {
      "name": "eps_timestamp",
@@ -799,8 +1024,12 @@
      "endian": "le",
      "signed": false,
      "category": "clock",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 17.0,
      "kind": "clock",
      "kind_ok": true
     },
@@ -811,8 +1040,12 @@
      "endian": "be",
      "signed": false,
      "category": "counter",
+     "located": "exact",
+     "fine": NaN,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -823,8 +1056,12 @@
      "endian": "le",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_bus",
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -835,8 +1072,12 @@
      "endian": "le",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_solar",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 25.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -847,8 +1088,12 @@
      "endian": "le",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_battery",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 27.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -859,8 +1104,12 @@
      "endian": "le",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_battery",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 29.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -871,10 +1120,14 @@
      "endian": "be",
      "signed": false,
      "category": "thermal",
-     "found": false,
-     "how": "",
-     "kind": "",
-     "kind_ok": false
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 33.0,
+     "kind": "orbit",
+     "kind_ok": true
     },
     {
      "name": "eps_temperature_cell2",
@@ -883,10 +1136,14 @@
      "endian": "be",
      "signed": false,
      "category": "thermal",
-     "found": false,
-     "how": "",
-     "kind": "",
-     "kind_ok": false
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 34.0,
+     "kind": "orbit",
+     "kind_ok": true
     },
     {
      "name": "obc_temperature_pos_x",
@@ -895,8 +1152,12 @@
      "endian": "be",
      "signed": true,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 43.0,
      "kind": "sun",
      "kind_ok": false
     },
@@ -907,8 +1168,12 @@
      "endian": "be",
      "signed": true,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 44.0,
      "kind": "sun",
      "kind_ok": false
     },
@@ -919,8 +1184,12 @@
      "endian": "be",
      "signed": true,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 45.0,
      "kind": "sun",
      "kind_ok": false
     },
@@ -931,8 +1200,12 @@
      "endian": "be",
      "signed": true,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 46.0,
      "kind": "sun",
      "kind_ok": false
     },
@@ -943,8 +1216,12 @@
      "endian": "le",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_bus",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 57.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -955,8 +1232,12 @@
      "endian": "le",
      "signed": false,
      "category": "counter",
+     "located": "exact",
+     "fine": NaN,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -967,8 +1248,12 @@
      "endian": "be",
      "signed": true,
      "category": "other",
+     "located": "exact",
+     "fine": NaN,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -979,8 +1264,12 @@
      "endian": "be",
      "signed": true,
      "category": "other",
+     "located": "exact",
+     "fine": NaN,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -991,8 +1280,12 @@
      "endian": "be",
      "signed": false,
      "category": "other",
+     "located": "exact",
+     "fine": NaN,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -1003,8 +1296,12 @@
      "endian": "be",
      "signed": false,
      "category": "other",
+     "located": "exact",
+     "fine": NaN,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -1015,8 +1312,12 @@
      "endian": "be",
      "signed": false,
      "category": "other",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": false,
+     "found_offset": 65.0,
      "kind": "counter",
      "kind_ok": false
     },
@@ -1027,10 +1328,14 @@
      "endian": "be",
      "signed": true,
      "category": "thermal",
-     "found": false,
-     "how": "",
-     "kind": "",
-     "kind_ok": false
+     "located": "exact",
+     "fine": NaN,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 68.0,
+     "kind": "orbit",
+     "kind_ok": true
     }
    ]
   }
@@ -1550,95 +1855,164 @@
      17,
      18
     ]
+   },
+   {
+    "offset": 38,
+    "type": "f4le",
+    "kind": "attitude",
+    "score": 1.0,
+    "axes": 4,
+    "unit_norm_fraction": 0.997,
+    "response_profile": {
+     "shadow 6-11 min after sunset": {
+      "median": 1.0,
+      "n": 40
+     },
+     "shadow 11-13 min after sunset": {
+      "median": 1.0,
+      "n": 55
+     },
+     "shadow 13-33 min after sunset": {
+      "median": 1.0,
+      "n": 57
+     },
+     "sun 27-44 min after sunrise": {
+      "median": 1.0,
+      "n": 44
+     },
+     "sun 44-47 min after sunrise": {
+      "median": 1.0,
+      "n": 57
+     },
+     "sun 47-52 min after sunrise": {
+      "median": 1.0,
+      "n": 68
+     }
+    },
+    "trend_in_sun_vs_minutes_since_sunrise": -0.018,
+    "trend_in_shadow_vs_minutes_since_sunset": -0.06,
+    "sun_minus_shadow_in_std": 0.0,
+    "rank_corr_by_lag_tau_min": {
+     "5": 0.015,
+     "10": 0.015,
+     "20": 0.015,
+     "40": 0.016,
+     "80": 0.02
+    },
+    "rank_corr_abs_beta": 0.113,
+    "relative_spread_p5_p95": 1.0,
+    "shadow_over_sun_median_ratio": 1.0,
+    "distinct_values": 297,
+    "median_step_within_pass": 6.264746998940751e-08,
+    "mean": 112239243049732.86,
+    "drift_per_30_days_of_daily_low": -0.0,
+    "drift_per_30_days_of_daily_high": -0.0,
+    "window_days": 21.6,
+    "moves_with_offsets": []
    }
   ],
   "names": {
-   "summary": "72-byte beacon frame with a 3-byte rolling counter at offset 8 and a block of float32 values that look like GNSS-derived position and velocity (ECI). Several fields are smooth over the orbit and track orbital phase rather than sunlight, which suggests navigation or attitude data. Most of the float fields are only partly consistent with the TLE.",
+   "summary": "A 72-byte beacon dominated by navigation data: a wrapping counter, GNSS-style position and velocity floats in ECI, and a unit quaternion for attitude. Several fields that look sun-correlated are actually orbit-phase artefacts, because ground stations only hear the satellite at a few orbital phases.",
    "fields": [
     {
      "offset": 8,
-     "name": "frame_counter",
+     "name": "uptime_counter",
      "category": "counter",
-     "unit": "counts",
-     "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "u3 counter that only increases, with a median step of 1 within a pass and 20 wraps in passes. 24 resets in 21.6 days with a rate of 0.018/s is more likely a free-running sequence or uptime tick than a true reboot count, so reboot inference is weak."
+     "unit": "s",
+     "scale": "raw * 1",
+     "confidence": 0.433,
+     "rationale": "A 3-byte counter that only increases, with 24 resets in the window (20 wraps within passes). Its rate of 0.018/s is odd, so it may be a frame or tick counter. It cannot be a plain seconds clock. [3/3 samples agree]"
     },
     {
      "offset": 16,
-     "name": "orbit_phase_byte",
+     "name": "unknown_byte_16",
      "category": "unknown",
-     "unit": "counts",
+     "unit": "",
      "scale": "raw",
-     "confidence": 0.2,
-     "rationale": "u1 with r2_orbit 0.445 and a strong within-regime trend, but the value is not a clear sun response. It could be a navigation or attitude byte; the evidence does not identify it."
+     "confidence": 0.15,
+     "rationale": "A single byte with a moderate orbit-phase R2 of 0.445 and no clear sun, lag or temperature behaviour. It is probably the low byte of a neighbouring field or a status value. [3/3 samples agree]"
     },
     {
      "offset": 17,
-     "name": "sun_correlated_flag",
+     "name": "unknown_sun_flag",
      "category": "unknown",
      "unit": "counts",
      "scale": "raw",
-     "confidence": 0.3,
-     "rationale": "s1 with only 5 distinct values, switching between -54 and 74 with sunlight (rho_sun -0.95). It looks like an eclipse or sun-sensor state flag and is not a physical analog value."
+     "confidence": 0.167,
+     "rationale": "s1 with only 5 distinct values that switches between about -54 and +74 with illumination (rho_sun -0.95). Its jumps are step-like and not smooth, and it moves with fields 18 and 34 that follow orbital geometry, so it is more likely a state or orbit-derived value than a sensor. [3/3 samples agree]"
     },
     {
      "offset": 18,
-     "name": "gnss_position_eci_y",
+     "name": "pos_eci_y",
      "category": "navigation",
      "unit": "m",
-     "scale": "raw / 1000 gives km (raw_per_km ~1009.7, so metres)",
+     "scale": "raw * 1",
      "confidence": 0.6,
-     "rationale": "Linear in ECI y position with raw_per_km about 1010, so metres. Only 34% of frames match the orbit, so the rest are stale or no-fix values."
+     "rationale": "Matches the TLE-derived ECI y position at 1009.685 raw per km, so the unit is metres. Only 34% of frames agree with the orbit, the rest likely being stale or no-fix values. [3/3 samples agree]"
     },
     {
      "offset": 22,
-     "name": "gnss_position_eci_component_unk",
+     "name": "position_eci_axis_candidate",
      "category": "navigation",
      "unit": "m",
      "scale": "raw",
-     "confidence": 0.3,
-     "rationale": "f4 with range about \u00b16.4e6, matching Earth-radius-scale orbital coordinates in metres, and r2_orbit 0.52. It moves with offset 26, so it is likely another position component."
+     "confidence": 0.35,
+     "rationale": "A float of order 1e6 that repeats with orbital phase (r2 0.52), so it is likely another ECI position component in metres. Its coordinate is not confirmed. [3/3 samples agree]"
     },
     {
      "offset": 26,
-     "name": "gnss_position_or_velocity_component_unk",
+     "name": "vel_eci_component",
      "category": "navigation",
-     "unit": "m or m/s",
-     "scale": "raw",
-     "confidence": 0.25,
-     "rationale": "Orbit-phase dependent f4 with magnitude of a few thousand, moving with offset 22. Sample max is a garbage float, suggesting an unaligned or no-fix value. It may be a velocity component in m/s."
+     "unit": "m/s",
+     "scale": "raw * 1",
+     "confidence": 0.267,
+     "rationale": "A float of about 6700 at p95 that follows the orbital phase and moves with the field at offset 22. A max of 4e27 suggests invalid frames, so this is probably an ECI velocity or position component with an uncertain identity. [3/3 samples agree]"
     },
     {
      "offset": 30,
-     "name": "gnss_velocity_eci_y",
+     "name": "vel_eci_y",
      "category": "navigation",
      "unit": "m/s",
-     "scale": "raw (raw_per_km_per_s ~1004, so m/s)",
+     "scale": "raw * 1",
      "confidence": 0.6,
-     "rationale": "Matches ECI y velocity with about 1000 raw per km/s, so m/s. 36% of frames agree with the orbit, so many are stale or no-fix."
+     "rationale": "Matches the ECI y velocity at 1003.9 raw per km/s, so the unit is m/s. Only 36.5% of frames agree with the orbit, the rest likely being stale fixes. [3/3 samples agree]"
     },
     {
      "offset": 34,
-     "name": "nav_velocity_component_unk",
+     "name": "velocity_eci_axis_candidate",
      "category": "navigation",
      "unit": "m/s",
      "scale": "raw",
-     "confidence": 0.3,
-     "rationale": "f4 within \u00b17.6e3, comparable to orbital velocity in m/s. Its sun correlation likely comes from orbital phase aliasing with eclipse, and it moves with fields 17 and 18."
+     "confidence": 0.333,
+     "rationale": "A float of order 1e3 whose sign follows orbital phase, which explains its apparent sun correlation. It is probably another ECI velocity component in m/s. [3/3 samples agree]"
+    },
+    {
+     "offset": 38,
+     "name": "attitude_quaternion",
+     "category": "attitude",
+     "unit": "unitless",
+     "scale": "raw",
+     "confidence": 0.817,
+     "rationale": "Four float axes with a unit norm in 99.7% of frames, which is characteristic of a quaternion. [3/3 samples agree]"
     }
    ],
-   "health": "Not enough evidence. The counter has 24 resets but more likely wraps by design, so reboots cannot be concluded. No battery or thermal fields were identified."
+   "health": "Not enough evidence for a reliable health assessment. The counter at offset 8 reset 24 times, with the last reset 0.5 days before the end of the window, but it may be a misparsed field rather than a true reboot count. No battery or thermal fields were identified."
   },
   "evaluation": {
    "true_fields": 15,
    "physical_true_fields": 14,
-   "recall_physical": 0.5,
-   "exact_physical": 0.35714285714285715,
-   "kind_accuracy": 0.42857142857142855,
+   "recall_physical": 0.7857142857142857,
+   "exact_physical": 0.6428571428571429,
+   "value_exact_physical": 0.6428571428571429,
+   "located_exact_fraction": 0.9333333333333333,
+   "kind_accuracy": 0.6363636363636364,
    "precision": 1.0,
-   "llm_category_accuracy": 0.7142857142857143,
-   "llm_judged": 7,
+   "llm_category_accuracy": 0.9090909090909091,
+   "llm_judged": 11,
+   "llm_answered": 0.9090909090909091,
+   "llm_selective_accuracy": 1.0,
+   "llm_fine_accuracy": NaN,
+   "llm_fine_judged": 0,
    "truth": [
     {
      "name": "cmd",
@@ -1647,8 +2021,12 @@
      "endian": "le",
      "signed": false,
      "category": "other",
+     "located": "exact",
+     "fine": null,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -1659,8 +2037,12 @@
      "endian": "le",
      "signed": false,
      "category": "clock",
+     "located": "affine",
+     "fine": null,
      "found": true,
      "how": "overlap",
+     "value_exact": false,
+     "found_offset": 8.0,
      "kind": "counter",
      "kind_ok": true
     },
@@ -1671,8 +2053,12 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
+     "located": "exact",
+     "fine": null,
      "found": true,
      "how": "overlap",
+     "value_exact": false,
+     "found_offset": 17.0,
      "kind": "sun",
      "kind_ok": false
     },
@@ -1683,8 +2069,12 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
+     "located": "exact",
+     "fine": null,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 18.0,
      "kind": "position",
      "kind_ok": true
     },
@@ -1695,8 +2085,12 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
+     "located": "exact",
+     "fine": null,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 22.0,
      "kind": "orbit",
      "kind_ok": false
     },
@@ -1707,8 +2101,12 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
+     "located": "exact",
+     "fine": null,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 26.0,
      "kind": "orbit",
      "kind_ok": false
     },
@@ -1719,8 +2117,12 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
+     "located": "exact",
+     "fine": null,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 30.0,
      "kind": "position",
      "kind_ok": true
     },
@@ -1731,8 +2133,12 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
+     "located": "exact",
+     "fine": null,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 34.0,
      "kind": "sun",
      "kind_ok": false
     },
@@ -1743,10 +2149,14 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
-     "found": false,
-     "how": "",
-     "kind": "",
-     "kind_ok": false
+     "located": "exact",
+     "fine": null,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 38.0,
+     "kind": "attitude",
+     "kind_ok": true
     },
     {
      "name": "gnss_value_2",
@@ -1755,10 +2165,14 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
-     "found": false,
-     "how": "",
-     "kind": "",
-     "kind_ok": false
+     "located": "exact",
+     "fine": null,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 38.0,
+     "kind": "attitude",
+     "kind_ok": true
     },
     {
      "name": "gnss_value_3",
@@ -1767,10 +2181,14 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
-     "found": false,
-     "how": "",
-     "kind": "",
-     "kind_ok": false
+     "located": "exact",
+     "fine": null,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 38.0,
+     "kind": "attitude",
+     "kind_ok": true
     },
     {
      "name": "gnss_value_4",
@@ -1779,10 +2197,14 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
-     "found": false,
-     "how": "",
-     "kind": "",
-     "kind_ok": false
+     "located": "exact",
+     "fine": null,
+     "found": true,
+     "how": "exact",
+     "value_exact": true,
+     "found_offset": 38.0,
+     "kind": "attitude",
+     "kind_ok": true
     },
     {
      "name": "gnss_value_10",
@@ -1791,8 +2213,12 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
+     "located": "exact",
+     "fine": null,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -1803,8 +2229,12 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
+     "located": "exact",
+     "fine": null,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -1815,8 +2245,12 @@
      "endian": "le",
      "signed": "f",
      "category": "nav",
+     "located": "exact",
+     "fine": null,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     }

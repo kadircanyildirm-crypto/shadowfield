@@ -17,44 +17,43 @@
   "fields": [
    {
     "offset": 2,
-    "type": "u2le",
+    "type": "u4le",
     "kind": "counter",
     "score": 1.0,
     "rough": 0.001,
-    "min": 158.0,
-    "max": 44492.0,
-    "p5": 2420.8,
-    "p95": 41979.8,
+    "min": 16908446.0,
+    "max": 16952780.0,
+    "p5": 16910708.8,
+    "p95": 16950267.8,
     "n_frames": 1105,
     "n_passes": 411,
     "frac_up": 1.0,
     "per_second": 0.001004779410668551,
     "resets": 11,
     "p": 0.0,
-    "joined": "carry",
     "response_profile": {
      "shadow 3-9 min after sunset": {
-      "median": 24963.5,
+      "median": 16933251.5,
       "n": 164
      },
      "shadow 9-12 min after sunset": {
-      "median": 23231.5,
+      "median": 16931519.5,
       "n": 166
      },
      "shadow 12-32 min after sunset": {
-      "median": 22820.5,
+      "median": 16931108.5,
       "n": 204
      },
      "sun 21-41 min after sunrise": {
-      "median": 20896.5,
+      "median": 16929184.5,
       "n": 166
      },
      "sun 41-45 min after sunrise": {
-      "median": 19631.0,
+      "median": 16927919.0,
       "n": 181
      },
      "sun 45-51 min after sunrise": {
-      "median": 23205.5,
+      "median": 16931493.5,
       "n": 224
      }
     },
@@ -69,11 +68,11 @@
      "80": 0.019
     },
     "rank_corr_abs_beta": 0.035,
-    "relative_spread_p5_p95": 1.733,
-    "shadow_over_sun_median_ratio": 1.121,
+    "relative_spread_p5_p95": 0.002,
+    "shadow_over_sun_median_ratio": 1.0,
     "distinct_values": 1092,
     "median_step_within_pass": 9.0,
-    "mean": 22351.722,
+    "mean": 16930639.722,
     "resets_in_window": 11,
     "last_reset_days_before_end": 3.7,
     "moves_with_offsets": [
@@ -1064,164 +1063,170 @@
    }
   ],
   "names": {
-   "summary": "A 58-byte housekeeping beacon with uptime and sequence counters, a millisecond clock, and a block of solar-panel voltage/current pairs, followed by a group of four panel-like temperatures. The counters reset together 11 times, which suggests reboots.",
+   "summary": "58-byte housekeeping/telemetry beacon with a boot counter-like u4 sequence, a millisecond uptime clock, a sub-counter, and groups of voltages, currents and four panel temperatures. Fields at 34/36/39/43 look like solar or battery voltages and currents; 49-53 look like four outer-panel temperatures.",
    "fields": [
     {
      "offset": 2,
-     "name": "reboot_frame_counter",
+     "name": "frame_counter",
      "category": "counter",
      "unit": "count",
      "scale": "raw",
      "confidence": 0.5,
-     "rationale": "u2 counter that only increases at about 0.001/s and resets 11 times. It moves with the u3 at offset 27 and is unrelated to sunlight, so it is probably an uptime or packet counter."
+     "rationale": "Monotonic u4 increasing about 0.001/s with 11 resets, moving with offset 27. It looks like a tick counter that resets on reboot. [3/3 samples agree]"
     },
     {
      "offset": 15,
      "name": "uptime_ms",
      "category": "clock",
-     "unit": "s",
-     "scale": "raw * 0.001",
-     "confidence": 0.6,
-     "rationale": "u4 that advances about 1000 per second, so it is a millisecond counter. One reset gives a uptime-style clock, and it has no known epoch."
+     "unit": "ms",
+     "scale": "raw * 0.001 s",
+     "confidence": 0.583,
+     "rationale": "Tracks wall-clock at 1000 counts/s with one reset 3.6 days before the end. The reset roughly coincides with the counter resets at 2 and 27, so a reboot is likely. [3/3 samples agree]"
     },
     {
      "offset": 27,
-     "name": "operation_counter",
+     "name": "secondary_counter",
      "category": "counter",
      "unit": "count",
      "scale": "raw",
-     "confidence": 0.45,
-     "rationale": "u3 counter that rises at 0.007/s and resets 11 times in step with offset 2. It is probably a second event or cycle counter."
+     "confidence": 0.4,
+     "rationale": "u3 counter with 11 resets at the same time as offset 2, joined by carry, so it is probably part of the same counter pair. [3/3 samples agree]"
     },
     {
      "offset": 33,
-     "name": "temperature_a",
-     "category": "thermal",
-     "unit": "degC",
+     "name": "unknown_small_value_a",
+     "category": "unknown",
+     "unit": "count",
      "scale": "raw",
-     "confidence": 0.3,
-     "rationale": "Small u1 in the 8-18 range that rises with minutes since sunrise and moves with offset 35. It is slightly warmer in shadow, so it may be an internal temperature, but evidence is weak."
+     "confidence": 0.133,
+     "rationale": "Small u1 with 8-18 range, partly orbit-dependent (r2 0.38) and anti-correlated with sunlight. It moves with offset 35, so it is probably a low-level current or sensor reading. [2/3 samples agree]"
     },
     {
      "offset": 34,
-     "name": "solar_panel_1_current",
+     "name": "solar_panel_current_1",
      "category": "power_solar",
      "unit": "mA",
      "scale": "raw",
-     "confidence": 0.35,
-     "rationale": "u1 that follows sunlight (rho 0.85) and moves with the voltage at offset 39. The units and scale are guessed."
+     "confidence": 0.233,
+     "rationale": "u1 that is high in sun and lower in shadow (rho 0.85), moving with the 3.7-4.2 k channel at offset 39. It may be a panel or bus current in an unknown unit. [2/3 samples agree]"
     },
     {
      "offset": 35,
-     "name": "temperature_b",
-     "category": "thermal",
-     "unit": "degC",
+     "name": "unknown_small_value_b",
+     "category": "unknown",
+     "unit": "count",
      "scale": "raw",
-     "confidence": 0.3,
-     "rationale": "Small u1 in the 8-31 range that moves with offset 33 and is slightly warmer in shadow. It is likely another internal temperature."
+     "confidence": 0.133,
+     "rationale": "Small u1 with 8-31 range, slightly higher in shadow, correlated with offset 33. This suggests a quiescent load or offset. [2/3 samples agree]"
     },
     {
      "offset": 36,
-     "name": "solar_panel_2_current",
+     "name": "solar_panel_current_2",
      "category": "power_solar",
      "unit": "mA",
      "scale": "raw",
-     "confidence": 0.35,
-     "rationale": "u1 that follows sunlight (rho 0.83) and moves with the voltage at offset 43. It resembles offset 34, so it is probably a panel current."
+     "confidence": 0.333,
+     "rationale": "u1 that is high in sun and lower in shadow (rho 0.83), moving with offset 43. It is probably a second panel or bus current. [3/3 samples agree]"
     },
     {
      "offset": 37,
-     "name": "battery_current_1",
+     "name": "battery_current_a",
      "category": "power_battery",
      "unit": "mA",
      "scale": "raw",
-     "confidence": 0.4,
-     "rationale": "Signed s2 that is positive in sun and negative in shadow, so it is a charge/discharge current. It moves with the voltage at offset 39."
+     "confidence": 0.45,
+     "rationale": "Signed s2, positive in sun (mean +81) and negative in shadow (-103), which fits a charge/discharge current. It moves with the voltage at 39. [3/3 samples agree]"
     },
     {
      "offset": 39,
-     "name": "battery_voltage_1",
+     "name": "battery_voltage_a",
      "category": "power_battery",
      "unit": "mV",
      "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "u2 in 3700-4200 with narrow spread (0.098), which fits a single Li-ion cell in mV. It follows sunlight and is lower in shadow."
+     "confidence": 0.55,
+     "rationale": "Range 3708-4216 with a spread of about 10%, which fits a single Li-ion cell in mV. It is higher in sun and moves with the current at 37. [3/3 samples agree]"
     },
     {
      "offset": 41,
-     "name": "battery_current_2",
+     "name": "battery_current_b",
      "category": "power_battery",
      "unit": "mA",
      "scale": "raw",
-     "confidence": 0.4,
-     "rationale": "Signed s2 that is positive in sun and negative in shadow, so it is a charge/discharge current. It moves with the voltage at offset 43."
+     "confidence": 0.45,
+     "rationale": "Signed s2, charging in sun and discharging in shadow, and it moves with the voltage at 43. [3/3 samples agree]"
     },
     {
      "offset": 43,
-     "name": "battery_voltage_2",
+     "name": "battery_voltage_b",
      "category": "power_battery",
      "unit": "mV",
      "scale": "raw",
-     "confidence": 0.5,
-     "rationale": "u2 in 3740-4196 with narrow spread, which fits a Li-ion cell in mV. It follows sunlight like offset 39 and is lower in shadow."
+     "confidence": 0.55,
+     "rationale": "Range 3740-4196 with a low spread, so a Li-ion cell in mV, higher in sun. It pairs with the current at 41. [3/3 samples agree]"
     },
     {
      "offset": 45,
-     "name": "bus_or_solar_input_power",
-     "category": "power_bus",
-     "unit": "mW",
+     "name": "solar_array_current",
+     "category": "power_solar",
+     "unit": "mA",
      "scale": "raw",
-     "confidence": 0.25,
-     "rationale": "u2 in 467-1528 that follows sunlight, with a shadow-to-sun ratio of 0.76 and a wide spread. The identity is uncertain, and it could be a solar input or a load."
+     "confidence": 0.233,
+     "rationale": "Range 467-1528, higher in sun (1300 vs 987), rough, and with a trend in sun. Probably a solar input or bus current. [2/3 samples agree]"
     },
     {
      "offset": 49,
-     "name": "panel_temperature_1",
+     "name": "panel_temp_1",
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.6,
-     "rationale": "s1 in the -23..30 range with a lag of about 10 min. It rises in sun and falls in shadow, and it moves with offsets 50 and 52, like an outer panel temperature."
+     "confidence": 0.633,
+     "rationale": "Signed byte in the -23..30 range with a lagged sun response (tau 10 min), rising in sun and falling in shadow. It moves with the other panel temperatures. [3/3 samples agree]"
     },
     {
      "offset": 50,
-     "name": "panel_temperature_2",
+     "name": "panel_temp_2",
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.6,
-     "rationale": "s1 in the -21..30 range with tau 10 min. It trends with sunlight and moves with the other panel temperatures."
+     "confidence": 0.633,
+     "rationale": "Same behaviour as offset 49: signed degC, tau about 10 min, trending up in sun and down in shadow. [3/3 samples agree]"
     },
     {
      "offset": 52,
-     "name": "panel_temperature_3",
+     "name": "panel_temp_3",
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.6,
-     "rationale": "s1 in the -18..28 range with tau 10 min and a strong lag correlation (0.947). It moves with the other three panel temperatures."
+     "confidence": 0.633,
+     "rationale": "Lagged correlation 0.947 with tau 10 min and strong in-regime trends, grouped with 49, 50 and 53. [3/3 samples agree]"
     },
     {
      "offset": 53,
-     "name": "panel_temperature_4",
+     "name": "panel_temp_4",
      "category": "thermal",
      "unit": "degC",
      "scale": "raw",
-     "confidence": 0.6,
-     "rationale": "s1 in the -20..30 range, rising in sun (+0.54) and falling in shadow (-0.87). It is part of the same four-panel group."
+     "confidence": 0.633,
+     "rationale": "Signed degC swinging about 25 degrees between sun and shadow, with positive trend in sun and negative in shadow, moving with 52. [3/3 samples agree]"
     }
    ],
-   "health": "Both counters reset 11 times in 45 days, with the last reset about 3.7 days before the end of the window, so the spacecraft may be rebooting. The uptime clock reset once, 3.6 days before the end. The two battery voltages look normal for single Li-ion cells, but their daily lows and highs drift down by roughly 55-95 mV per 30 days. That could be ageing or season effects, so I am not sure which. Panel temperatures look normal."
+   "health": "One reboot-like reset was seen about 3.6-3.7 days before the end, and the counters have 11 resets in total, which may include wraps by design. Battery voltages show a downward drift of about 55-95 mV per 30 days in the daily lows and highs, which may suggest ageing, but with only 45 days of data this could be seasonal, so confidence is low. Panel temperatures swing normally with the eclipse."
   },
   "evaluation": {
    "true_fields": 18,
    "physical_true_fields": 15,
    "recall_physical": 1.0,
    "exact_physical": 0.9333333333333333,
+   "value_exact_physical": 0.9333333333333333,
+   "located_exact_fraction": 0.9444444444444444,
    "kind_accuracy": 0.8666666666666667,
    "precision": 1.0,
    "llm_category_accuracy": 0.8666666666666667,
    "llm_judged": 15,
+   "llm_answered": 0.8666666666666667,
+   "llm_selective_accuracy": 1.0,
+   "llm_fine_accuracy": 0.5714285714285714,
+   "llm_fine_judged": 7,
    "truth": [
     {
      "name": "beacon_header_packet_id",
@@ -1230,8 +1235,12 @@
      "endian": "le",
      "signed": false,
      "category": "other",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
-     "how": "exact",
+     "how": "overlap",
+     "value_exact": false,
+     "found_offset": 2.0,
      "kind": "counter",
      "kind_ok": false
     },
@@ -1242,8 +1251,12 @@
      "endian": "le",
      "signed": false,
      "category": "clock",
+     "located": "affine",
+     "fine": NaN,
      "found": true,
      "how": "overlap",
+     "value_exact": false,
+     "found_offset": 15.0,
      "kind": "clock",
      "kind_ok": true
     },
@@ -1254,8 +1267,12 @@
      "endian": "le",
      "signed": false,
      "category": "counter",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 27.0,
      "kind": "counter",
      "kind_ok": true
     },
@@ -1266,8 +1283,12 @@
      "endian": "le",
      "signed": false,
      "category": "other",
+     "located": "exact",
+     "fine": NaN,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     },
@@ -1278,8 +1299,12 @@
      "endian": "be",
      "signed": false,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 33.0,
      "kind": "orbit",
      "kind_ok": true
     },
@@ -1290,8 +1315,12 @@
      "endian": "be",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_battery",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 34.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -1302,8 +1331,12 @@
      "endian": "be",
      "signed": false,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 35.0,
      "kind": "sun",
      "kind_ok": false
     },
@@ -1314,8 +1347,12 @@
      "endian": "be",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_battery",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 36.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -1326,8 +1363,12 @@
      "endian": "le",
      "signed": true,
      "category": "power",
+     "located": "exact",
+     "fine": "power_battery",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 37.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -1338,8 +1379,12 @@
      "endian": "le",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_battery",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 39.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -1350,8 +1395,12 @@
      "endian": "le",
      "signed": true,
      "category": "power",
+     "located": "exact",
+     "fine": "power_battery",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 41.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -1362,8 +1411,12 @@
      "endian": "le",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_battery",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 43.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -1374,8 +1427,12 @@
      "endian": "le",
      "signed": false,
      "category": "power",
+     "located": "exact",
+     "fine": "power_bus",
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 45.0,
      "kind": "sun",
      "kind_ok": true
     },
@@ -1386,8 +1443,12 @@
      "endian": "be",
      "signed": true,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 49.0,
      "kind": "lagged",
      "kind_ok": true
     },
@@ -1398,8 +1459,12 @@
      "endian": "be",
      "signed": true,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 50.0,
      "kind": "lagged",
      "kind_ok": true
     },
@@ -1410,8 +1475,12 @@
      "endian": "be",
      "signed": true,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 52.0,
      "kind": "lagged",
      "kind_ok": true
     },
@@ -1422,8 +1491,12 @@
      "endian": "be",
      "signed": true,
      "category": "thermal",
+     "located": "exact",
+     "fine": NaN,
      "found": true,
      "how": "exact",
+     "value_exact": true,
+     "found_offset": 53.0,
      "kind": "sun",
      "kind_ok": false
     },
@@ -1434,8 +1507,12 @@
      "endian": "le",
      "signed": false,
      "category": "other",
+     "located": "exact",
+     "fine": NaN,
      "found": false,
      "how": "",
+     "value_exact": false,
+     "found_offset": NaN,
      "kind": "",
      "kind_ok": false
     }

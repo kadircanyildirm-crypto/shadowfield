@@ -42,12 +42,34 @@ Shadowfield on their raw frames as if they did not, and use the decoder only aft
 
 **Development set.** The engine's rules were tuned while looking at these satellites:
 
-DEV_TABLE
+<!-- DEV_TABLE -->
+| satellite | frame type | frames / passes | decoder fields | recall | exact | precision | kind | Claude | answered | when answered | battery / solar / bus |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| UWE-4 | `DP0UWH:len58` | 1105 / 411 | 15 | 100% | 93% | 100% | 87% | 87% | 87% | 100% | 57% |
+| Geoscan | `len72:b0=0x84` | 1476 / 103 | 15 | 80% | 80% | 100% | 67% | 75% | 75% | 100% | 75% |
+| Geoscan | `len72:b0=0x04:b3=0x05` | 321 / 99 | 14 | 79% | 64% | 100% | 64% | 91% | 91% | 100% | – |
+| GRBBeta | `len79:b0=0x85` | 347 / 44 | 23 | 70% | 61% | 100% | 100% | 100% | 100% | 100% | 9% |
+| SNUGLITE | `len97` | 1005 / 126 | 7 | 100% | 86% | 88% | 100% | 100% | 100% | 100% | 100% |
+| SNUGLITE | `len214` | 405 / 108 | 30 | 90% | 83% | 94% | 96% | 100% | 100% | 100% | 100% |
+| NetSat | `len89` | 1724 / 241 | 14 | 43% | 14% | 100% | 100% | 33% | 33% | 100% | – |
+| AlSat-1N | `len19` | 1781 / 522 | 4 | 50% | 50% | 100% | 100% | 50% | 100% | 50% | 0% |
+| AlSat-1N | `len20` | 910 / 201 | 1 | 100% | 100% | 50% | 100% | 100% | 100% | 100% | – |
+| AlSat-1N | `len32` | 814 / 162 | 5 | 40% | 40% | 100% | 100% | 100% | 100% | 100% | – |
+| **total** | | | **128** | **77%** | **68%** | **98%** | **90%** | **86%** | **87%** | **98%** | **52%** |
+<!-- /DEV_TABLE -->
 
 **Held-out set.** Run once, with the engine frozen, and never inspected while tuning. This is the
 honest estimate for a satellite nobody has looked at:
 
-HELDOUT_TABLE
+<!-- HELDOUT_TABLE -->
+| satellite | frame type | frames / passes | decoder fields | recall | exact | precision | kind | Claude | answered | when answered | battery / solar / bus |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Sputnix USP | `len103` | 474 / 80 | 10 | 80% | 70% | 100% | 38% | 100% | 100% | 100% | – |
+| CubeBel-2 | `EU11S:len200:b0=0x14:b6=0x10` | 161 / 27 | 17 | 82% | 18% | 94% | 93% | 29% | 57% | 50% | 0% |
+| Geoscan (2nd unit) | `len72:b0=0x09` | 360 / 81 | 4 | 0% | 0% | 33% | – | – | – | – | – |
+| Geoscan (2nd unit) | `len72:b0=0x84` | 331 / 74 | 13 | 69% | 62% | 100% | 78% | 67% | 67% | 100% | 100% |
+| **total** | | | **44** | **70%** | **41%** | **92%** | **74%** | **59%** | **71%** | **79%** | **33%** |
+<!-- /HELDOUT_TABLE -->
 
 Column definitions:
 - *Recall*: share of the decoder's physical fields (temperature, power, clock, counter, navigation,
@@ -59,7 +81,7 @@ Column definitions:
 - *Answered*: share of fields Claude did not mark unknown. *When answered*: its accuracy on those.
 - *Battery / solar / bus*: the finer power class, scored where the decoder's field name says which.
 
-Frame types are skipped when they have fewer than 20 passes; those are usually stored-telemetry
+CroCube and LASARsat were also held out, but no single frame type reached the 150 unique frames the engine needs (their recordings spread over several frame lengths), so they produce no rows. Frame types are skipped when they have fewer than 20 passes; those are usually stored-telemetry
 dumps that cannot be tied to the orbit. Rows marked ¹ had no eclipse in the hours before any frame,
 so only counters, clocks and GNSS can be recovered; they are shown but not counted in the totals.
 

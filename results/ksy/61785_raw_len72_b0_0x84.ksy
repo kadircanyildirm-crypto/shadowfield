@@ -15,15 +15,23 @@ seq:
     size: 4
   - id: solar_array_current
     type: u2le
-    doc: "power_solar, mA, raw * 1.0; evidence: sun (score 0.93)"
-  - id: battery_cell_voltage
+    doc: "power_solar, mA, raw; evidence: sun (score 0.93)"
+  - id: battery_cell1_voltage
     type: u2le
-    doc: "power_battery, mV, raw * 1.0; evidence: sun (score 0.62)"
+    doc: "power_battery, mV, raw; evidence: sun (score 0.62)"
   - id: battery_pack_voltage
     type: u2le
-    doc: "power_battery, mV, raw * 1.0; evidence: sun (score 0.61)"
+    doc: "power_battery, mV, raw; evidence: sun (score 0.61)"
   - id: unknown_31
-    size: 12
+    size: 2
+  - id: unknown_small_a
+    type: u1
+    doc: "unknown, counts, raw; evidence: orbit (score 0.40)"
+  - id: unknown_small_b
+    type: u1
+    doc: "unknown, counts, raw; evidence: orbit (score 0.38)"
+  - id: unknown_35
+    size: 8
   - id: panel_temp_1
     type: s1
     doc: "thermal, degC, raw; evidence: sun (score 0.86)"
@@ -38,22 +46,18 @@ seq:
     doc: "thermal, degC, raw; evidence: sun (score 0.86)"
   - id: unknown_47
     size: 10
-  - id: battery_pack_voltage_2
+  - id: battery_voltage_secondary
     type: u2le
-    doc: "power_battery, mV, raw * 1.0; evidence: sun (score 0.56)"
+    doc: "power_battery, mV, raw; evidence: sun (score 0.56)"
   - id: unknown_59
     size: 6
-  - id: frame_sequence_counter
+  - id: sequence_counter
     type: s1
-    doc: "counter, count, raw (signed byte, wraps at 256); evidence: counter (score 1.00)"
+    doc: "counter, counts, raw; evidence: counter (score 1.00)"
   - id: unknown_66
-    size: 6
-instances:
-  solar_array_current_ma:
-    value: solar_array_current * 1.0
-  battery_cell_voltage_mv:
-    value: battery_cell_voltage * 1.0
-  battery_pack_voltage_mv:
-    value: battery_pack_voltage * 1.0
-  battery_pack_voltage_2_mv:
-    value: battery_pack_voltage_2 * 1.0
+    size: 2
+  - id: unknown_small_c
+    type: s1
+    doc: "unknown, counts, raw; evidence: orbit (score 0.42)"
+  - id: unknown_69
+    size: 3
