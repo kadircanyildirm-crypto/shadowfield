@@ -54,55 +54,74 @@ h1 .hl{background:linear-gradient(90deg,var(--sun),var(--sun2));-webkit-backgrou
 .ro b{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
 .note{color:var(--dim);font:11px var(--mono);position:absolute;right:6%;bottom:3%}
 
-/* ---------- decrypt ---------- */
+/* ---------- decrypt console ---------- */
 .decrypt{background:linear-gradient(180deg,var(--bg),var(--bg2))}
 .sats{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 8px}
 .sat{font:600 14px var(--body);color:var(--muted);border:1px solid var(--line);background:none;border-radius:999px;padding:8px 16px;cursor:pointer}
 .sat[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .meta{color:var(--muted);font:12.5px var(--mono)}
-.raw{margin-top:22px;background:var(--night);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px;position:relative;overflow:hidden}
-.rawhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
-.rawhead span{font:600 11.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.bytes{display:flex;flex-wrap:wrap;gap:5px;font:500 13.5px var(--mono)}
-.b{width:2.45em;text-align:center;padding:6px 0;border-radius:6px;background:#0f1730;color:#4b5876;border:0;font:inherit;cursor:default;
-  transition:background .5s,color .5s,box-shadow .5s,transform .3s}
-.b.lit{color:#0a0e18;cursor:pointer;box-shadow:0 0 16px -3px var(--c)}
-.b.sel{transform:translateY(-3px);box-shadow:0 0 0 2px var(--fg),0 0 22px -2px var(--c)}
-.sweep{position:absolute;top:0;bottom:0;width:120px;left:-120px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,195,90,.22),transparent)}
-.sweep.go{animation:sweep 1.4s ease-in-out}
+.console{display:grid;gap:18px;margin-top:22px}
+.pkt{background:var(--night);border:1px solid var(--line);border-radius:18px;padding:18px;position:relative;overflow:hidden}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.lab{font:600 11.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.prog{color:var(--muted);font-size:13.5px}
+.prog b{color:var(--fg);font-variant-numeric:tabular-nums}
+.rows{display:grid;gap:6px}
+.row{display:grid;grid-template-columns:40px repeat(var(--cols),minmax(0,1fr));gap:4px}
+.addr{font:10.5px var(--mono);color:var(--dim);align-self:center}
+.seg{border-radius:7px;min-width:0;padding:5px 6px;background:#0c1327;border:1px solid #121b33;text-align:left;font:inherit;color:inherit;cursor:default;
+  display:grid;gap:3px;transition:background .55s,border-color .55s,box-shadow .35s,transform .3s}
+.seg .nm{font:600 9.5px/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--c,var(--dim));white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;min-height:1.2em;opacity:0;transition:opacity .5s}
+.seg .hx{font:500 12px var(--mono);color:#4a5775;display:flex;justify-content:space-around;transition:color .5s}
+.seg.on{background:color-mix(in srgb,var(--c) 15%,#0c1327);border-color:color-mix(in srgb,var(--c) 55%,transparent);cursor:pointer}
+.seg.on .nm{opacity:1} .seg.on .hx{color:var(--fg)}
+.seg.cont .nm{visibility:hidden}
+.seg.sel{box-shadow:0 0 0 2px var(--c),0 0 28px -6px var(--c);transform:translateY(-2px)}
+.sweep{position:absolute;top:0;bottom:0;width:140px;left:-140px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,195,90,.2),transparent)}
+.sweep.go{animation:sweep 1.5s cubic-bezier(.4,0,.2,1)}
 @keyframes sweep{to{left:100%}}
-.prog{margin-top:12px;color:var(--muted);font-size:14px;min-height:1.6em}
-.prog b{color:var(--fg)}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:12px;margin-top:26px}
-.tc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;text-align:left;color:var(--fg);font:inherit;cursor:pointer;
-  position:relative;overflow:hidden;transition:transform .25s,border-color .25s;min-width:0}
-.tc:hover{transform:translateY(-3px);border-color:var(--c)}
-.tc[aria-pressed="true"]{border-color:var(--c);box-shadow:0 0 0 1px var(--c) inset}
-.tc:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c)}
-.tc .n{font:600 12.5px var(--body);color:var(--muted);text-transform:capitalize;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tc .v{font:600 21px/1.2 var(--mono);margin-top:6px;font-variant-numeric:tabular-nums;word-break:break-all}
-.tc .v small{font-size:12px;color:var(--muted);margin-left:4px}
-.tc .o{font:11px var(--mono);color:var(--dim);margin-top:6px}
-.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;color:var(--muted);font-size:12.5px}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-
-/* ---------- close-up ---------- */
-.close{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:26px;margin-top:34px;align-items:start}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;min-width:0}
-.panel .lab{font:600 11.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.fname{font:800 clamp(22px,2.6vw,32px)/1.12 var(--display);margin:10px 0 8px;text-transform:capitalize;word-break:break-word}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.tag{font:500 12px var(--mono);border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted)}
+.pktfoot{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:12.5px}
+.pktfoot i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grp{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 12px 8px;min-width:0}
+.grp h3{font:700 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;margin:0 6px 6px;display:flex;align-items:center;gap:9px;color:var(--fg)}
+.grp h3 i{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.grp h3 span{color:var(--dim);font-weight:500;letter-spacing:.08em}
+.tr{display:grid;grid-template-columns:minmax(0,1fr) auto 96px;gap:14px;align-items:center;width:100%;padding:10px 8px;border:0;border-top:1px solid var(--line);
+  background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;border-radius:10px;opacity:0;transform:translateY(6px);transition:opacity .45s,transform .45s,background .2s}
+.tr.in{opacity:1;transform:none}
+.grp .tr:first-of-type{border-top:0}
+.tr:hover,.tr[aria-pressed="true"]{background:rgba(255,255,255,.035)}
+.tr .nm{font:500 14.5px var(--body);min-width:0}
+.tr .nm b{display:block;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr .nm small{display:block;color:var(--dim);font:11px var(--mono);margin-top:1px}
+.tr .val{font:600 19px var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.tr .val small{font:500 12px var(--mono);color:var(--muted);margin-left:4px}
+.tr svg{width:96px;height:32px;display:block}
+.insp{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:26px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.insp .who{font:600 11.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.insp h3{font:800 clamp(22px,2.5vw,30px)/1.12 var(--display);margin:10px 0 6px;text-wrap:balance}
+.insp .now{font:600 15px var(--mono);color:var(--muted)} .insp .now b{color:var(--fg);font-size:22px}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.tag{font:500 11.5px var(--mono);border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted)}
 .tag.k{color:#0a0e18;border:0}
-.why{color:#d2dbec;font-size:15px;margin:12px 0 0}
-.ev{color:var(--muted);font:12.5px var(--mono);margin-top:10px}
+.why{color:#d2dbec;font-size:14.5px;margin:10px 0 0}
+.evid{display:grid;gap:6px;margin-top:14px}
+.evid div{display:flex;justify-content:space-between;gap:12px;font:12.5px var(--mono);color:var(--muted);border-bottom:1px dashed var(--line);padding-bottom:5px}
+.evid b{color:var(--fg);font-weight:500;text-align:right}
 .conf{display:flex;align-items:center;gap:10px;margin-top:14px;font:12px var(--mono);color:var(--muted)}
-.conf .bar{flex:1;height:5px;border-radius:5px;background:var(--line);overflow:hidden}
-.conf .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--sun2));transition:width .9s cubic-bezier(.2,.8,.2,1)}
-.verdict{margin-top:14px;font-size:14px;color:var(--muted)}
-.verdict b{color:var(--nav)} .verdict b.near{color:var(--power)}
-svg.plot{width:100%;height:auto;display:block}
-svg.plot text{fill:var(--muted);font:11px var(--body)}
+.conf .m{flex:1;height:5px;border-radius:5px;background:var(--line);overflow:hidden}
+.conf .m i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--sun2));transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.verdict{margin-top:14px;font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:flex-start}
+.verdict .ic{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 13px var(--body);color:#06110b;background:var(--nav)}
+.verdict .ic.near{background:var(--power)} .verdict .ic.none{background:var(--dim);color:var(--fg)}
+svg.chart{width:100%;height:auto;display:block}
+svg.chart text{fill:var(--muted);font:11px var(--body)}
+svg.chart .ttl{fill:var(--fg);font:600 11px var(--mono);letter-spacing:.08em}
+@media (max-width:900px){.groups,.insp{grid-template-columns:1fr}}
+@media (max-width:520px){.tr{grid-template-columns:minmax(0,1fr) auto}.tr svg{display:none}}
+@media (prefers-reduced-motion:reduce){.seg,.tr,.conf .m i{transition:none}.sweep.go{animation:none}}
 
 /* ---------- proof ---------- */
 .proof{background:radial-gradient(900px 400px at 20% 0%,#101a35 0%,var(--bg) 70%)}
@@ -157,22 +176,19 @@ footer{border-top:1px solid var(--line);padding-block:30px 50px;color:var(--mute
 <section class="decrypt" id="decrypt"><div class="in">
   <div class="kicker">Live decrypt</div>
   <h2>From hex to telemetry</h2>
-  <p class="sub">A real frame as SatNOGS ground stations received it. Every way of reading its bytes is tested against the orbit.
-    The ones that follow physics light up and turn into readable values, with Claude's names.</p>
+  <p class="sub">A real frame, exactly as SatNOGS ground stations received it. Every reading of its bytes is tested against the orbit;
+    the ones that follow physics become fields, and Claude names them.</p>
   <div class="sats" id="sats"></div>
   <div class="meta" id="satmeta"></div>
-  <div class="raw">
-    <div class="rawhead"><span>Raw frame</span><button class="btn" id="again" type="button">Decrypt again</button></div>
-    <div class="bytes" id="bytes"></div>
-    <div class="sweep" id="sweep"></div>
-    <div class="prog" id="prog">Loading…</div>
-  </div>
-  <div class="legend" id="legend"></div>
-  <div class="cards" id="cards"></div>
-
-  <div class="close">
-    <div class="panel" id="detail"></div>
-    <div class="panel"><div class="lab" id="plotlab">How it moves with the Sun</div><div id="plot"></div></div>
+  <div class="console">
+    <div class="pkt">
+      <div class="bar"><span class="lab">Frame structure</span><span class="prog" id="prog">Loading…</span><button class="btn" id="again" type="button">Decrypt again</button></div>
+      <div class="rows" id="rows"></div>
+      <div class="sweep" id="sweep"></div>
+      <div class="pktfoot" id="pktfoot"></div>
+    </div>
+    <div class="groups" id="groups"></div>
+    <div class="insp" id="insp"></div>
   </div>
 </div></section>
 
@@ -253,115 +269,216 @@ function scaled(raw, scale){
   if (raw == null || !scale || !/^[raw0-9eE.\s*+\-/()]+$/.test(scale) || !scale.includes("raw")) return raw;
   try { const v = Function("raw", `return (${scale})`)(raw); return Number.isFinite(v) ? v : raw; } catch { return raw; }
 }
-function valueText(f){
-  const axes = Math.max(1, Math.round(f.span / (+f.type[1] || 1)));
-  const vals = Array.from({length: axes}, (_, i) => scaled(read(sat.frame, f.offset + i * (+f.type[1]), f.type), axes === 1 ? f.scale : null));
-  const fmt = v => v == null ? "—" : Math.abs(v) >= 1e6 ? v.toExponential(3) : (Number.isInteger(v) ? v.toString() : (+v.toPrecision(5)).toString());
-  return vals.map(fmt).join(", ");
+const WORDS = {temp:"temperature", tmp:"temperature", batt:"battery", bat:"battery", volt:"voltage", curr:"current", pwr:"power", soc:"state of charge",
+  obc:"OBC", eps:"EPS", gnss:"GNSS", gps:"GPS", ecef:"ECEF", eci:"ECI", uhf:"UHF", rssi:"RSSI", mcu:"MCU", pv:"PV", ms:"(ms)", mv:"(mV)", ma:"(mA)", vbus:"bus voltage", id:"ID"};
+function human(f){
+  if (!f.name) return `Unnamed field · ${KIND[f.kind] || f.kind}`;
+  const w = f.name.split("_").filter(Boolean).map(t => WORDS[t.toLowerCase()] ?? t);
+  const s = w.join(" "); return s.charAt(0).toUpperCase() + s.slice(1);
+}
+function short(f){
+  if (!f.name) return f.kind;
+  const w = f.name.split("_").filter(Boolean).map(t => ({temperature:"temp", battery:"batt", voltage:"V", current:"I", counter:"count", panel:"panel"})[t.toLowerCase()] ?? t);
+  return w.join(" ");
+}
+const GROUPS = [["Power", ["power_battery", "power_solar", "power_bus"], "--power"], ["Thermal", ["thermal"], "--thermal"],
+  ["On-board computer", ["counter", "clock"], "--count"], ["Navigation & attitude", ["navigation", "attitude", "magnetometer"], "--nav"], ["Unnamed physics", ["unknown"], "--unknown"]];
+const groupOf = f => GROUPS.find(g => g[1].includes(cat(f))) || GROUPS[4];
+function duration(sec){
+  sec = Math.abs(sec); const d = Math.floor(sec / 86400), h = Math.floor(sec % 86400 / 3600), m = Math.floor(sec % 3600 / 60), s = Math.floor(sec % 60);
+  return d ? `${d} d ${h} h` : h ? `${h} h ${m} m` : m ? `${m} m ${s} s` : `${s} s`;
+}
+function num(v){
+  if (v == null || !Number.isFinite(v)) return "—";
+  if (Number.isInteger(v)) return v.toLocaleString("en-US");
+  const a = Math.abs(v); return a >= 1e5 ? v.toExponential(2) : (+v.toPrecision(a >= 100 ? 5 : 4)).toLocaleString("en-US", {maximumFractionDigits: 4});
+}
+function pretty(f){
+  const r = prettyRaw(f); return {v: String(r.v).replace(/(^|\s)-(?=\d)/g, "$1−"), u: r.u};  // a real minus sign
+}
+function prettyRaw(f){
+  const w = +f.type[1] || 1, axes = Math.max(1, Math.round(f.span / w));
+  const raws = Array.from({length: axes}, (_, i) => read(sat.frame, f.offset + i * w, f.type));
+  let u = (f.unit || "").trim(); if (/^(unknown|counts?|raw|ticks|-|none)$/i.test(u)) u = "";
+  if (axes > 1) return {v: raws.map(num).join(" · "), u};
+  let v = scaled(raws[0], f.scale);
+  if (f.kind === "clock" && f.evidence.epoch_guess === "unix"){ const ms = Math.abs(v) > 1e11 ? v : v * 1000; return {v: new Date(ms).toISOString().slice(0, 16).replace("T", " "), u: "UTC"}; }
+  if (/^ms$/i.test(u) || (/(^|_)ms$/.test(f.name || "") && f.kind !== "position")) return {v: duration(v / 1000), u: ""};
+  if (/^s$/i.test(u) && Math.abs(v) >= 3600) return {v: duration(v), u: ""};
+  if (/^mv$/i.test(u) && Math.abs(v) >= 1000) return {v: (v / 1000).toFixed(3), u: "V"};
+  if (/(°c|degc|^c$)/i.test(u)) return {v: (v > 0 ? "+" : "") + (+v.toFixed(1)).toString(), u: "°C"};
+  if (/^%$/.test(u)) return {v: num(v), u: "%"};
+  return {v: num(v), u};
+}
+function binned(f, nb){
+  const idx = f.x.map((x, i) => i).sort((a, b) => f.x[a] - f.x[b]), out = [];
+  for (let b = 0; b < nb; b++){ const part = idx.slice(Math.floor(b * idx.length / nb), Math.floor((b + 1) * idx.length / nb)); if (!part.length) continue;
+    const ys = part.map(i => f.y[i]).sort((p, q) => p - q), xs = part.map(i => f.x[i]); out.push([xs.reduce((p, q) => p + q, 0) / xs.length, ys[ys.length >> 1]]); }
+  return out;
+}
+function spark(f, c){
+  const NS = "http://www.w3.org/2000/svg", s = document.createElementNS(NS, "svg"); s.setAttribute("viewBox", "0 0 96 32"); s.setAttribute("aria-hidden", "true");
+  const pts = binned(f, 22); if (pts.length < 2) return s;
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys) || y0 + 1;
+  const X = v => 2 + (v - x0) / ((x1 - x0) || 1) * 92, Y = v => 29 - (v - y0) / ((y1 - y0) || 1) * 25;
+  if (f.xlabel.startsWith("minutes") && x0 < 0){ const r = document.createElementNS(NS, "rect"); r.setAttribute("x", 2); r.setAttribute("y", 1); r.setAttribute("width", Math.max(0, X(Math.min(0, x1)) - 2));
+    r.setAttribute("height", 30); r.setAttribute("rx", 3); r.setAttribute("fill", "rgba(0,0,0,.45)"); s.appendChild(r); }
+  const d = pts.map((p, i) => `${i ? "L" : "M"}${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join("");
+  const area = document.createElementNS(NS, "path"); area.setAttribute("d", d + `L${X(xs.at(-1)).toFixed(1)},31L${X(xs[0]).toFixed(1)},31Z`); area.setAttribute("fill", c); area.setAttribute("fill-opacity", ".12"); s.appendChild(area);
+  const line = document.createElementNS(NS, "path"); line.setAttribute("d", d); line.setAttribute("fill", "none"); line.setAttribute("stroke", c); line.setAttribute("stroke-width", "1.6"); s.appendChild(line);
+  return s;
 }
 
-/* ---------- decrypt section ---------- */
+/* ---------- decrypt console ---------- */
 function satButtons(){
   const S = document.getElementById("sats");
   DATA.satellites.forEach((s, i) => { const b = el("button", "sat", s.name); b.type = "button"; b.onclick = () => show(i); S.appendChild(b); });
-  const L = document.getElementById("legend");
-  LEG.forEach(([k, t]) => { const s = el("span"), i = el("i"); i.style.background = css(COL[k]); s.append(i, t); L.appendChild(s); });
+  const F = document.getElementById("pktfoot");
+  GROUPS.forEach(([n, , v]) => { const s = el("span"), i = el("i"); i.style.background = css(v); s.append(i, n); F.appendChild(s); });
+  const s = el("span"), i = el("i"); i.style.background = "#0c1327"; i.style.border = "1px solid #1c2640"; s.append(i, "No physical driver (status bits, IDs, CRC)"); F.appendChild(s);
 }
+const fieldAt = o => sat.fields.find(f => o >= f.offset && o < f.offset + f.span);
 
 function show(i){
   sat = DATA.satellites[i];
   [...document.querySelectorAll(".sat")].forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
-  document.getElementById("satmeta").textContent = `${sat.blurb} · NORAD ${sat.norad} · ${sat.frames} frames from ${sat.passes} passes · ${sat.length}-byte payload`;
+  document.getElementById("satmeta").textContent = `${sat.blurb} · NORAD ${sat.norad} · ${sat.frames.toLocaleString("en-US")} frames from ${sat.passes} passes · ${sat.length}-byte payload`;
   document.getElementById("ksy").innerHTML = highlight(sat.ksy || "");
-  const B = document.getElementById("bytes"); B.replaceChildren();
-  sat.frame.forEach((v, o) => { const c = el("button", "b", v.toString(16).toUpperCase().padStart(2, "0")); c.type = "button"; c.dataset.o = o; c.tabIndex = -1;
-    c.setAttribute("aria-label", `byte ${o}`); c.onclick = () => { const f = fieldAt(o); if (f) focus(f); }; B.appendChild(c); });
-  run();
+  layout(); groups(); run();
 }
-const fieldAt = o => sat.fields.find(f => o >= f.offset && o < f.offset + f.span);
+
+function layout(){
+  const cols = matchMedia("(max-width:700px)").matches ? 8 : 16, R = document.getElementById("rows"); R.replaceChildren(); R.style.setProperty("--cols", cols);
+  const segs = []; for (let o = 0; o < sat.frame.length;){ const f = fieldAt(o); const n = f && f.offset === o ? f.span : 1; segs.push([o, n, f && f.offset === o ? f : null]); o += n; }
+  let row = null, used = cols;
+  const newRow = start => { row = el("div", "row"); row.appendChild(el("div", "addr", "0x" + start.toString(16).toUpperCase().padStart(2, "0"))); R.appendChild(row); used = 0; };
+  for (const [o, n, f] of segs){
+    let left = n, at = o, first = true;
+    while (left > 0){
+      if (used === cols) newRow(at);
+      const k = Math.min(left, cols - used);
+      const b = el("button", "seg" + (first ? "" : " cont")); b.type = "button"; b.style.gridColumn = `span ${k}`; b.tabIndex = -1;
+      if (f){ b.dataset.f = f.offset; b.style.setProperty("--c", css(COL[cat(f)])); b.setAttribute("aria-label", `${human(f)}, bytes ${f.offset} to ${f.offset + f.span - 1}`); b.onclick = () => focus(f); }
+      b.appendChild(el("span", "nm", f ? short(f) : ""));
+      const hx = el("span", "hx"); for (let j = 0; j < k; j++) hx.appendChild(el("span", null, sat.frame[at + j].toString(16).toUpperCase().padStart(2, "0")));
+      b.appendChild(hx); row.appendChild(b);
+      used += k; left -= k; at += k; first = false;
+    }
+  }
+}
+
+function groups(){
+  const G = document.getElementById("groups"); G.replaceChildren();
+  GROUPS.forEach(([name, cats, v]) => {
+    const fs = sat.fields.filter(f => cats.includes(cat(f))).sort((a, b) => a.offset - b.offset); if (!fs.length) return;
+    const g = el("div", "grp"); g.style.setProperty("--c", css(v));
+    const h = el("h3"); h.append(el("i"), name, el("span", null, `· ${fs.length}`)); g.appendChild(h);
+    fs.forEach(f => {
+      const c = css(COL[cat(f)]), b = el("button", "tr"); b.type = "button"; b.dataset.f = f.offset; b.setAttribute("aria-pressed", "false");
+      const nm = el("div", "nm"); nm.append(el("b", null, human(f)), el("small", null, `bytes ${f.offset}${f.span > 1 ? "–" + (f.offset + f.span - 1) : ""} · ${f.type}`));
+      const val = el("div", "val"); val.dataset.final = JSON.stringify(pretty(f)); val.textContent = "··";
+      b.append(nm, val, spark(f, c)); b.onclick = () => focus(f); g.appendChild(b);
+    });
+    G.appendChild(g);
+  });
+}
 
 function run(){
   timers.forEach(clearTimeout); timers = [];
-  document.querySelectorAll(".b").forEach(c => { c.classList.remove("lit", "sel"); c.style.background = ""; c.tabIndex = -1; });
-  const C = document.getElementById("cards"); C.replaceChildren();
+  document.querySelectorAll(".seg").forEach(s => s.classList.remove("on", "sel"));
+  document.querySelectorAll(".tr").forEach(t => { t.classList.remove("in"); t.querySelector(".val").textContent = "··"; });
   const sw = document.getElementById("sweep"); sw.classList.remove("go"); void sw.offsetWidth; if (!REDUCE) sw.classList.add("go");
-  const P = document.getElementById("prog"); P.textContent = "Testing every reading of every byte against the orbit…";
+  const P = document.getElementById("prog"); P.textContent = "Testing every reading against the orbit…";
   const order = [...sat.fields].sort((a, b) => a.offset - b.offset);
   order.forEach((f, k) => timers.push(setTimeout(() => {
-    const c = css(COL[cat(f)]);
-    for (let o = f.offset; o < f.offset + f.span; o++){ const b = document.querySelector(`.b[data-o="${o}"]`); if (!b) continue;
-      b.classList.add("lit"); b.style.background = c; b.style.setProperty("--c", c); b.tabIndex = 0; b.setAttribute("aria-label", `byte ${o}: ${f.name || f.kind}`); }
-    C.appendChild(card(f, c));
-    P.innerHTML = `<b>${k + 1} / ${order.length}</b> · bytes ${f.offset}–${f.offset + f.span - 1} ${KIND[f.kind] || f.kind}`;
-    if (k === order.length - 1){ P.innerHTML = `<b>${order.length} fields</b> decoded from physics alone · click any card or lit byte`;
-      focus(order.find(x => x.kind === "lagged" && x.name) || order[0]); }
-  }, REDUCE ? 0 : 900 + k * 150)));
-}
-
-function card(f, c){
-  const b = el("button", "tc"); b.type = "button"; b.style.setProperty("--c", c); b.dataset.o = f.offset; b.setAttribute("aria-pressed", "false");
-  const v = el("div", "v"), unit = f.unit && f.unit !== "unknown" && f.unit !== "counts" ? f.unit : "";
-  b.append(el("div", "n", (f.name || "unnamed " + f.kind).replaceAll("_", " ")), v, el("div", "o", `bytes ${f.offset}–${f.offset + f.span - 1} · ${f.type}`));
-  const final = valueText(f);
-  if (REDUCE) v.textContent = final; else scramble(v, final, 600);
-  if (unit) setTimeout(() => v.appendChild(el("small", null, unit)), REDUCE ? 0 : 620);
-  b.onclick = () => focus(f);
-  return b;
+    document.querySelectorAll(`.seg[data-f="${f.offset}"]`).forEach(s => { s.classList.add("on"); s.tabIndex = 0; });
+    const t = document.querySelector(`.tr[data-f="${f.offset}"]`);
+    if (t){ t.classList.add("in"); const v = t.querySelector(".val"), {v: val, u} = JSON.parse(v.dataset.final);
+      const done = () => { v.textContent = val; if (u) v.appendChild(el("small", null, u)); };
+      if (REDUCE) done(); else { scramble(v, val, 520); setTimeout(done, 540); } }
+    P.innerHTML = `<b>${k + 1}</b> of <b>${order.length}</b> fields`;
+    if (k === order.length - 1){ P.innerHTML = `<b>${order.length}</b> fields from physics alone · select any`;
+      focus(order.find(x => x.kind === "lagged" && x.name) || order.find(x => x.name) || order[0]); }
+  }, REDUCE ? 0 : 1000 + k * 140)));
 }
 
 function focus(f){
-  document.querySelectorAll(".b.sel").forEach(x => x.classList.remove("sel"));
-  for (let o = f.offset; o < f.offset + f.span; o++) document.querySelector(`.b[data-o="${o}"]`)?.classList.add("sel");
-  document.querySelectorAll(".tc").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.o === f.offset)));
-  const c = css(COL[cat(f)]), D = document.getElementById("detail"); D.replaceChildren();
-  D.append(el("div", "lab", `Claude's reading · bytes ${f.offset}–${f.offset + f.span - 1}`), el("div", "fname", (f.name || "unnamed physical field").replaceAll("_", " ")));
+  document.querySelectorAll(".seg").forEach(s => s.classList.toggle("sel", +s.dataset.f === f.offset && s.dataset.f !== undefined));
+  document.querySelectorAll(".tr").forEach(t => t.setAttribute("aria-pressed", String(+t.dataset.f === f.offset)));
+  const c = css(COL[cat(f)]), I = document.getElementById("insp"); I.replaceChildren();
+  const left = el("div"), right = el("div");
+  left.append(el("div", "who", f.xlabel.startsWith("minutes") ? "Response to Earth's shadow" : "Against " + f.xlabel), chart(f, c));
+  right.appendChild(el("div", "who", `Claude's reading · bytes ${f.offset}${f.span > 1 ? "–" + (f.offset + f.span - 1) : ""}`));
+  right.appendChild(el("h3", null, human(f)));
+  const {v, u} = pretty(f), now = el("div", "now"); now.append("this frame: ", el("b", null, v), u ? " " + u : ""); right.appendChild(now);
   const T = el("div", "tags"), k = el("span", "tag k", (f.category || f.kind).replace("_", " ")); k.style.background = c; T.append(k, el("span", "tag", f.type));
-  if (f.unit && f.unit !== "unknown") T.appendChild(el("span", "tag", f.unit)); if (f.scale && f.scale !== "raw") T.appendChild(el("span", "tag", f.scale));
-  D.appendChild(T);
-  if (f.rationale) D.appendChild(el("p", "why", f.rationale));
-  D.appendChild(el("div", "ev", `physics: ${KIND[f.kind] || f.kind}${ev(f.evidence)}`));
-  if (f.confidence != null){ const r = el("div", "conf"), bar = el("div", "bar"), i = el("i"); bar.appendChild(i);
-    r.append(el("span", null, "confidence"), bar, el("span", null, Math.round(f.confidence * 100) + "%")); D.appendChild(r);
+  if (f.unit && !/^(unknown|counts?|raw)$/i.test(f.unit)) T.appendChild(el("span", "tag", f.unit));
+  if (f.scale && f.scale !== "raw") T.appendChild(el("span", "tag", f.scale));
+  right.appendChild(T);
+  if (f.rationale) right.appendChild(el("p", "why", f.rationale.replace(/\s*\[\d\/\d samples agree\]/, "")));
+  const E = el("div", "evid"), e = f.evidence, add = (a, b) => { const d = el("div"); d.append(el("span", null, a), el("b", null, b)); E.appendChild(d); };
+  add("physics", KIND[f.kind] || f.kind);
+  if (e.tau_min) add("time constant", `≈ ${e.tau_min} min`);
+  if (e.rho_sun != null && ["sun", "lagged"].includes(f.kind)) add("rank correlation with sunlight", (+e.rho_sun).toFixed(2));
+  if (e.per_second) add("rate", `${num(+(+e.per_second).toPrecision(3))} per second`);
+  if (e.epoch_guess && e.epoch_guess !== "custom") add("epoch", e.epoch_guess);
+  if (e.component) add("matches orbit coordinate", e.component.replaceAll("_", " "));
+  if (e.matching_frames_fraction) add("frames agreeing with the orbit", Math.round(e.matching_frames_fraction * 100) + "%");
+  if (e.rho_igrf) add("correlation with IGRF |B|", (+e.rho_igrf).toFixed(2));
+  if (e.unit_norm_fraction) add("frames with |q| = 1", Math.round(e.unit_norm_fraction * 100) + "%");
+  if (e.power_class_hint && (f.category || "").startsWith("power")) add("power signature", e.power_class_hint.replace("power_", ""));
+  const agree = (f.rationale || "").match(/\[(\d)\/(\d) samples agree\]/); if (agree) add("Claude samples agreeing", `${agree[1]} of ${agree[2]}`);
+  right.appendChild(E);
+  if (f.confidence != null){ const r = el("div", "conf"), m = el("div", "m"), i = el("i"); m.appendChild(i);
+    r.append(el("span", null, "confidence"), m, el("span", null, Math.round(f.confidence * 100) + "%")); right.appendChild(r);
     requestAnimationFrame(() => requestAnimationFrame(() => i.style.width = Math.round(f.confidence * 100) + "%")); }
   const V = el("div", "verdict");
-  if (f.decoder) V.append(el("b", f.decoder.exact ? null : "near", f.decoder.exact ? "✓ exact match" : "≈ overlaps"),
-    ` with the published decoder's ${f.decoder.name.replace(/^beacon_payload_/, "")}, checked only afterwards.`);
-  else V.textContent = "The published decoder has no field here.";
-  D.appendChild(V);
-  document.getElementById("plotlab").textContent = f.xlabel.startsWith("minutes") ? "How it moves with the Sun" : `Against ${f.xlabel}`;
-  const P = document.getElementById("plot"); P.replaceChildren(plot(f, c));
-}
-function ev(e){
-  const p = []; if (e.tau_min) p.push(`lag ≈ ${e.tau_min} min`); if (e.rho_sun != null) p.push(`ρ sunlight ${e.rho_sun}`);
-  if (e.per_second) p.push(`${(+e.per_second).toPrecision(3)} per s`); if (e.component) p.push(`= ${e.component}`);
-  if (e.power_class_hint) p.push(`signature: ${e.power_class_hint.replace("power_", "")}`); return p.length ? " · " + p.join(" · ") : "";
+  if (f.decoder){ V.append(el("span", "ic" + (f.decoder.exact ? "" : " near"), f.decoder.exact ? "✓" : "≈"),
+    el("span", null, `${f.decoder.exact ? "Exact match with" : "Overlaps"} the published decoder's ${f.decoder.name.replace(/^beacon_payload_/, "")}, checked only afterwards.`)); }
+  else V.append(el("span", "ic none", "?"), el("span", null, "The published decoder has no field here, so this one cannot be graded."));
+  right.appendChild(V);
+  I.append(left, right);
 }
 
-function plot(f, col){
-  const W = 640, H = 330, L = 54, R = 12, T = 18, B = 40, NS = "http://www.w3.org/2000/svg";
-  const s = document.createElementNS(NS, "svg"); s.setAttribute("viewBox", `0 0 ${W} ${H}`); s.setAttribute("class", "plot"); s.setAttribute("role", "img");
-  s.setAttribute("aria-label", `values against ${f.xlabel}`);
+function chart(f, col){
+  const W = 720, H = 360, L = 64, R = 14, T = 20, B = 54, NS = "http://www.w3.org/2000/svg";
+  const s = document.createElementNS(NS, "svg"); s.setAttribute("viewBox", `0 0 ${W} ${H}`); s.setAttribute("class", "chart"); s.setAttribute("role", "img");
+  s.setAttribute("aria-label", `${human(f)} against ${f.xlabel}`);
   const xs = f.x, ys = f.y; if (!xs.length) return s;
   const srt = [...ys].sort((a, b) => a - b), q = p => srt[Math.min(srt.length - 1, Math.floor(p * srt.length))];
-  let y0 = q(.01), y1 = q(.99); if (y1 === y0) y1 = y0 + 1; let x0 = Math.min(...xs), x1 = Math.max(...xs); if (x1 === x0) x1 = x0 + 1;
+  let y0 = q(.01), y1 = q(.99); if (y1 === y0){ y0 -= 1; y1 += 1; } const pad = (y1 - y0) * .08; y0 -= pad; y1 += pad;
+  let x0 = Math.min(...xs), x1 = Math.max(...xs); if (x1 === x0) x1 = x0 + 1;
   const sx = v => L + (v - x0) / (x1 - x0) * (W - L - R), sy = v => T + (1 - (Math.min(Math.max(v, y0), y1) - y0) / (y1 - y0)) * (H - T - B);
   const add = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); s.appendChild(e); return e; };
-  if (f.xlabel.startsWith("minutes") && x0 < 0){
-    add("rect", {x: sx(x0), y: T, width: Math.max(0, sx(Math.min(0, x1)) - sx(x0)), height: H - T - B, fill: css("--night"), rx: 8});
-    add("text", {x: sx(x0) + 10, y: T + 18}).textContent = "in Earth's shadow";
-    add("text", {x: sx(Math.max(0, x0)) + 10, y: T + 18, fill: css("--sun")}).textContent = "in sunlight";
+  const minutes = f.xlabel.startsWith("minutes");
+  if (minutes && x0 < 0){
+    add("rect", {x: sx(x0), y: T, width: Math.max(0, sx(Math.min(0, x1)) - sx(x0)), height: H - T - B, fill: "rgba(0,0,0,.5)", rx: 8});
+    add("text", {x: sx(x0) + 12, y: T + 20, class: "ttl"}).textContent = "EARTH'S SHADOW";
+    add("text", {x: sx(Math.max(0, x0)) + 12, y: T + 20, class: "ttl", style: `fill:${css("--sun")}`}).textContent = "SUNLIGHT";
+    add("line", {x1: sx(0), x2: sx(0), y1: T, y2: H - B, stroke: css("--sun"), "stroke-opacity": .5, "stroke-dasharray": "4 5"});
   }
-  for (let g = 0; g <= 4; g++){ const y = T + g * (H - T - B) / 4; add("line", {x1: L, x2: W - R, y1: y, y2: y, stroke: css("--line"), "stroke-opacity": .6}); }
-  const dots = xs.map((v, i) => { const tx = sx(v), ty = sy(ys[i]);
-    const c = add("circle", {cx: REDUCE ? tx : (L + W) / 2, cy: REDUCE ? ty : (T + H - B) / 2, r: 2.5, fill: col, "fill-opacity": .65}); return [c, tx, ty]; });
-  if (!REDUCE){ const t0 = performance.now(), sx0 = (L + W) / 2, sy0 = (T + H - B) / 2;
-    (function step(t){ dots.forEach(([c, tx, ty], i) => { const k = Math.min(1, Math.max(0, (t - t0 - i * 1.2) / 600)), e = 1 - Math.pow(1 - k, 3);
-      c.setAttribute("cx", (sx0 + (tx - sx0) * e).toFixed(1)); c.setAttribute("cy", (sy0 + (ty - sy0) * e).toFixed(1)); });
-      if (t - t0 < 600 + dots.length * 1.2) requestAnimationFrame(step); })(t0); }
-  const fmt = v => Math.abs(v) >= 1e5 ? v.toExponential(1) : (+v.toPrecision(4)).toString();
-  add("text", {x: L - 8, y: T + 10, "text-anchor": "end"}).textContent = fmt(y1); add("text", {x: L - 8, y: H - B, "text-anchor": "end"}).textContent = fmt(y0);
-  add("text", {x: L, y: H - 14}).textContent = fmt(x0); add("text", {x: W - R, y: H - 14, "text-anchor": "end"}).textContent = fmt(x1);
-  add("text", {x: (L + W) / 2, y: H - 14, "text-anchor": "middle"}).textContent = f.xlabel;
+  const nice = (a, b, n) => { const step0 = (b - a) / n, mag = 10 ** Math.floor(Math.log10(step0)), st = [1, 2, 2.5, 5, 10].map(m => m * mag).find(m => m >= step0) || step0;
+    const out = []; for (let v = Math.ceil(a / st) * st; v <= b + 1e-9; v += st) out.push(+v.toPrecision(10)); return out; };
+  const fmt = v => Math.abs(v) >= 1e5 || (Math.abs(v) < 1e-3 && v !== 0) ? v.toExponential(1) : num(+v.toPrecision(4));
+  nice(y0, y1, 4).forEach(v => { add("line", {x1: L, x2: W - R, y1: sy(v), y2: sy(v), stroke: css("--line"), "stroke-opacity": .7});
+    add("text", {x: L - 10, y: sy(v) + 4, "text-anchor": "end"}).textContent = fmt(v); });
+  nice(x0, x1, minutes ? 8 : 5).forEach(v => { add("line", {x1: sx(v), x2: sx(v), y1: H - B, y2: H - B + 5, stroke: css("--dim")});
+    add("text", {x: sx(v), y: H - B + 19, "text-anchor": "middle"}).textContent = fmt(v); });
+  add("line", {x1: L, x2: W - R, y1: H - B, y2: H - B, stroke: css("--dim")});
+  add("text", {x: (L + W - R) / 2, y: H - 10, "text-anchor": "middle", class: "ttl"}).textContent = minutes ? "MINUTES SINCE SUNSET (−) · SINCE SUNRISE (+)" : f.xlabel.toUpperCase();
+  const {u} = pretty(f), yl = add("text", {x: 14, y: (T + H - B) / 2, "text-anchor": "middle", class: "ttl", transform: `rotate(-90 14 ${(T + H - B) / 2})`});
+  yl.textContent = (u ? `RAW READING (${f.unit || u})` : "RAW READING").toUpperCase();
+  const cx0 = (L + W) / 2, cy0 = (T + H - B) / 2;
+  const dots = xs.map((v, i) => [add("circle", {cx: REDUCE ? sx(v) : cx0, cy: REDUCE ? sy(ys[i]) : cy0, r: 2.4, fill: col, "fill-opacity": .42}), sx(v), sy(ys[i])]);
+  const med = binned(f, 28), path = add("path", {d: med.map((p, i) => `${i ? "L" : "M"}${sx(p[0]).toFixed(1)},${sy(p[1]).toFixed(1)}`).join(""), fill: "none", stroke: col, "stroke-width": 2.4, "stroke-linejoin": "round"});
+  if (!REDUCE){
+    const len = path.getTotalLength ? 2400 : 0; path.setAttribute("stroke-dasharray", len); path.setAttribute("stroke-dashoffset", len);
+    const t0 = performance.now();
+    (function step(t){ const k = Math.min(1, (t - t0) / 900), e = 1 - Math.pow(1 - k, 3);
+      dots.forEach(([c, tx, ty]) => { c.setAttribute("cx", (cx0 + (tx - cx0) * e).toFixed(1)); c.setAttribute("cy", (cy0 + (ty - cy0) * e).toFixed(1)); });
+      path.setAttribute("stroke-dashoffset", (len * (1 - Math.max(0, (k - .35) / .65))).toFixed(0));
+      if (k < 1) requestAnimationFrame(step); })(t0);
+  }
   return s;
 }
 
@@ -386,7 +503,7 @@ function highlight(src){
     if (!m) return esc(l); const v = m[2] === "type" ? `<span class="t">${esc(m[4])}</span>` : m[2] === "doc" ? `<span class="c">${esc(m[4])}</span>` : esc(m[4]);
     return `${esc(m[1])}<span class="k">${m[2]}</span>${m[3]}${v}`; }).join("\n");
 }
-document.getElementById("again").onclick = run;
+document.getElementById("again").onclick = () => run();
 document.getElementById("copy").onclick = () => { const m = document.getElementById("copied");
   navigator.clipboard.writeText(sat.ksy).then(() => m.textContent = "Copied", () => { const r = document.createRange(); r.selectNodeContents(document.getElementById("ksy"));
     const s = getSelection(); s.removeAllRanges(); s.addRange(r); m.textContent = "Selected: press Ctrl+C"; }); };
