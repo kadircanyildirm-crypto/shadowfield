@@ -35,18 +35,19 @@ section{padding-block:84px}
 #sky2{animation:twinkle 5s ease-in-out infinite alternate}
 #sky3{animation:twinkle 3.6s ease-in-out -1.8s infinite alternate}
 @keyframes twinkle{from{opacity:.25}to{opacity:1}}
-.herogrid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:center;width:100%}
-h1{font:800 clamp(42px,6.6vw,92px)/.98 var(--display);letter-spacing:-.035em;margin:16px 0 22px;min-height:2em}
+.herogrid{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:center;width:100%;
+  max-width:1920px;padding-left:max(24px,4.5vw,env(safe-area-inset-left,0px));padding-right:max(20px,3vw,env(safe-area-inset-right,0px))}
+h1{font:800 clamp(34px,4.2vw,64px)/1.04 var(--display);letter-spacing:-.03em;margin:14px 0 20px;min-height:2.08em}
 h1 .hl{background:linear-gradient(90deg,var(--sun),var(--sun2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .scr{color:var(--dim)}
-.lede{color:#c3cde1;font-size:17.5px;max-width:50ch;margin:0}
+.lede{color:#c3cde1;font-size:16.5px;max-width:52ch;margin:0}
 .lede b{color:var(--fg)}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .btn{font:600 14.5px var(--body);border-radius:999px;padding:13px 22px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--fg);
   text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px)}
 .btn.gold{background:linear-gradient(90deg,var(--sun),var(--sun2));color:#170f04;border:0;box-shadow:0 10px 40px -12px rgba(255,160,60,.7)}
-.globe{position:relative;min-width:0}
+.globe{position:relative;min-width:0;width:min(100%,82vh);margin-left:auto}
 #globe{width:100%;aspect-ratio:1/1;display:block}
 .state{position:absolute;top:8%;right:6%;font:600 12px var(--mono);letter-spacing:.16em;padding:7px 13px;border-radius:999px;
   background:rgba(8,13,26,.75);border:1px solid var(--line);transition:color .3s;color:var(--sun)}
@@ -149,7 +150,7 @@ pre.ksy{background:var(--night);border:1px solid var(--line);border-radius:16px;
 pre.ksy .k{color:var(--count)} pre.ksy .t{color:var(--nav)} pre.ksy .c{color:#5d6a8a}
 footer{border-top:1px solid var(--line);padding-block:30px 50px;color:var(--muted);font-size:13.5px}
 
-@media (max-width:900px){.herogrid{grid-template-columns:1fr}.hero{min-height:0;padding-bottom:40px}.close{grid-template-columns:1fr}
+@media (max-width:900px){.herogrid{grid-template-columns:1fr}.globe{margin-inline:auto}.hero{min-height:0;padding-bottom:40px}.close{grid-template-columns:1fr}
   .nums{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:1fr}.readouts{position:static;margin-top:8px}.ro{grid-template-columns:1fr auto}}
 @media (prefers-reduced-motion:reduce){.b,.tc,.conf .bar i{transition:none}.sweep.go{animation:none}}
 </style>
