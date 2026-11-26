@@ -34,6 +34,10 @@ sunrise/sunset response shape, the time constant, the raw ranges and which field
 Claude is never told the satellite's name, so it cannot recall a known decoder. The output is an
 HTML report and a **Kaitai Struct decoder draft** (`.ksy`), the format satnogs-decoders uses.
 
+**Demo:** `docs/index.html` is an interactive explorer of two decoded satellites: the frame's bytes light up as
+physics finds each field, click one to see its response to Earth's shadow and Claude's reading. It runs locally with
+`python -m http.server -d docs` (then open http://localhost:8000); `python -m tools.make_explorer` rebuilds its data.
+
 ## Does it work? Blind tests against real decoders
 
 Some satellites do have public decoders
