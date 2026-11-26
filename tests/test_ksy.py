@@ -43,12 +43,22 @@ def layout(spec):
     return out, pos
 
 
-@pytest.mark.parametrize("path", KSY, ids=[p.stem for p in KSY])
-def test_ksy_compiles_and_matches_engine(path, tmp_path):
-    spec = yaml.safe_load(path.read_text(encoding="utf-8"))
+def _compile(path, tmp_path):
     r = subprocess.run(["node", str(KSC / "compile.js"), str(path), str(tmp_path)], capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
-    py = next(tmp_path.glob("*.py"))
+    return next(tmp_path.glob("*.py"))
+
+
+@pytest.mark.parametrize("path", KSY, ids=[p.stem for p in KSY])
+def test_ksy_compiles_with_the_official_compiler(path, tmp_path):
+    py = _compile(path, tmp_path)
+    compile(py.read_text(encoding="utf-8"), str(py), "exec")  # valid Python parser out
+
+
+@pytest.mark.parametrize("path", KSY, ids=[p.stem for p in KSY])
+def test_ksy_reads_real_frames_like_the_engine(path, tmp_path):
+    spec = yaml.safe_load(path.read_text(encoding="utf-8"))
+    py = _compile(path, tmp_path)
     mod_spec = importlib.util.spec_from_file_location(py.stem, py)
     mod = importlib.util.module_from_spec(mod_spec)
     mod_spec.loader.exec_module(mod)
