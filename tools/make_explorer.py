@@ -27,6 +27,7 @@ for norad, dec, label, key, blurb in SHOW:
     ph = res.phys
     order = np.argsort(ph["unix"].to_numpy())
     frame = res.ft.bytes_[order[len(order) // 2]].tolist()
+    stream = [bytes(res.ft.bytes_[i]).hex().upper() for i in order[np.linspace(0, len(order) - 1, 28).astype(int)]]
     fields = []
     for f in res.fields:
         y = _values(res.ft, f)
@@ -55,7 +56,7 @@ for norad, dec, label, key, blurb in SHOW:
     ev = saved.get("evaluation") or {}
     out["satellites"].append({
         "norad": norad, "name": label, "blurb": blurb, "frame_type": key, "length": res.ft.length,
-        "frames": len(res.ft.df), "passes": int(res.ft.df["obs_id"].nunique()), "frame": frame,
+        "frames": len(res.ft.df), "passes": int(res.ft.df["obs_id"].nunique()), "frame": frame, "stream": stream,
         "summary": (saved.get("names") or {}).get("summary"), "health": (saved.get("names") or {}).get("health"),
         "grade": {k: ev.get(k) for k in ("recall_physical", "value_exact_physical", "precision", "llm_category_accuracy")},
         "decoder_fields": [{"offset": t["offset"], "width": t["width"], "name": t["name"], "category": t["category"]}

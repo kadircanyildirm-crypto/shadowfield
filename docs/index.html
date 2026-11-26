@@ -1,286 +1,464 @@
 <title>Shadowfield</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-/* Layout: one working screen — header with the orbit, then the frame (hex) beside the field it decodes, then the proof. */
+/* Layout: a scroll story on the night side of an orbit. Hero scene (the physics) -> live downlink -> the decode (bytes
+   light up, one field at a time) -> how -> proof -> the decoder file. One look, deliberately dark: space. */
 :root{
-  /* deliberately one look: night side of the orbit */
-  --bg:#0a0e16; --panel:#111827; --line:#1f2a3c; --fg:#e7edf6; --muted:#8b98ad; --faint:#3a465b;
-  --sun:#ffd27a; --shadow:#070a10;
-  --thermal:#ff8f5a; --power:#ffd166; --count:#6cb6ff; --nav:#5fe3a1; --vec:#c4a1ff; --unknown:#5b677c;
-  --display:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --bg:#05070d; --bg2:#0b1020; --panel:#0e1426; --line:#1c2640; --fg:#eef2fa; --muted:#8e9bb5; --faint:#38445f;
+  --sun:#ffc45e; --sun2:#ff9a3d; --shadow:#020308;
+  --thermal:#ff7a4d; --power:#ffd166; --count:#68b8ff; --nav:#4fe0a0; --vec:#c49bff; --unknown:#56627d;
+  --display:"Unbounded",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body)}
-.wrap{max-width:1180px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
-header{display:grid;grid-template-columns:1fr 260px;gap:24px;align-items:center}
-h1{font:700 44px/1.05 var(--display);letter-spacing:-.02em;margin:0}
-h1 span{color:var(--sun)}
-.lede{color:var(--muted);max-width:62ch;margin:10px 0 0;font-size:16px}
-.lede b{color:var(--fg);font-weight:600}
-canvas#orbit{width:260px;height:180px;max-width:100%}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.tab{font:500 14px var(--body);color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
-.tab[aria-selected="true"]{color:var(--bg);background:var(--fg);border-color:var(--fg)}
-.tab:focus-visible,.byte:focus-visible,.btn:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
-.meta{color:var(--muted);font:13px var(--mono)}
-.main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:start}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
-.panel h2{font:600 13px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
-.hexhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.btn{font:500 13px var(--body);color:var(--fg);background:var(--line);border:0;border-radius:8px;padding:6px 12px;cursor:pointer}
-.hex{display:grid;grid-template-columns:34px repeat(8,minmax(0,1fr));gap:4px;font:500 13px var(--mono);margin-top:8px}
-.off{color:var(--faint);font-size:11px;align-self:center}
-.byte{border:0;border-radius:5px;padding:7px 0;text-align:center;background:#161f2e;color:var(--faint);cursor:default;font:inherit;transition:background .35s,color .35s,transform .2s}
-.byte.on{color:#0a0e16;cursor:pointer}
-.byte.sel{transform:translateY(-2px);box-shadow:0 0 0 2px var(--fg)}
-.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;color:var(--muted);font-size:12.5px}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-.status{margin-top:12px;color:var(--muted);font-size:13.5px;min-height:1.5em}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);overflow-x:hidden}
+.in{max-width:1200px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+section{padding-block:72px}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--sun)}
+h2{font:700 clamp(26px,3.6vw,42px)/1.1 var(--display);letter-spacing:-.01em;margin:10px 0 14px;text-wrap:balance}
+.sub{color:var(--muted);max-width:64ch;margin:0}
+
+/* hero */
+.hero{position:relative;margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(env(safe-area-inset-top,0px) + 40px);padding-bottom:30px;
+  background:radial-gradient(1200px 600px at 75% 40%,#101a36 0%,var(--bg) 60%);overflow:hidden}
+#stars{position:absolute;inset:0;width:100%;height:100%}
+.heroin{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:28px;align-items:center;min-height:540px}
+.title{font:800 clamp(40px,6.4vw,84px)/.98 var(--display);letter-spacing:-.03em;margin:14px 0 18px;text-wrap:balance}
+.title em{font-style:normal;background:linear-gradient(90deg,var(--sun),var(--sun2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{color:#c5cfe2;max-width:52ch;font-size:17px;margin:0}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{font:600 14px var(--body);border-radius:999px;padding:12px 20px;border:1px solid var(--line);color:var(--fg);background:rgba(255,255,255,.03);cursor:pointer;text-decoration:none;transition:transform .2s,background .2s}
+.btn.primary{background:linear-gradient(90deg,var(--sun),var(--sun2));color:#1a1206;border:0}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,.tab:focus-visible,.byte:focus-visible,.fchip:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+.scene{position:relative;min-width:0}
+#orbit{width:100%;height:auto;aspect-ratio:4/3;max-width:100%;display:block}
+.hud{position:absolute;right:0;bottom:6%;display:grid;gap:8px;min-width:210px;font:500 12px var(--mono)}
+.gauge{background:rgba(11,16,32,.78);border:1px solid var(--line);border-radius:10px;padding:8px 12px;backdrop-filter:blur(6px)}
+.gauge .k{color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-size:10.5px}
+.gauge .v{font:700 18px var(--mono);font-variant-numeric:tabular-nums}
+.gauge .bar{height:3px;background:var(--line);border-radius:3px;margin-top:5px;overflow:hidden}
+.gauge .bar i{display:block;height:100%;width:50%;transition:width .2s}
+.pill{position:absolute;left:4%;top:6%;font:700 12px var(--mono);letter-spacing:.14em;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(11,16,32,.75)}
+.pill.sun{color:var(--sun)} .pill.dark{color:var(--muted)}
+.illus{position:absolute;left:4%;bottom:6%;color:var(--faint);font:11px var(--mono)}
+
+/* downlink ticker */
+.ticker{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding-block:14px;position:relative}
+.ticker:before,.ticker:after{content:"";position:absolute;top:0;bottom:0;width:80px;z-index:1}
+.ticker:before{left:0;background:linear-gradient(90deg,var(--bg2),transparent)} .ticker:after{right:0;background:linear-gradient(270deg,var(--bg2),transparent)}
+.track{display:flex;gap:40px;width:max-content;animation:tick 70s linear infinite;font:12.5px var(--mono);color:#53627f;white-space:nowrap}
+.track b{color:var(--sun);font-weight:500;margin-right:10px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* decode */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 6px}
+.tab{font:600 14px var(--body);color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer}
+.tab[aria-selected="true"]{color:#1a1206;background:var(--sun);border-color:var(--sun)}
+.satmeta{color:var(--muted);font:12.5px var(--mono);margin:0 0 20px}
+.board{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;align-items:start}
+.card{background:linear-gradient(180deg,var(--panel),#0b1122);border:1px solid var(--line);border-radius:16px;padding:20px;min-width:0;position:relative}
+.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.label{font:600 11.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mapwrap{position:relative}
+.map{display:grid;grid-template-columns:36px repeat(12,minmax(0,1fr));gap:4px;font:500 12.5px var(--mono)}
+.off{color:var(--faint);font-size:10.5px;align-self:center}
+.byte{border:0;border-radius:6px;padding:8px 0;text-align:center;background:#121a2e;color:#46536f;cursor:default;font:inherit;
+  transition:background .45s,color .45s,transform .25s,box-shadow .45s}
+.byte.on{color:#0a0e18;cursor:pointer;box-shadow:0 0 14px -2px var(--glow)}
+.byte.sel{transform:translateY(-3px) scale(1.04);box-shadow:0 0 0 2px var(--fg),0 0 22px -2px var(--glow)}
+.scan{position:absolute;top:0;bottom:0;width:60px;left:-60px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,196,94,.28),transparent);opacity:0}
+.scan.go{animation:scan 1.5s ease-in-out 1}
+@keyframes scan{0%{left:-60px;opacity:1}100%{left:100%;opacity:.0}}
+.status{margin-top:14px;color:var(--muted);font-size:14px;min-height:1.6em}
 .status b{color:var(--fg)}
-.fname{font:700 26px/1.15 var(--display);margin:0;word-break:break-word}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.chip{font:500 12px var(--mono);padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
-.chip.k{color:#0a0e16;border:0}
-.why{color:var(--fg);opacity:.9;margin:10px 0 0;font-size:14px}
-.conf{height:4px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:6px}
-.conf>div{height:100%;background:var(--sun)}
-.check{margin-top:12px;font-size:13.5px;color:var(--muted)}
-.check b.ok{color:var(--nav)} .check b.near{color:var(--power)}
-svg.plot{width:100%;height:auto;display:block;margin-top:12px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;color:var(--muted);font-size:12.5px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.fchip{font:500 12px var(--mono);border:1px solid var(--line);background:none;color:var(--muted);border-radius:999px;padding:4px 10px;cursor:pointer}
+.fchip[aria-pressed="true"]{color:var(--fg);border-color:var(--fg)}
+.fname{font:700 clamp(22px,2.4vw,30px)/1.15 var(--display);margin:6px 0 4px;word-break:break-word;text-wrap:balance}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tag{font:500 12px var(--mono);padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tag.k{color:#0a0e18;border:0}
+.ev{color:var(--muted);font:12.5px var(--mono)}
+.why{margin:12px 0 0;font-size:14.5px;color:#d3dbea}
+.conf{display:flex;align-items:center;gap:10px;margin-top:10px;font:12px var(--mono);color:var(--muted)}
+.conf .b{flex:1;height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.conf .b i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),var(--sun2));width:0;transition:width .8s}
+svg.plot{width:100%;height:auto;display:block;margin-top:14px}
 svg.plot text{fill:var(--muted);font:11px var(--body)}
-.scores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.score b{display:block;font:700 34px/1 var(--display);font-variant-numeric:tabular-nums}
-.score span{color:var(--muted);font-size:13px}
-.note{color:var(--muted);font-size:13.5px;margin:12px 0 0;max-width:75ch}
-pre.ksy{background:var(--shadow);border:1px solid var(--line);border-radius:10px;padding:14px;overflow:auto;max-height:340px;font:12.5px/1.5 var(--mono);color:#c9d4e3;margin:10px 0 0}
-details summary{cursor:pointer;color:var(--fg);font-weight:600}
-@media (max-width:860px){header{grid-template-columns:1fr} .main{grid-template-columns:1fr} .scores{grid-template-columns:repeat(2,minmax(0,1fr))} h1{font-size:34px}}
-@media (prefers-reduced-motion:reduce){.byte{transition:none}}
+.verdict{margin-top:12px;font-size:14px;color:var(--muted)}
+.verdict b.ok{color:var(--nav)} .verdict b.near{color:var(--power)}
+
+/* how */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:26px}
+.step{border-top:2px solid var(--line);padding-top:16px}
+.step .n{font:700 13px var(--mono);color:var(--sun)}
+.step h3{font:700 19px/1.25 var(--display);margin:8px 0}
+.step p{color:var(--muted);margin:0;font-size:14.5px}
+
+/* proof */
+.proof{background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:28px}
+.num b{display:block;font:800 clamp(40px,5vw,64px)/1 var(--display);font-variant-numeric:tabular-nums;
+  background:linear-gradient(180deg,var(--fg),#9fb0cf);-webkit-background-clip:text;background-clip:text;color:transparent}
+.num span{color:var(--muted);font-size:14px;display:block;margin-top:8px;max-width:22ch}
+.sats{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.sats span{font:500 12px var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+.fine{color:var(--muted);font-size:14px;margin-top:18px;max-width:80ch}
+
+/* ksy */
+pre.ksy{background:var(--shadow);border:1px solid var(--line);border-radius:14px;padding:18px;overflow:auto;max-height:420px;font:12.5px/1.6 var(--mono);color:#c8d3e6;margin:16px 0 0}
+pre.ksy .k{color:var(--count)} pre.ksy .t{color:var(--nav)} pre.ksy .c{color:#5f6d8c}
+footer{border-top:1px solid var(--line);padding-block:28px 48px;color:var(--muted);font-size:13.5px}
+
+@media (max-width:900px){.heroin{grid-template-columns:1fr;min-height:0}.board{grid-template-columns:1fr}.steps{grid-template-columns:1fr}
+  .nums{grid-template-columns:repeat(2,minmax(0,1fr))}.map{grid-template-columns:30px repeat(8,minmax(0,1fr))}.hud{position:static;margin-top:10px;grid-template-columns:repeat(3,minmax(0,1fr));min-width:0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track{animation:none}.byte,.conf .b i{transition:none}.scan.go{animation:none}}
 </style>
 
-<div class="wrap">
-  <header>
+<header class="hero" id="top">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="in heroin">
     <div>
-      <h1>Shadow<span>field</span></h1>
-      <p class="lede">Hundreds of small satellites send telemetry nobody can read: no public format, just bytes.
-        Shadowfield works out what the bytes mean <b>from the orbit alone</b>. A battery charges in sunlight, a panel cools in
-        Earth's shadow, a clock keeps time, a GNSS fix follows the orbit. Then <b>Claude</b> names each field like a spacecraft engineer.
-        The satellite's decoder and its name are never used.</p>
+      <div class="eyebrow">SatNOGS · 15 satellites · decoded blind</div>
+      <h1 class="title">The orbit is<br>the <em>decoder</em>.</h1>
+      <p class="lede">Hundreds of small satellites broadcast telemetry nobody can read: no public format, just bytes.
+        Shadowfield works out what each byte means from the physics of the orbit. Batteries charge in sunlight, panels cool in
+        Earth's shadow, clocks tick and GNSS fixes trace the path. Claude then names every field like a spacecraft engineer.
+        No decoder and no satellite name are used.</p>
+      <div class="cta"><a class="btn primary" href="#decode">Decode a frame</a><a class="btn" href="#proof">See the blind scores</a></div>
     </div>
-    <canvas id="orbit" width="520" height="360" aria-label="A satellite orbiting Earth, passing through its shadow"></canvas>
-  </header>
-
-  <div class="tabs" role="tablist" id="tabs"></div>
-  <div class="meta" id="satmeta"></div>
-
-  <div class="main">
-    <section class="panel" aria-label="Frame bytes">
-      <div class="hexhead"><h2>One telemetry frame</h2><button class="btn" id="replay" type="button">Decode again</button></div>
-      <div class="hex" id="hex"></div>
-      <div class="legend" id="legend"></div>
-      <div class="status" id="status"></div>
-    </section>
-    <section class="panel" id="detail" aria-live="polite"></section>
+    <div class="scene">
+      <canvas id="orbit" width="900" height="675" aria-label="A satellite orbiting Earth, entering and leaving its shadow"></canvas>
+      <div class="pill sun" id="pill">IN SUNLIGHT</div>
+      <div class="hud" aria-hidden="true">
+        <div class="gauge"><div class="k">Solar current</div><div class="v" id="g1">0 mA</div><div class="bar"><i id="b1" style="background:var(--power)"></i></div></div>
+        <div class="gauge"><div class="k">Battery</div><div class="v" id="g2">0 V</div><div class="bar"><i id="b2" style="background:var(--power)"></i></div></div>
+        <div class="gauge"><div class="k">Panel temperature</div><div class="v" id="g3">0 °C</div><div class="bar"><i id="b3" style="background:var(--thermal)"></i></div></div>
+      </div>
+      <div class="illus">illustration of the physics the engine looks for</div>
+    </div>
   </div>
+</header>
 
-  <section class="panel">
-    <h2>Graded blind against the published decoders</h2>
-    <div class="scores" id="scores"></div>
-    <p class="note" id="scorenote"></p>
-  </section>
+<div class="ticker" aria-label="Real frames as received by SatNOGS ground stations"><div class="track" id="track"></div></div>
 
-  <section class="panel">
-    <details>
-      <summary>Kaitai Struct decoder draft for this frame (.ksy)</summary>
-      <div style="display:flex;gap:10px;align-items:center;margin-top:10px"><button class="btn" id="copy" type="button">Copy</button><span class="meta" id="copymsg"></span></div>
-      <pre class="ksy" id="ksy"></pre>
-    </details>
-  </section>
-</div>
+<section id="decode"><div class="in">
+  <div class="eyebrow">The decode</div>
+  <h2>Watch a frame give up its fields</h2>
+  <p class="sub">A real frame received by amateur ground stations. Every byte reading is tested against sunlight, Earth's
+    shadow, orbital phase, wall-clock time, the magnetic field and the GNSS orbit. The ones that follow physics light up.</p>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <p class="satmeta" id="satmeta"></p>
+  <div class="board">
+    <div class="card">
+      <div class="cardhead"><span class="label">Telemetry frame · bytes</span><button class="btn" id="replay" type="button">Decode again</button></div>
+      <div class="mapwrap"><div class="map" id="map"></div><div class="scan" id="scan"></div></div>
+      <div class="status" id="status">Loading frames…</div>
+      <div class="legend" id="legend"></div>
+      <div class="chips" id="chips" aria-label="Fields found"></div>
+    </div>
+    <div class="card" id="detail" aria-live="polite"><span class="label">Field</span><p class="fname">Pick a lit byte</p></div>
+  </div>
+</div></section>
+
+<section><div class="in">
+  <div class="eyebrow">How it works</div>
+  <h2>Three steps, no decoder</h2>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><h3>Physics from the orbit</h3><p>For every frame, the public TLE gives sunlight, the last 200 minutes of
+      sunlight history, minutes since sunrise or sunset, orbital phase, position and velocity, and the IGRF magnetic field.</p></div>
+    <div class="step"><div class="n">02</div><h3>Every reading, tested</h3><p>Each offset, width, byte order, sign and float is correlated with that
+      physics, within weeks, with significance counted in passes. Structural tests then settle the byte layout (carries, sign extension).</p></div>
+    <div class="step"><div class="n">03</div><h3>Claude reads the evidence</h3><p>Blind to the satellite's name, Claude reads each field's response
+      shape, time constant and range, and proposes name, unit and scale. It is asked three times and the majority answer is kept.</p></div>
+  </div>
+</div></section>
+
+<section class="proof" id="proof"><div class="in">
+  <div class="eyebrow">Proof</div>
+  <h2>Graded blind against the published decoders</h2>
+  <p class="sub" id="proofsub">On satellites never inspected while the engine was built.</p>
+  <div class="nums" id="nums"></div>
+  <div class="sats" id="sats"></div>
+  <p class="fine" id="fine"></p>
+</div></section>
+
+<section><div class="in">
+  <div class="eyebrow">The output</div>
+  <h2>A decoder file, written for you</h2>
+  <p class="sub">The fields above as a Kaitai Struct draft, the format SatNOGS decoders use. It compiles with the official compiler and reads
+    real frames exactly as the engine does.</p>
+  <div class="cta"><button class="btn" id="copy" type="button">Copy .ksy</button><span class="satmeta" id="copymsg" style="align-self:center;margin:0"></span></div>
+  <pre class="ksy" id="ksy"></pre>
+</div></section>
+
+<footer><div class="in">Shadowfield, built for Build Your First AI App. Frames: SatNOGS Network (CC BY-SA). Ground truth for grading: satnogs-decoders.
+  Field names by Claude.</div></footer>
 
 <script>
-const COLORS = {thermal:"--thermal", power_solar:"--power", power_battery:"--power", power_bus:"--power",
-  counter:"--count", clock:"--count", navigation:"--nav", magnetometer:"--vec", attitude:"--vec", unknown:"--unknown"};
-const KIND_FALLBACK = {lagged:"thermal", sun:"power_solar", orbit:"unknown", counter:"counter", clock:"clock",
-  position:"navigation", magnet:"magnetometer", attitude:"attitude"};
+const COLORS = {thermal:"--thermal", power_solar:"--power", power_battery:"--power", power_bus:"--power", counter:"--count", clock:"--count",
+  navigation:"--nav", magnetometer:"--vec", attitude:"--vec", unknown:"--unknown"};
+const KIND_FALLBACK = {lagged:"thermal", sun:"power_solar", orbit:"unknown", counter:"counter", clock:"clock", position:"navigation", magnet:"magnetometer", attitude:"attitude"};
+const KIND_TEXT = {sun:"steps with sunlight", lagged:"follows sunlight with a lag", orbit:"repeats with the orbit", counter:"counts up",
+  clock:"keeps wall-clock time", position:"traces the orbit's coordinates", magnet:"its |B| follows the IGRF model", attitude:"a unit quaternion (|q| = 1)"};
 const LEGEND = [["thermal","Temperature"],["power_battery","Power"],["counter","Counter / clock"],["navigation","GNSS"],["magnetometer","Vector"],["unknown","Physical, unnamed"]];
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const cat = f => (f.category && COLORS[f.category]) ? f.category : (KIND_FALLBACK[f.kind] || "unknown");
-const KIND_TEXT = {sun:"steps with sunlight", lagged:"follows sunlight with a lag", orbit:"repeats with the orbit",
-  counter:"counts up", clock:"tracks wall-clock time", position:"matches the orbit's coordinates", magnet:"|B| follows the IGRF model",
-  attitude:"unit quaternion (|q| = 1)"};
-let DATA, sat, sel = null, timers = [];
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+let DATA, sat, sel, timers = [];
 
-fetch("data.json").then(r => r.json()).then(d => { DATA = d; buildTabs(); scores(); show(0); })
-  .catch(() => { document.getElementById("status").textContent = "Could not load data.json next to this page."; });
+fetch("data.json").then(r => r.json()).then(d => { DATA = d; tabs(); proof(); show(0); })
+  .catch(() => { document.getElementById("status").textContent = "Could not load data.json, which must sit next to this page."; });
 
-function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-
-function buildTabs(){
+function tabs(){
   const t = document.getElementById("tabs");
-  DATA.satellites.forEach((s, i) => {
-    const b = el("button", "tab", s.name); b.type = "button"; b.setAttribute("role", "tab");
-    b.onclick = () => show(i); t.appendChild(b);
-  });
+  DATA.satellites.forEach((s, i) => { const b = el("button", "tab", s.name); b.type = "button"; b.setAttribute("role", "tab"); b.onclick = () => show(i); t.appendChild(b); });
 }
 
 function show(i){
   sat = DATA.satellites[i]; sel = null;
   [...document.querySelectorAll(".tab")].forEach((b, j) => b.setAttribute("aria-selected", i === j));
-  document.getElementById("satmeta").textContent =
-    `${sat.blurb} · NORAD ${sat.norad} · ${sat.frames} frames from ${sat.passes} passes recorded by SatNOGS stations · ${sat.length}-byte payload`;
-  document.getElementById("ksy").textContent = sat.ksy || "(no draft)";
-  hex(); legend(); reveal();
+  document.getElementById("satmeta").textContent = `${sat.blurb} · NORAD ${sat.norad} · ${sat.frames} frames from ${sat.passes} passes · ${sat.length}-byte payload`;
+  const tr = document.getElementById("track"); tr.replaceChildren();
+  for (let k = 0; k < 2; k++) sat.stream.forEach(h => { const s = el("span"); s.append(el("b", null, sat.name), h.match(/../g).join(" ")); tr.appendChild(s); });
+  document.getElementById("ksy").innerHTML = highlight(sat.ksy || "");
+  map(); legend(); chips(); decode();
 }
 
-function hex(){
-  const h = document.getElementById("hex"); h.replaceChildren();
+function map(){
+  const m = document.getElementById("map"); m.replaceChildren();
+  const cols = matchMedia("(max-width:900px)").matches ? 8 : 12;
   sat.frame.forEach((b, o) => {
-    if (o % 8 === 0) h.appendChild(el("div", "off", String(o).padStart(3, "0")));
+    if (o % cols === 0) m.appendChild(el("div", "off", String(o).padStart(3, "0")));
     const c = el("button", "byte", b.toString(16).toUpperCase().padStart(2, "0"));
     c.type = "button"; c.dataset.o = o; c.tabIndex = -1; c.setAttribute("aria-label", `byte ${o}`);
     c.onclick = () => { const f = fieldAt(o); if (f) pick(f); };
-    h.appendChild(c);
+    m.appendChild(c);
   });
 }
-
-function fieldAt(o){ return sat.fields.find(f => o >= f.offset && o < f.offset + f.span); }
+const fieldAt = o => sat.fields.find(f => o >= f.offset && o < f.offset + f.span);
 
 function legend(){
   const L = document.getElementById("legend"); L.replaceChildren();
-  LEGEND.forEach(([k, label]) => { const s = el("span"); const i = el("i"); i.style.background = css(COLORS[k]); s.append(i, label); L.appendChild(s); });
+  LEGEND.forEach(([k, t]) => { const s = el("span"); const i = el("i"); i.style.background = css(COLORS[k]); s.append(i, t); L.appendChild(s); });
+}
+
+function chips(){
+  const C = document.getElementById("chips"); C.replaceChildren();
+  [...sat.fields].sort((a, b) => a.offset - b.offset).forEach(f => {
+    const b = el("button", "fchip", (f.name || f.kind).replaceAll("_", " ")); b.type = "button"; b.dataset.o = f.offset; b.hidden = true;
+    b.setAttribute("aria-pressed", "false"); b.onclick = () => pick(f); C.appendChild(b);
+  });
 }
 
 function paint(f, on){
+  const col = css(COLORS[cat(f)]);
   for (let o = f.offset; o < f.offset + f.span; o++){
     const c = document.querySelector(`.byte[data-o="${o}"]`); if (!c) continue;
-    c.classList.toggle("on", on); c.style.background = on ? css(COLORS[cat(f)]) : ""; c.tabIndex = on ? 0 : -1;
+    c.classList.toggle("on", on); c.style.background = on ? col : ""; c.style.setProperty("--glow", col); c.tabIndex = on ? 0 : -1;
     c.setAttribute("aria-label", on ? `byte ${o}: ${f.name || f.kind}` : `byte ${o}`);
   }
+  const ch = document.querySelector(`.fchip[data-o="${f.offset}"]`); if (ch) ch.hidden = !on;
 }
 
-function reveal(){
+function decode(){
   timers.forEach(clearTimeout); timers = [];
   sat.fields.forEach(f => paint(f, false));
-  const status = document.getElementById("status");
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  status.textContent = "Testing every reading of every byte against the orbit…";
-  const order = [...sat.fields].sort((a, b) => a.offset - b.offset);
+  const st = document.getElementById("status"), scan = document.getElementById("scan");
+  scan.classList.remove("go"); void scan.offsetWidth; if (!REDUCE) scan.classList.add("go");
+  st.textContent = "Testing every reading of every byte against the orbit…";
+  const order = [...sat.fields].sort((a, b) => a.offset - b.offset), t0 = REDUCE ? 0 : 900;
   order.forEach((f, k) => timers.push(setTimeout(() => {
     paint(f, true);
-    status.innerHTML = `<b>${k + 1}</b> of ${order.length} fields found · byte ${f.offset}: ${KIND_TEXT[f.kind] || f.kind}`;
-    if (k === order.length - 1) {
-      status.innerHTML = `<b>${order.length} fields</b> recovered from physics. Click one.`;
-      pick(order.find(x => x.kind === "lagged") || order[0]);
+    st.innerHTML = `<b>${k + 1} / ${order.length}</b> · byte ${f.offset} ${KIND_TEXT[f.kind] || f.kind}`;
+    if (k === order.length - 1){
+      st.innerHTML = `<b>${order.length} fields</b> recovered from physics alone. Pick any lit byte.`;
+      pick(order.find(x => x.kind === "lagged" && x.name) || order[0]);
     }
-  }, reduce ? 0 : 280 + k * 170)));
+  }, REDUCE ? 0 : t0 + k * 140)));
 }
 
 function pick(f){
-  if (sel) document.querySelectorAll(".byte.sel").forEach(c => c.classList.remove("sel"));
+  document.querySelectorAll(".byte.sel").forEach(c => c.classList.remove("sel"));
+  document.querySelectorAll(".fchip").forEach(c => c.setAttribute("aria-pressed", String(+c.dataset.o === f.offset)));
   sel = f;
   for (let o = f.offset; o < f.offset + f.span; o++) document.querySelector(`.byte[data-o="${o}"]`)?.classList.add("sel");
   const d = document.getElementById("detail"); d.replaceChildren();
-  d.appendChild(el("h2", null, `Bytes ${f.offset}–${f.offset + f.span - 1} · what Claude says it is`));
+  d.appendChild(el("span", "label", `Bytes ${f.offset}–${f.offset + f.span - 1} · Claude's reading`));
   d.appendChild(el("p", "fname", f.name ? f.name.replaceAll("_", " ") : "unnamed physical field"));
-  const chips = el("div", "chips");
-  const k = el("span", "chip k", (f.category || f.kind).replace("_", " ")); k.style.background = css(COLORS[cat(f)]); chips.appendChild(k);
-  chips.appendChild(el("span", "chip", f.type));
-  if (f.unit && f.unit !== "unknown") chips.appendChild(el("span", "chip", f.unit));
-  if (f.scale && f.scale !== "raw") chips.appendChild(el("span", "chip", f.scale));
-  d.appendChild(chips);
-  d.appendChild(el("div", "meta", `physics: ${KIND_TEXT[f.kind] || f.kind} · evidence score ${f.score}` + evText(f.evidence)));
-  if (f.confidence != null){ const c = el("div", "conf"); const b = el("div"); b.style.width = `${Math.round(f.confidence * 100)}%`; c.appendChild(b);
-    d.appendChild(el("div", "meta", `Claude's confidence ${Math.round(f.confidence * 100)}%`)); d.appendChild(c); }
+  const tags = el("div", "tags"), k = el("span", "tag k", (f.category || f.kind).replace("_", " "));
+  k.style.background = css(COLORS[cat(f)]); tags.appendChild(k); tags.appendChild(el("span", "tag", f.type));
+  if (f.unit && f.unit !== "unknown") tags.appendChild(el("span", "tag", f.unit));
+  if (f.scale && f.scale !== "raw") tags.appendChild(el("span", "tag", f.scale));
+  d.appendChild(tags);
+  d.appendChild(el("div", "ev", `physics: ${KIND_TEXT[f.kind] || f.kind}${evText(f.evidence)}`));
+  if (f.confidence != null){
+    const c = el("div", "conf"), b = el("div", "b"), i = el("i"); b.appendChild(i);
+    c.append(el("span", null, "confidence"), b, el("span", null, `${Math.round(f.confidence * 100)}%`)); d.appendChild(c);
+    requestAnimationFrame(() => requestAnimationFrame(() => i.style.width = `${Math.round(f.confidence * 100)}%`));
+  }
   if (f.rationale) d.appendChild(el("p", "why", f.rationale));
   d.appendChild(plot(f));
-  const chk = el("div", "check");
-  if (f.decoder){ const b = el("b", f.decoder.exact ? "ok" : "near", f.decoder.exact ? "Exact match" : "Overlaps");
-    chk.append(b, ` with the decoder's field ${f.decoder.name.replace(/^beacon_payload_/, "")}, checked afterwards.`); }
-  else chk.textContent = "The published decoder has no field here.";
-  d.appendChild(chk);
+  const v = el("div", "verdict");
+  if (f.decoder){ v.append(el("b", f.decoder.exact ? "ok" : "near", f.decoder.exact ? "✓ Exact match" : "≈ Overlaps"),
+    ` the published decoder's ${f.decoder.name.replace(/^beacon_payload_/, "")}, checked afterwards.`); }
+  else v.textContent = "The published decoder has no field here.";
+  d.appendChild(v);
 }
 
 function evText(e){
-  const parts = [];
-  if (e.tau_min) parts.push(`lag ≈ ${e.tau_min} min`);
-  if (e.rho_sun != null) parts.push(`ρ(sunlight) ${e.rho_sun}`);
-  if (e.per_second) parts.push(`${(+e.per_second).toPrecision(3)} per second`);
-  if (e.component) parts.push(`matches ${e.component}`);
-  if (e.power_class_hint) parts.push(`signature: ${e.power_class_hint.replace("power_", "")}`);
-  return parts.length ? " · " + parts.join(" · ") : "";
+  const p = [];
+  if (e.tau_min) p.push(`lag ≈ ${e.tau_min} min`);
+  if (e.rho_sun != null) p.push(`ρ sunlight ${e.rho_sun}`);
+  if (e.per_second) p.push(`${(+e.per_second).toPrecision(3)}/s`);
+  if (e.component) p.push(`= ${e.component}`);
+  if (e.power_class_hint) p.push(`signature ${e.power_class_hint.replace("power_", "")}`);
+  return p.length ? " · " + p.join(" · ") : "";
 }
 
 function plot(f){
-  const W = 560, H = 230, L = 46, R = 10, T = 12, B = 34, NS = "http://www.w3.org/2000/svg";
+  const W = 600, H = 250, L = 50, R = 10, T = 16, B = 36, NS = "http://www.w3.org/2000/svg";
   const s = document.createElementNS(NS, "svg"); s.setAttribute("viewBox", `0 0 ${W} ${H}`); s.setAttribute("class", "plot");
-  s.setAttribute("role", "img"); s.setAttribute("aria-label", `value of ${f.name || "the field"} against ${f.xlabel}`);
+  s.setAttribute("role", "img"); s.setAttribute("aria-label", `value against ${f.xlabel}`);
   const xs = f.x, ys = f.y; if (!xs.length) return s;
-  const sorted = [...ys].sort((a, b) => a - b), q = p => sorted[Math.min(sorted.length - 1, Math.floor(p * sorted.length))];
-  let y0 = q(0.01), y1 = q(0.99); if (y1 === y0) { y1 = y0 + 1; }
+  const srt = [...ys].sort((a, b) => a - b), q = p => srt[Math.min(srt.length - 1, Math.floor(p * srt.length))];
+  let y0 = q(.01), y1 = q(.99); if (y1 === y0) y1 = y0 + 1;
   let x0 = Math.min(...xs), x1 = Math.max(...xs); if (x1 === x0) x1 = x0 + 1;
   const sx = v => L + (v - x0) / (x1 - x0) * (W - L - R), sy = v => T + (1 - (Math.min(Math.max(v, y0), y1) - y0) / (y1 - y0)) * (H - T - B);
-  const add = (tag, at) => { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); s.appendChild(e); return e; };
+  const add = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); s.appendChild(e); return e; };
   if (f.xlabel.startsWith("minutes") && x0 < 0){
-    add("rect", {x: sx(x0), y: T, width: sx(Math.min(0, x1)) - sx(x0), height: H - T - B, fill: css("--shadow")});
-    add("text", {x: sx(x0) + 6, y: T + 14}).textContent = "in Earth's shadow";
-    add("text", {x: sx(Math.max(0, x0)) + 6, y: T + 14, fill: css("--sun")}).textContent = "in sunlight";
+    add("rect", {x: sx(x0), y: T, width: Math.max(0, sx(Math.min(0, x1)) - sx(x0)), height: H - T - B, fill: css("--shadow"), rx: 6});
+    add("text", {x: sx(x0) + 8, y: T + 16}).textContent = "Earth's shadow";
+    add("text", {x: sx(Math.max(0, x0)) + 8, y: T + 16, fill: css("--sun")}).textContent = "sunlight";
   }
-  add("line", {x1: L, x2: W - R, y1: H - B, y2: H - B, stroke: css("--line")});
-  const color = css(COLORS[cat(f)]);
-  xs.forEach((v, i) => add("circle", {cx: sx(v).toFixed(1), cy: sy(ys[i]).toFixed(1), r: 2.1, fill: color, "fill-opacity": .55}));
+  for (let g = 0; g <= 4; g++) add("line", {x1: L, x2: W - R, y1: T + g * (H - T - B) / 4, y2: T + g * (H - T - B) / 4, stroke: css("--line"), "stroke-opacity": .5});
+  const col = css(COLORS[cat(f)]), dots = xs.map((v, i) => {
+    const tx = sx(v), ty = sy(ys[i]);
+    const c = add("circle", {cx: REDUCE ? tx : L + Math.random() * (W - L - R), cy: REDUCE ? ty : T + Math.random() * (H - T - B), r: 2.3, fill: col, "fill-opacity": .62});
+    return [c, tx, ty, +c.getAttribute("cx"), +c.getAttribute("cy")];
+  });
+  if (!REDUCE){ const t0 = performance.now(); (function step(t){ const k = Math.min(1, (t - t0) / 700), e = 1 - Math.pow(1 - k, 3);
+    dots.forEach(([c, tx, ty, ox, oy]) => { c.setAttribute("cx", (ox + (tx - ox) * e).toFixed(1)); c.setAttribute("cy", (oy + (ty - oy) * e).toFixed(1)); });
+    if (k < 1) requestAnimationFrame(step); })(t0); }
   const fmt = v => Math.abs(v) >= 1e5 ? v.toExponential(1) : (+v.toPrecision(4)).toString();
-  add("text", {x: L - 6, y: T + 9, "text-anchor": "end"}).textContent = fmt(y1);
-  add("text", {x: L - 6, y: H - B, "text-anchor": "end"}).textContent = fmt(y0);
+  add("text", {x: L - 8, y: T + 10, "text-anchor": "end"}).textContent = fmt(y1);
+  add("text", {x: L - 8, y: H - B, "text-anchor": "end"}).textContent = fmt(y0);
   add("text", {x: L, y: H - 12}).textContent = fmt(x0);
   add("text", {x: W - R, y: H - 12, "text-anchor": "end"}).textContent = fmt(x1);
   add("text", {x: (L + W) / 2, y: H - 12, "text-anchor": "middle"}).textContent = f.xlabel;
   return s;
 }
 
-function scores(){
-  const h = DATA.scores["held-out"], d = DATA.scores.development, pct = v => v == null ? "–" : Math.round(v * 100) + "%";
-  const S = document.getElementById("scores");
-  [[pct(h.recall), "of the decoders' physical fields found"], [pct(h.precision), "of reported fields are real"],
-   [pct(h.claude_selective), "of Claude's answers right, when it answers"], [pct(h.kind_acc), "physics class right"]]
-    .forEach(([v, t]) => { const c = el("div", "score"); c.append(el("b", null, v), el("span", null, t)); S.appendChild(c); });
-  document.getElementById("scorenote").textContent =
-    `On ${DATA.scores.held_out_sats.length} satellites never inspected while the engine was built (${DATA.scores.held_out_sats.join(", ")}), ` +
-    `${h.fields} decoder fields. The exact byte layout was right for ${pct(h.value_exact)} of them; on the development satellites it was right for ${pct(d.value_exact)}, ` +
-    `and ${pct(d.recall)} of fields were found there.`;
+function proof(){
+  const h = DATA.scores["held-out"], d = DATA.scores.development, pct = v => v == null ? 0 : Math.round(v * 100);
+  document.getElementById("proofsub").textContent =
+    `${DATA.scores.held_out_sats.length} satellites from different makers, never inspected while the engine was built: ${h.fields} decoder fields.`;
+  const N = document.getElementById("nums");
+  [[pct(h.precision), "of the fields it reports are real decoder fields"], [pct(h.recall), "of the decoders' physical fields found"],
+   [pct(h.kind_acc), "physics class right (temperature, power, clock…)"], [pct(h.claude_selective), "of Claude's answers right, when it answers"]]
+    .forEach(([v, t]) => { const c = el("div", "num"), b = el("b", null, v + "%"); c.append(b, el("span", null, t)); N.appendChild(c); countUp(b, v); });
+  const S = document.getElementById("sats"); DATA.scores.held_out_sats.forEach(n => S.appendChild(el("span", null, n)));
+  document.getElementById("fine").textContent =
+    `Exact byte layout (bit-for-bit the decoder's values): ${pct(h.value_exact)}% on these satellites, ${pct(d.value_exact)}% on the ${d.fields}-field development set. ` +
+    `Battery, solar or bus told apart: ${pct(h.claude_fine)}% here, ${pct(d.claude_fine)}% on development. Measured, not claimed.`;
 }
 
-document.getElementById("replay").onclick = () => reveal();
+function countUp(node, target){
+  if (REDUCE) return;
+  const t0 = performance.now();
+  (function step(t){ const k = Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 3); node.textContent = Math.round(target * e) + "%"; if (k < 1) requestAnimationFrame(step); })(t0);
+}
+
+function highlight(src){
+  const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  return src.split("\n").map(line => {
+    let m;
+    if ((m = line.match(/^(\s*-?\s*)(id|type|size|doc|value|title|endian)(:)(.*)$/))) {
+      const val = m[2] === "type" ? `<span class="t">${esc(m[4])}</span>` : m[2] === "doc" ? `<span class="c">${esc(m[4])}</span>` : esc(m[4]);
+      return `${esc(m[1])}<span class="k">${m[2]}</span>${m[3]}${val}`;
+    }
+    return esc(line);
+  }).join("\n");
+}
+
+document.getElementById("replay").onclick = () => decode();
 document.getElementById("copy").onclick = () => {
   const m = document.getElementById("copymsg");
   navigator.clipboard.writeText(sat.ksy).then(() => m.textContent = "Copied", () => {
-    const r = document.createRange(); r.selectNodeContents(document.getElementById("ksy"));
-    const s = getSelection(); s.removeAllRanges(); s.addRange(r); m.textContent = "Selected; press Ctrl+C";
+    const r = document.createRange(); r.selectNodeContents(document.getElementById("ksy")); const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    m.textContent = "Selected: press Ctrl+C";
   });
 };
 
-/* the orbit: a satellite circling Earth, dimmed while it crosses the shadow */
+/* stars */
+(function stars(){
+  const c = document.getElementById("stars"), g = c.getContext("2d"); let pts = [];
+  function size(){ c.width = c.offsetWidth * devicePixelRatio; c.height = c.offsetHeight * devicePixelRatio;
+    pts = Array.from({length: 220}, () => ({x: Math.random() * c.width, y: Math.random() * c.height, r: Math.random() * 1.3 * devicePixelRatio, p: Math.random() * 6})); }
+  size(); addEventListener("resize", size);
+  (function frame(t){ g.clearRect(0, 0, c.width, c.height);
+    pts.forEach(s => { g.globalAlpha = .25 + .55 * (0.5 + 0.5 * Math.sin(t / 900 + s.p)); g.fillStyle = "#dfe8ff"; g.beginPath(); g.arc(s.x, s.y, s.r, 0, 7); g.fill(); });
+    g.globalAlpha = 1; if (!REDUCE) requestAnimationFrame(frame); })(0);
+})();
+
+/* the orbit: Earth, its shadow cylinder, a satellite, and the telemetry the physics would produce */
 (function orbit(){
   const c = document.getElementById("orbit"), g = c.getContext("2d"), W = c.width, H = c.height;
-  const cx = W * 0.42, cy = H / 2, R = 62, r = 128, reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let a = 2.2;
+  const cx = W * 0.46, cy = H * 0.5, R = 130, r = 230, tilt = 0.5;
+  let th = 2.4, batt = 4.05, temp = 6, trail = [];
+  const pill = document.getElementById("pill"), g1 = document.getElementById("g1"), g2 = document.getElementById("g2"), g3 = document.getElementById("g3");
+  const b1 = document.getElementById("b1"), b2 = document.getElementById("b2"), b3 = document.getElementById("b3");
+  const pos = t => { const x = r * Math.cos(t), y = r * Math.sin(t) * Math.sin(tilt), z = r * Math.sin(t) * Math.cos(tilt); return {x, y, z, sx: cx + x, sy: cy - y * 0.9 + z * 0.33}; };
+  function earth(){
+    const atm = g.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * 1.25); atm.addColorStop(0, "rgba(90,150,255,.35)"); atm.addColorStop(1, "rgba(90,150,255,0)");
+    g.fillStyle = atm; g.beginPath(); g.arc(cx, cy, R * 1.25, 0, 7); g.fill();
+    const sea = g.createRadialGradient(cx - R * .45, cy - R * .35, R * .1, cx, cy, R); sea.addColorStop(0, "#5aa0ff"); sea.addColorStop(.6, "#1f4f9e"); sea.addColorStop(1, "#0c2350");
+    g.fillStyle = sea; g.beginPath(); g.arc(cx, cy, R, 0, 7); g.fill();
+    const night = g.createLinearGradient(cx - R * .1, 0, cx + R, 0); night.addColorStop(0, "rgba(2,3,8,0)"); night.addColorStop(.35, "rgba(2,3,8,.75)"); night.addColorStop(1, "rgba(2,3,8,.92)");
+    g.save(); g.beginPath(); g.arc(cx, cy, R, 0, 7); g.clip(); g.fillStyle = night; g.fillRect(cx - R, cy - R, 2 * R, 2 * R); g.restore();
+  }
+  function shadow(){
+    const sh = g.createLinearGradient(cx, 0, W, 0); sh.addColorStop(0, "rgba(0,0,0,.85)"); sh.addColorStop(1, "rgba(0,0,0,.15)");
+    g.fillStyle = sh; g.fillRect(cx, cy - R, W - cx, 2 * R);
+    g.strokeStyle = "rgba(255,255,255,.05)"; g.beginPath(); g.moveTo(cx, cy - R); g.lineTo(W, cy - R); g.moveTo(cx, cy + R); g.lineTo(W, cy + R); g.stroke();
+  }
+  function ring(front){
+    g.strokeStyle = front ? "rgba(255,196,94,.35)" : "rgba(255,196,94,.12)"; g.lineWidth = 2; g.setLineDash([4, 7]); g.beginPath();
+    for (let k = 0; k <= 120; k++){ const t = k / 120 * Math.PI * 2, p = pos(t); if ((p.z > 0) !== front) { g.moveTo(p.sx, p.sy); continue; } g.lineTo(p.sx, p.sy); }
+    g.stroke(); g.setLineDash([]);
+  }
+  function sat(p, lit){
+    trail.push([p.sx, p.sy]); if (trail.length > 40) trail.shift();
+    trail.forEach(([x, y], i) => { g.fillStyle = `rgba(255,196,94,${lit ? i / 160 : i / 600})`; g.beginPath(); g.arc(x, y, 3, 0, 7); g.fill(); });
+    g.save(); g.translate(p.sx, p.sy);
+    if (lit){ const gl = g.createRadialGradient(0, 0, 2, 0, 0, 26); gl.addColorStop(0, "rgba(255,196,94,.7)"); gl.addColorStop(1, "rgba(255,196,94,0)"); g.fillStyle = gl; g.beginPath(); g.arc(0, 0, 26, 0, 7); g.fill(); }
+    g.fillStyle = lit ? "#5d8fe8" : "#2a3550"; g.fillRect(-22, -5, 14, 10); g.fillRect(8, -5, 14, 10);
+    g.fillStyle = lit ? "#ffd99a" : "#4a5570"; g.fillRect(-6, -6, 12, 12); g.restore();
+  }
   function frame(){
     g.clearRect(0, 0, W, H);
-    g.fillStyle = css("--shadow"); g.fillRect(cx, cy - R, W - cx, 2 * R);           // shadow behind Earth (Sun at left)
-    const grd = g.createRadialGradient(cx - 30, cy - 20, 10, cx, cy, R);
-    grd.addColorStop(0, "#3d7bd8"); grd.addColorStop(1, "#16335f"); g.fillStyle = grd;
-    g.beginPath(); g.arc(cx, cy, R, 0, Math.PI * 2); g.fill();
-    g.fillStyle = "rgba(10,14,22,.55)"; g.beginPath(); g.arc(cx, cy, R, -Math.PI / 2, Math.PI / 2); g.fill(); // night side
-    g.strokeStyle = css("--faint"); g.setLineDash([3, 5]); g.beginPath(); g.ellipse(cx, cy, r, r * 0.42, 0, 0, Math.PI * 2); g.stroke(); g.setLineDash([]);
-    const x = cx + r * Math.cos(a), y = cy + r * 0.42 * Math.sin(a);
-    const inShadow = x > cx && Math.abs(y - cy) < R && !(Math.sin(a) < 0 && Math.hypot(x - cx, y - cy) < R);
-    g.fillStyle = inShadow ? css("--faint") : css("--sun"); g.beginPath(); g.arc(x, y, 6, 0, Math.PI * 2); g.fill();
-    g.fillStyle = css("--muted"); g.font = "22px Inter, system-ui"; g.fillText(inShadow ? "in shadow" : "in sunlight", 14, H - 16);
-    g.fillStyle = css("--sun"); g.beginPath(); g.arc(14, 24, 7, 0, Math.PI * 2); g.fill(); g.fillStyle = css("--muted"); g.fillText("Sun", 28, 32);
-    a += 0.012; if (!reduce) requestAnimationFrame(frame);
+    const sunGl = g.createRadialGradient(0, cy, 0, 0, cy, 220); sunGl.addColorStop(0, "rgba(255,196,94,.55)"); sunGl.addColorStop(1, "rgba(255,196,94,0)");
+    g.fillStyle = sunGl; g.fillRect(0, 0, 260, H);
+    shadow();
+    const p = pos(th), lit = !(p.x > 0 && Math.hypot(p.y, p.z) < R);
+    ring(false); if (p.z <= 0) sat(p, lit);
+    earth(); ring(true); if (p.z > 0) sat(p, lit);
+    // the telemetry this physics produces (illustration)
+    const solar = lit ? 380 + 40 * Math.sin(th * 7) : 3;
+    batt += lit ? 0.0009 : -0.0011; batt = Math.min(4.2, Math.max(3.85, batt));
+    temp += ((lit ? 34 : -22) - temp) * 0.006;
+    g1.textContent = `${Math.round(solar)} mA`; g2.textContent = `${batt.toFixed(2)} V`; g3.textContent = `${temp >= 0 ? "+" : ""}${temp.toFixed(1)} °C`;
+    b1.style.width = `${solar / 4.5}%`; b2.style.width = `${(batt - 3.8) / 0.4 * 100}%`; b3.style.width = `${(temp + 25) / 60 * 100}%`;
+    pill.textContent = lit ? "IN SUNLIGHT" : "IN EARTH'S SHADOW"; pill.className = "pill " + (lit ? "sun" : "dark");
+    th += 0.0065; if (!REDUCE) requestAnimationFrame(frame);
   }
   frame();
 })();
