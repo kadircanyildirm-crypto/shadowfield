@@ -116,6 +116,9 @@ h1 .hl{color:var(--fg)}
 .tr .nm small{display:block;color:var(--dim);font:11px var(--mono);margin-top:1px}
 .tr .val{font:600 19px var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
 .tr .val small{font:500 12px var(--mono);color:var(--muted);margin-left:4px}
+/* vectors (GNSS triplets, quaternions): the values get their own line under the name */
+.tr.multi{grid-template-columns:minmax(0,1fr) 96px;row-gap:4px}
+.tr.multi .val{grid-column:1 / -1;grid-row:2;text-align:left;font-size:14.5px;white-space:normal}
 .tr svg{width:96px;height:32px;display:block}
 .insp{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;display:grid;gap:16px;background:var(--card);border:1px solid var(--line);
   border-radius:12px;padding:20px;transition:opacity .3s}
@@ -141,7 +144,7 @@ svg.chart{width:100%;height:auto;display:block}
 svg.chart text{fill:var(--muted);font:11px var(--body)}
 svg.chart .ttl{fill:var(--fg);font:600 11px var(--mono);letter-spacing:.08em}
 @media (max-width:900px){.split{grid-template-columns:1fr}.insp{position:static;max-height:none;overflow:visible}}
-@media (max-width:520px){.tr{grid-template-columns:minmax(0,1fr) auto}.tr svg{display:none}}
+@media (max-width:520px){.tr{grid-template-columns:minmax(0,1fr) auto}.tr.multi{grid-template-columns:minmax(0,1fr)}.tr svg{display:none}}
 @media (prefers-reduced-motion:reduce){.seg,.tr,.conf .m i{transition:none}.sweep.go,#sky2,#sky3{animation:none}}
 
 /* ---------- proof ---------- */
@@ -388,6 +391,7 @@ function groups(){
     const h = el("h3"); h.append(el("i"), name, el("span", null, `· ${fs.length}`)); g.appendChild(h);
     fs.forEach(f => {
       const c = css(COL[cat(f)]), b = el("button", "tr"); b.type = "button"; b.dataset.f = f.offset; b.setAttribute("aria-pressed", "false");
+      if (Math.round(f.span / (+f.type[1] || 1)) > 1) b.classList.add("multi");
       const nm = el("div", "nm"); nm.append(el("b", null, human(f)), el("small", null, `bytes ${f.offset}${f.span > 1 ? "–" + (f.offset + f.span - 1) : ""} · ${f.type}`));
       const val = el("div", "val"); val.dataset.final = JSON.stringify(pretty(f)); val.textContent = "··";
       b.append(nm, val, spark(f, c)); b.onclick = () => focus(f, true); g.appendChild(b);
