@@ -1,0 +1,456 @@
+<title>Shadowfield</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a cinematic single page. Globe + scrambling headline -> raw bytes that decrypt into telemetry cards ->
+   one field up close -> blind scores -> the decoder file. Deliberately one look: night side of an orbit. */
+:root{
+  --bg:#04060c; --bg2:#080d1a; --card:#0c1324; --line:#1a2440; --fg:#f1f4fb; --muted:#8f9cb8; --dim:#3b4763;
+  --sun:#ffc35a; --sun2:#ff8f3a; --earth:#3f86ff; --night:#01030a;
+  --thermal:#ff7b4f; --power:#ffd166; --count:#6ab9ff; --nav:#4fe3a2; --vec:#c69cff; --unknown:#5a6683;
+  --display:"Unbounded",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);overflow-x:hidden}
+.in{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.kicker{font:600 12px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--sun)}
+h2{font:800 clamp(28px,4vw,48px)/1.05 var(--display);letter-spacing:-.02em;margin:12px 0 14px;text-wrap:balance}
+.sub{color:var(--muted);max-width:62ch;margin:0}
+section{padding-block:84px}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:min(92vh,860px);display:grid;align-items:center;overflow:hidden;
+  margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(env(safe-area-inset-top,0px) + 24px);
+  background:radial-gradient(900px 600px at 72% 45%,#0d1937 0%,var(--bg) 62%)}
+#sky{position:absolute;inset:0;width:100%;height:100%}
+.herogrid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:center;width:100%}
+h1{font:800 clamp(42px,6.6vw,92px)/.98 var(--display);letter-spacing:-.035em;margin:16px 0 22px;min-height:2em}
+h1 .hl{background:linear-gradient(90deg,var(--sun),var(--sun2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.scr{color:var(--dim)}
+.lede{color:#c3cde1;font-size:17.5px;max-width:50ch;margin:0}
+.lede b{color:var(--fg)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{font:600 14.5px var(--body);border-radius:999px;padding:13px 22px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--fg);
+  text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.gold{background:linear-gradient(90deg,var(--sun),var(--sun2));color:#170f04;border:0;box-shadow:0 10px 40px -12px rgba(255,160,60,.7)}
+.globe{position:relative;min-width:0}
+#globe{width:100%;height:auto;aspect-ratio:1/1;display:block}
+.state{position:absolute;top:8%;right:6%;font:600 12px var(--mono);letter-spacing:.16em;padding:7px 13px;border-radius:999px;
+  background:rgba(8,13,26,.75);border:1px solid var(--line);transition:color .3s}
+.readouts{position:absolute;left:4%;bottom:7%;display:grid;gap:8px;font:12px var(--mono)}
+.ro{display:grid;grid-template-columns:120px 72px;align-items:center;gap:10px;background:rgba(8,13,26,.72);border:1px solid var(--line);
+  border-radius:10px;padding:7px 12px;backdrop-filter:blur(6px)}
+.ro span{color:var(--muted);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.ro b{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.note{color:var(--dim);font:11px var(--mono);position:absolute;right:6%;bottom:3%}
+
+/* ---------- decrypt ---------- */
+.decrypt{background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.sats{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 8px}
+.sat{font:600 14px var(--body);color:var(--muted);border:1px solid var(--line);background:none;border-radius:999px;padding:8px 16px;cursor:pointer}
+.sat[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.meta{color:var(--muted);font:12.5px var(--mono)}
+.raw{margin-top:22px;background:var(--night);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px;position:relative;overflow:hidden}
+.rawhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.rawhead span{font:600 11.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.bytes{display:flex;flex-wrap:wrap;gap:5px;font:500 13.5px var(--mono)}
+.b{width:2.45em;text-align:center;padding:6px 0;border-radius:6px;background:#0f1730;color:#4b5876;border:0;font:inherit;cursor:default;
+  transition:background .5s,color .5s,box-shadow .5s,transform .3s}
+.b.lit{color:#0a0e18;cursor:pointer;box-shadow:0 0 16px -3px var(--c)}
+.b.sel{transform:translateY(-3px);box-shadow:0 0 0 2px var(--fg),0 0 22px -2px var(--c)}
+.sweep{position:absolute;top:0;bottom:0;width:120px;left:-120px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,195,90,.22),transparent)}
+.sweep.go{animation:sweep 1.4s ease-in-out}
+@keyframes sweep{to{left:100%}}
+.prog{margin-top:12px;color:var(--muted);font-size:14px;min-height:1.6em}
+.prog b{color:var(--fg)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:12px;margin-top:26px}
+.tc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;text-align:left;color:var(--fg);font:inherit;cursor:pointer;
+  position:relative;overflow:hidden;transition:transform .25s,border-color .25s;min-width:0}
+.tc:hover{transform:translateY(-3px);border-color:var(--c)}
+.tc[aria-pressed="true"]{border-color:var(--c);box-shadow:0 0 0 1px var(--c) inset}
+.tc:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c)}
+.tc .n{font:600 12.5px var(--body);color:var(--muted);text-transform:capitalize;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc .v{font:600 21px/1.2 var(--mono);margin-top:6px;font-variant-numeric:tabular-nums;word-break:break-all}
+.tc .v small{font-size:12px;color:var(--muted);margin-left:4px}
+.tc .o{font:11px var(--mono);color:var(--dim);margin-top:6px}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;color:var(--muted);font-size:12.5px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* ---------- close-up ---------- */
+.close{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:26px;margin-top:34px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;min-width:0}
+.panel .lab{font:600 11.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.fname{font:800 clamp(22px,2.6vw,32px)/1.12 var(--display);margin:10px 0 8px;text-transform:capitalize;word-break:break-word}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tag{font:500 12px var(--mono);border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted)}
+.tag.k{color:#0a0e18;border:0}
+.why{color:#d2dbec;font-size:15px;margin:12px 0 0}
+.ev{color:var(--muted);font:12.5px var(--mono);margin-top:10px}
+.conf{display:flex;align-items:center;gap:10px;margin-top:14px;font:12px var(--mono);color:var(--muted)}
+.conf .bar{flex:1;height:5px;border-radius:5px;background:var(--line);overflow:hidden}
+.conf .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--sun2));transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.verdict{margin-top:14px;font-size:14px;color:var(--muted)}
+.verdict b{color:var(--nav)} .verdict b.near{color:var(--power)}
+svg.plot{width:100%;height:auto;display:block}
+svg.plot text{fill:var(--muted);font:11px var(--body)}
+
+/* ---------- proof ---------- */
+.proof{background:radial-gradient(900px 400px at 20% 0%,#101a35 0%,var(--bg) 70%)}
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:34px}
+.num{border-top:1px solid var(--line);padding-top:18px}
+.num b{display:block;font:800 clamp(44px,5.6vw,76px)/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.num:first-child b{background:linear-gradient(90deg,var(--sun),var(--sun2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.num span{display:block;color:var(--muted);font-size:14.5px;margin-top:10px;max-width:24ch}
+.held{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}
+.held span{font:500 12px var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+.fine{color:var(--muted);font-size:14.5px;max-width:78ch;margin-top:18px}
+
+/* ---------- steps + file ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:30px}
+.step .k{font:700 13px var(--mono);color:var(--sun)}
+.step h3{font:800 19px/1.25 var(--display);margin:10px 0 8px}
+.step p{color:var(--muted);font-size:14.5px;margin:0}
+pre.ksy{background:var(--night);border:1px solid var(--line);border-radius:16px;padding:18px;overflow:auto;max-height:440px;margin:18px 0 0;
+  font:12.5px/1.6 var(--mono);color:#c9d3e7}
+pre.ksy .k{color:var(--count)} pre.ksy .t{color:var(--nav)} pre.ksy .c{color:#5d6a8a}
+footer{border-top:1px solid var(--line);padding-block:30px 50px;color:var(--muted);font-size:13.5px}
+
+@media (max-width:900px){.herogrid{grid-template-columns:1fr}.hero{min-height:0;padding-bottom:40px}.close{grid-template-columns:1fr}
+  .nums{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:1fr}.readouts{position:static;margin-top:8px}.ro{grid-template-columns:1fr auto}}
+@media (prefers-reduced-motion:reduce){.b,.tc,.conf .bar i{transition:none}.sweep.go{animation:none}}
+</style>
+
+<header class="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="in herogrid">
+    <div>
+      <div class="kicker">SatNOGS · 15 satellites · no decoder</div>
+      <h1 id="headline" aria-label="The orbit is the decoder."><span id="h1a">The orbit is</span><br><span id="h1b" class="hl">the decoder.</span></h1>
+      <p class="lede">Small satellites beam down telemetry that nobody can read: no public format, only bytes.
+        <b>Shadowfield</b> reads them through physics. Batteries charge in sunlight, panels cool in Earth's shadow, clocks tick, GNSS fixes trace the orbit.
+        <b>Claude</b> then names each field like a spacecraft engineer, without ever seeing the decoder or the satellite's name.</p>
+      <div class="cta"><a class="btn gold" href="#decrypt">Decrypt a frame</a><a class="btn" href="#proof">Blind scores</a></div>
+    </div>
+    <div class="globe">
+      <canvas id="globe" width="900" height="900" aria-label="Earth turning, with a satellite passing through its shadow"></canvas>
+      <div class="state" id="state">IN SUNLIGHT</div>
+      <div class="readouts" aria-hidden="true">
+        <div class="ro"><span>Solar current</span><b id="r1">—</b></div>
+        <div class="ro"><span>Battery</span><b id="r2">—</b></div>
+        <div class="ro"><span>Panel temp</span><b id="r3">—</b></div>
+      </div>
+      <div class="note">illustration of the physics</div>
+    </div>
+  </div>
+</header>
+
+<section class="decrypt" id="decrypt"><div class="in">
+  <div class="kicker">Live decrypt</div>
+  <h2>From hex to telemetry</h2>
+  <p class="sub">A real frame as SatNOGS ground stations received it. Every way of reading its bytes is tested against the orbit.
+    The ones that follow physics light up and turn into readable values, with Claude's names.</p>
+  <div class="sats" id="sats"></div>
+  <div class="meta" id="satmeta"></div>
+  <div class="raw">
+    <div class="rawhead"><span>Raw frame</span><button class="btn" id="again" type="button">Decrypt again</button></div>
+    <div class="bytes" id="bytes"></div>
+    <div class="sweep" id="sweep"></div>
+    <div class="prog" id="prog">Loading…</div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="cards" id="cards"></div>
+
+  <div class="close">
+    <div class="panel" id="detail"></div>
+    <div class="panel"><div class="lab" id="plotlab">How it moves with the Sun</div><div id="plot"></div></div>
+  </div>
+</div></section>
+
+<section class="proof" id="proof"><div class="in">
+  <div class="kicker">Proof, not claims</div>
+  <h2>Graded blind against real decoders</h2>
+  <p class="sub" id="proofsub"></p>
+  <div class="nums" id="nums"></div>
+  <div class="held" id="held"></div>
+  <p class="fine" id="fine"></p>
+</div></section>
+
+<section><div class="in">
+  <div class="kicker">Under the hood</div>
+  <h2>Three steps</h2>
+  <div class="steps">
+    <div class="step"><div class="k">01 · Orbit</div><h3>Physics for every frame</h3><p>From the public TLE: sunlight now and over the last 200 minutes,
+      minutes since sunrise or sunset, orbital phase, position and velocity, Earth's magnetic field.</p></div>
+    <div class="step"><div class="k">02 · Bytes</div><h3>Every reading tested</h3><p>Each offset, width, byte order, sign and float is correlated with that physics,
+      week by week, with significance counted in passes. Structure tests settle the layout: carries, sign extension, the wrap point.</p></div>
+    <div class="step"><div class="k">03 · Claude</div><h3>Names from evidence</h3><p>Claude reads each field's response shape, time constant and range,
+      blind to the satellite. Three samples, majority answer: name, unit, scale, and a health note.</p></div>
+  </div>
+</div></section>
+
+<section><div class="in">
+  <div class="kicker">The output</div>
+  <h2>A decoder file, written for you</h2>
+  <p class="sub">Everything found above, as a Kaitai Struct draft: the format SatNOGS decoders are written in. It compiles with the official
+    compiler and reads real frames exactly as the engine does.</p>
+  <div class="cta"><button class="btn" id="copy" type="button">Copy .ksy</button><span class="meta" id="copied" style="align-self:center"></span></div>
+  <pre class="ksy" id="ksy"></pre>
+</div></section>
+
+<footer><div class="in">Shadowfield · built for Build Your First AI App · frames from the SatNOGS Network (CC BY-SA) · graded against satnogs-decoders · field names by Claude</div></footer>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const COL = {thermal:"--thermal", power_solar:"--power", power_battery:"--power", power_bus:"--power", counter:"--count", clock:"--count",
+  navigation:"--nav", magnetometer:"--vec", attitude:"--vec", unknown:"--unknown"};
+const FALL = {lagged:"thermal", sun:"power_solar", orbit:"unknown", counter:"counter", clock:"clock", position:"navigation", magnet:"magnetometer", attitude:"attitude"};
+const KIND = {sun:"steps with sunlight", lagged:"follows sunlight with a lag", orbit:"repeats every orbit", counter:"counts up", clock:"keeps wall-clock time",
+  position:"traces the orbit", magnet:"its |B| follows Earth's field model", attitude:"a unit quaternion"};
+const LEG = [["thermal","Temperature"],["power_battery","Power"],["counter","Counter / clock"],["navigation","GNSS"],["magnetometer","Vector"],["unknown","Unnamed"]];
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const cat = f => (f.category && COL[f.category]) ? f.category : (FALL[f.kind] || "unknown");
+const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+const HEX = "0123456789ABCDEF";
+let sat, timers = [];
+
+/* ---------- headline decrypt ---------- */
+function scramble(node, final, ms){
+  if (REDUCE) { node.textContent = final; return; }
+  const t0 = performance.now();
+  (function step(t){
+    const k = Math.min(1, (t - t0) / ms), n = Math.floor(final.length * k);
+    node.textContent = final.slice(0, n) + [...final.slice(n)].map(ch => ch === " " ? " " : HEX[Math.random() * 16 | 0]).join("");
+    if (k < 1) requestAnimationFrame(step);
+  })(t0);
+}
+scramble(document.getElementById("h1a"), "The orbit is", 1100);
+setTimeout(() => scramble(document.getElementById("h1b"), "the decoder.", 1100), REDUCE ? 0 : 500);
+
+/* ---------- value decoding from the frame's bytes ---------- */
+function read(bytes, o, type){
+  const f = type[0], w = +type[1], le = type.endsWith("le");
+  const b = bytes.slice(o, o + w); if (b.length < w) return null;
+  if (f === "f") { const dv = new DataView(new Uint8Array(b).buffer); return dv.getFloat32(0, le); }
+  const seq = le ? [...b].reverse() : b; let v = 0; for (const x of seq) v = v * 256 + x;
+  if (f === "s" && v >= 2 ** (8 * w - 1)) v -= 2 ** (8 * w);
+  return v;
+}
+function scaled(raw, scale){
+  if (raw == null || !scale || !/^[raw0-9eE.\s*+\-/()]+$/.test(scale) || !scale.includes("raw")) return raw;
+  try { const v = Function("raw", `return (${scale})`)(raw); return Number.isFinite(v) ? v : raw; } catch { return raw; }
+}
+function valueText(f){
+  const axes = Math.max(1, Math.round(f.span / (+f.type[1] || 1)));
+  const vals = Array.from({length: axes}, (_, i) => scaled(read(sat.frame, f.offset + i * (+f.type[1]), f.type), axes === 1 ? f.scale : null));
+  const fmt = v => v == null ? "—" : Math.abs(v) >= 1e6 ? v.toExponential(3) : (Number.isInteger(v) ? v.toString() : (+v.toPrecision(5)).toString());
+  return vals.map(fmt).join(", ");
+}
+
+/* ---------- decrypt section ---------- */
+function satButtons(){
+  const S = document.getElementById("sats");
+  DATA.satellites.forEach((s, i) => { const b = el("button", "sat", s.name); b.type = "button"; b.onclick = () => show(i); S.appendChild(b); });
+  const L = document.getElementById("legend");
+  LEG.forEach(([k, t]) => { const s = el("span"), i = el("i"); i.style.background = css(COL[k]); s.append(i, t); L.appendChild(s); });
+}
+
+function show(i){
+  sat = DATA.satellites[i];
+  [...document.querySelectorAll(".sat")].forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+  document.getElementById("satmeta").textContent = `${sat.blurb} · NORAD ${sat.norad} · ${sat.frames} frames from ${sat.passes} passes · ${sat.length}-byte payload`;
+  document.getElementById("ksy").innerHTML = highlight(sat.ksy || "");
+  const B = document.getElementById("bytes"); B.replaceChildren();
+  sat.frame.forEach((v, o) => { const c = el("button", "b", v.toString(16).toUpperCase().padStart(2, "0")); c.type = "button"; c.dataset.o = o; c.tabIndex = -1;
+    c.setAttribute("aria-label", `byte ${o}`); c.onclick = () => { const f = fieldAt(o); if (f) focus(f); }; B.appendChild(c); });
+  run();
+}
+const fieldAt = o => sat.fields.find(f => o >= f.offset && o < f.offset + f.span);
+
+function run(){
+  timers.forEach(clearTimeout); timers = [];
+  document.querySelectorAll(".b").forEach(c => { c.classList.remove("lit", "sel"); c.style.background = ""; c.tabIndex = -1; });
+  const C = document.getElementById("cards"); C.replaceChildren();
+  const sw = document.getElementById("sweep"); sw.classList.remove("go"); void sw.offsetWidth; if (!REDUCE) sw.classList.add("go");
+  const P = document.getElementById("prog"); P.textContent = "Testing every reading of every byte against the orbit…";
+  const order = [...sat.fields].sort((a, b) => a.offset - b.offset);
+  order.forEach((f, k) => timers.push(setTimeout(() => {
+    const c = css(COL[cat(f)]);
+    for (let o = f.offset; o < f.offset + f.span; o++){ const b = document.querySelector(`.b[data-o="${o}"]`); if (!b) continue;
+      b.classList.add("lit"); b.style.background = c; b.style.setProperty("--c", c); b.tabIndex = 0; b.setAttribute("aria-label", `byte ${o}: ${f.name || f.kind}`); }
+    C.appendChild(card(f, c));
+    P.innerHTML = `<b>${k + 1} / ${order.length}</b> · bytes ${f.offset}–${f.offset + f.span - 1} ${KIND[f.kind] || f.kind}`;
+    if (k === order.length - 1){ P.innerHTML = `<b>${order.length} fields</b> decoded from physics alone · click any card or lit byte`;
+      focus(order.find(x => x.kind === "lagged" && x.name) || order[0]); }
+  }, REDUCE ? 0 : 900 + k * 150)));
+}
+
+function card(f, c){
+  const b = el("button", "tc"); b.type = "button"; b.style.setProperty("--c", c); b.dataset.o = f.offset; b.setAttribute("aria-pressed", "false");
+  const v = el("div", "v"), unit = f.unit && f.unit !== "unknown" && f.unit !== "counts" ? f.unit : "";
+  b.append(el("div", "n", (f.name || "unnamed " + f.kind).replaceAll("_", " ")), v, el("div", "o", `bytes ${f.offset}–${f.offset + f.span - 1} · ${f.type}`));
+  const final = valueText(f);
+  if (REDUCE) v.textContent = final; else scramble(v, final, 600);
+  if (unit) setTimeout(() => v.appendChild(el("small", null, unit)), REDUCE ? 0 : 620);
+  b.onclick = () => focus(f);
+  return b;
+}
+
+function focus(f){
+  document.querySelectorAll(".b.sel").forEach(x => x.classList.remove("sel"));
+  for (let o = f.offset; o < f.offset + f.span; o++) document.querySelector(`.b[data-o="${o}"]`)?.classList.add("sel");
+  document.querySelectorAll(".tc").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.o === f.offset)));
+  const c = css(COL[cat(f)]), D = document.getElementById("detail"); D.replaceChildren();
+  D.append(el("div", "lab", `Claude's reading · bytes ${f.offset}–${f.offset + f.span - 1}`), el("div", "fname", (f.name || "unnamed physical field").replaceAll("_", " ")));
+  const T = el("div", "tags"), k = el("span", "tag k", (f.category || f.kind).replace("_", " ")); k.style.background = c; T.append(k, el("span", "tag", f.type));
+  if (f.unit && f.unit !== "unknown") T.appendChild(el("span", "tag", f.unit)); if (f.scale && f.scale !== "raw") T.appendChild(el("span", "tag", f.scale));
+  D.appendChild(T);
+  if (f.rationale) D.appendChild(el("p", "why", f.rationale));
+  D.appendChild(el("div", "ev", `physics: ${KIND[f.kind] || f.kind}${ev(f.evidence)}`));
+  if (f.confidence != null){ const r = el("div", "conf"), bar = el("div", "bar"), i = el("i"); bar.appendChild(i);
+    r.append(el("span", null, "confidence"), bar, el("span", null, Math.round(f.confidence * 100) + "%")); D.appendChild(r);
+    requestAnimationFrame(() => requestAnimationFrame(() => i.style.width = Math.round(f.confidence * 100) + "%")); }
+  const V = el("div", "verdict");
+  if (f.decoder) V.append(el("b", f.decoder.exact ? null : "near", f.decoder.exact ? "✓ exact match" : "≈ overlaps"),
+    ` with the published decoder's ${f.decoder.name.replace(/^beacon_payload_/, "")}, checked only afterwards.`);
+  else V.textContent = "The published decoder has no field here.";
+  D.appendChild(V);
+  document.getElementById("plotlab").textContent = f.xlabel.startsWith("minutes") ? "How it moves with the Sun" : `Against ${f.xlabel}`;
+  const P = document.getElementById("plot"); P.replaceChildren(plot(f, c));
+}
+function ev(e){
+  const p = []; if (e.tau_min) p.push(`lag ≈ ${e.tau_min} min`); if (e.rho_sun != null) p.push(`ρ sunlight ${e.rho_sun}`);
+  if (e.per_second) p.push(`${(+e.per_second).toPrecision(3)} per s`); if (e.component) p.push(`= ${e.component}`);
+  if (e.power_class_hint) p.push(`signature: ${e.power_class_hint.replace("power_", "")}`); return p.length ? " · " + p.join(" · ") : "";
+}
+
+function plot(f, col){
+  const W = 640, H = 330, L = 54, R = 12, T = 18, B = 40, NS = "http://www.w3.org/2000/svg";
+  const s = document.createElementNS(NS, "svg"); s.setAttribute("viewBox", `0 0 ${W} ${H}`); s.setAttribute("class", "plot"); s.setAttribute("role", "img");
+  s.setAttribute("aria-label", `values against ${f.xlabel}`);
+  const xs = f.x, ys = f.y; if (!xs.length) return s;
+  const srt = [...ys].sort((a, b) => a - b), q = p => srt[Math.min(srt.length - 1, Math.floor(p * srt.length))];
+  let y0 = q(.01), y1 = q(.99); if (y1 === y0) y1 = y0 + 1; let x0 = Math.min(...xs), x1 = Math.max(...xs); if (x1 === x0) x1 = x0 + 1;
+  const sx = v => L + (v - x0) / (x1 - x0) * (W - L - R), sy = v => T + (1 - (Math.min(Math.max(v, y0), y1) - y0) / (y1 - y0)) * (H - T - B);
+  const add = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); s.appendChild(e); return e; };
+  if (f.xlabel.startsWith("minutes") && x0 < 0){
+    add("rect", {x: sx(x0), y: T, width: Math.max(0, sx(Math.min(0, x1)) - sx(x0)), height: H - T - B, fill: css("--night"), rx: 8});
+    add("text", {x: sx(x0) + 10, y: T + 18}).textContent = "in Earth's shadow";
+    add("text", {x: sx(Math.max(0, x0)) + 10, y: T + 18, fill: css("--sun")}).textContent = "in sunlight";
+  }
+  for (let g = 0; g <= 4; g++){ const y = T + g * (H - T - B) / 4; add("line", {x1: L, x2: W - R, y1: y, y2: y, stroke: css("--line"), "stroke-opacity": .6}); }
+  const dots = xs.map((v, i) => { const tx = sx(v), ty = sy(ys[i]);
+    const c = add("circle", {cx: REDUCE ? tx : (L + W) / 2, cy: REDUCE ? ty : (T + H - B) / 2, r: 2.5, fill: col, "fill-opacity": .65}); return [c, tx, ty]; });
+  if (!REDUCE){ const t0 = performance.now(), sx0 = (L + W) / 2, sy0 = (T + H - B) / 2;
+    (function step(t){ dots.forEach(([c, tx, ty], i) => { const k = Math.min(1, Math.max(0, (t - t0 - i * 1.2) / 600)), e = 1 - Math.pow(1 - k, 3);
+      c.setAttribute("cx", (sx0 + (tx - sx0) * e).toFixed(1)); c.setAttribute("cy", (sy0 + (ty - sy0) * e).toFixed(1)); });
+      if (t - t0 < 600 + dots.length * 1.2) requestAnimationFrame(step); })(t0); }
+  const fmt = v => Math.abs(v) >= 1e5 ? v.toExponential(1) : (+v.toPrecision(4)).toString();
+  add("text", {x: L - 8, y: T + 10, "text-anchor": "end"}).textContent = fmt(y1); add("text", {x: L - 8, y: H - B, "text-anchor": "end"}).textContent = fmt(y0);
+  add("text", {x: L, y: H - 14}).textContent = fmt(x0); add("text", {x: W - R, y: H - 14, "text-anchor": "end"}).textContent = fmt(x1);
+  add("text", {x: (L + W) / 2, y: H - 14, "text-anchor": "middle"}).textContent = f.xlabel;
+  return s;
+}
+
+/* ---------- proof ---------- */
+function proof(){
+  const h = DATA.scores["held-out"], d = DATA.scores.development, p = v => v == null ? 0 : Math.round(v * 100);
+  document.getElementById("proofsub").textContent = `${DATA.scores.held_out_sats.length} satellites from different makers that were never inspected while the engine was built · ${h.fields} decoder fields.`;
+  const N = document.getElementById("nums");
+  [[p(h.precision), "of the fields it reports are real"], [p(h.recall), "of the decoders' physical fields found"],
+   [p(h.kind_acc), "physics class right: temperature, power, clock…"], [p(h.claude_selective), "of Claude's answers right when it answers"]]
+    .forEach(([v, t]) => { const c = el("div", "num"), b = el("b", null, v + "%"); c.append(b, el("span", null, t)); N.appendChild(c); count(b, v); });
+  const Hh = document.getElementById("held"); DATA.scores.held_out_sats.forEach(n => Hh.appendChild(el("span", null, n)));
+  document.getElementById("fine").textContent = `Exact byte layout, bit for bit: ${p(h.value_exact)}% on these satellites, ${p(d.value_exact)}% on the ${d.fields}-field development set. ` +
+    `Battery, solar or bus told apart: ${p(h.claude_fine)}% here, ${p(d.claude_fine)}% on development.`;
+}
+function count(node, v){ if (REDUCE) return; const t0 = performance.now();
+  (function step(t){ const k = Math.min(1, (t - t0) / 1500), e = 1 - Math.pow(1 - k, 3); node.textContent = Math.round(v * e) + "%"; if (k < 1) requestAnimationFrame(step); })(t0); }
+
+function highlight(src){
+  const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  return src.split("\n").map(l => { const m = l.match(/^(\s*-?\s*)(id|type|size|doc|value|title)(:)(.*)$/);
+    if (!m) return esc(l); const v = m[2] === "type" ? `<span class="t">${esc(m[4])}</span>` : m[2] === "doc" ? `<span class="c">${esc(m[4])}</span>` : esc(m[4]);
+    return `${esc(m[1])}<span class="k">${m[2]}</span>${m[3]}${v}`; }).join("\n");
+}
+document.getElementById("again").onclick = run;
+document.getElementById("copy").onclick = () => { const m = document.getElementById("copied");
+  navigator.clipboard.writeText(sat.ksy).then(() => m.textContent = "Copied", () => { const r = document.createRange(); r.selectNodeContents(document.getElementById("ksy"));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); m.textContent = "Selected: press Ctrl+C"; }); };
+
+/* ---------- sky ---------- */
+(function sky(){
+  const c = document.getElementById("sky"), g = c.getContext("2d"); let st = [];
+  const size = () => { c.width = c.offsetWidth * devicePixelRatio; c.height = c.offsetHeight * devicePixelRatio;
+    st = Array.from({length: 260}, () => ({x: Math.random() * c.width, y: Math.random() * c.height, r: (Math.random() * 1.2 + .2) * devicePixelRatio, p: Math.random() * 7})); };
+  size(); addEventListener("resize", size);
+  (function f(t){ g.clearRect(0, 0, c.width, c.height); g.fillStyle = "#e3ebff";
+    for (const s of st){ g.globalAlpha = .2 + .6 * (.5 + .5 * Math.sin(t / 1100 + s.p)); g.beginPath(); g.arc(s.x, s.y, s.r, 0, 7); g.fill(); }
+    g.globalAlpha = 1; if (!REDUCE) requestAnimationFrame(f); })(0);
+})();
+
+/* ---------- globe: a turning dot-sphere lit from the left, its shadow, and a satellite crossing it ---------- */
+(function globe(){
+  const c = document.getElementById("globe"), g = c.getContext("2d"), W = c.width, H = c.height, cx = W / 2, cy = H / 2, R = W * 0.27, r = R * 1.62;
+  const N = 1700, pts = [];
+  for (let i = 0; i < N; i++){ const y = 1 - 2 * (i + .5) / N, rad = Math.sqrt(1 - y * y), a = i * 2.399963; pts.push([Math.cos(a) * rad, y, Math.sin(a) * rad]); }
+  const sun = [-1, 0.15, 0.35], sl = Math.hypot(...sun); sun.forEach((v, i) => sun[i] = v / sl);
+  let spin = 0, th = 2.2, batt = 4.06, temp = 5; const trail = [];
+  const state = document.getElementById("state"), r1 = document.getElementById("r1"), r2 = document.getElementById("r2"), r3 = document.getElementById("r3");
+  const inc = 0.55;
+  const satPos = t => { const x = Math.cos(t), y = Math.sin(t) * Math.sin(inc), z = Math.sin(t) * Math.cos(inc); return [x * r, y * r, z * r]; };
+  const proj = ([x, y, z]) => [cx + x, cy - y * .92 + z * .22];
+  function drawSat(p, lit){
+    const [sx, sy] = proj(p); trail.push([sx, sy, lit]); if (trail.length > 46) trail.shift();
+    trail.forEach(([x, y, l], i) => { g.fillStyle = l ? `rgba(255,195,90,${i / 120})` : `rgba(120,140,190,${i / 260})`; g.beginPath(); g.arc(x, y, 3.2, 0, 7); g.fill(); });
+    g.save(); g.translate(sx, sy);
+    if (lit){ const gl = g.createRadialGradient(0, 0, 2, 0, 0, 34); gl.addColorStop(0, "rgba(255,195,90,.75)"); gl.addColorStop(1, "rgba(255,195,90,0)"); g.fillStyle = gl; g.beginPath(); g.arc(0, 0, 34, 0, 7); g.fill(); }
+    g.fillStyle = lit ? "#4f86ee" : "#26314c"; g.fillRect(-30, -7, 20, 14); g.fillRect(10, -7, 20, 14);
+    g.fillStyle = lit ? "#ffe0a6" : "#465270"; g.fillRect(-8, -8, 16, 16); g.restore();
+  }
+  function orbitPath(front){
+    g.strokeStyle = front ? "rgba(255,195,90,.38)" : "rgba(255,195,90,.12)"; g.lineWidth = 2; g.setLineDash([5, 8]); g.beginPath(); let pen = false;
+    for (let k = 0; k <= 160; k++){ const p = satPos(k / 160 * Math.PI * 2), [x, y] = proj(p); if ((p[2] > 0) !== front){ pen = false; continue; }
+      if (!pen){ g.moveTo(x, y); pen = true; } else g.lineTo(x, y); } g.stroke(); g.setLineDash([]);
+  }
+  function frame(){
+    g.clearRect(0, 0, W, H);
+    // the shadow cylinder, pointing away from the Sun
+    const sh = g.createLinearGradient(cx, 0, W, 0); sh.addColorStop(0, "rgba(0,0,0,.7)"); sh.addColorStop(1, "rgba(0,0,0,0)");
+    g.fillStyle = sh; g.fillRect(cx, cy - R, W - cx, 2 * R);
+    const p = satPos(th), lit = !(p[0] > 0 && Math.hypot(p[1], p[2]) < R);
+    orbitPath(false); if (p[2] <= 0) drawSat(p, lit);
+    // atmosphere
+    const at = g.createRadialGradient(cx, cy, R * .95, cx, cy, R * 1.22); at.addColorStop(0, "rgba(80,140,255,.32)"); at.addColorStop(1, "rgba(80,140,255,0)");
+    g.fillStyle = at; g.beginPath(); g.arc(cx, cy, R * 1.22, 0, 7); g.fill();
+    g.fillStyle = "#030712"; g.beginPath(); g.arc(cx, cy, R, 0, 7); g.fill();
+    // dots, turned and lit
+    const cs = Math.cos(spin), sn = Math.sin(spin);
+    for (const [x0, y0, z0] of pts){
+      const x = x0 * cs + z0 * sn, z = -x0 * sn + z0 * cs, y = y0; if (z < -0.05) continue;
+      const light = Math.max(0, x * sun[0] + y * sun[1] + z * sun[2]);
+      const a = .18 + .82 * light, rr = (1.3 + 1.6 * light) * (0.6 + 0.4 * z);
+      g.fillStyle = light > 0.02 ? `rgba(${120 + 135 * light | 0},${170 + 70 * light | 0},255,${a})` : "rgba(70,90,140,.25)";
+      g.beginPath(); g.arc(cx + x * R, cy - y * R, rr, 0, 7); g.fill();
+    }
+    orbitPath(true); if (p[2] > 0) drawSat(p, lit);
+    // what that physics does to telemetry (illustration)
+    const solar = lit ? 390 + 45 * Math.sin(th * 6) : 2;
+    batt = Math.min(4.2, Math.max(3.86, batt + (lit ? .0009 : -.0012))); temp += ((lit ? 33 : -24) - temp) * .006;
+    r1.textContent = `${Math.round(solar)} mA`; r2.textContent = `${batt.toFixed(3)} V`; r3.textContent = `${temp >= 0 ? "+" : ""}${temp.toFixed(1)} °C`;
+    state.textContent = lit ? "IN SUNLIGHT" : "IN EARTH'S SHADOW"; state.style.color = lit ? css("--sun") : css("--muted");
+    spin += .0022; th += .0058; if (!REDUCE) requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+satButtons(); proof(); show(0);
+</script>
