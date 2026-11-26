@@ -41,7 +41,7 @@ h1 .hl{background:linear-gradient(90deg,var(--sun),var(--sun2));-webkit-backgrou
 .btn:hover{transform:translateY(-2px)}
 .btn.gold{background:linear-gradient(90deg,var(--sun),var(--sun2));color:#170f04;border:0;box-shadow:0 10px 40px -12px rgba(255,160,60,.7)}
 .globe{position:relative;min-width:0}
-#globe{width:100%;height:auto;aspect-ratio:1/1;display:block}
+#globe{width:100%;aspect-ratio:1/1;display:block}
 .state{position:absolute;top:8%;right:6%;font:600 12px var(--mono);letter-spacing:.16em;padding:7px 13px;border-radius:999px;
   background:rgba(8,13,26,.75);border:1px solid var(--line);transition:color .3s}
 .readouts{position:absolute;left:4%;bottom:7%;display:grid;gap:8px;font:12px var(--mono)}
@@ -139,14 +139,14 @@ footer{border-top:1px solid var(--line);padding-block:30px 50px;color:var(--mute
       <div class="cta"><a class="btn gold" href="#decrypt">Decrypt a frame</a><a class="btn" href="#proof">Blind scores</a></div>
     </div>
     <div class="globe">
-      <canvas id="globe" width="900" height="900" aria-label="Earth turning, with a satellite passing through its shadow"></canvas>
+      <canvas id="globe" aria-label="Earth turning, with a CubeSat passing through its shadow"></canvas>
       <div class="state" id="state">IN SUNLIGHT</div>
       <div class="readouts" aria-hidden="true">
         <div class="ro"><span>Solar current</span><b id="r1">—</b></div>
         <div class="ro"><span>Battery</span><b id="r2">—</b></div>
         <div class="ro"><span>Panel temp</span><b id="r3">—</b></div>
       </div>
-      <div class="note">illustration of the physics</div>
+      <div class="note">illustration · not to scale</div>
     </div>
   </div>
 </header>
@@ -204,8 +204,10 @@ footer{border-top:1px solid var(--line);padding-block:30px 50px;color:var(--mute
   <pre class="ksy" id="ksy"></pre>
 </div></section>
 
-<footer><div class="in">Shadowfield · built for Build Your First AI App · frames from the SatNOGS Network (CC BY-SA) · graded against satnogs-decoders · field names by Claude</div></footer>
+<footer><div class="in">Shadowfield · built for Build Your First AI App · frames from the SatNOGS Network (CC BY-SA) · graded against satnogs-decoders · field names by Claude · Earth imagery: NASA Blue Marble and Black Marble (public domain)</div></footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>const TEX = {day: "__DAY__", night: "__NIGHT__", water: "__WATER__"};</script>
 <script id="data" type="application/json">__DATA__</script>
 <script>
 const DATA = JSON.parse(document.getElementById("data").textContent);
@@ -397,59 +399,126 @@ document.getElementById("copy").onclick = () => { const m = document.getElementB
     g.globalAlpha = 1; if (!REDUCE) requestAnimationFrame(f); })(0);
 })();
 
-/* ---------- globe: a turning dot-sphere lit from the left, its shadow, and a satellite crossing it ---------- */
+/* ---------- Earth and satellite in WebGL: NASA imagery, city lights on the night side, ocean glint, atmosphere,
+   and a CubeSat that Earth really shadows (shadow mapping), so it goes dark in eclipse ---------- */
 (function globe(){
-  const c = document.getElementById("globe"), g = c.getContext("2d"), W = c.width, H = c.height, cx = W / 2, cy = H / 2, R = W * 0.27, r = R * 1.62;
-  const N = 1700, pts = [];
-  for (let i = 0; i < N; i++){ const y = 1 - 2 * (i + .5) / N, rad = Math.sqrt(1 - y * y), a = i * 2.399963; pts.push([Math.cos(a) * rad, y, Math.sin(a) * rad]); }
-  const sun = [-1, 0.15, 0.35], sl = Math.hypot(...sun); sun.forEach((v, i) => sun[i] = v / sl);
-  let spin = 0, th = 2.2, batt = 4.06, temp = 5; const trail = [];
+  const canvas = document.getElementById("globe");
   const state = document.getElementById("state"), r1 = document.getElementById("r1"), r2 = document.getElementById("r2"), r3 = document.getElementById("r3");
-  const inc = 0.55;
-  const satPos = t => { const x = Math.cos(t), y = Math.sin(t) * Math.sin(inc), z = Math.sin(t) * Math.cos(inc); return [x * r, y * r, z * r]; };
-  const proj = ([x, y, z]) => [cx + x, cy - y * .92 + z * .22];
-  function drawSat(p, lit){
-    const [sx, sy] = proj(p); trail.push([sx, sy, lit]); if (trail.length > 46) trail.shift();
-    trail.forEach(([x, y, l], i) => { g.fillStyle = l ? `rgba(255,195,90,${i / 120})` : `rgba(120,140,190,${i / 260})`; g.beginPath(); g.arc(x, y, 3.2, 0, 7); g.fill(); });
-    g.save(); g.translate(sx, sy);
-    if (lit){ const gl = g.createRadialGradient(0, 0, 2, 0, 0, 34); gl.addColorStop(0, "rgba(255,195,90,.75)"); gl.addColorStop(1, "rgba(255,195,90,0)"); g.fillStyle = gl; g.beginPath(); g.arc(0, 0, 34, 0, 7); g.fill(); }
-    g.fillStyle = lit ? "#4f86ee" : "#26314c"; g.fillRect(-30, -7, 20, 14); g.fillRect(10, -7, 20, 14);
-    g.fillStyle = lit ? "#ffe0a6" : "#465270"; g.fillRect(-8, -8, 16, 16); g.restore();
-  }
-  function orbitPath(front){
-    g.strokeStyle = front ? "rgba(255,195,90,.38)" : "rgba(255,195,90,.12)"; g.lineWidth = 2; g.setLineDash([5, 8]); g.beginPath(); let pen = false;
-    for (let k = 0; k <= 160; k++){ const p = satPos(k / 160 * Math.PI * 2), [x, y] = proj(p); if ((p[2] > 0) !== front){ pen = false; continue; }
-      if (!pen){ g.moveTo(x, y); pen = true; } else g.lineTo(x, y); } g.stroke(); g.setLineDash([]);
-  }
-  function frame(){
-    g.clearRect(0, 0, W, H);
-    // the shadow cylinder, pointing away from the Sun
-    const sh = g.createLinearGradient(cx, 0, W, 0); sh.addColorStop(0, "rgba(0,0,0,.7)"); sh.addColorStop(1, "rgba(0,0,0,0)");
-    g.fillStyle = sh; g.fillRect(cx, cy - R, W - cx, 2 * R);
-    const p = satPos(th), lit = !(p[0] > 0 && Math.hypot(p[1], p[2]) < R);
-    orbitPath(false); if (p[2] <= 0) drawSat(p, lit);
-    // atmosphere
-    const at = g.createRadialGradient(cx, cy, R * .95, cx, cy, R * 1.22); at.addColorStop(0, "rgba(80,140,255,.32)"); at.addColorStop(1, "rgba(80,140,255,0)");
-    g.fillStyle = at; g.beginPath(); g.arc(cx, cy, R * 1.22, 0, 7); g.fill();
-    g.fillStyle = "#030712"; g.beginPath(); g.arc(cx, cy, R, 0, 7); g.fill();
-    // dots, turned and lit
-    const cs = Math.cos(spin), sn = Math.sin(spin);
-    for (const [x0, y0, z0] of pts){
-      const x = x0 * cs + z0 * sn, z = -x0 * sn + z0 * cs, y = y0; if (z < -0.05) continue;
-      const light = Math.max(0, x * sun[0] + y * sun[1] + z * sun[2]);
-      const a = .18 + .82 * light, rr = (1.3 + 1.6 * light) * (0.6 + 0.4 * z);
-      g.fillStyle = light > 0.02 ? `rgba(${120 + 135 * light | 0},${170 + 70 * light | 0},255,${a})` : "rgba(70,90,140,.25)";
-      g.beginPath(); g.arc(cx + x * R, cy - y * R, rr, 0, 7); g.fill();
-    }
-    orbitPath(true); if (p[2] > 0) drawSat(p, lit);
-    // what that physics does to telemetry (illustration)
+  if (!window.THREE) { canvas.replaceWith(el("div", "meta", "3D view needs WebGL.")); return; }
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: true}); } catch (e) { canvas.replaceWith(el("div", "meta", "3D view needs WebGL.")); return; }
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 200);
+  const sunDir = new THREE.Vector3(-1, 0.22, 0.55).normalize();
+  const loader = new THREE.TextureLoader();
+  const tex = src => { const t = loader.load(src); t.anisotropy = renderer.capabilities.getMaxAnisotropy(); return t; };
+
+  // stars
+  const sg = new THREE.BufferGeometry(), sp = [];
+  for (let i = 0; i < 2600; i++){ const u = Math.random() * 2 - 1, ph = Math.random() * Math.PI * 2, rr = 60 + Math.random() * 20, q = Math.sqrt(1 - u * u);
+    sp.push(Math.cos(ph) * q * rr, u * rr, Math.sin(ph) * q * rr); }
+  sg.setAttribute("position", new THREE.Float32BufferAttribute(sp, 3));
+  scene.add(new THREE.Points(sg, new THREE.PointsMaterial({color: 0xdfe8ff, size: 1.1, sizeAttenuation: false, transparent: true, opacity: .8})));
+
+  // the Sun: a glow sprite far along the sun direction
+  const glowTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 256; const g = c.getContext("2d");
+    const gr = g.createRadialGradient(128, 128, 0, 128, 128, 128); gr.addColorStop(0, "rgba(255,250,235,1)"); gr.addColorStop(.12, "rgba(255,214,140,.9)");
+    gr.addColorStop(.35, "rgba(255,170,80,.25)"); gr.addColorStop(1, "rgba(255,150,60,0)"); g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+    return new THREE.CanvasTexture(c); })();
+  const sun = new THREE.Sprite(new THREE.SpriteMaterial({map: glowTex, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true}));
+  sun.position.copy(sunDir.clone().multiplyScalar(40)); sun.scale.set(14, 14, 1); scene.add(sun);
+
+  // light that casts Earth's shadow
+  const light = new THREE.DirectionalLight(0xfff4e6, 2.2);
+  light.position.copy(sunDir.clone().multiplyScalar(8)); light.castShadow = true;
+  light.shadow.mapSize.set(2048, 2048); Object.assign(light.shadow.camera, {left: -2.2, right: 2.2, top: 2.2, bottom: -2.2, near: 1, far: 20});
+  light.shadow.bias = -0.0004; scene.add(light);
+  scene.add(new THREE.AmbientLight(0x223355, 0.12)); // faint earthshine
+
+  // Earth
+  const earthMat = new THREE.ShaderMaterial({
+    uniforms: {dayMap: {value: tex(TEX.day)}, nightMap: {value: tex(TEX.night)}, waterMap: {value: tex(TEX.water)},
+      sunDir: {value: sunDir}, camPos: {value: camera.position}},
+    vertexShader: `varying vec2 vUv; varying vec3 vN; varying vec3 vP;
+      void main(){ vUv = uv; vN = normalize(mat3(modelMatrix) * normal); vec4 w = modelMatrix * vec4(position, 1.0); vP = w.xyz;
+        gl_Position = projectionMatrix * viewMatrix * w; }`,
+    fragmentShader: `uniform sampler2D dayMap, nightMap, waterMap; uniform vec3 sunDir, camPos; varying vec2 vUv; varying vec3 vN; varying vec3 vP;
+      void main(){
+        vec3 n = normalize(vN), v = normalize(camPos - vP); float d = dot(n, sunDir);
+        float day = smoothstep(-0.18, 0.22, d);
+        vec3 dayC = pow(texture2D(dayMap, vUv).rgb, vec3(1.05)) * (0.04 + 1.15 * max(d, 0.0));
+        vec3 nightC = texture2D(nightMap, vUv).rgb * vec3(1.0, 0.82, 0.55) * 1.7;
+        vec3 col = mix(nightC, dayC, day);
+        float water = texture2D(waterMap, vUv).r;
+        vec3 h = normalize(sunDir + v); col += vec3(1.0, 0.92, 0.78) * pow(max(dot(n, h), 0.0), 60.0) * water * 0.9 * day;
+        col += vec3(1.0, 0.45, 0.15) * exp(-pow(d * 7.0, 2.0)) * 0.10;
+        float rim = pow(1.0 - max(dot(n, v), 0.0), 2.6); col += vec3(0.32, 0.58, 1.0) * rim * 0.55 * smoothstep(-0.25, 0.5, d);
+        gl_FragColor = vec4(col, 1.0);
+      }`});
+  const earth = new THREE.Mesh(new THREE.SphereGeometry(1, 128, 128), earthMat);
+  earth.castShadow = true; earth.rotation.z = 0.41; scene.add(earth);  // axial tilt
+
+  // atmosphere: a glowing shell, brightest just above the limb and on the day side
+  const atm = new THREE.Mesh(new THREE.SphereGeometry(1.06, 96, 96), new THREE.ShaderMaterial({
+    uniforms: {sunDir: {value: sunDir}}, side: THREE.BackSide, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `varying vec3 vNv; varying vec3 vNw;
+      void main(){ vNv = normalize(normalMatrix * normal); vNw = normalize(mat3(modelMatrix) * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+    fragmentShader: `uniform vec3 sunDir; varying vec3 vNv; varying vec3 vNw;
+      void main(){ float k = pow(max(0.0, 0.62 - vNv.z), 4.0) * 1.9;
+        float lit = smoothstep(-0.35, 0.45, dot(normalize(vNw), sunDir));
+        vec3 c = mix(vec3(0.06, 0.12, 0.35), vec3(0.36, 0.64, 1.0), lit);
+        gl_FragColor = vec4(c * k, k); }`}));
+  scene.add(atm);
+
+  // a 3U CubeSat with two deployable solar wings
+  const sat = new THREE.Group();
+  const cells = (() => { const c = document.createElement("canvas"); c.width = 256; c.height = 128; const g = c.getContext("2d");
+    g.fillStyle = "#0b1a3d"; g.fillRect(0, 0, 256, 128);
+    for (let x = 0; x < 8; x++) for (let y = 0; y < 4; y++){ const gr = g.createLinearGradient(0, 0, 32, 32); gr.addColorStop(0, "#1f4fae"); gr.addColorStop(1, "#122d6b");
+      g.fillStyle = gr; g.fillRect(x * 32 + 2, y * 32 + 2, 28, 28); g.fillStyle = "rgba(200,220,255,.25)"; g.fillRect(x * 32 + 2, y * 32 + 15, 28, 1); }
+    const t = new THREE.CanvasTexture(c); t.anisotropy = 8; return t; })();
+  const foil = new THREE.MeshStandardMaterial({color: 0xd4a640, metalness: 0.9, roughness: 0.32});
+  const frame = new THREE.MeshStandardMaterial({color: 0x9aa3b5, metalness: 0.8, roughness: 0.4});
+  const panel = new THREE.MeshStandardMaterial({map: cells, metalness: 0.35, roughness: 0.45});
+  const body = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, 0.15), [foil, foil, frame, frame, foil, foil]);
+  [ -1, 1 ].forEach(s => { const w = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.003, 0.14), panel); w.position.x = s * 0.103; sat.add(w);
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.004, 0.006), frame); arm.position.x = s * 0.035; sat.add(arm); });
+  const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.0012, 0.0012, 0.09, 6), frame); ant.position.set(0.02, 0.02, 0.1); ant.rotation.x = Math.PI / 2;
+  sat.add(body, ant); sat.scale.setScalar(0.8);
+  sat.traverse(o => { if (o.isMesh){ o.castShadow = true; o.receiveShadow = true; } }); scene.add(sat);
+
+  // orbit: inclined, drawn as a faint ring
+  const a = 1.42, inc = THREE.MathUtils.degToRad(64), node = THREE.MathUtils.degToRad(30);
+  const orbitQ = new THREE.Quaternion().setFromEuler(new THREE.Euler(inc, node, 0, "YXZ"));
+  const ringPts = []; for (let k = 0; k <= 256; k++){ const t = k / 256 * Math.PI * 2; ringPts.push(new THREE.Vector3(Math.cos(t) * a, 0, Math.sin(t) * a).applyQuaternion(orbitQ)); }
+  scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(ringPts), new THREE.LineBasicMaterial({color: 0xffc35a, transparent: true, opacity: .22})));
+
+  function size(){ const w = canvas.clientWidth, h = canvas.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  size(); addEventListener("resize", size);
+
+  let th = 2.9, batt = 4.06, temp = 6, t0 = performance.now();
+  const pos = new THREE.Vector3(), next = new THREE.Vector3(), up = new THREE.Vector3();
+  function frameLoop(now){
+    const t = (now - t0) / 1000;
+    camera.position.set(Math.sin(t * 0.05) * 0.5 + 0.35, 0.55 + Math.sin(t * 0.07) * 0.08, 4.3); camera.lookAt(0, 0, 0);
+    earth.rotation.y = t * 0.035;
+    th += REDUCE ? 0 : 0.0042;
+    pos.set(Math.cos(th) * a, 0, Math.sin(th) * a).applyQuaternion(orbitQ);
+    next.set(Math.cos(th + 0.01) * a, 0, Math.sin(th + 0.01) * a).applyQuaternion(orbitQ);
+    sat.position.copy(pos); up.copy(pos).normalize(); sat.up.copy(up); sat.lookAt(next);   // flies forward, wings cross-track
+    // eclipse: behind Earth, inside its shadow cylinder
+    const along = pos.dot(sunDir), perp = pos.clone().sub(sunDir.clone().multiplyScalar(along)).length(), lit = !(along < 0 && perp < 1.0);
     const solar = lit ? 390 + 45 * Math.sin(th * 6) : 2;
     batt = Math.min(4.2, Math.max(3.86, batt + (lit ? .0009 : -.0012))); temp += ((lit ? 33 : -24) - temp) * .006;
     r1.textContent = `${Math.round(solar)} mA`; r2.textContent = `${batt.toFixed(3)} V`; r3.textContent = `${temp >= 0 ? "+" : ""}${temp.toFixed(1)} °C`;
     state.textContent = lit ? "IN SUNLIGHT" : "IN EARTH'S SHADOW"; state.style.color = lit ? css("--sun") : css("--muted");
-    spin += .0022; th += .0058; if (!REDUCE) requestAnimationFrame(frame);
+    renderer.render(scene, camera);
+    if (!REDUCE) requestAnimationFrame(frameLoop);
   }
-  frame();
+  requestAnimationFrame(frameLoop);
+  if (REDUCE) setTimeout(() => requestAnimationFrame(frameLoop), 400); // textures arrive after the first frame
 })();
 
 satButtons(); proof(); show(0);
