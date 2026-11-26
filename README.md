@@ -163,7 +163,7 @@ Things that had to be solved along the way:
 
 ## Tested and validated
 
-- `python -m pytest` runs 48 tests:
+- `python -m pytest` runs 70 tests (47 of them on a fresh clone without the downloaded frames):
   - Unit tests for decoding, the structure tests, peeling, grading and voting.
   - A **random synthetic fleet**. Each satellite gets its own byte order, field order, gaps and traps
     (signed currents, counters with constant top bytes, rolling sequence numbers, status and noise
