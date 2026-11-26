@@ -66,11 +66,12 @@ def _canonical_widths(chosen: list[Field], pool: list[Field], B: np.ndarray) -> 
         return la == lb
 
     out = []
-    for f in chosen:
+    for i, f in enumerate(chosen):
         if f.kind in ("magnet", "attitude") or f.signed == "f":
             out.append(f)
             continue
-        claimed = set().union(*(set(g.span) for g in chosen if g is not f)) if len(chosen) > 1 else set()
+        # bytes held by fields still to come, and by fields already settled (possibly widened)
+        claimed = set().union(set(), *(set(g.span) for g in chosen[i + 1:]), *(set(g.span) for g in out))
         vf = _decode(B, f.offset, f.width, f.endian, f.signed)
         best = f
         for g in pool:

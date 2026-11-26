@@ -48,18 +48,18 @@ Shadowfield on their raw frames as if they did not, and use the decoder only aft
 | UWE-4 | `DP0UWH:len58` | 1105 / 411 | 15 | 100% | 93% | 100% | 87% | 100% | 100% | 100% | 86% |
 | Geoscan | `len72:b0=0x84` | 1476 / 103 | 15 | 80% | 80% | 100% | 67% | 75% | 75% | 100% | 75% |
 | Geoscan | `len72:b0=0x04:b3=0x05` | 321 / 99 | 14 | 79% | 64% | 100% | 64% | 91% | 91% | 100% | – |
-| GRBBeta | `len79:b0=0x85` | 347 / 44 | 23 | 70% | 61% | 100% | 100% | 88% | 100% | 88% | 77% |
+| GRBBeta | `len79:b0=0x85` | 347 / 44 | 23 | 70% | 61% | 100% | 100% | 88% | 100% | 88% | 91% |
 | SNUGLITE | `len97` | 1005 / 126 | 7 | 100% | 86% | 88% | 100% | 100% | 100% | 100% | 100% |
 | SNUGLITE | `len214` | 405 / 108 | 30 | 90% | 83% | 94% | 96% | 96% | 96% | 100% | 100% |
 | NetSat | `len89` | 1724 / 241 | 14 | 43% | 21% | 86% | 100% | 17% | 17% | 100% | – |
-| AlSat-1N | `len19` | 1781 / 522 | 4 | 50% | 50% | 100% | 100% | 50% | 100% | 50% | 0% |
+| AlSat-1N | `len19` | 1781 / 522 | 4 | 50% | 50% | 100% | 100% | 50% | 100% | 50% | – |
 | AlSat-1N | `len20` | 910 / 201 | 1 | 100% | 100% | 50% | 100% | 100% | 100% | 100% | – |
 | AlSat-1N | `len32` | 814 / 162 | 5 | 40% | 40% | 100% | 100% | 100% | 100% | 100% | – |
 | Sputnix USP | `len103` | 474 / 80 | 10 | 80% | 70% | 100% | 50% | 38% | 100% | 38% | – |
-| CubeBel-2 | `EU11S:len200:b0=0x14:b6=0x10` | 161 / 27 | 17 | 88% | 35% | 94% | 93% | 60% | 67% | 90% | 0% |
+| CubeBel-2 | `EU11S:len200:b0=0x14:b6=0x10` | 161 / 27 | 17 | 88% | 35% | 94% | 93% | 60% | 67% | 90% | – |
 | Geoscan (2nd unit) | `len72:b0=0x09` | 360 / 81 | 4 | 0% | 0% | 33% | – | – | – | – | – |
 | Geoscan (2nd unit) | `len72:b0=0x84` | 331 / 74 | 13 | 69% | 62% | 100% | 78% | 78% | 78% | 100% | 100% |
-| **total** | | | **172** | **76%** | **63%** | **95%** | **87%** | **77%** | **84%** | **92%** | **77%** |
+| **total** | | | **172** | **76%** | **63%** | **95%** | **87%** | **77%** | **84%** | **92%** | **90%** |
 <!-- /DEV_TABLE -->
 
 **Held-out set.** Six satellites from six different makers, run once with the engine frozen and
@@ -71,15 +71,15 @@ replaced it.)
 <!-- HELDOUT_TABLE -->
 | satellite | frame type | frames / passes | decoder fields | recall | exact | precision | kind | Claude | answered | when answered | battery / solar / bus |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| CP16 | `len239` | 970 / 111 | 37 | 84% | 35% | 100% | 84% | 39% | 58% | 67% | 38% |
+| CP16 | `len239` | 970 / 111 | 37 | 84% | 35% | 100% | 84% | 39% | 58% | 67% | 71% |
 | KNACKSAT-2 | `HS0K:len149` | 195 / 23 | 22 | 5% | 0% | 100% | 100% | 100% | 100% | 100% | 0% |
 | Kostka | `OK0KST:len59` | 180 / 54 | 1 | 100% | 100% | 3% | 100% | 0% | 0% | – | – |
 | GBSAT | `GBSAT0:len68` | 897 / 94 | 14 | 71% | 50% | 90% | 80% | 100% | 100% | 100% | 100% |
 | CANVAS | `LASP:len212` | 2998 / 46 | 2 | 100% | 100% | 100% | 100% | 100% | 100% | 100% | – |
-| CANVAS | `LASP:len248` | 1753 / 46 | 44 | 82% | 57% | 100% | 97% | 78% | 97% | 80% | 20% |
+| CANVAS | `LASP:len248` | 1753 / 46 | 44 | 82% | 57% | 100% | 97% | 78% | 97% | 80% | 28% |
 | CANVAS | `LASP:len84` | 652 / 43 | 2 | 100% | 100% | 67% | 100% | 100% | 100% | 100% | – |
 | InnoSat-16 | `len72:b1=0x98` | 600 / 49 | 4 | 0% | 0% | – | – | – | – | – | – |
-| **total** | | | **126** | **66%** | **40%** | **98%** | **92%** | **73%** | **85%** | **83%** | **36%** |
+| **total** | | | **126** | **66%** | **40%** | **98%** | **92%** | **73%** | **85%** | **83%** | **50%** |
 <!-- /HELDOUT_TABLE -->
 
 Column definitions:
@@ -163,7 +163,7 @@ Things that had to be solved along the way:
 
 ## Tested and validated
 
-- `python -m pytest` runs 37 tests:
+- `python -m pytest` runs 48 tests:
   - Unit tests for decoding, the structure tests, peeling, grading and voting.
   - A **random synthetic fleet**. Each satellite gets its own byte order, field order, gaps and traps
     (signed currents, counters with constant top bytes, rolling sequence numbers, status and noise
@@ -171,6 +171,8 @@ Things that had to be solved along the way:
     (`python -m tests.fleet`: 99% recall, 91% exact, no false fields over 12 satellites).
   - A **regression lock** on every real development frame type: a rule change that lowers recall,
     exact layout or precision anywhere fails the suite.
+  - Regression tests for each bug an independent code review found (half-written download lines,
+    fields widening into the same byte, one missing IGRF value, the grading of the finer power class).
 - **Every generated `.ksy` compiles with the official Kaitai Struct compiler** (its JavaScript build,
   `tools/ksc`). The compiled parser reads the real frames exactly as the engine does (`tests/test_ksy.py`).
 - The engine is a package of small steps (`shadowfield/engine`: readings, motion, correlation,
@@ -185,17 +187,18 @@ Things that had to be solved along the way:
 ## Run it
 
 ```bash
-python -m venv .venv && .venv/Scripts/pip install -r requirements.txt   # Windows; .venv/bin on Linux/macOS
+python -m venv .venv && .venv/Scripts/pip install -r requirements-dev.txt   # Windows; .venv/bin on Linux/macOS
 cp .env.example .env        # ANTHROPIC_API_KEY, optional SATNOGS_DB_TOKEN
 python -m shadowfield fetch 43880 --eclipse-season    # frames + per-pass TLEs from SatNOGS Network
-python -m shadowfield run 43880 --decoder uwe4        # find, name, grade -> results/43880.html, results/ksy/
+python -m shadowfield run 43880 --decoder uwe4        # find, name, grade -> results/run/43880.html, results/run/ksy/
 python -m shadowfield bench                           # blind scoreboard -> results/index.html
 (cd tools/ksc && npm install) && python -m pytest     # tests, including compiling the .ksy drafts
 ```
 
 Claude cost is about $0.05-0.15 per frame type: Sonnet 5.5 at medium effort, three samples sharing one
 cached prompt. Answers are cached on disk, so re-runs are free. `SHADOWFIELD_MODEL`,
-`SHADOWFIELD_EFFORT` and `SHADOWFIELD_VOTES` override the defaults.
+`SHADOWFIELD_EFFORT` and `SHADOWFIELD_VOTES` override the defaults, and `SHADOWFIELD_ALPHA` (default 1e-4)
+sets the significance level per reading.
 
 ## Related work
 
@@ -229,7 +232,7 @@ SatNOGS decoders are written by hand, sometimes from CSV with helper scripts.
 - Real encryption or compression is detected and reported, not decoded.
 - On satellites it has never seen, the engine finds two thirds of the physical fields with almost no
   false ones, but gets the exact byte layout of only about 40%. The finer power class (battery vs
-  solar vs bus) reaches 77% on development satellites but only 36% on the held-out ones.
+  solar vs bus) reaches 90% on development satellites but 50% on the held-out ones.
 - Claude's names are a draft. Its categories are measured, its exact field names are not.
 - Precision is measured against the decoder's fields, so on a satellite whose decoder covers only part
   of the frame (Kostka) real but undecoded fields count as false.

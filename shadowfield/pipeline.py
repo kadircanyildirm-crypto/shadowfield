@@ -43,36 +43,6 @@ def _season_note(ph) -> str | None:
             "correlations are taken within weeks, so seasonal drift cannot pose as physics.")
 
 
-def _one_season(ft, ph, gap_days: float = 14.0):
-    """Keep one contiguous stretch of data when the frames come from separate seasons.
-
-    Mixing, say, a June eclipse season with November data in permanent sunlight is a trap:
-    everything that drifted between June and November (season, battery ageing, counters)
-    then correlates with "had an eclipse recently". So the stretch where the sunlight
-    history actually varies is analysed on its own.
-    """
-    u = ph["unix"].to_numpy()
-    order = np.argsort(u)
-    gaps = np.flatnonzero(np.diff(u[order]) > gap_days * 86400)
-    if not len(gaps):
-        return ft, ph, None
-    bounds = np.split(order, gaps + 1)
-    def value(idx):
-        passes = ft.df["obs_id"].iloc[idx].nunique()
-        return ph[f"ema_{physics.TAUS[2]}"].iloc[idx].std() * min(passes, 200) if passes >= MIN_PASSES else -1
-    best = max(bounds, key=value)
-    if value(best) <= 0:
-        return ft, ph, None
-    keep = np.sort(best)
-    sub = ft.df.iloc[keep].reset_index(drop=True)
-    ft2 = frames_mod.FrameType(ft.key, ft.length, sub)
-    ph2 = ph.iloc[keep].reset_index(drop=True)
-    d0, d1 = (pd.Timestamp(x, unit="s", tz="UTC").strftime("%Y-%m-%d") for x in (u[keep].min(), u[keep].max()))
-    return ft2, ph2, (f"Frames come from {len(bounds)} separate seasons; analysed the one where the sunlight "
-                      f"history varies ({d0} to {d1}, {len(sub)} frames) on its own, so seasonal drift "
-                      f"cannot pose as physics.")
-
-
 def orbit_summary(phys: pd.DataFrame) -> dict:
     return {
         "mean_altitude_km": round(float(phys["alt_km"].mean())),
@@ -93,6 +63,11 @@ def run(norad: int, data_dir: Path, decoder: str | None = None, use_llm: bool = 
     results = []
     for ft in types:
         ph = physics.compute(ft.df, data_dir / "ephemeris")
+        keep = ph[["sunlit", "lat", "alt_km", "sin_u", "cos_u"]].notna().all(axis=1).to_numpy()
+        if not keep.all():  # frames the TLE cannot propagate (decay, bad epoch) carry no physics
+            print(f"[{norad}] {ft.key}: {int((~keep).sum())} frames dropped (orbit could not be propagated)")
+            ft = frames_mod.FrameType(ft.key, ft.length, ft.df[keep].reset_index(drop=True))
+            ph = ph[keep].reset_index(drop=True)
         seg_note = _season_note(ph)
         n_pass = int(ft.df["obs_id"].nunique())
         if n_pass < MIN_PASSES:
@@ -140,9 +115,13 @@ def run(norad: int, data_dir: Path, decoder: str | None = None, use_llm: bool = 
                           "passes": int(ft.df["obs_id"].nunique())}
             if layer:
                 frame_info["whitening_removed"] = layer
-            guess = name_fields([f.as_dict() for f in found], orbit_summary(ph), frame_info,
-                                sat_hint=None if blind else sat_name)
-            res.names = guess.model_dump()
+            try:
+                guess = name_fields([f.as_dict() for f in found], orbit_summary(ph), frame_info,
+                                    sat_hint=None if blind else sat_name)
+                res.names = guess.model_dump()
+            except Exception as e:  # no key, network, refusal: keep the physics results
+                print(f"[{norad}] {ft.key}: Claude naming skipped ({type(e).__name__}: {e})")
+                res.names = None
         if decoder:
             t = truth.locate_true_fields(ft, list(ft.df["raw"]), decoder)
             if t:
@@ -179,7 +158,7 @@ def _llm_accuracy(names: dict, table: pd.DataFrame) -> dict:
         if g["category"] != "unknown":
             answered += 1
             sel_hits += ok
-            if t.get("fine") and g["category"].startswith("power"):
+            if isinstance(t.get("fine"), str) and g["category"].startswith("power"):
                 fine_total += 1
                 fine_hits += g["category"] == t["fine"]
     nan = float("nan")

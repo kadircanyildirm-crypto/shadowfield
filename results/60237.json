@@ -1381,8 +1381,8 @@
    "llm_judged": 16,
    "llm_answered": 1.0,
    "llm_selective_accuracy": 0.875,
-   "llm_fine_accuracy": 0.7692307692307693,
-   "llm_fine_judged": 13,
+   "llm_fine_accuracy": 0.9090909090909091,
+   "llm_fine_judged": 11,
    "truth": [
     {
      "name": "psu_uptime_rst",

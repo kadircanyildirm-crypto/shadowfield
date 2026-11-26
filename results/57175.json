@@ -1064,8 +1064,8 @@
    "llm_judged": 15,
    "llm_answered": 0.6666666666666666,
    "llm_selective_accuracy": 0.9,
-   "llm_fine_accuracy": 0.0,
-   "llm_fine_judged": 2,
+   "llm_fine_accuracy": NaN,
+   "llm_fine_judged": 0,
    "truth": [
     {
      "name": "beacon_uptime",

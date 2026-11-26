@@ -106,11 +106,12 @@ def _quaternions(cand, X, tol: float = 0.02) -> list[Field]:
     return out
 
 def _magnetometers(cand, X, b, n_pass, alpha) -> list[Field]:
-    if np.isnan(b).all():
+    ok = np.isfinite(b)
+    if ok.sum() < 30:
         return []
     key = {c: j for j, c in enumerate(cand)}
     out = []
-    rb = stats.rankdata(b)
+    rb = stats.rankdata(b[ok])
     for (o, w, endian, signed), j in key.items():
         if not signed or w == 1:
             continue
@@ -118,7 +119,7 @@ def _magnetometers(cand, X, b, n_pass, alpha) -> list[Field]:
         if j2 is None or j3 is None:
             continue
         m = np.sqrt(X[:, j] ** 2 + X[:, j2] ** 2 + X[:, j3] ** 2)
-        rho = stats.spearmanr(m, rb).statistic
+        rho = stats.spearmanr(m[ok], rb).statistic
         if rho > 0.5 and _p_from_rho(np.array([rho]), n_pass)[0] < alpha:
             out.append(Field(o, w, endian, signed, "magnet", float(rho),
                              {"axes": 3, "rho_igrf": round(float(rho), 3)}, m))

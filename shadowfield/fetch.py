@@ -100,9 +100,15 @@ def fetch(norad: int, out_dir: Path, max_obs: int = 400, workers: int = 16,
     path = out / "frames.jsonl"
     done = set()
     if path.exists():
+        good = []
         for line in path.read_text(encoding="utf-8").splitlines():
-            f = json.loads(line)
+            try:
+                f = json.loads(line)
+            except json.JSONDecodeError:  # a run killed mid-write leaves half a line: drop it
+                continue
+            good.append(line)
             done.add((f["obs_id"], f["ts"], f["hex"]))
+        path.write_text("".join(g + "\n" for g in good), encoding="utf-8")
     done_obs = {k[0] for k in done}
 
     def work(job):
@@ -171,18 +177,28 @@ def fetch_db(norad: int, out_dir: Path, days: int = 45, max_frames: int = 20000,
     out = out_dir / str(norad)
     out.mkdir(parents=True, exist_ok=True)
     path = out / "frames.jsonl"
-    url, params, n = DB_API + "telemetry/", {"satellite": norad, "start": start, "format": "json"}, 0
-    with path.open("w", encoding="utf-8") as fh:
+    url, params, n, ts = DB_API + "telemetry/", {"satellite": norad, "start": start, "format": "json"}, 0, None
+    tmp = path.with_suffix(".jsonl.part")  # the old file is only replaced once the download succeeds
+    with tmp.open("w", encoding="utf-8") as fh:
         while url and n < max_frames:
+            r = None
             for i in range(6):
-                r = requests.get(url, params=params, headers=headers, timeout=90)
+                try:
+                    r = requests.get(url, params=params, headers=headers, timeout=90)
+                except (requests.ConnectionError, requests.Timeout):
+                    time.sleep(10 * (i + 1))
+                    r = None
+                    continue
                 if r.status_code == 429:
                     wait = int(r.headers.get("Retry-After", "30"))
                     print(f"[fetch_db] rate limited, waiting {wait}s")
                     time.sleep(min(wait, 900))
+                    r = None
                     continue
                 r.raise_for_status()
                 break
+            if r is None:
+                raise requests.ConnectionError(f"SatNOGS DB did not answer for {url}")
             body = r.json()
             for t in body["results"] if isinstance(body, dict) else body:
                 ts = t.get("timestamp")
@@ -200,7 +216,18 @@ def fetch_db(norad: int, out_dir: Path, days: int = 45, max_frames: int = 20000,
             fh.flush()
             print(f"[fetch_db] {norad}: {n} frames, back to {ts}", flush=True)
             time.sleep(pause)
+    tmp.replace(path)
     return path
+
+
+def _read_rows(path: Path) -> list[dict]:
+    rows = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+    return rows
 
 
 def survey(norads: list[int], pages: int = 1) -> list[dict]:
@@ -256,7 +283,7 @@ def apply_tles(path: Path, tles: list[tuple[str, str]]) -> None:
     if not tles:
         return
     epochs = [_tle_epoch(t[0]) for t in tles]
-    rows = [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines()]
+    rows = _read_rows(path)
     for f in rows:
         u = datetime.fromisoformat(f["ts"]).timestamp()
         f["tle1"], f["tle2"] = tles[min(range(len(epochs)), key=lambda i: abs(epochs[i] - u))]
@@ -267,7 +294,7 @@ def fetch_eclipse_season(norad: int, out_dir: Path, max_obs: int = 150, lookback
     """Add frames from the most recent weeks in which the satellite actually saw eclipses."""
     from .eclipse import calendar, eclipse_windows
     path = out_dir / str(norad) / "frames.jsonl"
-    rows = [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines()] if path.exists() else []
+    rows = _read_rows(path) if path.exists() else []
     if rows:
         t1, t2 = max(((f["tle1"], f["tle2"]) for f in rows), key=lambda t: t[0][18:32])
     else:

@@ -3303,8 +3303,8 @@
    "llm_judged": 36,
    "llm_answered": 0.9722222222222222,
    "llm_selective_accuracy": 0.8,
-   "llm_fine_accuracy": 0.2,
-   "llm_fine_judged": 25,
+   "llm_fine_accuracy": 0.2777777777777778,
+   "llm_fine_judged": 18,
    "truth": [
     {
      "name": "sequence_count",

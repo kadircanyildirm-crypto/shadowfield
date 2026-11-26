@@ -67,8 +67,11 @@ def _scatter(x, y, shade_neg=False, xlabel="", max_pts=2500) -> str:
 
 def _plot(ft, phys, f) -> str:
     y = _values(ft, f)
-    if f.kind in ("counter", "clock"):
+    if f.kind in ("counter", "clock", "attitude"):
         return _scatter((phys["unix"].to_numpy() - phys["unix"].min()) / 86400, y, xlabel="days")
+    if f.kind == "position" and f.detail.get("component") in phys:
+        c = f.detail["component"]
+        return _scatter(phys[c].to_numpy(), y, xlabel=f"orbit {c} from the TLE")
     if f.kind == "magnet":
         return _scatter(phys["b_igrf"].to_numpy(), y, xlabel="IGRF |B| (nT)")
     return _scatter(phys["since_change"].to_numpy(), y, shade_neg=True, xlabel="min since sunrise (+) / sunset (−)")

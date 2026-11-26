@@ -24,7 +24,7 @@ from pydantic import BaseModel, Field as PField
 MODEL = os.environ.get("SHADOWFIELD_MODEL", "claude-sonnet-5-5")
 EFFORT = os.environ.get("SHADOWFIELD_EFFORT", "medium")
 PRICE_PER_MTOK = {"claude-sonnet-5-5": (2.0, 10.0), "claude-opus-5-5": (4.0, 20.0), "claude-haiku-5-5": (0.10, 0.50)}
-CACHE_DIR = Path("data/llm_cache")
+CACHE_DIR = Path(__file__).resolve().parents[1] / "data" / "llm_cache"
 
 Category = Literal["thermal", "power_solar", "power_battery", "power_bus", "counter", "navigation",
                    "clock", "magnetometer", "attitude", "unknown"]

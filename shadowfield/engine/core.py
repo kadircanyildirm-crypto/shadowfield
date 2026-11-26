@@ -196,6 +196,7 @@ def correlate(X: np.ndarray, df: pd.DataFrame, phys: pd.DataFrame, unix: np.ndar
     H = np.column_stack([np.ones(n), su, cu, 2 * su * cu, cu ** 2 - su ** 2])
     beta, *_ = np.linalg.lstsq(H, RX, rcond=None)
     r2_orbit = 1 - ((RX - H @ beta) ** 2).mean(0)
+    r2_orbit = np.where(RX.std(0) > 0, r2_orbit, 0.0)  # a column with nothing left to explain
 
     return Correlation(C, ci, n_pass_sun, r2_orbit, feats["sunlit"])
 
@@ -249,7 +250,7 @@ def classify(cand, X, mo: Motion, co: Correlation, unix, n, n_pass, alpha) -> tu
         phys_best[(o, w, endian, signed)] = max(v for k_, v, _ in options if k_ in ("sun", "lagged", "orbit"))
         n_eff = n_pass_sun if kind in ("sun", "lagged") else n_pass
         p = _p_from_rho(np.array([s]), max(n_eff, 3))[0] if kind in ("sun", "lagged", "orbit") else 0.0
-        if p > alpha:
+        if not p <= alpha:  # also rejects NaN
             continue
         det.update(info)
         det["p"] = float(p)

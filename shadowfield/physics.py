@@ -78,6 +78,7 @@ def geodetic(r: np.ndarray, unix: np.ndarray):
 
 
 def compute(df: pd.DataFrame, data_dir: Path | None = None) -> pd.DataFrame:
+    """Physics for every frame (see the module docstring). data_dir is unused (kept for callers)."""
     # pandas 3 parses ISO strings at microsecond resolution, so never assume nanoseconds
     unix = df["ts"].astype("datetime64[ns, UTC]").astype("int64").to_numpy() / 1e9
     out = pd.DataFrame(index=df.index)
@@ -97,6 +98,8 @@ def compute(df: pd.DataFrame, data_dir: Path | None = None) -> pd.DataFrame:
         r, _ = propagate(sat, grid)
         s = sun_unit(JD_UNIX0 + grid / 86400.0)
         lit = in_sun(r, s).reshape(len(rows), HISTORY_MIN).astype(float)
+        bad = np.isnan(r).any(-1).reshape(len(rows), HISTORY_MIN).any(1)  # SGP4 error: no physics
+        lit[bad] = np.nan
         cols["sunlit"][rows] = lit[:, 0]
         for tau, w in weights.items():
             cols[f"ema_{tau}"][rows] = lit @ w

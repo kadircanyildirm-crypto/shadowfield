@@ -35,13 +35,23 @@ def main() -> None:
     r.add_argument("--name", help="satellite name (only sent with --not-blind)")
     b = sub.add_parser("bench")
     b.add_argument("--no-llm", action="store_true")
+    b.add_argument("--dev-only", action="store_true", help="development satellites only (keeps held-out rows)")
     ap.add_argument("--data", type=Path, default=ROOT / "data")
     a = ap.parse_args()
 
     if a.cmd == "fetch":
         from . import fetch
         if a.db:
-            fetch.fetch_db(a.norad, a.data, days=a.days)
+            path = fetch.fetch_db(a.norad, a.data, days=a.days)
+            # DB frames carry no orbit: give each the historical TLE nearest its time
+            import json as _json
+            from datetime import datetime
+            rows = [_json.loads(l) for l in path.read_text(encoding="utf-8").splitlines()]
+            if rows:
+                ts = [datetime.fromisoformat(r["ts"]) for r in rows]
+                tles = fetch.tle_history(a.norad, min(ts), max(ts))
+                fetch.apply_tles(path, tles)
+                print(f"[fetch] {len(tles)} historical TLEs applied")
         else:
             fetch.fetch(a.norad, a.data, max_obs=a.max_obs)
         if a.eclipse_season:
@@ -50,18 +60,25 @@ def main() -> None:
 
     if a.cmd == "bench":
         from . import bench
-        for r in bench.run(data_dir=a.data, use_llm=not a.no_llm):
-            print(f"{r['name']:<10} {r['frame_type']:<22} recall {r['recall']}, exact {r['exact']}, "
-                  f"precision {r['precision']}, Claude {r['claude_acc']}")
+        sats = bench.SATS if a.dev_only else bench.SATS + bench.HELDOUT
+        for r in bench.run(sats, data_dir=a.data, use_llm=not a.no_llm, merge=a.dev_only):
+            def p(v):
+                return "-" if v is None or v != v else f"{v:.0%}"
+            print(f"{r['name']:<12} {r['frame_type']:<26} recall {p(r['recall'])}, exact {p(r['value_exact'])}, "
+                  f"precision {p(r['precision'])}, Claude {p(r['claude_acc'])}")
+        print("scoreboard: results/index.html")
         return
 
     from . import pipeline
     results = pipeline.run(a.norad, a.data, decoder=a.decoder, use_llm=not a.no_llm,
                            blind=not a.not_blind, sat_name=a.name)
-    out = pipeline.save(results, ROOT / "results", a.norad)
+    # single runs go to results/run/, so they never overwrite the benchmark's results
+    run_dir = ROOT / "results" / "run"
+    out = pipeline.save(results, run_dir, a.norad)
     from . import ksy, report
-    report.render(results, a.norad, ROOT / "results" / f"{a.norad}.html", title=a.name or f"NORAD {a.norad}")
-    for k in ksy.write(results, a.norad, ROOT / "results" / "ksy"):
+    page = report.render(results, a.norad, run_dir / f"{a.norad}.html", title=a.name or f"NORAD {a.norad}")
+    print(f"report: {page}")
+    for k in ksy.write(results, a.norad, run_dir / "ksy"):
         print(f"decoder draft: {k}")
     for res in results:
         print(f"\n== {res.ft.key}: {len(res.ft.df)} frames ==")
@@ -72,7 +89,7 @@ def main() -> None:
                   f"{g.get('name', ''):<28} {g.get('unit', '')}")
         if res.evaluation:
             ev = res.evaluation
-            print(f"  vs decoder: recall {ev['recall_physical']:.2f}, exact {ev['exact_physical']:.2f}, "
+            print(f"  vs decoder: recall {ev['recall_physical']:.2f}, exact {ev['value_exact_physical']:.2f}, "
                   f"precision {ev['precision']:.2f}"
                   + (f", Claude category accuracy {ev['llm_category_accuracy']:.2f}" if "llm_category_accuracy" in ev else ""))
     print(f"\nsaved {out}")

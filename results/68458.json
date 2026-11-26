@@ -2780,8 +2780,8 @@
    "llm_judged": 31,
    "llm_answered": 0.5806451612903226,
    "llm_selective_accuracy": 0.6666666666666666,
-   "llm_fine_accuracy": 0.38461538461538464,
-   "llm_fine_judged": 13,
+   "llm_fine_accuracy": 0.7142857142857143,
+   "llm_fine_judged": 7,
    "truth": [
     {
      "name": "cp16_daughter_a_temp",
