@@ -1,6 +1,6 @@
 """Controlled experiment: whiten real UWE-4 frames three ways and let Shadowfield peel them.
 
-Run: python -m tests.peel_test
+Run: python -m tests.peel_experiment
 """
 import copy
 from pathlib import Path

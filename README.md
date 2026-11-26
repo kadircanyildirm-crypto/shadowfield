@@ -126,7 +126,7 @@ frames are never "peeled":
 - G3RUH self-synchronising scrambler: per-column entropy must drop clearly.
 
 Real ciphertext is recognised by its uniform byte statistics and reported as such, never "decoded".
-Controlled test on real UWE-4 frames (`python -m tests.peel_test`):
+Controlled test on real UWE-4 frames (`python -m tests.peel_experiment`):
 
 | layer applied to the frames | fields before | after peeling |
 |---|---|---|
