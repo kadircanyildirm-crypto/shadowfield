@@ -112,8 +112,8 @@ python, numpy, pandas, scipy, sgp4, ppigrf, pydantic, anthropic, claude, satnogs
 
 ## Try it out (links)
 
-- GitHub repo: https://github.com/kadircanyildirm-crypto/shadowfield (make it public, or invite the judges, before submitting)
-- Live demo: https://kadircanyildirm-crypto.github.io/shadowfield/ (works after GitHub Pages is turned on for `master` / `docs`)
+- GitHub repo: https://github.com/kadircanyildirm-crypto/shadowfield
+- Live demo: https://kadircanyildirm-crypto.github.io/shadowfield/
 
 ---
 

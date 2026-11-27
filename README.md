@@ -2,6 +2,8 @@
 
 **Decode a satellite's telemetry without its decoder, using the orbit it flies.**
 
+**Live demo:** https://kadircanyildirm-crypto.github.io/shadowfield/
+
 Hundreds of small satellites broadcast housekeeping beacons that amateur ground stations
 (SatNOGS) record every day. Many of those beacons have no public format: they are just bytes.
 Shadowfield works out what the bytes mean from physics alone, then has Claude read the evidence
