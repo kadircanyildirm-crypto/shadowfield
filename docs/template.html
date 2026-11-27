@@ -27,16 +27,16 @@ section{padding-block:84px}
 :focus-visible{outline:2px solid var(--fg);outline-offset:3px}
 
 /* ---------- hero ---------- */
-.hero{position:relative;min-height:min(92vh,860px);display:grid;align-items:center;overflow:hidden;
-  margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(env(safe-area-inset-top,0px) + 24px);
+.hero{position:relative;min-height:min(calc(100vh - 57px),900px);display:grid;align-items:center;overflow:hidden;padding-block:28px;
   background:linear-gradient(180deg,#000 75%,var(--bg))}
 .sky{position:absolute;inset:0;width:100%;height:100%}
 #sky2{animation:twinkle 5s ease-in-out infinite alternate}
 #sky3{animation:twinkle 3.6s ease-in-out -1.8s infinite alternate}
 @keyframes twinkle{from{opacity:.25}to{opacity:1}}
-.herogrid{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:center;width:100%;
+.herogrid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center;width:100%;
   max-width:1920px;padding-left:max(24px,4.5vw,env(safe-area-inset-left,0px));padding-right:max(20px,3vw,env(safe-area-inset-right,0px))}
-h1{font:700 clamp(36px,4.4vw,66px)/1.04 var(--display);letter-spacing:-.035em;color:var(--muted);margin:14px 0 20px;min-height:2.08em}
+h1{font:700 clamp(32px,3.5vw,56px)/1.06 var(--display);letter-spacing:-.035em;color:var(--muted);margin:14px 0 18px;text-wrap:balance}
+h1 span{display:block}
 h1 .hl{color:var(--fg)}
 .scr{color:var(--dim)}
 .lede{color:#c4c4c4;font-size:16.5px;max-width:52ch;margin:0}
@@ -117,7 +117,7 @@ h1 .hl{color:var(--fg)}
 .tr.multi{grid-template-columns:minmax(0,1fr) 96px;row-gap:4px}
 .tr.multi .val{grid-column:1 / -1;grid-row:2;text-align:left;font-size:14.5px;white-space:normal}
 .tr svg{width:96px;height:32px;display:block}
-.insp{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;display:grid;gap:16px;background:var(--card);border:1px solid var(--line);
+.insp{position:sticky;top:72px;max-height:calc(100vh - 88px);overflow:auto;scroll-margin-top:72px;display:grid;gap:16px;background:var(--card);border:1px solid var(--line);
   border-radius:12px;padding:20px;transition:opacity .3s}
 .insp.stale{opacity:.4}
 .insp .who{font:600 11.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
@@ -166,18 +166,87 @@ footer{border-top:1px solid var(--line);padding-block:30px 50px;color:var(--mute
 @media (max-width:900px){.herogrid{grid-template-columns:1fr}.globe{margin-inline:auto}.hero{min-height:0;padding-bottom:40px}.close{grid-template-columns:1fr}
   .nums{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:1fr}.feed{position:static;margin-top:8px}}
 @media (prefers-reduced-motion:reduce){.b,.tc,.conf .bar i{transition:none}.sweep.go{animation:none}}
+
+/* ---------- three pages ---------- */
+.top{position:sticky;top:0;z-index:20;background:rgba(11,11,11,.94);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.navin{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px;max-width:1920px;
+  padding-left:max(24px,4.5vw,env(safe-area-inset-left,0px));padding-right:max(20px,3vw,env(safe-area-inset-right,0px))}
+.brand{font:700 17px var(--display);letter-spacing:-.02em;color:var(--fg);text-decoration:none}
+.tabs{display:flex;gap:4px}
+.tabs a{display:flex;align-items:center;gap:9px;color:var(--muted);text-decoration:none;font:600 14px var(--body);padding:8px 14px;border-radius:8px;transition:background .2s,color .2s}
+.tabs a:hover{color:var(--fg);background:#161616}
+.tabs a b{display:grid;place-items:center;width:21px;height:21px;border-radius:50%;border:1px solid #3a3a3a;font:600 11px var(--mono)}
+.tabs a[aria-current="page"]{color:var(--fg);background:#1d1d1d}
+.tabs a[aria-current="page"] b{background:var(--fg);border-color:var(--fg);color:#0b0b0b}
+.page[hidden]{display:none}
+.page > section:first-child{padding-top:56px}
+.next{margin-top:48px}
+/* page 1: one real frame in, named telemetry out */
+.io{margin-top:26px;max-width:600px;display:grid;gap:10px;background:rgba(17,17,17,.88);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.io-h{display:flex;align-items:center;gap:10px;font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.io-h span{color:var(--fg);border:1px solid #3a3a3a;border-radius:4px;padding:1px 7px}
+.io-hex{display:flex;flex-wrap:wrap;gap:3px 4px;font:500 12px var(--mono);color:#5e5e5e}
+.io-hex span{padding:1px 2px;border-radius:3px;transition:color .4s,background .4s,box-shadow .4s}
+.io-hex span.on{color:var(--fg);background:color-mix(in srgb,var(--c) 22%,transparent);box-shadow:inset 0 -2px 0 var(--c)}
+.io-out{display:grid}
+.io-r{display:grid;grid-template-columns:9px minmax(0,1fr) auto minmax(9ch,auto);gap:10px;align-items:center;padding:7px 2px;border-top:1px solid var(--line);
+  opacity:0;transform:translateY(4px);transition:opacity .4s,transform .4s}
+.io-r.vis{opacity:1;transform:none}
+.io-r i{width:9px;height:9px;border-radius:2px;background:var(--c)}
+.io-r .n{font:500 14.5px var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.io-r .b{font:11px var(--mono);color:var(--dim)}
+.io-r .v{font:600 16px var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+/* page 3: proof */
+.rules,.checks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}
+.rule,.chk{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.rule b,.chk b{display:block;font:600 15.5px/1.3 var(--body);margin-bottom:6px}
+.rule span,.chk span{display:block;color:var(--muted);font-size:14.5px}
+.chk q{color:var(--fg)}
+h3.sh{font:700 12.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:60px 0 0}
+h3.sh + .nums{margin-top:18px}
+h3.sh + .sub{margin-top:10px}
+.tw{overflow-x:auto;margin-top:18px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.tw table{border-collapse:collapse;width:100%;font-size:14.5px}
+.tw th,.tw td{padding:11px 16px;text-align:left;border-top:1px solid var(--line);white-space:nowrap}
+.tw thead th{border-top:0;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tw th.r,.tw td.n{text-align:right}
+.tw td.n{font:600 14.5px var(--mono);font-variant-numeric:tabular-nums}
+.tw td.ft{font:12px var(--mono);color:var(--dim)}
+.tw sup{color:var(--muted);margin-left:2px}
+.mtr{display:flex;align-items:center;justify-content:flex-end;gap:12px}
+.mtr i{display:block;width:110px;height:5px;border-radius:5px;background:var(--line);overflow:hidden}
+.mtr i span{display:block;height:100%;background:var(--fg);border-radius:5px}
+.mtr > span{min-width:4ch}
+@media (max-width:900px){.rules,.checks{grid-template-columns:1fr}.mtr i{width:60px}}
+@media (max-width:560px){.brand{display:none}.tabs{flex:1;justify-content:space-between}.tabs a{padding:8px 9px;font-size:13.5px;gap:7px}
+  .io-r{grid-template-columns:9px minmax(0,1fr) auto}.io-r .b{display:none}.mtr i{display:none}.tw th,.tw td{padding:10px 12px}}
 </style>
 
+<nav class="top"><div class="navin">
+  <a class="brand" href="#what">Shadowfield</a>
+  <div class="tabs">
+    <a href="#what" aria-current="page"><b>1</b><span>Overview</span></a>
+    <a href="#demo"><b>2</b><span>Live demo</span></a>
+    <a href="#proof"><b>3</b><span>Proof</span></a>
+  </div>
+</div></nav>
+
+<div class="page" id="page-what">
 <header class="hero">
   <canvas id="sky" class="sky" aria-hidden="true"></canvas><canvas id="sky2" class="sky" aria-hidden="true"></canvas><canvas id="sky3" class="sky" aria-hidden="true"></canvas>
   <div class="in herogrid">
     <div>
-      <div class="kicker">SatNOGS · 15 satellites · no decoder</div>
-      <h1 id="headline" aria-label="The orbit is the decoder."><span id="h1a">The orbit is</span><br><span id="h1b" class="hl">the decoder.</span></h1>
-      <p class="lede">Small satellites beam down telemetry that nobody can read: no public format, only bytes.
-        <b>Shadowfield</b> reads them through physics. Batteries charge in sunlight, panels cool in Earth's shadow, clocks tick, GNSS fixes trace the orbit.
-        <b>Claude</b> then names each field like a spacecraft engineer, without ever seeing the decoder or the satellite's name.</p>
-      <div class="cta"><a class="btn primary" href="#decrypt">Decrypt a frame</a><a class="btn" href="#proof">Blind scores</a></div>
+      <div class="kicker">Small-satellite telemetry · no decoder needed</div>
+      <h1 id="headline" aria-label="Satellite data nobody can read. Shadowfield reads it."><span id="h1a">Satellite data nobody can read.</span><span id="h1b" class="hl">Shadowfield reads it.</span></h1>
+      <p class="lede">Many small satellites send telemetry in a format that was never published. Shadowfield checks every byte against the
+        satellite's public orbit, <b>when it was in sunlight and when it was in Earth's shadow</b>, to find the fields. <b>Claude</b> then names each one.</p>
+      <div class="io" aria-label="A real UWE-4 frame in hex, and four of the fields Shadowfield found in it">
+        <div class="io-h"><span>In</span>a real UWE-4 frame, as received</div>
+        <div class="io-hex" id="iohex"></div>
+        <div class="io-h"><span>Out</span>named telemetry</div>
+        <div class="io-out" id="ioout"></div>
+      </div>
+      <div class="cta"><a class="btn primary" href="#demo">See it decode a frame →</a><a class="btn" href="#proof">See the proof</a></div>
     </div>
     <div class="globe">
       <canvas id="globe" aria-label="Earth with the 15 benchmark satellites on their own orbit planes, each going dark in Earth's shadow"></canvas>
@@ -187,11 +256,27 @@ footer{border-top:1px solid var(--line);padding-block:30px 50px;color:var(--mute
   </div>
 </header>
 
-<section class="decrypt" id="decrypt"><div class="in">
-  <div class="kicker">Live decrypt</div>
+<section><div class="in">
+  <div class="kicker">How it works</div>
+  <h2>The orbit is the decoder.</h2>
+  <div class="steps">
+    <div class="step"><div class="k">01 · Orbit</div><h3>Know the light</h3><p>Every satellite's orbit is public. From it we know, for each frame,
+      whether the satellite was in sunlight or in Earth's shadow, and where it was.</p></div>
+    <div class="step"><div class="k">02 · Bytes</div><h3>Find what reacts</h3><p>Every way of reading the bytes is tested. Batteries charge in sunlight,
+      panels cool in the dark, counters tick, GPS traces the orbit. Whatever follows the physics is a field.</p></div>
+    <div class="step"><div class="k">03 · Claude</div><h3>Name it</h3><p>Claude reads each field's evidence like a spacecraft engineer and gives it
+      a name, a unit and a scale. It never sees the satellite's name or its decoder.</p></div>
+  </div>
+  <div class="cta next"><a class="btn primary" href="#demo">Next: the live demo →</a></div>
+</div></section>
+</div>
+
+<div class="page" id="page-demo" hidden>
+<section class="decrypt"><div class="in">
+  <div class="kicker">Live demo</div>
   <h2>From hex to telemetry</h2>
   <p class="sub">A real frame, exactly as SatNOGS ground stations received it. Every reading of its bytes is tested against the orbit;
-    the ones that follow physics become fields, and Claude names them.</p>
+    the ones that follow physics become fields, and Claude names them. Pick a satellite, then click any field to see the evidence.</p>
   <div class="sats" id="sats"></div>
   <div class="meta" id="satmeta"></div>
   <div class="console">
@@ -205,28 +290,6 @@ footer{border-top:1px solid var(--line);padding-block:30px 50px;color:var(--mute
   </div>
 </div></section>
 
-<section class="proof" id="proof"><div class="in">
-  <div class="kicker">Proof, not claims</div>
-  <h2>Graded blind against real decoders</h2>
-  <p class="sub" id="proofsub"></p>
-  <div class="nums" id="nums"></div>
-  <div class="held" id="held"></div>
-  <p class="fine" id="fine"></p>
-</div></section>
-
-<section><div class="in">
-  <div class="kicker">Under the hood</div>
-  <h2>Three steps</h2>
-  <div class="steps">
-    <div class="step"><div class="k">01 · Orbit</div><h3>Physics for every frame</h3><p>From the public TLE: sunlight now and over the last 200 minutes,
-      minutes since sunrise or sunset, orbital phase, position and velocity, Earth's magnetic field.</p></div>
-    <div class="step"><div class="k">02 · Bytes</div><h3>Every reading tested</h3><p>Each offset, width, byte order, sign and float is correlated with that physics,
-      week by week, with significance counted in passes. Structure tests settle the layout: carries, sign extension, the wrap point.</p></div>
-    <div class="step"><div class="k">03 · Claude</div><h3>Names from evidence</h3><p>Claude reads each field's response shape, time constant and range,
-      blind to the satellite. Three samples, majority answer: name, unit, scale, and a health note.</p></div>
-  </div>
-</div></section>
-
 <section><div class="in">
   <div class="kicker">The output</div>
   <h2>A decoder file, written for you</h2>
@@ -234,7 +297,45 @@ footer{border-top:1px solid var(--line);padding-block:30px 50px;color:var(--mute
     compiler and reads real frames exactly as the engine does.</p>
   <div class="cta"><button class="btn" id="copy" type="button">Copy .ksy</button><span class="meta" id="copied" style="align-self:center"></span></div>
   <pre class="ksy" id="ksy"></pre>
+  <div class="cta next"><a class="btn primary" href="#proof">Next: the proof →</a></div>
 </div></section>
+</div>
+
+<div class="page" id="page-proof" hidden>
+<section><div class="in">
+  <div class="kicker">Proof, not claims</div>
+  <h2>Graded blind against real decoders</h2>
+  <p class="sub">Some satellites already have a published decoder, so every answer can be checked. Shadowfield runs on their raw frames as if
+    no decoder existed. Only afterwards is its output compared with the decoder.</p>
+  <div class="rules">
+    <div class="rule"><b>The decoder is never an input</b><span>The community's satnogs-decoders are used only to grade a finished run.</span></div>
+    <div class="rule"><b>Claude answers blind</b><span>It never sees the satellite's name or its decoder, so it cannot recall an answer.</span></div>
+    <div class="rule"><b>Held-out satellites</b><span>Six satellites from six makers, never inspected while building, run once with the engine frozen.</span></div>
+  </div>
+
+  <h3 class="sh">On the six held-out satellites</h3>
+  <div class="nums" id="nums"></div>
+
+  <h3 class="sh">Both sets, side by side</h3>
+  <p class="sub">The rules were tuned on the development set, so its numbers are higher. The held-out numbers are the honest estimate for a new satellite.</p>
+  <div class="tw"><table id="cmp"></table></div>
+
+  <h3 class="sh">Every held-out satellite</h3>
+  <div class="tw"><table id="per"></table></div>
+  <p class="fine" id="fine"></p>
+
+  <h3 class="sh">More checks</h3>
+  <div class="checks">
+    <div class="chk"><b>Decoder files that compile</b><span>Every generated .ksy compiles with the official Kaitai Struct compiler, and the compiled
+      parser reads the real frames exactly as the engine does.</span></div>
+    <div class="chk"><b>70 automated tests</b><span>A random synthetic fleet with planted traps, a regression lock on every real frame type,
+      and a test for each bug an independent review found.</span></div>
+    <div class="chk"><b>Claude caught a mistake first</b><span>When two seasons of NetSat data were mixed, almost every byte seemed to follow sunlight.
+      Claude refused to name them: <q>they move together and share the same lag… the sun correlations are probably artefacts of sampling order.</q> It was right.</span></div>
+  </div>
+  <div class="cta next"><a class="btn" href="#what">Back to the overview</a><a class="btn" href="https://github.com/kadircanyildirm-crypto/shadowfield">Source on GitHub</a></div>
+</div></section>
+</div>
 
 <footer><div class="in">Shadowfield · built for Build Your First AI App · frames from the SatNOGS Network (CC BY-SA) · graded against satnogs-decoders · field names by Claude · Earth imagery: NASA Blue Marble and Black Marble (public domain)</div></footer>
 
@@ -258,16 +359,18 @@ let sat, timers = [];
 
 /* ---------- headline decrypt ---------- */
 function scramble(node, final, ms){
+  const tok = node._scr = {};
   if (REDUCE) { node.textContent = final; return; }
   const t0 = performance.now();
   (function step(t){
-    const k = Math.min(1, (t - t0) / ms), n = Math.floor(final.length * k);
+    if (node._scr !== tok) return;   // settled or restarted meanwhile
+    const k = Math.max(0, Math.min(1, (t - t0) / ms)), n = Math.floor(final.length * k);
     node.textContent = final.slice(0, n) + [...final.slice(n)].map(ch => ch === " " ? " " : HEX[Math.random() * 16 | 0]).join("");
     if (k < 1) requestAnimationFrame(step);
   })(t0);
 }
-scramble(document.getElementById("h1a"), "The orbit is", 1100);
-setTimeout(() => scramble(document.getElementById("h1b"), "the decoder.", 1100), REDUCE ? 0 : 500);
+scramble(document.getElementById("h1a"), "Satellite data nobody can read.", 1200);
+setTimeout(() => scramble(document.getElementById("h1b"), "Shadowfield reads it.", 1000), REDUCE ? 0 : 600);
 
 /* ---------- value decoding from the frame's bytes ---------- */
 function read(bytes, o, type){
@@ -352,13 +455,14 @@ function satButtons(){
 }
 const fieldAt = o => sat.fields.find(f => o >= f.offset && o < f.offset + f.span);
 
-function show(i){
+function select(i){
   sat = DATA.satellites[i];
   [...document.querySelectorAll(".sat")].forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
   document.getElementById("satmeta").textContent = `${sat.blurb} · NORAD ${sat.norad} · ${sat.frames.toLocaleString("en-US")} frames from ${sat.passes} passes · ${sat.length}-byte payload`;
   document.getElementById("ksy").innerHTML = highlight(sat.ksy || "");
-  layout(); groups(); run();
+  layout(); groups();
 }
+function show(i){ select(i); run(); }
 
 function layout(){
   const cols = matchMedia("(max-width:700px)").matches ? 8 : 16, R = document.getElementById("rows"); R.replaceChildren(); R.style.setProperty("--cols", cols);
@@ -410,7 +514,7 @@ function run(){
     document.querySelectorAll(`.seg[data-f="${f.offset}"]`).forEach(s => { s.classList.add("on"); s.tabIndex = 0; });
     const t = document.querySelector(`.tr[data-f="${f.offset}"]`);
     if (t){ t.classList.add("vis"); const v = t.querySelector(".val"), {v: val, u} = JSON.parse(v.dataset.final);
-      const done = () => { v.textContent = val; if (u) v.appendChild(el("small", null, u)); };
+      const done = () => { v._scr = null; v.textContent = val; if (u) v.appendChild(el("small", null, u)); };
       if (REDUCE) done(); else { scramble(v, val, 520); setTimeout(done, 540); } }
     P.innerHTML = `<b>${k + 1}</b> of <b>${order.length}</b> fields`;
     if (k === order.length - 1){ P.innerHTML = `<b>${order.length}</b> fields from physics alone · select any`;
@@ -503,17 +607,40 @@ function chart(f, col){
 }
 
 /* ---------- proof ---------- */
+const pct = v => v == null || !Number.isFinite(v) ? null : Math.round(v * 100);
 function proof(){
-  const h = DATA.scores["held-out"], d = DATA.scores.development, p = v => v == null ? 0 : Math.round(v * 100);
-  document.getElementById("proofsub").textContent = `${DATA.scores.held_out_sats.length} satellites from different makers that were never inspected while the engine was built · ${h.fields} decoder fields.`;
+  const S = DATA.scores, h = S["held-out"], d = S.development, rows = S.rows || [];
+  const nsat = split => new Set(rows.filter(r => r.split === split).map(r => r.name)).size;
   const N = document.getElementById("nums");
-  [[p(h.precision), "of the fields it reports are real"], [p(h.recall), "of the decoders' physical fields found"],
-   [p(h.kind_acc), "physics class right: temperature, power, clock…"], [p(h.claude_selective), "of Claude's answers right when it answers"]]
-    .forEach(([v, t]) => { const c = el("div", "num"), b = el("b", null, v + "%"); c.append(b, el("span", null, t)); N.appendChild(c); count(b, v); });
-  const Hh = document.getElementById("held"); DATA.scores.held_out_sats.forEach(n => Hh.appendChild(el("span", null, n)));
-  document.getElementById("fine").textContent = `Exact byte layout, bit for bit: ${p(h.value_exact)}% on these satellites, ${p(d.value_exact)}% on the ${d.fields}-field development set. ` +
-    `Battery, solar or bus told apart: ${p(h.claude_fine)}% here, ${p(d.claude_fine)}% on development.`;
+  [[pct(h.precision), "of the fields it reports match a decoder field"], [pct(h.recall), "of the decoders' physical fields found"],
+   [pct(h.kind_acc), "physics class right: temperature, power, clock…"], [pct(h.claude_selective), "of Claude's answers right when it answers"]]
+    .forEach(([v, t]) => { const c = el("div", "num"), b = el("b", null, v + "%"); b.dataset.v = v; c.append(b, el("span", null, t)); N.appendChild(c); });
+  // both sets, side by side: a number and a thin bar per cell
+  const cell = v => { const td = el("td", "n"), p = pct(v); if (p == null){ td.textContent = "–"; return td; }
+    const m = el("div", "mtr"), bar = el("i"), fill = el("span"); fill.style.width = p + "%"; bar.appendChild(fill); m.append(bar, el("span", null, p + "%")); td.appendChild(m); return td; };
+  const C = document.getElementById("cmp"), hd = el("tr"), th = el("thead"), tb = el("tbody");
+  hd.append(el("th", null, "Measure"), el("th", "r", `Development · ${nsat("development")} satellites · ${d.fields} fields`), el("th", "r", `Held-out · ${nsat("held-out")} satellites · ${h.fields} fields`));
+  th.appendChild(hd);
+  [["Physical fields found", "recall"], ["Reported fields that match the decoder", "precision"], ["Exact byte layout, bit for bit", "value_exact"],
+   ["Physics class right", "kind_acc"], ["Claude's category right", "claude_acc"], ["Claude right when it answers", "claude_selective"],
+   ["Battery, solar or bus told apart", "claude_fine"]].forEach(([n, k]) => { const r = el("tr"); r.append(el("td", null, n), cell(d[k]), cell(h[k])); tb.appendChild(r); });
+  C.append(th, tb);
+  // every held-out frame type, weak ones included
+  const P = document.getElementById("per"), held = rows.filter(r => r.split === "held-out"), txt = v => { const p = pct(v); return p == null ? "–" : p + "%"; };
+  const ph = el("tr"), pth = el("thead"), pb = el("tbody");
+  ["Satellite", "Frame type", "Decoder fields", "Fields found", "Exact layout", "Reported that match"].forEach((t, k) => ph.appendChild(el("th", k > 1 ? "r" : null, t)));
+  pth.appendChild(ph);
+  held.forEach(r => { const tr = el("tr"), pr = el("td", "n", txt(r.precision)); if (r.precision != null && r.precision < .5) pr.appendChild(el("sup", null, "*"));
+    tr.append(el("td", null, r.name), el("td", "ft", r.frame_type), el("td", "n", r.physical_truth ?? "–"), el("td", "n", txt(r.recall)), el("td", "n", txt(r.value_exact)), pr);
+    pb.appendChild(tr); });
+  P.append(pth, pb);
+  const rep = held.filter(r => r.found && r.precision != null);
+  const micro = rep.reduce((a, r) => a + r.precision * r.found, 0) / rep.reduce((a, r) => a + r.found, 0);
+  const low = held.find(r => r.precision != null && r.precision < .5);
+  document.getElementById("fine").textContent = (low ? `* ${low.name}'s decoder describes only part of its frame, so ${low.found - Math.round(low.precision * low.found)} of the ${low.found} fields found there cannot be confirmed and count as false. ` : "") +
+    `The totals weight each frame type by its number of decoder fields. Counted per reported field instead, ${pct(micro)}% of the held-out finds match a decoder field.`;
 }
+function countUp(){ document.querySelectorAll("#nums b").forEach(b => count(b, +b.dataset.v)); }
 function count(node, v){ if (REDUCE) return; const t0 = performance.now();
   (function step(t){ const k = Math.min(1, (t - t0) / 1500), e = 1 - Math.pow(1 - k, 3); node.textContent = Math.round(v * e) + "%"; if (k < 1) requestAnimationFrame(step); })(t0); }
 
@@ -686,10 +813,44 @@ document.getElementById("copy").onclick = () => { const m = document.getElementB
   function start(){ if (running || !onScreen || document.hidden) return; running = true; last = performance.now(); requestAnimationFrame(frameLoop); }
   if (REDUCE) draw(0);
   else {
-    new IntersectionObserver(es => { onScreen = es[es.length - 1].isIntersecting; start(); }).observe(canvas);
+    new IntersectionObserver(es => { onScreen = es[es.length - 1].isIntersecting; if (onScreen) size(); start(); }).observe(canvas);
     document.addEventListener("visibilitychange", start); start();
   }
 })();
 
-satButtons(); proof(); show(0);
+/* ---------- page 1: one real frame in, named telemetry out ---------- */
+const ioFields = [];
+function intro(){   // runs while sat is UWE-4, so the values are computed now and kept
+  const H = document.getElementById("iohex"), O = document.getElementById("ioout"), named = sat.fields.filter(f => f.name);
+  [f => f.kind === "lagged" && cat(f) === "thermal", f => /volt/i.test(f.name), f => cat(f) === "clock", f => /charge|soc/i.test(f.name), f => cat(f) === "counter", () => true]
+    .forEach(t => { const f = ioFields.length < 4 && named.find(x => t(x) && !ioFields.includes(x)); if (f) ioFields.push(f); });
+  sat.frame.forEach((b, o) => { const x = el("span", null, b.toString(16).toUpperCase().padStart(2, "0")); x.dataset.o = o; H.appendChild(x); });
+  ioFields.forEach(f => { const r = el("div", "io-r"), {v, u} = pretty(f), val = el("b", "v", "··");
+    val.dataset.final = v + (u ? " " + u : ""); r.style.setProperty("--c", css(COL[cat(f)]));
+    r.append(el("i"), el("span", "n", human(f).replace(/\s*\((ms|mV|mA)\)$/, "")), el("span", "b", `byte${f.span > 1 ? "s" : ""} ${f.offset}${f.span > 1 ? "–" + (f.offset + f.span - 1) : ""}`), val);
+    O.appendChild(r); });
+}
+function playIntro(){
+  const rows = document.getElementById("ioout").children;
+  ioFields.forEach((f, k) => setTimeout(() => {
+    const c = css(COL[cat(f)]);
+    for (let o = f.offset; o < f.offset + f.span; o++){ const x = document.querySelector(`#iohex span[data-o="${o}"]`); if (x){ x.style.setProperty("--c", c); x.classList.add("on"); } }
+    const r = rows[k], v = r.querySelector(".v"), fin = v.dataset.final; r.classList.add("vis");
+    if (REDUCE) v.textContent = fin; else { scramble(v, fin, 480); setTimeout(() => { v._scr = null; v.textContent = fin; }, 500); }
+  }, REDUCE ? 0 : 1500 + k * 600));
+}
+
+/* ---------- three pages in one file: #what, #demo, #proof ---------- */
+const PAGES = ["what", "demo", "proof"], seen = new Set();
+function route(){
+  const id = PAGES.includes(location.hash.slice(1)) ? location.hash.slice(1) : "what";
+  PAGES.forEach(p => document.getElementById("page-" + p).hidden = p !== id);
+  document.querySelectorAll(".tabs a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + id ? "page" : "false"));
+  scrollTo(0, 0);
+  dispatchEvent(new Event("resize"));   // canvases measured while their page was hidden get their real size
+  if (seen.has(id)) return; seen.add(id);
+  if (id === "what") playIntro(); else if (id === "demo") run(); else countUp();
+}
+satButtons(); select(0); intro(); proof();
+addEventListener("hashchange", route); route();
 </script>

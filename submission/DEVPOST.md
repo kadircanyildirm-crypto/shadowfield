@@ -58,18 +58,20 @@ Then it tests every possible reading of the bytes against that physics:
   - Structure tests settle the layout. They look for carries between bytes, sign extension and the point where a counter wraps.
 - **Claude:** the `anthropic` Python SDK, with a pydantic schema for structured output and a disk cache. The whole 15-satellite benchmark costs about $2 in API calls.
 - **Grading:** `satnogs-decoders`, the community's published decoders. They are used only *after* a run, to score it, never as input.
-- **Demo page:** one self-contained HTML file with Three.js, NASA Blue Marble and Black Marble imagery, and the real benchmark results inlined.
+- **Demo page:** one self-contained HTML file in three pages (overview, live demo, proof), with Three.js, NASA Blue Marble and Black Marble imagery, and the real benchmark results inlined.
 
 ### Results, graded blind against real decoders
 
 Satellites that already have public decoders let us check the answers. Shadowfield runs on their raw frames as if no decoder existed, and only afterwards is it compared with the decoder.
 
-| | Satellites | Decoder fields | Fields found | Reported fields that are real | Exact byte layout | Claude's category right |
+| | Satellites | Decoder fields | Fields found | Reported fields that match the decoder | Exact byte layout | Claude's category right |
 |---|---|---|---|---|---|---|
 | Development set (rules tuned while looking at it) | 9 | 172 | 76% | 95% | 63% | 77% |
 | **Held-out set (never inspected, engine frozen)** | **6** | **126** | **66%** | **98%** | **40%** | **73%** |
 
 The held-out set is six satellites from six different makers, run once. Its numbers are the honest estimate for a satellite nobody has looked at. Both sets are reported, and the weaker one is not hidden.
+
+Totals weight each frame type by its number of decoder fields. One held-out decoder (Kostka) describes only part of its frame, so 32 of the 33 fields found there cannot be confirmed and count as false. Counted per reported field instead, 72% of the held-out finds match a decoder field. The demo's Proof page lists every satellite.
 
 ### Challenges I ran into
 
@@ -84,7 +86,7 @@ The held-out set is six satellites from six different makers, run once. Its numb
 
 ### Accomplishments that I'm proud of
 
-- On satellites it had never seen, **98% of the fields it reports are real**.
+- On satellites it had never seen, **98% of the fields it reports match the real decoder** (weighted by decoder fields, as above).
 - Every generated `.ksy` **compiles with the official Kaitai Struct compiler**, and the compiled parser reads the real frames exactly as the engine does.
 - 70 automated tests:
   - a random synthetic fleet of satellites with planted traps;

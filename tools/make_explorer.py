@@ -65,5 +65,8 @@ for norad, dec, label, key, blurb in SHOW:
 rows = json.loads((ROOT / "results" / "scoreboard.json").read_text(encoding="utf-8"))
 out["scores"] = {s: bench.totals([r for r in rows if r["split"] == s]) for s in ("development", "held-out")}
 out["scores"]["held_out_sats"] = sorted({r["name"] for r in rows if r["split"] == "held-out"})
+ROW_KEYS = ("name", "frame_type", "split", "physical_truth", "found", "recall", "value_exact", "precision", "claude_acc")
+out["scores"]["rows"] = [{k: (None if isinstance(r.get(k), float) and r[k] != r[k] else r.get(k)) for k in ROW_KEYS}  # NaN is not JSON
+                         for r in rows]
 (ROOT / "docs" / "data.json").write_text(json.dumps(out, separators=(",", ":"), default=float), encoding="utf-8")
 print("wrote", (ROOT / "docs" / "data.json").stat().st_size // 1024, "KB")

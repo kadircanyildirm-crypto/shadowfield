@@ -16,9 +16,11 @@ Konuşmak istemezsen narration metnini YouTube'a altyazı olarak ekleyebilirsin,
 
 ---
 
+Sayfanın üstünde 3 sekme var: **1 Overview**, **2 Live demo**, **3 Proof**. Video bu sırayı izliyor.
+
 ## 0:00 – 0:15 · The problem
 
-**Ekran:** Sayfanın en üstü. Dünya dönüyor, uydular etrafında. Hiçbir şeye tıklama.
+**Ekran:** Sayfa 1 (Overview) açık. Dünya dönüyor, soldaki IN/OUT kutusu kendiliğinden doluyor. Hiçbir şeye tıklama.
 
 > Hundreds of small satellites are sending us data right now.
 > Volunteers record it every day with their own ground stations.
@@ -26,7 +28,7 @@ Konuşmak istemezsen narration metnini YouTube'a altyazı olarak ekleyebilirsin,
 
 ## 0:15 – 0:35 · The idea
 
-**Ekran:** Fareyi sağ üstteki "15 SATELLITES · N IN EARTH'S SHADOW" yazısının üstüne götür. Sonra bir uydunun gölgeye girip griye dönmesini bekle.
+**Ekran:** Fareyi IN kutusundaki renkli baytların, sonra OUT satırlarının üstünde gezdir. Sonra biraz aşağı kaydırıp "The orbit is the decoder." başlığını ve 3 adımı göster.
 
 > Shadowfield reads those bytes through physics.
 > Every satellite's orbit is public. From the orbit, we know exactly when it was in sunlight, and when it was in Earth's shadow.
@@ -35,7 +37,7 @@ Konuşmak istemezsen narration metnini YouTube'a altyazı olarak ekleyebilirsin,
 
 ## 0:35 – 1:15 · A real frame
 
-**Ekran:** "Decrypt a frame" butonuna tıkla. Baytlar renklenirken bekle (UWE-4 seçili).
+**Ekran:** Üstteki **2 Live demo** sekmesine tıkla. Baytlar renklenirken bekle (UWE-4 seçili).
 
 > This is a real frame from UWE-4, a German university CubeSat, exactly as ground stations received it.
 > Shadowfield tries every way to read these bytes: every position, width, byte order and sign.
@@ -63,20 +65,25 @@ Konuşmak istemezsen narration metnini YouTube'a altyazı olarak ekleyebilirsin,
 > On SNUGLITE, a Korean satellite, it even finds the GPS position.
 > This field is the orbit's own coordinate, in centimetres.
 
-## 2:00 – 2:20 · Proof
+## 2:00 – 2:10 · Output
 
-**Ekran:** Aşağı kaydırıp "Graded blind against real decoders" bölümünde dur. Sayılar animasyonla dolsun.
-
-> We graded it blind against real decoders.
-> On six satellites we never looked at while building it, ninety-eight percent of the fields it reports are real.
-> It finds two thirds of the physical fields. The exact byte layout is right forty percent of the time. We show that too.
-
-## 2:20 – 2:35 · Output and close
-
-**Ekran:** En alttaki ".ksy" kod bölümüne kaydır. Son 3 saniyede tekrar en üste çık ve dünyayı göster.
+**Ekran:** Aynı sayfada en alta kaydır: ".ksy" kod bölümü.
 
 > The output is a decoder file in Kaitai Struct, the format SatNOGS uses.
 > It compiles with the official compiler and reads the real frames.
+
+## 2:10 – 2:30 · Proof
+
+**Ekran:** Üstteki **3 Proof** sekmesine tıkla. Büyük sayılar dolsun. Sonra yavaşça aşağı kaydırıp iki tabloyu göster.
+
+> We graded it blind against real decoders.
+> On six satellites we never looked at while building it, ninety-eight percent of the fields it reports match the real decoder.
+> It finds two thirds of the physical fields. The exact byte layout is right forty percent of the time. Every satellite is listed, the weak ones too.
+
+## 2:30 – 2:35 · Close
+
+**Ekran:** **1 Overview** sekmesine tıkla, dünyayı göster.
+
 > Shadowfield. The orbit is the decoder.
 
 ---
